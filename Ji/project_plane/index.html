@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flatpickr 月曆調整位置</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <style>
+        .custom-flatpickr {
+            position: relative;
+            top: 500px;
+            width: 200px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="custom-flatpickr">
+        <input type="text" id="datePicker" placeholder="選擇日期">
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script>
+        flatpickr("#datePicker", {
+            position: 'below', // 可以設置為 'below' 或 'above'
+            // 可以進一步調整 offset
+            onOpen: function (selectedDates, dateStr, instance) {
+                instance.calendarContainer.style.top = '500px'; // 調整月曆的垂直位置
+                instance.calendarContainer.style.left = '0';   // 調整月曆的水平位置
+            }
+        });
+    </script>
+</body>
+
+</html>
