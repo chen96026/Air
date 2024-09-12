@@ -12,6 +12,10 @@
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <style>
+        * {
+            box-sizing: border-box;
+        }
+
         /* Header */
         header {
             height: 13vh;
@@ -133,6 +137,14 @@
 
         }
 
+        .container_notice {
+            width: 80%;
+            margin: 0 auto;
+            /* padding: 20px; */
+            background-color: #E9E4D4;
+            display: flex;
+        }
+
 
         .container_lg {
 
@@ -246,9 +258,14 @@
             margin-left: 5%;
         }
 
-        .col_ann {
+        .col_notice_right {
+            flex: 5;
+
+        }
+
+        .col_notice_left {
             flex: 1;
-            padding-left: 10%;
+            padding-left: 5%;
         }
 
         @media (max-width: 479px) {
@@ -375,7 +392,37 @@
                 </div>
             </div>
 
+
             <h5 style="margin-left: 10%; font-size: larger;">您的機票</h5>
+            <div class="container_notice">
+                <div style="display: flex; width: 50%;">
+                    <div style="margin: 10%;"><span class="material-symbols-outlined" style="font-size: 68px;">campaign</span></div>
+                    <div>
+                        <h3>出票時間</h3>
+                        <p>付款成功後，
+                            將於2天內出票。</p>
+                    </div>
+                </div>
+
+                <div style="display: flex; width: 50%;">
+                    <div style="margin: 10%;"><span class="material-symbols-outlined" style="font-size: 68px;">flight_takeoff</span></div>
+                    <div>
+                        <h3>行前須知</h3>
+                        <p>依序使用機票<br>
+                            <a href="www">查看詳情</a>
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+
+
+
+
+
+
+
+
             <div class="row container" style="padding: 20px; margin-top: 20px; ">
                 <div class="col_ticket">行李限額
                     <p><span class="material-symbols-outlined" style="vertical-align: middle">checked_bag</span>手提行李：1 x
@@ -389,35 +436,7 @@
                 </div>
             </div>
 
-            <div style="margin-top: 20px;">
-                <div class="container row">
-                    <div class="col_ann"><span class="material-symbols-outlined"
-                            style="font-size: 68px; vertical-align: middle; ">campaign</span>
-                    </div>
-                    <div class="col_ann">
-                        <h3>出票時間</h3>
-                        <p>付款成功後，
-                            將於2天內出票。</p>
-                    </div>
-                </div>
-                <div class="container row">
-                    <div class="col_ann"><span class="material-symbols-outlined"
-                            style="font-size: 68px;">flight_takeoff</span></div>
-                    <div class="col_ann">
-                        <h3>行前須知</h3>
-                        <p>依序使用機票<br>
-                            <a href="www">查看詳情</a>
-                        </p>
-                    </div>
-
-
-                </div>
-
-            </div>
-
-
-
-
+        
 
             <h5></h5>
             <div class="container" style="width: 80%; padding: 20px;">主要旅客資訊
@@ -469,20 +488,20 @@
                             </select>
 
                         </div>
-                        <div >
+                        <div>
                             證件類型：<select style="font-size: 14px; width:100px">
                                 <option value="">護照</option>
                             </select>
                             證件號碼：<input type="text" style="font-size: 14px; width: 100px;">
-                            證件有效日期至：<input type="date" id="dop" style="font-size: 14px; width: 150px;" >
+                            證件有效日期至：<input type="date" id="dop" style="font-size: 14px; width: 150px;">
                         </div>
-                        
+
                     </form>
                 </div>
                 <div>
                     <p>一經確認即無法變更訂單。如果您的姓名不正確，您可能無法登機且將必須支付退票費用。</p>
                 </div>
-                <div style="display: flex;justify-content: center;">
+                <div style="display: flex;justify-content: center; padding: 20px">
                     <button style="width: 200px; font-size: 16px;">新增另位旅客</button>
                 </div>
             </div>
@@ -561,11 +580,12 @@
             <div>
                 <h5 style="margin-left: 10%; font-size: larger;">聯繫方式</h5>
                 <div class="container" style="display: flex; flex-wrap: wrap; gap: 10px;">
-                    <div><input type="text" placeholder="聯繫人姓名" style="width: 200px; height: 20px; border-radius: 5px; align-content: center;">
+                    <div><input type="text" placeholder="聯繫人姓名"
+                            style="width: 200px; height: 20px; border-radius: 5px; align-content: center; height: 30px">
                     </div>
-                    <div><input type="tel" placeholder="手機號碼" style="width:200px; height: 20px; border-radius: 5px; ">
+                    <div><input type="tel" placeholder="手機號碼" style="width:200px; height: 20px; border-radius: 5px;height: 30px ">
                     </div>
-                    <div><input type="email" placeholder="電子郵件" style="width:200px;height: 20px; border-radius: 5px;">
+                    <div><input type="email" placeholder="電子郵件" style="width:200px;height: 20px; border-radius: 5px; height: 30px;">
                     </div>
 
                 </div>
@@ -582,25 +602,26 @@
 
 
         </div>
-        <div class="col_right">
-            <div class="container">
-                <div style="font-size: 24px;">價格詳情</div>
-                <div style="padding: 5px;">
-                    <h3>機票 (1位成人)</h3>
-                    <h3>行李</h3>
-                    <p>個人物品</p>
-                    <p>手提行李</p>
-                    <p>托運行李</p>
-                    <hr style="border: 1px dashed;">
-                    <h3>總額</h3>
-                </div>
-
+    </div>
+    <div class="col_right">
+        <div class="container">
+            <div style="font-size: 24px;">價格詳情</div>
+            <div style="padding: 5px;">
+                <h3>機票 (1位成人)</h3>
+                <h3>行李</h3>
+                <p>個人物品</p>
+                <p>手提行李</p>
+                <p>托運行李</p>
+                <hr style="border: 1px dashed;">
+                <h3>總額</h3>
             </div>
-
 
         </div>
 
-        
+
+    </div>
+
+
     </div>
     <footer>
         <div>
