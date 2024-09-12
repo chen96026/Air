@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>member_Card_Write</title>
+    <link rel="stylesheet" href="./member.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+      integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="./member.js"></script>
+  </head>
+  <body>
+    <header>
+      <div>
+        <a href=""><img src="./pic/logo.png" /></a>
+      </div>
+      <div>
+        <p>製作美好日旅回憶的第一步</p>
+        <a href=""><img src="./icon/icon_Forum.png" /></a>
+        <a href=""><img src="./icon/icon_logIn.png" /></a>
+        <div style="clear: both"></div>
+      </div>
+    </header>
+
+    <main id="member_Main">
+      <section id="member_LeftSide">
+        <section id="member_Left_TopSide">
+          <div>卡片管理</div>
+        </section>
+        <section id="member_Left_BottomSide">
+          <div id="member_LeftMember">我的會員</div>
+          <div id="member_LeftInfo">更新資訊</div>
+          <div id="member_LeftPassword">更改密碼</div>
+          <div id="member_LeftOrder">訂單查詢</div>
+          <div id="member_LeftCard">卡片管理</div>
+          <div id="member_LeftCollection">收藏清單</div>
+        </section>
+      </section>
+
+      <section id="member_Card_MiddleSide">
+        <div id="member_Card_MiddleInside">
+          <div id="member_Card_MiddleInside2">
+            <form class="member_Card_inputTitle">
+              <i class="fa-solid fa-star-of-life"></i>
+              <label id="member_Card_Name">持卡人姓名</label>
+              <input id="member_Card_NameInput" type="text" />
+            </form>
+          
+            <form class="member_Card_inputTitle">
+              <i class="fa-solid fa-star-of-life"></i>
+              <label id="member_Card_CardName">信用卡卡號</label>
+              <!-- <div id="member_Card_InputNumber"> -->
+              <input class="member_Card_Number" type="text" />
+              <i class="fa-solid fa-minus"></i>
+              <input class="member_Card_Number" type="text" />
+              <i class="fa-solid fa-minus"></i>
+              <input class="member_Card_Number" type="text" />
+              <i class="fa-solid fa-minus"></i>
+              <input class="member_Card_Number" type="text" />
+              <!-- </div> -->
+            </form>
+
+            <form class="member_Card_inputTitle">
+              <i class="fa-solid fa-star-of-life"></i>
+              <label id="member_Card_DateName">信用卡有效月/年</label>
+              <div class="member_Card_inputText">
+                <select id="member_Card_Date" type="text">
+                  <option></option>
+                  <option>01</option>
+                  <option>02</option>
+                  <option>03</option>
+                  <option>04</option>
+                  <option>05</option>
+                  <option>06</option>
+                  <option>07</option>
+                  <option>08</option>
+                  <option>09</option>
+                  <option>10</option>
+                  <option>11</option>
+                  <option>12</option>
+                </select>
+                <p>月</p>
+                <select id="member_Card_Month" type="number">
+                  <option></option>
+                  <option>24</option>
+                  <option>25</option>
+                  <option>26</option>
+                  <option>27</option>
+                  <option>28</option>
+                  <option>29</option>
+                  <option>30</option>
+                </select>
+                <p>年</p>
+              </div>
+            </form>
+
+            <form class="member_Card_inputTitle">
+              <i class="fa-solid fa-star-of-life"></i>
+              <label id="member_Card_ThreeName">信用卡背後三碼</label>
+              <div class="member_Card_inputText">
+                <input id="member_Card_Three" type="text" />
+              </div>
+            </form>
+          </div>
+          <button id="member_Card_ConfirmButton">確認</button>
+        </div>
+        </div>
+      </section>
+    </main>
+    <footer>
+      <div>
+        <section>
+          <h3>公司</h3>
+          <div class="footer_line"></div>
+          <div class="footer_list"><a href="">關於我們</a></div>
+          <div class="footer_list"><a href="">聯絡我們</a></div>
+        </section>
+        <section>
+          <h3>隱私</h3>
+          <div class="footer_line"></div>
+          <div class="footer_list"><a href="">隱私權政策</a></div>
+          <div class="footer_list"><a href="">隱私設定</a></div>
+        </section>
+        <section>
+          <h3>Cookie</h3>
+          <div class="footer_line"></div>
+          <div class="footer_list"><a href="">Cookie政策</a></div>
+          <div class="footer_list"><a href="">Cookie設定</a></div>
+        </section>
+        <section>
+          <h3>合作夥伴</h3>
+          <div class="footer_line"></div>
+          <div class="footer_list"><a href="">廣告投放</a></div>
+          <div class="footer_list"><a href="">旅遊宣傳合作</a></div>
+        </section>
+      </div>
+    </footer>
+  </body>
+</html>

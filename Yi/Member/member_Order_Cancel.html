@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>member_Order_Cancel</title>
+    <link rel="stylesheet" href="./member.css" />
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="./member.js"></script>
+  </head>
+  <body>
+    <header>
+      <div>
+        <a href=""><img src="./pic/logo.png" /></a>
+      </div>
+      <div>
+        <p>製作美好日旅回憶的第一步</p>
+        <a href=""><img src="./icon/icon_Forum.png" /></a>
+        <a href=""><img src="./icon/icon_logIn.png" /></a>
+        <div style="clear: both"></div>
+      </div>
+    </header>
+
+      <main id="member_Main">
+        <section id="member_LeftSide">
+          <section id="member_Left_TopSide">
+            <div>訂單查詢</div>
+          </section>
+          <section id="member_Left_BottomSide">
+          <div id="member_LeftMember">我的會員</div>
+          <div id="member_LeftInfo">更新資訊</div>
+          <div id="member_LeftPassword">更改密碼</div>
+          <div id="member_LeftOrder">訂單查詢</div>
+          <div id="member_LeftCard">卡片管理</div>
+          <div id="member_LeftCollection">收藏清單</div>
+          </section>
+        </section>
+
+        <section id="member_Order_MiddleSide">
+          <div id="member_Order_Operation">
+            <div id="member_Order_All">全部</div>
+            <div id="member_Order_Pay">待付款</div>
+            <div id="member_Order_Depart">待出發</div>
+            <div id="member_Order_Finish">已完成</div>
+            <div id="member_Order_Cancel">已取消</div>
+          </div>
+
+          <!--第一張訂單-->
+          <section id="member_Order_Ticket">
+            <section id="member_Order_TopSchedule">
+              <div id="member_Order_TotalSchedule">
+                <div id="member_Order_Order"> 
+                  <img src="./icon/plane.png" alt="">
+                  <span id="member_Order_Form">訂單編號</span>
+                  <span id="member_Order_Number">AE9268 </span>
+                  <span id="member_Order_GoCity">TPE</span>
+                  <img src="./icon/arrow.png" alt="">
+                  <span id="member_Order_BackCity">KIX</span>
+                </div>
+                <div id="member_Order_Schedule">
+                  <span id="member_Order_GoTime">2024年8月30日(週五)</span>
+                  <div>-</div>
+                  <span id="member_Order_BackTime">2024年9月2日(週一)</span>
+                  <span id="member_Order_Class">經濟艙</span>
+                </div>
+              </div>
+            <div id="member_Order_State"> 
+              <div>狀態:</div>
+              <span>已取消</span>
+             </div>
+          </section>
+
+          <section id="member_Order_WholeTicket">
+            <div id="member_Order_GoPlane">
+              <span id="member_Order_Plane">長榮</span>
+              <div>-</div>
+              <span id="member_Order_Go">回程</span>
+            </div>
+            <div id="member_Order_MiddleSchedule">
+            <div id="member_Order_DepartTime">
+              <div>
+                <span id="member_Order_DepartSmallTime">9:00</span>
+                <span id="member_Order_DepartBigTime">下午</span>
+              </div>
+            <div> 
+              <span id="member_Order_DepartCity">KIX</span>
+            </div>
+            </div>
+            <div id="member_Order_WholeTime">
+              <span>2小時45分鐘</span>
+              <img src="./icon/long_arrow.png" alt="" width="5vw">
+              <span>直達</span>
+            </div>
+            <div id="member_Order_LandTime">
+              <div>
+                <span id="member_Order_LandSmallTime">11:45</span>
+                <span id="member_Order_LandBigTime">下午</span>
+              </div>
+            <div> 
+              <span id="member_Order_LandCity">TPE</span>
+            </div>
+          </div>
+          </div>
+        </section>
+          <section id="member_Order_WholeTicket">
+            <div id="member_Order_GoPlane">
+              <span id="member_Order_Plane">長榮</span>
+              <div>-</div>
+              <span id="member_Order_Go">去程</span>
+            </div>
+            <div id="member_Order_MiddleSchedule">
+            <div id="member_Order_DepartTime">
+              <div>
+                <span id="member_Order_DepartSmallTime">6:30</span>
+                <span id="member_Order_DepartBigTime">下午</span>
+              </div>
+            <div> 
+              <span id="member_Order_DepartCity">TPE</span>
+            </div>
+            </div>
+            <div id="member_Order_WholeTime">
+              <span>2小時40分鐘</span>
+              <img src="./icon/long_arrow.png" alt="">
+              <span>直達</span>
+            </div>
+            <div id="member_Order_LandTime">
+              <div>
+                <span id="member_Order_LandSmallTime">9:10</span>
+                <span id="member_Order_LandBigTime">下午</span>
+              </div>
+            <div> 
+              <span id="member_Order_LandCity">KIX</span>
+            </div>
+          </div>
+          </div>
+        </section>
+
+       <section id="member_Order_BottomPrice">
+        <div id="member_Order_Banngo">
+        <div>訂單順序:</div>
+        <span>1</span>
+        </div>
+
+        <div id="member_Order_PeoplePrice">
+          <div id="member_Order_People">
+            <div>張數:</div>
+            <span>1</span>
+            </div>
+            <div id="member_Order_TotalPrice">
+              <div>總價NT$</div>
+              <span>8,829</span>
+         </div>
+        </div>
+ 
+       </section>
+        </section>
+      
+    </main>
+    <footer>
+      <div>
+        <section>
+          <h3>公司</h3>
+          <div class="footer_line"></div>
+          <div class="footer_list"><a href="">關於我們</a></div>
+          <div class="footer_list"><a href="">聯絡我們</a></div>
+        </section>
+        <section>
+          <h3>隱私</h3>
+          <div class="footer_line"></div>
+          <div class="footer_list"><a href="">隱私權政策</a></div>
+          <div class="footer_list"><a href="">隱私設定</a></div>
+        </section>
+        <section>
+          <h3>Cookie</h3>
+          <div class="footer_line"></div>
+          <div class="footer_list"><a href="">Cookie政策</a></div>
+          <div class="footer_list"><a href="">Cookie設定</a></div>
+        </section>
+        <section>
+          <h3>合作夥伴</h3>
+          <div class="footer_line"></div>
+          <div class="footer_list"><a href="">廣告投放</a></div>
+          <div class="footer_list"><a href="">旅遊宣傳合作</a></div>
+        </section>
+      </div>
+    </footer>
+
+  </body>
+</html>
