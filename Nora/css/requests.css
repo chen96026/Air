@@ -1,0 +1,147 @@
+.requests_body {
+    margin: 0;
+}
+
+.requests_main {
+    background-color: #F1F1F1;
+}
+
+.requests_mark {
+    color: #BC002D;
+}
+
+.requests_main > div {
+    /* background-color: aqua; */
+    width: 750px;
+    margin: auto;
+    padding: 75px 0;
+}
+
+.requests_main h1 {
+    text-align: center;
+    font-size: 64px;
+    margin: 0;
+}
+
+.requests_main label {
+    font-size: 24px;
+    margin-left: 20px;
+}
+
+.requests_main button {
+    display: block;
+    border: 0px;
+    border-radius: 10px;
+    font-size: 28px;
+    letter-spacing: 5px;
+    padding: 18px 56px;
+    margin: 0 auto;
+}
+
+.requests_description {
+    margin: 30px 20px;
+}
+
+.requests_about {
+    font-size: 24px;
+    margin: 0;
+}
+
+.requests_required{
+    font-size: 18px;
+}
+
+.requests_input, .requests_select, .requests_textarea {
+    box-sizing: border-box;
+    border: 2px solid black;
+    border-radius: 10px;
+    width: 100%;
+    font-size: 20px;
+}
+
+.requests_input, .requests_select {
+    padding-left: 20px;
+    height: 50px;
+    margin: 8px auto 25px auto;
+}
+
+.requests_select {
+    background-color: white;
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    background-image: url("../img/icon/arrow_drop_down_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg");
+    background-image: url("../img/icon/arrow_drop_down_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg");
+    background-image: url("../img/icon/arrow_drop_down_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg");
+    background-position: right 1px;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.requests_select:focus {
+    background-color: #E9E4D4;
+}
+
+.requests_select > option {
+    background-color: rgb(255, 252, 250);
+}
+
+.requests_textarea {
+    resize: none;
+    padding: 20px;
+    height: 360px;
+    margin: 8px 0 50px 0;
+}
+
+.requests_input:focus, .requests_textarea:focus {
+    background-color: #E9E4D4;
+    outline: none;
+}
+
+.requests_btnSubmit {
+    background-color: #BC002D;
+    color: white;
+}
+
+.rrequests_btnSubmit:hover {
+    background-color: #8a0421;
+}
+
+.requests_send {
+    position: fixed;
+    background-color: #E9E4D4;
+    border: 3px solid black;
+    border-radius: 50px;
+    width: 700px;
+    height: 500px;
+    top: 50%;
+    left: 50%;
+    margin: -250px 0 0 -350px;
+    box-shadow: 0 3px 5px rgba(70, 70, 70, 0.5);
+}
+
+.requests_send h1 {
+    font-size: 48px;
+    margin-top: 30px;
+}
+
+.requests_send p {
+    font-size: 24px;
+    margin: 15px 10% 30px 10%;
+}
+
+.requests_mail{
+    display: block;
+    position: relative;
+    top: 35px;
+    left: 260px;
+}
+
+.requests_btnClose {
+    background-color: #79470D;
+    color: white;
+}
+
+.requests_btnClose:hover {
+    background-color: #6d341a;
+}

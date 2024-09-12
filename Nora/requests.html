@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh-Hans-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>聯繫我們</title>
+    <link rel="stylesheet" href="./css/requests.css">
+</head>
+<body class="requests_body">
+    <header class="">
+        <nav>
+            Header:Nav
+        </nav>
+    </header>
+    <main class="requests_main">
+        <div>
+            <h1>聯絡我們</h1>
+            <div class="requests_description">
+                <p class="requests_about">
+                    您是否有任何的意見或提問？
+                    <br>
+                    只需要填寫以下表格，我們會盡快與您取得聯繫
+                </p>
+                <p class="requests_required">
+                    有標註 <span class="requests_mark">*</span> 的為必填項目
+                </p>
+            </div>
+            <form action="">
+                <div>
+                    <label for="requests_name">姓名 <span class="requests_mark">*</span></label>
+                    <br>
+                    <input type="text" id="requests_name" class="requests_input" placeholder="請輸入姓名">
+                </div>
+                <div>
+                    <label for="requests_email">E-MAIL <span class="requests_mark">*</span></label>
+                    <br>
+                    <input type="email" id="requests_email" class="requests_input" placeholder="請輸入完整電子信箱">
+                </div>
+                <div>
+                    <label for="requests_phone">連絡電話</label>
+                    <br>
+                    <input type="tel" id="requests_phone" class="requests_input" placeholder="請輸入連絡電話">
+                </div>
+                <div>
+                    <label for="requests_orderNum">訂單編號</label>
+                    <br>
+                    <input type="text" id="requests_orderNum" class="requests_input" placeholder="請輸入訂單編號">
+                </div>
+                <div>
+                    <label for="requests_category">意見類別 <span class="requests_mark">*</span></label>
+                    <br>
+                    <select id="requests_category"  class="requests_select">
+                        <option value="requests_c">請選擇問題分類</option>
+                        <option value="requests_c_account" >會員帳號</option>
+                        <option value="requests_c_order" >訂購問題</option>
+                        <option value="requests_c_comment" >意見回饋</option>
+                        <option value="requests_c_other" >其他</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="requests_details">問題與建議 <span class="requests_mark">*</span></label>
+                    <br>
+                    <textarea id="requests_details" class="requests_textarea" placeholder="請輸入問題或建議的詳細內容"></textarea>
+                <button class="requests_btnSubmit" type="submit">送出</button>
+            </form>
+        </div>
+        <!-- <div class="requests_send">
+            <img class="requests_mail" src="./img/icon/mail_175dp_BC002D_FILL1_wght400_GRAD0_opsz48.svg" alt="mail">
+            <h1>感謝您的信件</h1>
+            <p>我們已收到您的問題與回饋，我們將於近日內回信至您填寫的E-MAIL</p>
+            <button class="requests_btnClose">關閉</button>
+        </div> -->
+    </main>
+    <footer>
+        Footer
+    </footer>
+</body>
+</html>

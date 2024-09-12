@@ -1,0 +1,59 @@
+.about_body {
+    margin: 0;
+}
+
+.about_main {
+    background-color: #F1F1F1;
+}
+
+.about_main > div {
+    width: 75%;
+    margin: auto;
+    padding: 120px 0;
+}
+
+.about_main h1 {
+    font-size: 48px;
+}
+
+.about_main h2 {
+    font-size: 32px;
+}
+
+.about_main p {
+    font-size: 24px;
+}
+
+.about_about {
+    background-color: #E9E4D4;
+    padding: 65px 8%;
+    border-radius: 40px;
+}
+
+.about_about h1 {
+    text-align: center;
+    margin: 0 0 50px 0;
+}
+
+.about_pay {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-top: 100px;
+    padding: 0 5%;
+}
+
+.about_p_title{
+    width: 500px;
+    text-align: center;
+    margin: 0;
+}
+
+.about_p_title img {
+    width: 80%;
+    margin: 10% 0 25% 0;
+}
+
+.about_p_p {
+    padding: auto 50px;
+}
