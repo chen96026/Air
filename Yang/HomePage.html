@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Javel</title>
+    <meta name="description" content="Air Ticket Comparison Web">
+    <meta name="keywords" content="plane,Air Ticket,travel,trip">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        body {
+            background-color: #F1F1F1;
+            margin: 0;
+        }
+
+        /* Header */
+        header {
+            height: 13vh;
+            /* 140px */
+            background-color: #F4CFE0;
+        }
+
+        header>div {
+            height: 50%;
+            width: 73.5%;
+            margin: 0 auto;
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        header>div img[src*="logo"] {
+            position: absolute;
+            bottom: 0;
+        }
+
+        header>div>p {
+            display: inline-block;
+            font-size: 3vh;
+            width: 85%;
+            margin: 0;
+        }
+
+        header>div img[src*="icon"] {
+            height: 5vh;
+            margin: auto 10px;
+            float: right;
+            /* 48px */
+        }
+
+        /* Footer */
+        footer {
+            height: 20.8vh;
+            /* 225px */
+            background-color: #F4CFE0;
+        }
+
+        footer>div {
+            width: 73.5%;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        footer>div>section {
+            display: inline-block;
+            width: 17vw;
+        }
+
+        footer>div>section>h3 {
+            font-size: 3vh;
+            margin: 1vh;
+            text-align: center;
+        }
+
+        .footer_line {
+            border: 0.2vh solid black;
+            margin: 0 auto;
+            width: 60%;
+        }
+
+        .footer_list>a {
+            font-size: 2.2vh;
+            font-weight: bold;
+            margin: 1vh 1vh 0;
+            position: relative;
+            left: 20%;
+            color: black;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        /* 搜尋欄 */
+        #HpSearchBar {
+            background-color: #F4CFE0;
+        }
+        #HpSearchBar>form {
+            height: 11vh;
+        }
+        .Hp_grid_container1 {
+            width: 73.5%;
+            height: 50%;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 12.5vw 12.5vw 11.5vw 11.5vw 14.8vw 5.2vw;
+        }
+        .Hp_grid_container1>input:focus {
+            border: 2px solid black;
+            background-color: lightgray;
+        }
+        .Hp_grid_item1 {
+            background-color: white;
+            border: none;
+            border-radius: 20px;
+            margin: 0 0.5vw;
+            font-size: 2.2vh;
+            padding: 0 1vw;
+        }
+        .Hp_grid_item2 {
+            background-color: white;
+            border: none;
+            border-radius: 20px;
+            margin: 0 0.5vw;
+            font-size: 2.2vh;
+            text-align: left;
+            padding: 0 1vw;
+            color: #8e8e8e;
+            cursor: pointer;
+        }
+        .Hp_grid_btn {
+            background-color: white;
+            border: none;
+            border-radius: 20px;
+            margin: 0 0 0 0.3vw;
+            font-size: 2.2vh;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .Hp_place {
+            display: none;
+            width: 25vw;
+            background-color: white;
+            border: 2px solid black;
+            border-radius: 20px;
+            font-size: 2.2vh;
+        }
+        #HpPlace1 {
+            position: absolute;
+            left: 13vw;
+        }
+        #HpPlace2 {
+            position: absolute;
+            left: 25.5vw;
+        }
+        .Hp_place>p {
+            margin: 0;
+            padding: 1vw;
+            cursor: pointer;
+        }
+        .Hp_place_item_1 {
+            border-radius: 18px 18px 0 0;
+        }
+        .Hp_place_item_L {
+            border-radius: 0 0 18px 18px;
+        }
+        .Hp_place>p:hover {
+            background-color: #BC002D;
+            color: white;
+        }
+        .Hp_ticket {
+            display: none;
+            position: absolute;
+            left: 60vw;
+            width: 25vw;
+            background-color: white;
+            border: 2px solid black;
+            border-radius: 20px;
+            font-size: 2.2vh;
+            padding: 1vw;
+        }
+        .Hp_ticket>h3 {
+            margin: auto 2vw;
+            display: inline-block;
+        }
+        .Hp_ticket>select {
+            font-size: 2vh;
+            text-align: center;
+            border-radius: 10px;
+            width: 50%;
+            height: 4vh;
+        }
+        .Hp_peopleAge {
+            padding: 1vw;
+        }
+        .Hp_peopleAge>div {
+            display: inline-block;
+        }
+        .Hp_peopleSelf>span {
+            color: #8e8e8e;
+        }
+        .Hp_peopleNum {
+            float: right;
+            font-size: 3vw;
+        }
+        .Hp_peopleNumUpd {
+            display: inline-block;
+            width: 5vh;
+            text-align: center;
+            margin: 0 1vw;
+            background-color: lightslategray;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+        .Hp_show {
+            display: block;
+        }
+        /* 廣告文宣 */
+        #HpPoster {
+            width: 83.3vw;
+            height: 60.2vh;
+            /* 650px */
+            margin: 9.25vh auto;
+            background-color: #E9E4D4;
+            display: flex;
+            align-items: center;
+        }
+
+        #HpPoster>figure {
+            width: 41.7vw;
+            height: 47.7vh;
+            float: left;
+        }
+
+        #HpPoster>section {
+            display: inline-block;
+            width: 33.8vw;
+            height: 47.7vh;
+            clear: both;
+        }
+
+        #HpPoster>section>h2 {
+            font-size: 4.4vh;
+        }
+
+        #HpPoster>section>h3 {
+            font-size: 3vh;
+        }
+
+        #HpPoster>section>p {
+            font-size: 2.6vh;
+            word-break: break-all;
+        }
+
+        .fa-star {
+            font-size: 2.6vh;
+        }
+
+        /* 簡易問答 */
+        #HpQA {
+            display: flex;
+            justify-content: center;
+            margin: 0 auto 9.25vh;
+        }
+
+        #HpQA>div {
+            width: 39vw;
+            display: inline-block;
+        }
+
+        #HpQA button {
+            display: inline-block;
+        }
+        #HpQA p {
+            font-size: 1.85vh;
+        }
+
+        .Hp_accordion {
+            font-size: 2.2vh;
+            font-weight: bold;
+            cursor: pointer;
+            padding: 18px;
+            text-align: left;
+            border: none;
+            border-bottom: 3px solid black;
+            outline: none;
+            width: 90%;
+        }
+        .Hp_accordion:hover {
+            background-color: #E9E4D4;
+        }
+        .Hp_panel {
+            padding: 0 18px;
+            width: 85.3%;
+            background-color: #E9E4D4;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.2s ease-out;
+        }
+        .fa-solid {
+            display: inline-block;
+            position: relative;
+            right: 1.5vw;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div><a href=""><img src="./圖片/logo.png"></a></div>
+        <div>
+            <p>製作美好日旅回憶的第一步</p>
+            <a href=""><img src="./圖片/icon_Forum.png"></a>
+            <a href=""><img src="./圖片/icon_logIn.png"></a>
+            <div style="clear:both"></div>
+        </div>
+    </header>
+    <main>
+        <section id="HpSearchBar">
+            <form action="">
+                <div class="Hp_grid_container1">
+                    <input id="HpSearch1" class="Hp_grid_item1" onclick="Hp_callPlace1()" placeholder="出發機場">
+                    <input id="HpSearch2" class="Hp_grid_item1" onclick="Hp_callPlace2()" placeholder="目的機場">
+                    <input type="button" id="HpSearch3" class="Hp_grid_item2" value="出發日期">
+                    <input type="button" id="HpSearch4" class="Hp_grid_item2" value="回程日期">
+                    <input type="button" id="HpSearch5" class="Hp_grid_item2" value="旅客數和艙等">
+                    <input type="submit" id="HpSearch6" class="Hp_grid_btn" value="搜尋">
+                </div>
+                <div class="Hp_place" id="HpPlace1">
+                    <p class="Hp_place_item_1">1. 日本, 東京, 成田機場, NRT</p>
+                    <p>2. 台灣, 桃園, 桃園機場, TPE</p>
+                    <p>3. 越南, 河內, 內排機場, HAN</p>
+                    <p>4. 韓國, 首爾, 仁川機場, ICN</p>
+                    <p class="Hp_place_item_L">5. 中國, 上海, 浦東機場, PVG</p>
+                </div>
+                <div class="Hp_place" id="HpPlace2">
+                    <p class="Hp_place_item_1">1. 日本, 東京, 成田機場, NRT</p>
+                    <p>2. 台灣, 桃園, 桃園機場, TPE</p>
+                    <p>3. 越南, 河內, 內排機場, HAN</p>
+                    <p>4. 韓國, 首爾, 仁川機場, ICN</p>
+                    <p class="Hp_place_item_L">5. 中國, 上海, 浦東機場, PVG</p>
+                </div>
+                <div class="Hp_date"></div>
+                <div class="Hp_ticket" id="HpTicket">
+                    <h3>客艙等級</h3>
+                    <select>
+                        <option selected>經濟艙</option>
+                        <option>商務艙</option>
+                        <option>高端經濟艙</option>
+                    </select>
+                    <div class="Hp_peopleAge">
+                        <div class="Hp_peopleSelf">
+                            <div>成人</div>
+                            <span>年滿18歲</span>
+                        </div>
+                        <div class="Hp_peopleNum">
+                            <span id="Hp_AduMinus" class="Hp_peopleNumUpd">
+                                -
+                            </span>
+                            <span id="Hp_Adunum">
+                                1
+                            </span>
+                            <span id="Hp_AduPlus" class="Hp_peopleNumUpd">
+                                +
+                            </span>
+                        </div>
+                    </div>
+                    <div class="Hp_peopleAge">
+                        <div class="Hp_peopleSelf">
+                            <div>青年</div>
+                            <span>12 ~ 18歲</span>
+                        </div>
+                        <div class="Hp_peopleNum">
+                            <span id="Hp_TeenMinus" class="Hp_peopleNumUpd">
+                                -
+                            </span>
+                            <span id="Hp_Teennum">
+                                1
+                            </span>
+                            <span id="Hp_TeenPlus" class="Hp_peopleNumUpd">
+                                +
+                            </span>
+                        </div>
+                    </div>
+                    <div class="Hp_peopleAge">
+                        <div class="Hp_peopleSelf">
+                            <div>兒童</div>
+                            <span>2 ~ 12歲</span>
+                        </div>
+                        <div class="Hp_peopleNum">
+                            <span id="Hp_ChildMinus" class="Hp_peopleNumUpd">
+                                -
+                            </span>
+                            <span id="Hp_Childnum">
+                                1
+                            </span>
+                            <span id="Hp_ChildPlus" class="Hp_peopleNumUpd">
+                                +
+                            </span>
+                        </div>
+                    </div>
+                    <div class="Hp_peopleAge">
+                        <div class="Hp_peopleSelf">
+                            <div>嬰兒</div>
+                            <span>2歲以下</span>
+                        </div>
+                        <div class="Hp_peopleNum">
+                            <span id="Hp_BabyMinus" class="Hp_peopleNumUpd">
+                                -
+                            </span>
+                            <span id="Hp_Babynum">
+                                1
+                            </span>
+                            <span id="Hp_BabyPlus" class="Hp_peopleNumUpd">
+                                +
+                            </span>
+                        </div>
+                    </div>
+                    
+                </div>
+            </form>
+        </section>
+        <article id="HpPoster">
+            <figure>
+                <img src="./圖片/photo_1.png" style="width: 100%;height: 100%;">
+            </figure>
+            <section>
+                <h2>沖繩</h2>
+                <h3>令人陶醉的沙灘海洋</h3>
+                <p>日本最靠近台灣的縣，夢幻的度假小島。
+                    和家人疫情後的首次出國，在這七天六夜裡，充分感受到沖繩的熱情與好客。
+                    不論是食物或商場，夜晚的久吧都是這趟旅途的美好回憶。</p>
+                <div>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star"></span>
+                    <span class="fa fa-star"></span>
+                </div>
+            </section>
+        </article>
+        <section id="HpQA">
+            <div>
+                <button class="Hp_accordion">如何找到低價航班?</button><i class="fa fa-solid fa-chevron-up"></i>
+                <div class="Hp_panel">
+                    <p>1 . 平日出發，尤其是週四出發的航班更便宜。因為在這些日子出遊的人不多。</p>
+                    <p>2 . 清晨/半夜的航班，比較少人願意搭清晨 6 點之前的航班，因此這個時間點的機票也會更便宜。</p>
+                    <p>3 . 及早預定，剛剛釋出的機票是最便宜得時候 — 通常是起飛前的 1 年左右，隨著日期接近，價格會逐漸提高；熱門航班的機票漲幅更快，所以有預定的行程建議您提早購買機票。</p>
+                    <p>4 . 使用信用卡優惠，某些銀行信用卡會對機票給予更高的折扣和回饋。</p>
+                </div>
+                <button class="Hp_accordion">我在這裡是跟航空公司訂票嗎?</button><i class="fa fa-solid fa-chevron-up"></i>
+                <div class="Hp_panel">
+                    <p>Lorem ipsum...</p>
+                </div>
+                <button class="Hp_accordion">預定航班後我需要注意什麼?</button><i class="fa fa-solid fa-chevron-up"></i>
+                <div class="Hp_panel">
+                    <p>Lorem ipsum...</p>
+                </div>
+            </div>
+            <div>
+                <button class="Hp_accordion">我如果有事能取消航班機票嗎?</button><i class="fa fa-solid fa-chevron-up"></i>
+                <div class="Hp_panel">
+                    <p>Lorem ipsum...</p>
+                </div>
+                <button class="Hp_accordion">會員有什麼功能或好處?</button><i class="fa fa-solid fa-chevron-up"></i>
+                <div class="Hp_panel">
+                    <p>Lorem ipsum...</p>
+                </div>
+                <button class="Hp_accordion">為什麼經濟艙又有分等級?</button><i class="fa fa-solid fa-chevron-up"></i>
+                <div class="Hp_panel">
+                    <p>Lorem ipsum...</p>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <div>
+            <section>
+                <h3>公司</h3>
+                <div class="footer_line"></div>
+                <div class="footer_list"><a href="">關於我們</a></div>
+                <div class="footer_list"><a href="">聯絡我們</a></div>
+            </section>
+            <section>
+                <h3>隱私</h3>
+                <div class="footer_line"></div>
+                <div class="footer_list"><a href="">隱私權政策</a></div>
+                <div class="footer_list"><a href="">隱私設定</a></div>
+            </section>
+            <section>
+                <h3>Cookie</h3>
+                <div class="footer_line"></div>
+                <div class="footer_list"><a href="">Cookie政策</a></div>
+                <div class="footer_list"><a href="">Cookie設定</a></div>
+            </section>
+            <section>
+                <h3>合作夥伴</h3>
+                <div class="footer_line"></div>
+                <div class="footer_list"><a href="">廣告投放</a></div>
+                <div class="footer_list"><a href="">旅遊宣傳合作</a></div>
+            </section>
+        </div>
+    </footer>
+    <script>
+        var acc = document.getElementsByClassName("Hp_accordion");
+        var i;
+
+        for (i = 0; i < acc.length; i++) {
+            acc[i].addEventListener("click", function () {
+                console.log(this);
+                var panel = this.nextElementSibling.nextElementSibling;
+                if (panel.style.maxHeight) {
+                    panel.style.maxHeight = null;
+                    this.nextElementSibling.className = "fa fa-solid fa-chevron-up";
+                } else {
+                    panel.style.maxHeight = panel.scrollHeight + "px";
+                    this.nextElementSibling.className = "fa fa-solid fa-chevron-down";
+                }
+            });
+        }
+    </script>
+    <script>
+        document.getElementById("HpSearch1").onclick = function(){
+            document.getElementById("HpPlace1").classList.toggle("Hp_show");
+        }
+        document.getElementById("HpSearch2").onclick = function(){
+            document.getElementById("HpPlace2").classList.toggle("Hp_show");
+        }
+        document.getElementById("HpSearch5").onclick = function(){
+            document.getElementById("HpTicket").classList.toggle("Hp_show");
+        }
+
+        window.onclick = function(event) {
+
+            if (!event.target.matches('#HpSearch1') &&
+            document.getElementById("HpPlace1").classList.contains('Hp_show') ) {
+                document.getElementById("HpPlace1").classList.remove('Hp_show')
+            }
+            if (!event.target.matches('#HpSearch2') &&
+            document.getElementById("HpPlace2").classList.contains('Hp_show') ) {
+                document.getElementById("HpPlace2").classList.remove('Hp_show')
+            }
+            if ( !event.target.matches('#HpTicket') &&  !event.target.matches('#HpSearch5') ) {
+                if ( document.getElementById("HpTicket").classList.contains('Hp_show') ) {
+                    document.getElementById("HpTicket").classList.remove('Hp_show')
+                }
+            }
+            
+        }
+    </script>
+    <script>
+        Hp_AduMinus.onclick = function(){
+            var tempAmnt = Hp_Adunum.textContent;
+            if ( +(tempAmnt)>1 ) {
+                Hp_Adunum.textContent = tempAmnt - 1;
+            }
+        }
+        Hp_AduPlus.onclick = function(){
+            var tempAmnt = Hp_Adunum.textContent;
+            if ( +(tempAmnt)<9 ) {
+                Hp_Adunum.textContent = +(tempAmnt) + 1;
+            }
+        }
+        Hp_TeenMinus.onclick = function(){
+            var tempAmnt = Hp_Teennum.textContent;
+            if ( +(tempAmnt)>1 ) {
+                Hp_Teennum.textContent = tempAmnt - 1;
+            }
+        }
+        Hp_TeenPlus.onclick = function(){
+            var tempAmnt = Hp_Teennum.textContent;
+            if ( +(tempAmnt)<9 ) {
+                Hp_Teennum.textContent = +(tempAmnt) + 1;
+            }
+        }
+        Hp_ChildMinus.onclick = function(){
+            var tempAmnt = Hp_Childnum.textContent;
+            if ( +(tempAmnt)>1 ) {
+                Hp_Childnum.textContent = tempAmnt - 1;
+            }
+        }
+        Hp_ChildPlus.onclick = function(){
+            var tempAmnt = Hp_Childnum.textContent;
+            if ( +(tempAmnt)<9 ) {
+                Hp_Childnum.textContent = +(tempAmnt) + 1;
+            }
+        }
+        Hp_BabyMinus.onclick = function(){
+            var tempAmnt = Hp_Babynum.textContent;
+            if ( +(tempAmnt)>1 ) {
+                Hp_Babynum.textContent = tempAmnt - 1;
+            }
+        }
+        Hp_BabyPlus.onclick = function(){
+            var tempAmnt = Hp_Babynum.textContent;
+            if ( +(tempAmnt)<9 ) {
+                Hp_Babynum.textContent = +(tempAmnt) + 1;
+            }
+        }
+    </script>
+</body>
+
+</html>
