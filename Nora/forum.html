@@ -12,7 +12,7 @@
         <div><a href=""><img src="./圖片/logo.png"></a></div>
         <div>
             <p>製作美好日旅回憶的第一步</p>
-            <a href=""><img src="./圖片/icon_Forum.png"></a>
+            <a href="./forum.html"><img src="./圖片/icon_Forum.png"></a>
             <a href=""><img src="./圖片/icon_logIn.png"></a>
             <div style="clear:both"></div>
         </div>
@@ -21,40 +21,32 @@
         <div class="forum_search">
             <h1>探索世界各地的旅遊心得</h1>
             <form action="">
-                <select name="" id="">
+                <select name="" id="forum_select_country">
                     <optgroup label="不分國家">
-                        <option value="">全世界</option>
+                        <option value="all">全世界</option>
                     </optgroup>
                     <optgroup label="亞洲">
-                        <option value="">日本</option>
-                        <option value="">中國</option>
-                        <option value="">新加坡</option>
-                        <option value="">馬來西亞</option>
+                        <option value="Japan">日本</option>
+                        <!-- <option value="Chinese">中國</option> -->
+                        <!-- <option value="">新加坡</option>
+                        <option value="">馬來西亞</option> -->
                     </optgroup>
-                    <optgroup label="歐美">
+                    <!-- <optgroup label="歐美">
                         <option value="">法國</option>
                         <option value="">英國</option>
                         <option value="">美國</option>
-                    </optgroup>
+                    </optgroup> -->
                 </select>
-                <select class="forum_select" name="" id="">
-                    <optgroup label="北海道">
-                        <option value="">北海道</option>
-                    </optgroup>
-                    <optgroup label="關西">
-                        <option value="">京都</option>
-                        <option value="">大阪</option>
-                        <option value="">滋賀</option>
-                        <option value="">兵庫</option>
-                        <option value="">奈良</option>
-                        <option value="">和歌山</option>
+                <select name="" id="forum_select_area">
+                    <optgroup label="全世界">
+                        <option value="">所有地點</option>
                     </optgroup>
                 </select>
                 <input type="search" placeholder="輸入 文章標題 或 HashTag 關鍵字">
                 <button type="submit">搜尋</button>
             </form>
         </div>
-        <div class="forum_cards">
+        <div class="forum_cards" id="cards-container">
             <div class="forum_card">
                 <a href="./forum_detail.html">
                     <article>
@@ -94,7 +86,7 @@
             <div class="forum_card">
                 <a href="">
                     <article>
-                        <img class="forum_articleImg" src="https://picsum.photos/400/240?random=1" alt="">
+                        <img class="forum_articleImg" src="https://picsum.photos/400/240?random=2" alt="">
                         <h2>金閣寺真的好美！</h2>
                         <p class="forum_articleMore">
                             這次旅遊去了金閣寺，真的超棒！<br>
@@ -102,69 +94,22 @@
                         </p>
                     </article>
                     <div>
-                        <img class="forum_authorImg" src="https://picsum.photos/50?random=1" alt="">
-                        <p class="forum_author">無名背包客</p>
-                        <p class="forum_postDate">2024-01-01</p>
-                    </div>
-                </a>
-            </div>
-            <div class="forum_card">
-                <a href="">
-                    <article>
-                        <img class="forum_articleImg" src="https://picsum.photos/400/240?random=1" alt="">
-                        <h2>金閣寺真的好美！</h2>
-                        <p class="forum_articleMore">
-                            這次旅遊去了金閣寺，真的超棒！<br>
-                            金光閃閃的寺廟在湖面上映出來，超級夢幻。周圍的環境也很寧靜，走在小徑上超放鬆。很推薦來京都旅遊的朋友們有時間一定要來這邊走
-                        </p>
-                    </article>
-                    <div>
-                        <img class="forum_authorImg" src="https://picsum.photos/50?random=1" alt="">
-                        <p class="forum_author">無名背包客</p>
-                        <p class="forum_postDate">2024-01-01</p>
-                    </div>
-                </a>
-            </div>
-            <div class="forum_card">
-                <a href="">
-                    <article>
-                        <img class="forum_articleImg" src="https://picsum.photos/400/240?random=1" alt="">
-                        <h2>金閣寺真的好美！</h2>
-                        <p class="forum_articleMore">
-                            這次旅遊去了金閣寺，真的超棒！<br>
-                            金光閃閃的寺廟在湖面上映出來，超級夢幻。周圍的環境也很寧靜，走在小徑上超放鬆。很推薦來京都旅遊的朋友們有時間一定要來這邊走
-                        </p>
-                    </article>
-                    <div>
-                        <img class="forum_authorImg" src="https://picsum.photos/50?random=1" alt="author_icon">
-                        <p class="forum_author">無名背包客</p>
-                        <p class="forum_postDate">2024-01-01</p>
-                    </div>
-                </a>
-            </div>
-            <div class="forum_card">
-                <a href="">
-                    <article>
-                        <img class="forum_articleImg" src="https://picsum.photos/400/240?random=1" alt="">
-                        <h2>金閣寺真的好美！</h2>
-                        <p class="forum_articleMore">
-                            這次旅遊去了金閣寺，真的超棒！<br>
-                            金光閃閃的寺廟在湖面上映出來，超級夢幻。周圍的環境也很寧靜，走在小徑上超放鬆。很推薦來京都旅遊的朋友們有時間一定要來這邊走
-                        </p>
-                    </article>
-                    <div>
-                        <img class="forum_authorImg" src="https://picsum.photos/50?random=1" alt="">
+                        <img class="forum_authorImg" src="https://picsum.photos/50?random=2" alt="author_icon">
                         <p class="forum_author">無名背包客</p>
                         <p class="forum_postDate">2024-01-01</p>
                     </div>
                 </a>
             </div>
         </div>
+        <div id="loading" class="forum_loading">
+            <p>Loading...</p>
+        </div>
     </main>
     <div class="forum_write">
         <a href="./forum_edit.html">
-            <img src="./img/icon/add_circle_80dp_79470D_FILL1_wght400_GRAD0_opsz48.svg" alt="write">
-            <p>撰寫心得</p>
+            <!-- <img src="./img/icon/add_circle_80dp_79470D_FILL1_wght400_GRAD0_opsz48.svg" alt="write"> -->
+            <div class="forum_writeImg"></div>
+            <p class="forum_writeP">撰寫心得</p>
         </a>
     </div>
     <footer>
@@ -172,8 +117,8 @@
             <section>
                 <h3>公司</h3>
                 <div class="footer_line"></div>
-                <div class="footer_list"><a href="">關於我們</a></div>
-                <div class="footer_list"><a href="">聯絡我們</a></div>
+                <div class="footer_list"><a href="./about.html">關於我們</a></div>
+                <div class="footer_list"><a href="./requests.html">聯絡我們</a></div>
             </section>
             <section>
                 <h3>隱私</h3>
@@ -195,5 +140,8 @@
             </section>
         </div>
     </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="./js/forum_selectArea.js"></script>
+    <script src="./js/forum_loadingCards.js"></script>
 </body>
 </html>
