@@ -1,5 +1,10 @@
 $(() => {
     $('#requests_submit').click(() => {
+        // 讓表單無法送出，讓前端功能能正常展示
+        // 正式加入後端後須拿掉
+        event.preventDefault();
+        //
+
         $('.requests_send').html(`
             <img class="requests_mail" src="./img/icon/mail_175dp_BC002D_FILL1_wght400_GRAD0_opsz48.svg" alt="mail">
             <h1>感謝您的信件</h1>

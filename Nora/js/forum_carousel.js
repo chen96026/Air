@@ -1,51 +1,56 @@
 $(() => {
     // 輪播
-    let slideIndex = 1;
-    showSlides(slideIndex);
+    let slides = $(".forum_photoImg");  // 所有幻燈片圖片(大圖)
+    let smallPhotos = $(".forum_smallPhoto");   // 所有小圖
+    let slideIndex = 0; // 圖片索引
+    let timer;  // 計時器
 
+    // 切換圖片
     function showSlides(n) {
-        let slides = $(".forum_photoImg");
-        let forum_smallPhotos = $(".forum_smallPhoto");
 
         // 確保索引在合理範圍內
-        if (n > slides.length) { slideIndex = 1; }    
-        if (n < 1) { slideIndex = slides.length; }
+        if (n >= slides.length) { slideIndex = 0; }  // 從最後一張再往後會回到第一張
+        if (n < 0) { slideIndex = slides.length - 1; }  // 從第一張再往前會跳到最後一張
 
         // 隱藏所有幻燈片
         slides.hide();  
 
-        // 移除所有點的活躍狀態
-        forum_smallPhotos.removeClass("forum_smallPhoto_active");
+        // 移除所有小圖的活躍狀態
+        smallPhotos.removeClass("forum_smallPhoto_active");
 
         // 顯示當前幻燈片
-        slides.eq(slideIndex - 1).show();  
+        slides.eq(slideIndex).show();  
         
-        // 設置當前點為活躍狀態
-        forum_smallPhotos.eq(slideIndex - 1).addClass("forum_smallPhoto_active");
+        // 設置對應小圖為活躍狀態
+        smallPhotos.eq(slideIndex).addClass("forum_smallPhoto_active");
+
+        // 清空原本的計時器
+        clearInterval(timer);
+        // 重新設置計時器每隔 ~ 秒自動切換
+        timer = setInterval(() => { showSlides(slideIndex += 1); }, 5000);
     }
 
-    // 每隔 ~ 秒自動切換
-    setInterval(() => { showSlides(slideIndex += 1); }, 5000);
-
-    // 設置按鈕事件
+    // 頁面載入即開始執行
+    showSlides(slideIndex);
+    
+    // 點擊向左箭頭切換到前一張
     $("#forum_lastImg").on('click', function() {
         showSlides(slideIndex -= 1);
     });
-
+    
+    // 點擊向右箭頭切換到後一張
     $("#forum_nextImg").on('click', function() {
         showSlides(slideIndex += 1)
     });
     
-    $(".forum_smallPhoto").on('click', function() {
-        let index = $(this).index() + 1;
+    // 點擊底下小圖切換到指定圖片
+    smallPhotos.on('click', function() {
+        let index = $(this).index();
         showSlides(slideIndex = index);
     });
 
-    
-    // 依圖片數量更變小圖示寬
-    if ($(".forum_smallPhoto").length > 1) {
-        $('.forum_smallPhoto').css({
-            'width':  `${100 / $(".forum_smallPhoto").length}%`
-        })
+    // 依圖片總數更變小圖寬
+    if (smallPhotos.length > 1) {
+        smallPhotos.css('width', `${100 / smallPhotos.length}%`)
     }
 });
