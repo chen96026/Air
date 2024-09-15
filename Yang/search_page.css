@@ -116,28 +116,6 @@ nav {
     padding: 3rem 1rem;
 }
 
-.search_section_nav {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-}
-
-.search_section_nav span {
-    padding: 0 7px;
-    font-size: 1.75rem;
-    color: black;
-    border: 1px solid black;
-    border-radius: 100%;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-.search_section_nav span:hover {
-    color: white;
-    background-color: blue;
-    border-color: blue;
-}
-
 .search_header_container {
     padding: 0rem 1rem 1rem;
 }
@@ -186,6 +164,10 @@ nav {
     outline: none;
     border: none;
     font-size: 0.9rem;
+}
+
+.search_input_group:nth-of-type(n+3)>* {
+    cursor: pointer;
 }
 
 .search_container_grid {
@@ -362,6 +344,12 @@ footer {
     border-radius: 10px;
     z-index: 1000;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+.suggestions_country_start {
+    left: 20%;
+}
+.suggestions_country_end {
+    left: 30.5%;
 }
 
 #suggestions div {
