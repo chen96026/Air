@@ -9,6 +9,9 @@
     <meta name="keywords" content="plane,Air Ticket,travel,trip">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
+        * {
+            box-sizing: border-box;
+        }
         body {
             background-color: #F1F1F1;
             margin: 0;
@@ -16,37 +19,24 @@
 
         /* Header */
         header {
-            height: 13vh;
-            /* 140px */
             background-color: #F4CFE0;
+            position: sticky;
         }
 
         header>div {
-            height: 50%;
-            width: 73.5%;
-            margin: 0 auto;
-            position: relative;
+            max-width: 60vw;
+            margin: auto;
+            padding: 2rem 1rem;
             display: flex;
             align-items: center;
+            justify-content: space-between;  
         }
-
         header>div img[src*="logo"] {
-            position: absolute;
-            bottom: 0;
+            width: 135px;
+            height: 40px;
         }
-
-        header>div>p {
-            display: inline-block;
-            font-size: 3vh;
-            width: 85%;
-            margin: 0;
-        }
-
-        header>div img[src*="icon"] {
-            height: 5vh;
-            margin: auto 10px;
-            float: right;
-            /* 48px */
+        header img[src*="icon"] {
+            height: 3rem;
         }
 
         /* Footer */
@@ -307,12 +297,12 @@
 
 <body>
     <header>
-        <div><a href=""><img src="./圖片/logo.png"></a></div>
         <div>
-            <p>製作美好日旅回憶的第一步</p>
-            <a href=""><img src="./圖片/icon_Forum.png"></a>
-            <a href=""><img src="./圖片/icon_logIn.png"></a>
-            <div style="clear:both"></div>
+            <a href="./HomePage.html"><img src="./圖片/logo.png"></a>
+            <div>
+                <a href="../Nora/forum.html"><img src="./圖片/icon_Forum.png"></a>
+                <a href="../Yi/Member/member_Info.html"><img src="./圖片/icon_logIn.png"></a>
+            </div>
         </div>
     </header>
     <main>

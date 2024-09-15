@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Page</title>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link rel="stylesheet" href="./search_page.css">
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/zh.js"></script>
+</head>
+
+<body>
+    <button class="overlay" id="overlay"></button>
+    <header class="search_header">
+        <nav id="search_navbar">
+            <div class="search_nav_logo"><a href="#"><img src="./assets/logo.png"></a></div>
+            <ul class="search_nav_links">
+                <li class="search_link"><a href="#"><img src="./assets/login.png"></a></li>
+                <li class="search_link"><a href="#"><img src="./assets/menu.png"></a></li>
+            </ul>
+        </nav>
+        <div class="search_section_container search_header_container" id="home">
+            <div class="search_header_form">
+                <div>
+                    <button class="search_bar" id="search_bar_button">無</button>
+                </div>
+                <form id="search_form">
+                    <div class="search_input_group">
+                        <label for="destination">出發地</label>
+                        <input type="text" placeholder="國家" id="search_country_start" autocomplete="off" />
+                    </div>
+                    <div class="search_input_group">
+                        <label for="destination">目的地</label>
+                        <input type="text" placeholder="國家" id="search_country_end" autocomplete="off" />
+                    </div>
+                    <div class="search_input_group">
+                        <label for="checkIn">出發</label>
+                        <input type="text" id="departureDate" placeholder="新增日期" readonly>
+                    </div>
+                    <div class="search_input_group">
+                        <label for="CheckOut">回程</label>
+                        <input type="text" id="returnDate" placeholder="新增日期" readonly>
+                    </div>
+                    <div class="search_input_group">
+                        <label for="guests">旅客</label>
+                        <input type="text" id="quantityInput" placeholder="選擇人數" readonly>
+                    </div>
+                    <button class="search_btn" id="search_btn">搜尋</button>
+                </form>
+                <div id="suggestions"></div>
+                <!--選單-->
+                <div class="quantity-container">
+                    <div id="quantityBox" class="quantity-box">
+                        <div class="quantity-item">
+                            <span>客艙等級</span>
+                            <select id="quantityRoom">
+                                <option selected>經濟艙</option>
+                                <option>商務艙</option>
+                            </select>
+                        </div>
+                        <div class="quantity-item">
+                            <span>成人</span>
+                            <button class="quantity-btn" data-type="adult" data-action="decrease">-</button>
+                            <span class="quantity-number" data-type="adult">0</span>
+                            <button class="quantity-btn" data-type="adult" data-action="increase">+</button>
+                        </div>
+                        <!-- 把 .quantity-item 的margin-bottom 改到年齡介紹文字 -->
+                        <div style="color: #8e8e8e; margin-left: 1vw; margin-bottom: 10px;">年滿18歲</div>
+                        <div class="quantity-item">
+                            <span>青年</span>
+                            <button class="quantity-btn" data-type="teen" data-action="decrease">-</button>
+                            <span class="quantity-number" data-type="teen">0</span>
+                            <button class="quantity-btn" data-type="teen" data-action="increase">+</button>
+                        </div>
+                        <div style="color: #8e8e8e; margin-left: 1vw; margin-bottom: 10px;">12 ~ 18歲</div>
+                        <div class="quantity-item">
+                            <span>兒童</span>
+                            <button class="quantity-btn" data-type="child" data-action="decrease">-</button>
+                            <span class="quantity-number" data-type="child">0</span>
+                            <button class="quantity-btn" data-type="child" data-action="increase">+</button>
+                        </div>
+                        <div style="color: #8e8e8e; margin-left: 1vw; margin-bottom: 10px;">2 ~ 12歲</div>
+                        <div class="quantity-item">
+                            <span>嬰兒</span>
+                            <button class="quantity-btn" data-type="baby" data-action="decrease">-</button>
+                            <span class="quantity-number" data-type="baby">0</span>
+                            <button class="quantity-btn" data-type="baby" data-action="increase">+</button>
+                        </div>
+                        <div style="color: #8e8e8e; margin-left: 1vw; margin-bottom: 10px;">2歲以下</div>
+                        <div id="quantityWarning" style="color: red; margin-left: 1vw;"></div>
+                        <button id="confirmBtn" class="confirm-btn">套用</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="search_section_container search_destination_container" id="destination">
+        <h2 class="search_section_title">選擇國家</h2>
+        <div class="search_container_grid" id="cards-container"></div>
+        <div id="loading" class="search_loading">Loading...</div>
+    </section>
+
+    <footer>
+        <div class="search_section_container search_footer_container">
+            <div class="search_footer_col">
+                <h4>追蹤我們</h4>
+                <hr style="width:50%">
+                <div class="search_footer_socials">
+                    <span>
+                        <a href="#"><i class="ri-twitter-fill"></i></a>
+                    </span>
+                    <span>
+                        <a href="#"><i class="ri-linkedin-fill"></i></a>
+                    </span>
+                    <span>
+                        <a href="#"><i class="ri-instagram-line"></i></a>
+                    </span>
+                    <span>
+                        <a href="#"><i class="ri-facebook-fill"></i></a>
+                    </span>
+                </div>
+            </div>
+            <div class="search_footer_col">
+                <h4>隱私</h4>
+                <hr style="width:80%">
+                <a href="#">隱私權政策</a>
+                <a href="#">隱私設定</a>
+            </div>
+            <div class="search_footer_col">
+                <h4>Cookie</h4>
+                <hr style="width:80%">
+                <a href="#">Cookie政策</a>
+                <a href="#">Cookie設定</a>
+            </div>
+            <div class="search_footer_col">
+                <h4>合作夥伴</h4>
+                <hr style="width:80%">
+                <a href="#">廣告投放</a>
+                <a href="#">旅遊宣傳合作</a>
+            </div>
+        </div>
+        <div class="search_footer_bar">
+            Copyright © 2024 Javel. All rights reserved.
+        </div>
+    </footer>
+
+    <script src="search_page.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const departureDateInput = document.getElementById('departureDate');
+            const returnDateInput = document.getElementById('returnDate');
+
+            const datePicker = flatpickr(departureDateInput, {
+                mode: "range",
+                dateFormat: "Y-m-d",
+                minDate: "2024-09-12",
+                maxDate: "2025-12-31",
+                showMonths: 2,
+                closeOnSelect: false,
+                locale: "zh",
+                onChange: function (selectedDates) {
+                    if (selectedDates.length === 2) {
+                        departureDateInput.value = selectedDates[0].toLocaleDateString();
+                        returnDateInput.value = selectedDates[1].toLocaleDateString();
+                    }
+                },
+                onReady: function (selectedDates, dateStr, instance) {
+                    const submitBtn = document.createElement("button");
+                    submitBtn.innerText = "套用";
+                    submitBtn.id = "submitBtn";
+                    submitBtn.classList.add('btn', 'btn-primary');
+
+                    submitBtn.onclick = function () {
+                        const selectedDates = instance.selectedDates;
+                        if (selectedDates.length === 2) {
+                            departureDateInput.value = selectedDates[0].toLocaleDateString();
+                            returnDateInput.value = selectedDates[1].toLocaleDateString();
+                            instance.close();
+                        }
+                    };
+                    const line = document.createElement("hr");
+                    instance.calendarContainer.appendChild(line);
+                    instance.calendarContainer.appendChild(submitBtn);
+                }
+            });
+
+            returnDateInput.addEventListener('focus', () => {
+                datePicker.open();
+            });
+
+            departureDateInput.addEventListener('focus', () => {
+                datePicker.open();
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const quantityInput = document.getElementById('quantityInput');
+            const quantityBox = document.getElementById('quantityBox');
+            const confirmBtn = document.getElementById('confirmBtn');
+
+            quantityInput.addEventListener('click', function () {
+                quantityBox.style.display = quantityBox.style.display === 'block' ? 'none' : 'block';
+            });
+
+            document.querySelectorAll('.quantity-btn').forEach(button => {
+                button.addEventListener('click', function () {
+                    const type = this.getAttribute('data-type');
+                    const action = this.getAttribute('data-action');
+                    const quantityNumber = document.querySelector(`.quantity-number[data-type="${type}"]`);
+                    let currentValue = parseInt(quantityNumber.textContent);
+
+                    if (action === 'increase') {
+                        quantityNumber.textContent = currentValue + 1;
+                    } else if (action === 'decrease') {
+                        if (currentValue > 0) {
+                            quantityNumber.textContent = currentValue - 1;
+                        }
+                    }
+                });
+            });
+            
+            confirmBtn.addEventListener('click', function () {
+                const adultQuantity = Number(document.querySelector('.quantity-number[data-type="adult"]').textContent);
+                const teenQuantity = Number(document.querySelector('.quantity-number[data-type="teen"]').textContent);
+                const childQuantity = Number(document.querySelector('.quantity-number[data-type="child"]').textContent);
+                const babyQuantity = Number(document.querySelector('.quantity-number[data-type="baby"]').textContent);
+                const ticketTotal = adultQuantity + teenQuantity + childQuantity + babyQuantity;
+                let quantityRoom = document.getElementById('quantityRoom');
+                let quantitywarning = document.getElementById('quantityWarning');
+                let roomNum = quantityRoom.selectedIndex;
+                if ( adultQuantity >= (childQuantity+babyQuantity) ) {
+                    quantityInput.value = `票數: ${ticketTotal}位 , ${quantityRoom.options[roomNum].value}`;
+                    quantitywarning.style.display = 'none';
+                    quantityBox.style.display = 'none';
+                } else {
+                    quantitywarning.style.display = 'block';
+                    quantitywarning.innerHTML = '每位大人最多攜帶<br>一位兒童或嬰兒!'; 
+                }
+            });
+
+            document.addEventListener('click', function (event) {
+                if (!quantityInput.contains(event.target) && !quantityBox.contains(event.target)) {
+                    quantityBox.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
