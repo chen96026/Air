@@ -135,13 +135,10 @@ footer>div>section>h3 {
 
 
 .container_lg {
-
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    align-content: center;
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
     background-color: #E9E4D4;
-    margin: 0 auto
 }
 
 
@@ -231,7 +228,6 @@ select {
 
 ul {
     list-style: none;
-    padding-left: 0;
 }
 
 li {
