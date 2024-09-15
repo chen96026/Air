@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-Hans-TW">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,12 +8,13 @@
     <link rel="stylesheet" href="./css/a_HeaderFooter.css">
     <link rel="stylesheet" href="./css/forum_edit.css">
 </head>
+
 <body class="forum_body">
     <header>
-        <div><a href=""><img src="./圖片/logo.png"></a></div>
+        <div><a href="./HomePage.html"><img src="./圖片/logo.png"></a></div>
         <div>
             <p>製作美好日旅回憶的第一步</p>
-            <a href=""><img src="./圖片/icon_Forum.png"></a>
+            <a href="./forum.html"><img src="./圖片/icon_Forum.png"></a>
             <a href=""><img src="./圖片/icon_logIn.png"></a>
             <div style="clear:both"></div>
         </div>
@@ -23,7 +25,7 @@
                 <img src="https://picsum.photos/50?random=1" alt="author_icon">
                 <p>奇異鳥真奇異啊</p>
             </div>
-            <form action="">
+            <form action="" enctype="multipart/form-data">
                 <div class="forum_where">
                     <div>
                         <label for="forum_select_country">選擇國家：</label>
@@ -73,20 +75,13 @@
                             </div>
                         </div>
                         <div class="forum_uploadImg">
-                            <img src="https://picsum.photos/1200/700?random=1" alt="photo1">
-                            <div class="forum_moreImg">
-                                <img src="https://picsum.photos/1200/700?random=2" alt="photo2">
-                                <img src="https://picsum.photos/1200/700?random=3" alt="photo3">
-                                <img src="https://picsum.photos/1200/700?random=4" alt="photo4">
-                            </div>
+                            <div class="forum_noImg"></div>
                             <div class="forum_chooseImg">
-                                <p>目前已上傳 4 張照片</p>
+                                <p>目前未選取相片</p>
                                 <label for="forum_chooseImg_id">
-                                    <div>
-                                        <img src="./img/icon/add_newImg.svg" alt="chooseImg">
-                                        <span>上傳相片…</span>
-                                        <input type="file" name="" id="forum_chooseImg_id" accept=".png, .jpg, .jpeg">
-                                    </div>
+                                    <img src="./img/icon/add_newImg.svg" alt="chooseImg">
+                                    <span>上傳相片…</span>
+                                    <input type="file" name="" id="forum_chooseImg_id" accept="image/*" multiple>
                                 </label>
                             </div>
                         </div>
@@ -126,5 +121,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="./js/forum_selectArea.js"></script>
     <script src="./js/forum_stars.js"></script>
+    <script src="./js/forum_upLoadImg.js"></script>
 </body>
+
 </html>
