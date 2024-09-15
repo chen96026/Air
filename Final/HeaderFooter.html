@@ -1,117 +1,200 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 
+    <!-- 社群媒體的iconnnnnnnnnnnn -->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet" />
     <style>
+        a {
+            text-decoration: none;
+        }
         /* Header */
         header {
-            height: 13vh;
-            /* 140px */
-            background-color: #F4CFE0;
+            background-color: #FFC1E0;
+            position: sticky;
+            top: 0;
+            z-index: 101;
         }
-        header>div {
-            height: 50%;
-            width: 73.5%;
-            margin: 0 auto;
-            position: relative;
+
+        #header {
+            max-width: 60vw;
+            margin: auto;
+            padding: 2rem 1rem;
             display: flex;
             align-items: center;
+            justify-content: space-between;
+            gap: 2rem;
         }
-        header>div img[src*="logo"] {
-            position: absolute;
-            bottom: 0;
-        }
-        header>div>p {
-            display: inline-block;
-            font-size: 3vh;
-            width: 85%;
-            margin: 0;
-        }
-        header>div img[src*="icon"] {
+
+        .header_logo img {
+            width: 5vw;
             height: 5vh;
-            margin: auto 10px;
-            float: right;
-            /* 48px */
+        }
+
+        .header_nav_links {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+        }
+
+        .header_link a {
+            padding: 5px;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        .header_link img {
+            width: 3vw;
+            height: 3vh;
+            object-fit: scale-down;
         }
 
         /* Footer */
         footer {
-            height: 20.8vh;
-            /* 225px */
-            background-color: #F4CFE0;
+            background-color: #FFC1E0;
         }
-        footer>div {
-            width: 73.5%;
-            margin: 0 auto;
+
+        .search_section_container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 3rem 1rem;
+        }
+
+        .search_footer_container {
+            display: grid;
+            grid-template-columns: 400px repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .search_footer_col h5 {
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: black;
+        }
+
+        .search_footer_col p {
+            max-width: 300px;
+            color: black;
+        }
+
+        .search_footer_col h4 {
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: black;
+        }
+
+        .search_footer_col a {
+            display: block;
+            margin-bottom: 1rem;
+            font-size: 1rem;
+            font-weight: 500;
+            color: black;
+            transition: 0.3s;
+        }
+
+        .search_footer_col a:hover {
+            color: blue;
+        }
+
+        .search_footer_socials {
             display: flex;
-            justify-content: space-between;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 10px;
+            flex-wrap: wrap;
         }
-        footer>div>section {
-            display: inline-block;
-            width: 17vw;
+
+        .search_footer_socials span a {
+            padding: 5px 10px;
+            margin: 0;
+            font-size: 1.25rem;
+            color: white;
+            background-color: #930000;
+            border-radius: 100%;
         }
-        footer>div>section>h3 {
-            font-size: 3vh;
-            margin: 1vh;
+
+        .search_footer_socials span a:hover {
+            color: white;
+            background-color: #000093;
+        }
+
+        .search_footer_bar {
+            padding: 1rem;
+            font-size: 0.8rem;
+            color: black;
             text-align: center;
         }
-        .footer_line {
-            border: 0.2vh solid black;
-            margin: 0 auto;
-            width: 60%;
+
+        hr {
+            margin: 1rem 0;
+            border: 0;
+            border-top: solid;
+            opacity: .25;
         }
-        .footer_list>a {
-            font-size: 2.2vh;
-            font-weight: bold;
-            margin: 1vh 1vh 0;
-            position: relative;
-            left: 20%;
-            color: black;
-            text-decoration: none;
-            display: inline-block;
-        }
+
+        
     </style>
 </head>
+
 <body>
     <header>
-        <div><a href=""><img src="./圖片/logo.png"></a></div>
-        <div>
-            <p>製作美好日旅回憶的第一步</p>
-            <a href=""><img src="./圖片/icon_Forum.png"></a>
-            <a href=""><img src="./圖片/icon_logIn.png"></a>
-            <div style="clear:both"></div>
-        </div>
+        <nav id="header">
+            <div class="header_logo"><a href=""><img src="../Yang/圖片/logo.png"></a></div>
+            <ul class="header_nav_links">
+                <li class="header_link"><a href="#"><img src="../Yang/圖片/icon_logIn.png"></a></li>
+                <li class="header_link"><a href="#"><img src="../Yang/圖片/icon_Forum.png"></a></li>
+            </ul>
+        </nav>
     </header>
     <footer>
-        <div>
-            <section>
-                <h3>公司</h3>
-                <div class="footer_line"></div>
-                <div class="footer_list"><a href="">關於我們</a></div>
-                <div class="footer_list"><a href="">聯絡我們</a></div>
-            </section>
-            <section>
-                <h3>隱私</h3>
-                <div class="footer_line"></div>
-                <div class="footer_list"><a href="">隱私權政策</a></div>
-                <div class="footer_list"><a href="">隱私設定</a></div>
-            </section>
-            <section>
-                <h3>Cookie</h3>
-                <div class="footer_line"></div>
-                <div class="footer_list"><a href="">Cookie政策</a></div>
-                <div class="footer_list"><a href="">Cookie設定</a></div>
-            </section>
-            <section>
-                <h3>合作夥伴</h3>
-                <div class="footer_line"></div>
-                <div class="footer_list"><a href="">廣告投放</a></div>
-                <div class="footer_list"><a href="">旅遊宣傳合作</a></div>
-            </section>
+        <div class="search_section_container search_footer_container">
+            <div class="search_footer_col">
+                <h4>追蹤我們</h4>
+                <hr style="width:50%">
+                <div class="search_footer_socials">
+                    <span>
+                        <a href="#"><i class="ri-twitter-fill"></i></a>
+                    </span>
+                    <span>
+                        <a href="#"><i class="ri-linkedin-fill"></i></a>
+                    </span>
+                    <span>
+                        <a href="#"><i class="ri-instagram-line"></i></a>
+                    </span>
+                    <span>
+                        <a href="#"><i class="ri-facebook-fill"></i></a>
+                    </span>
+                </div>
+            </div>
+            <div class="search_footer_col">
+                <h4>隱私</h4>
+                <hr style="width:80%">
+                <a href="#">隱私權政策</a>
+                <a href="#">隱私設定</a>
+            </div>
+            <div class="search_footer_col">
+                <h4>Cookie</h4>
+                <hr style="width:80%">
+                <a href="#">Cookie政策</a>
+                <a href="#">Cookie設定</a>
+            </div>
+            <div class="search_footer_col">
+                <h4>合作夥伴</h4>
+                <hr style="width:80%">
+                <a href="#">廣告投放</a>
+                <a href="#">旅遊宣傳合作</a>
+            </div>
+        </div>
+        <div class="search_footer_bar">
+            Copyright © 2024 Javel. All rights reserved.
         </div>
     </footer>
 </body>
+
 </html>

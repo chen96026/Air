@@ -1,0 +1,430 @@
+* {
+    box-sizing: border-box;
+}
+body {
+    background-color: #F1F1F1;
+    margin: 0;
+}
+a {
+    text-decoration: none;
+}
+body {
+    font-family: "Poppins", sans-serif;
+    background-color: #EEE9E9;
+    display: flex;
+    flex-direction: column;
+}
+/* Header */
+
+.search_btn {
+    padding: 0.75rem 1.5rem;
+    outline: none;
+    border: none;
+    font-size: 1rem;
+    font-weight: 600;
+    white-space: nowrap;
+    color: white;
+    background-color: #930000;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.search_btn:hover {
+    background-color: #000093;
+}
+
+.search_header {
+    background-color: #FFC1E0;
+    position: sticky;
+    top: 0;
+    z-index: 101;
+}
+
+nav {
+    max-width: 60vw;
+    margin: auto;
+    padding: 2rem 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+}
+.search_nav_logo img {
+    width: 5vw;
+    height: 5vh;
+}
+
+.search_nav_links {
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+}
+
+.search_link a {
+    padding: 5px;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.search_link img {
+    width: 3vw;
+    height: 3vh;
+    object-fit: scale-down;
+}
+.search_section_container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 3rem 1rem;
+}
+
+.search_header_container {
+    padding: 0rem 1rem 1rem;
+}
+
+.search_header_form {
+    padding: 1rem;
+    opacity: 1;
+    border-radius: 10px;
+}
+
+.search_header_form form {
+    padding: 1rem 2rem;
+    display: none;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+    background-color: white;
+    border-radius: 10px;
+}
+.search_bar {
+    width: 100%;
+    padding: 1rem 2rem;
+    display: block;
+    align-items: center;
+    background-color: white;
+    border: none;
+    border-radius: 10px;
+}
+
+.search_input_group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.search_input_group label {
+    font-size: 1rem;
+    font-weight: 600;
+    color: black;
+}
+
+.search_input_group input {
+    max-width: 140px;
+    outline: none;
+    border: none;
+    font-size: 0.9rem;
+}
+
+.search_input_group:nth-of-type(n+3)>* {
+    cursor: pointer;
+}
+
+/* Footer */
+
+footer {
+    background-color: #FFC1E0;
+}
+
+.search_section_container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 3rem 1rem;
+}
+
+.search_footer_container {
+    display: grid;
+    grid-template-columns: 400px repeat(3, 1fr);
+    gap: 2rem;
+}
+
+.search_footer_col h5 {
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: black;
+}
+
+.search_footer_col p {
+    max-width: 300px;
+    color: black;
+}
+
+.search_footer_col h4 {
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: black;
+}
+
+.search_footer_col a {
+    display: block;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+    font-weight: 500;
+    color: black;
+    transition: 0.3s;
+}
+
+.search_footer_col a:hover {
+    color: blue;
+}
+
+.search_footer_socials {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.search_footer_socials span a {
+    padding: 5px 10px;
+    margin: 0;
+    font-size: 1.25rem;
+    color: white;
+    background-color: #930000;
+    border-radius: 100%;
+}
+
+.search_footer_socials span a:hover {
+    color: white;
+    background-color: #000093;
+}
+
+.search_footer_bar {
+    padding: 1rem;
+    font-size: 0.8rem;
+    color: black;
+    text-align: center;
+}
+
+hr {
+    margin: 1rem 0;
+    border: 0;
+    border-top: solid;
+    opacity: .25;
+}
+
+/* 搜尋欄 */
+#HpSearchBar {
+    background-color: #F4CFE0;
+}
+#HpSearchBar>form {
+    height: 11vh;
+}
+.Hp_grid_container1 {
+    width: 73.5%;
+    height: 50%;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 12.5vw 12.5vw 11.5vw 11.5vw 14.8vw 5.2vw;
+}
+.Hp_grid_container1>input:focus {
+    border: 2px solid black;
+    background-color: lightgray;
+}
+.Hp_grid_item1 {
+    background-color: white;
+    border: none;
+    border-radius: 20px;
+    margin: 0 0.5vw;
+    font-size: 2.2vh;
+    padding: 0 1vw;
+}
+.Hp_grid_item2 {
+    background-color: white;
+    border: none;
+    border-radius: 20px;
+    margin: 0 0.5vw;
+    font-size: 2.2vh;
+    text-align: left;
+    padding: 0 1vw;
+    color: #8e8e8e;
+    cursor: pointer;
+}
+.Hp_grid_btn {
+    background-color: white;
+    border: none;
+    border-radius: 20px;
+    margin: 0 0 0 0.3vw;
+    font-size: 2.2vh;
+    font-weight: bold;
+    cursor: pointer;
+}
+.Hp_place {
+    display: none;
+    width: 25vw;
+    background-color: white;
+    border: 2px solid black;
+    border-radius: 20px;
+    font-size: 2.2vh;
+}
+#HpPlace1 {
+    position: absolute;
+    left: 13vw;
+}
+#HpPlace2 {
+    position: absolute;
+    left: 25.5vw;
+}
+.Hp_place>p {
+    margin: 0;
+    padding: 1vw;
+    cursor: pointer;
+}
+.Hp_place_item_1 {
+    border-radius: 18px 18px 0 0;
+}
+.Hp_place_item_L {
+    border-radius: 0 0 18px 18px;
+}
+.Hp_place>p:hover {
+    background-color: #BC002D;
+    color: white;
+}
+.Hp_ticket {
+    display: none;
+    position: absolute;
+    left: 60vw;
+    width: 25vw;
+    background-color: white;
+    border: 2px solid black;
+    border-radius: 20px;
+    font-size: 2.2vh;
+    padding: 1vw;
+}
+.Hp_ticket>h3 {
+    margin: auto 2vw;
+    display: inline-block;
+}
+.Hp_ticket>select {
+    font-size: 2vh;
+    text-align: center;
+    border-radius: 10px;
+    width: 50%;
+    height: 4vh;
+}
+.Hp_peopleAge {
+    padding: 1vw;
+}
+.Hp_peopleAge>div {
+    display: inline-block;
+}
+.Hp_peopleSelf>span {
+    color: #8e8e8e;
+}
+.Hp_peopleNum {
+    float: right;
+    font-size: 3vw;
+}
+.Hp_peopleNumUpd {
+    display: inline-block;
+    width: 5vh;
+    text-align: center;
+    margin: 0 1vw;
+    background-color: lightslategray;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.Hp_show {
+    display: block;
+}
+/* 廣告文宣 */
+#HpPoster {
+    width: 83.3vw;
+    height: 60.2vh;
+    /* 650px */
+    margin: 9.25vh auto;
+    background-color: #E9E4D4;
+    display: flex;
+    align-items: center;
+}
+
+#HpPoster>figure {
+    width: 41.7vw;
+    height: 47.7vh;
+    float: left;
+}
+
+#HpPoster>section {
+    display: inline-block;
+    width: 33.8vw;
+    height: 47.7vh;
+    clear: both;
+}
+
+#HpPoster>section>h2 {
+    font-size: 4.4vh;
+}
+
+#HpPoster>section>h3 {
+    font-size: 3vh;
+}
+
+#HpPoster>section>p {
+    font-size: 2.6vh;
+    word-break: break-all;
+}
+
+.fa-star {
+    font-size: 2.6vh;
+}
+
+/* 簡易問答 */
+#HpQA {
+    display: flex;
+    justify-content: center;
+    margin: 0 auto 9.25vh;
+}
+
+#HpQA>div {
+    width: 39vw;
+    display: inline-block;
+}
+
+#HpQA button {
+    display: inline-block;
+}
+#HpQA p {
+    font-size: 1.85vh;
+}
+
+.Hp_accordion {
+    font-size: 2.2vh;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 18px;
+    text-align: left;
+    border: none;
+    border-bottom: 3px solid black;
+    outline: none;
+    width: 90%;
+}
+.Hp_accordion:hover {
+    background-color: #E9E4D4;
+}
+.Hp_panel {
+    padding: 0 18px;
+    width: 85.3%;
+    background-color: #E9E4D4;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+}
+.fa-solid {
+    display: inline-block;
+    position: relative;
+    right: 1.5vw;
+}

@@ -33,12 +33,6 @@ body {
     background: rgba(0, 0, 0, 0.5);
     z-index: 100;
 }
-
-.search_icon {
-    height: 1.5rem;
-    object-fit: scale-down;
-}
-
 .search_btn {
     padding: 0.75rem 1.5rem;
     outline: none;
@@ -73,7 +67,6 @@ nav {
     justify-content: space-between;
     gap: 2rem;
 }
-
 .search_nav_logo img {
     width: 5vw;
     height: 5vh;
@@ -95,13 +88,6 @@ nav {
     width: 3vw;
     height: 3vh;
     object-fit: scale-down;
-}
-
-.search_section_header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 2rem;
 }
 
 .search_section_title {
@@ -192,23 +178,6 @@ nav {
 .card-img-top {
     height: 70%;
     object-fit: cover;
-}
-
-.search_details {
-    display: flex;
-}
-
-.search_text {
-    font-size: smaller;
-    text-align: left;
-    flex: 1;
-}
-
-.search_price {
-    text-align: right;
-    font-size: x-large;
-    font-weight: bold;
-    flex: 1;
 }
 
 footer {
