@@ -342,61 +342,63 @@ hr {
     display: block;
 }
 /* 廣告文宣 */
-#HpPoster {
-    width: 83.3vw;
-    height: 60.2vh;
-    /* 650px */
-    margin: 9.25vh auto;
+.Hp_slideshow_container {
     background-color: #E9E4D4;
+    width: 70%;
     display: flex;
-    align-items: center;
+    margin: 3vh auto;
+    padding: 2% 1%;
+}
+.Hp_mySlides {
+    display: none;
+}
+.Hp_mySlides>div {
+    margin: 0 1%;
+}
+.Hp_mySlides>div>img {
+    display: block;
+    width: 720px;
+    height: 400px;
 }
 
-#HpPoster>figure {
-    width: 41.7vw;
-    height: 47.7vh;
-    float: left;
+.Hp_prev, .Hp_next {
+  color: white;
+  font-weight: bold;
+  font-size: 2rem;
+  border-radius: 5px;
+  height: 3rem;
+  width: 5rem;
+  text-align: center;   
+  margin: auto 1% ;
+  background-color: #bc002c;
 }
 
-#HpPoster>section {
-    display: inline-block;
-    width: 33.8vw;
-    height: 47.7vh;
-    clear: both;
+.Hp_prev:hover, .Hp_next:hover {
+  background-color: #ff89a5;
+  color: black;
 }
 
-#HpPoster>section>h2 {
-    font-size: 4.4vh;
+.Hp_fade {
+  animation-name: fadePoster;
+  animation-duration: 1.5s;
 }
-
-#HpPoster>section>h3 {
-    font-size: 3vh;
-}
-
-#HpPoster>section>p {
-    font-size: 2.6vh;
-    word-break: break-all;
-}
-
-.fa-star {
-    font-size: 2.6vh;
+@keyframes fadePoster {
+  from {opacity: .4}
+  to {opacity: 1}
 }
 
 /* 簡易問答 */
 #HpQA {
     display: flex;
+    width: 70%;
     justify-content: center;
     margin: 0 auto 9.25vh;
 }
 
 #HpQA>div {
-    width: 39vw;
-    display: inline-block;
+    width: 50%;
 }
 
-#HpQA button {
-    display: inline-block;
-}
 #HpQA p {
     font-size: 1.85vh;
 }
@@ -411,17 +413,21 @@ hr {
     border-bottom: 3px solid black;
     outline: none;
     width: 90%;
+    position: relative;
+    left: 1.5vw;
 }
 .Hp_accordion:hover {
     background-color: #E9E4D4;
 }
 .Hp_panel {
     padding: 0 18px;
-    width: 85.3%;
+    width: 90%;
     background-color: #E9E4D4;
     max-height: 0;
     overflow: hidden;
     transition: max-height 0.2s ease-out;
+    position: relative;
+    left: 1.5vw;
 }
 .fa-solid {
     display: inline-block;

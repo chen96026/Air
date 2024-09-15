@@ -25,7 +25,7 @@
                 <li class="search_link"><a href="#"><img src="./圖片/icon_Forum.png"></a></li>
             </ul>
         </nav>
-        <div class="search_section_container search_header_container" id="home">
+        <div class="search_section_container search_header_container" id="home" style="display: none;">
             <div class="search_header_form">
                 <form id="search_form">
                     <div class="search_input_group">
@@ -97,10 +97,12 @@
             </div>
         </div>
     </header>
-        <article id="HpPoster">
-            <figure>
-                <img src="./圖片/photo_1.png" style="width: 100%;height: 100%;">
-            </figure>
+    <article class="Hp_slideshow_container">
+        <div class="Hp_prev" onclick="posterPlusSlides(-1)">&#10094;</div>
+        <div class="Hp_mySlides Hp_fade">
+            <div>
+                <img src="./測試/圖片/kiwi1.png">
+            </div>
             <section>
                 <h2>沖繩</h2>
                 <h3>令人陶醉的沙灘海洋</h3>
@@ -115,40 +117,87 @@
                     <span class="fa fa-star"></span>
                 </div>
             </section>
-        </article>
-        <section id="HpQA">
+        </div>
+        <div class="Hp_mySlides Hp_fade">
             <div>
-                <button class="Hp_accordion">如何找到低價航班?</button><i class="fa fa-solid fa-chevron-up"></i>
-                <div class="Hp_panel">
-                    <p>1 . 平日出發，尤其是週四出發的航班更便宜。因為在這些日子出遊的人不多。</p>
-                    <p>2 . 清晨/半夜的航班，比較少人願意搭清晨 6 點之前的航班，因此這個時間點的機票也會更便宜。</p>
-                    <p>3 . 及早預定，剛剛釋出的機票是最便宜得時候 — 通常是起飛前的 1 年左右，隨著日期接近，價格會逐漸提高；熱門航班的機票漲幅更快，所以有預定的行程建議您提早購買機票。</p>
-                    <p>4 . 使用信用卡優惠，某些銀行信用卡會對機票給予更高的折扣和回饋。</p>
-                </div>
-                <button class="Hp_accordion">我在這裡是跟航空公司訂票嗎?</button><i class="fa fa-solid fa-chevron-up"></i>
-                <div class="Hp_panel">
-                    <p>Lorem ipsum...</p>
-                </div>
-                <button class="Hp_accordion">預定航班後我需要注意什麼?</button><i class="fa fa-solid fa-chevron-up"></i>
-                <div class="Hp_panel">
-                    <p>Lorem ipsum...</p>
-                </div>
+                <img src="./測試/圖片/kiwi3.png">
             </div>
+            <section>
+                <h2>夏威夷</h2>
+                <h3>酒吧、派對、營火晚會</h3>
+                <p>
+                    以前都只能在電影畫面看到的夏威夷，這次終於用雙眼親自見識了!
+                    路上行人真的比想像中還熱情，無論是裝扮或是談話，
+                    尤其晚上的派對真的是嗨到爆炸啊啊啊啊啊!!!!!
+                    第一次旅行結束時，竟然會失落到快哭出來。
+                </p>
+                <div>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star"></span>
+                </div>
+            </section>
+        </div>
+        <div class="Hp_mySlides Hp_fade">
             <div>
-                <button class="Hp_accordion">我如果有事能取消航班機票嗎?</button><i class="fa fa-solid fa-chevron-up"></i>
-                <div class="Hp_panel">
-                    <p>Lorem ipsum...</p>
-                </div>
-                <button class="Hp_accordion">會員有什麼功能或好處?</button><i class="fa fa-solid fa-chevron-up"></i>
-                <div class="Hp_panel">
-                    <p>Lorem ipsum...</p>
-                </div>
-                <button class="Hp_accordion">為什麼經濟艙又有分等級?</button><i class="fa fa-solid fa-chevron-up"></i>
-                <div class="Hp_panel">
-                    <p>Lorem ipsum...</p>
-                </div>
+                <img src="./測試/圖片/kiwi4.png">
             </div>
-        </section>
+            <section>
+                <h2>首爾</h2>
+                <h3>電競追星圓夢成功!</h3>
+                <p>
+                    本來還在考慮，結果六月多看到喜歡的電競選手表示夏季後要退役，
+                    趕緊手刀和同好訂了七月季後賽的票直接衝去現場支持，
+                    雖然打滿局數，還好最後還是贏了 QAQQQQ
+                    不得不說韓國電競館真的是帥到炸，還有一堆粉絲紀念品可以買
+                    皮包大失血~~~~
+                </p>
+                <div>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                </div>
+            </section>
+        </div>
+        <div class="Hp_next" onclick="posterPlusSlides(1)">&#10095;</div>
+    </article>
+    <section id="HpQA">
+        <div>
+            <button class="Hp_accordion">如何找到低價航班?</button><i class="fa fa-solid fa-chevron-up"></i>
+            <div class="Hp_panel">
+                <p>1 . 平日出發，尤其是週四出發的航班更便宜。因為在這些日子出遊的人不多。</p>
+                <p>2 . 清晨/半夜的航班，比較少人願意搭清晨 6 點之前的航班，因此這個時間點的機票也會更便宜。</p>
+                <p>3 . 及早預定，剛剛釋出的機票是最便宜得時候 — 通常是起飛前的 1 年左右，隨著日期接近，價格會逐漸提高；熱門航班的機票漲幅更快，所以有預定的行程建議您提早購買機票。</p>
+                <p>4 . 使用信用卡優惠，某些銀行信用卡會對機票給予更高的折扣和回饋。</p>
+            </div>
+            <button class="Hp_accordion">我在這裡是跟航空公司訂票嗎?</button><i class="fa fa-solid fa-chevron-up"></i>
+            <div class="Hp_panel">
+                <p>Lorem ipsum...</p>
+            </div>
+            <button class="Hp_accordion">預定航班後我需要注意什麼?</button><i class="fa fa-solid fa-chevron-up"></i>
+            <div class="Hp_panel">
+                <p>Lorem ipsum...</p>
+            </div>
+        </div>
+        <div>
+            <button class="Hp_accordion">我如果有事能取消航班機票嗎?</button><i class="fa fa-solid fa-chevron-up"></i>
+            <div class="Hp_panel">
+                <p>Lorem ipsum...</p>
+            </div>
+            <button class="Hp_accordion">會員有什麼功能或好處?</button><i class="fa fa-solid fa-chevron-up"></i>
+            <div class="Hp_panel">
+                <p>Lorem ipsum...</p>
+            </div>
+            <button class="Hp_accordion">為什麼經濟艙又有分等級?</button><i class="fa fa-solid fa-chevron-up"></i>
+            <div class="Hp_panel">
+                <p>Lorem ipsum...</p>
+            </div>
+        </div>
+    </section>
     </main>
     <footer>
         <div class="search_section_container search_footer_container">
@@ -212,84 +261,28 @@
         }
     </script>
     <script>
-        document.getElementById("HpSearch1").onclick = function(){
-            document.getElementById("HpPlace1").classList.toggle("Hp_show");
-        }
-        document.getElementById("HpSearch2").onclick = function(){
-            document.getElementById("HpPlace2").classList.toggle("Hp_show");
-        }
-        document.getElementById("HpSearch5").onclick = function(){
-            document.getElementById("HpTicket").classList.toggle("Hp_show");
+        let slideIndex = 1;
+        let timer;
+        showSlides(slideIndex);
+
+        function posterPlusSlides(n) {
+            showSlides(slideIndex += n);
         }
 
-        window.onclick = function(event) {
+        function showSlides(n) {
+            let i;
+            let slides = document.getElementsByClassName("Hp_mySlides");
+            if (n > slides.length) { slideIndex = 1 }
+            if (n < 1) { slideIndex = slides.length }
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            slides[slideIndex - 1].style.display = "flex";
+            // clearInterval(timer);
+            // timer = setInterval(() => { showSlides(++slideIndex); }, 3000);
+        }
+    </script>
 
-            if (!event.target.matches('#HpSearch1') &&
-            document.getElementById("HpPlace1").classList.contains('Hp_show') ) {
-                document.getElementById("HpPlace1").classList.remove('Hp_show')
-            }
-            if (!event.target.matches('#HpSearch2') &&
-            document.getElementById("HpPlace2").classList.contains('Hp_show') ) {
-                document.getElementById("HpPlace2").classList.remove('Hp_show')
-            }
-            if ( !event.target.matches('#HpTicket') &&  !event.target.matches('#HpSearch5') ) {
-                if ( document.getElementById("HpTicket").classList.contains('Hp_show') ) {
-                    document.getElementById("HpTicket").classList.remove('Hp_show')
-                }
-            }
-            
-        }
-    </script>
-    <script>
-        Hp_AduMinus.onclick = function(){
-            var tempAmnt = Hp_Adunum.textContent;
-            if ( +(tempAmnt)>1 ) {
-                Hp_Adunum.textContent = tempAmnt - 1;
-            }
-        }
-        Hp_AduPlus.onclick = function(){
-            var tempAmnt = Hp_Adunum.textContent;
-            if ( +(tempAmnt)<9 ) {
-                Hp_Adunum.textContent = +(tempAmnt) + 1;
-            }
-        }
-        Hp_TeenMinus.onclick = function(){
-            var tempAmnt = Hp_Teennum.textContent;
-            if ( +(tempAmnt)>1 ) {
-                Hp_Teennum.textContent = tempAmnt - 1;
-            }
-        }
-        Hp_TeenPlus.onclick = function(){
-            var tempAmnt = Hp_Teennum.textContent;
-            if ( +(tempAmnt)<9 ) {
-                Hp_Teennum.textContent = +(tempAmnt) + 1;
-            }
-        }
-        Hp_ChildMinus.onclick = function(){
-            var tempAmnt = Hp_Childnum.textContent;
-            if ( +(tempAmnt)>1 ) {
-                Hp_Childnum.textContent = tempAmnt - 1;
-            }
-        }
-        Hp_ChildPlus.onclick = function(){
-            var tempAmnt = Hp_Childnum.textContent;
-            if ( +(tempAmnt)<9 ) {
-                Hp_Childnum.textContent = +(tempAmnt) + 1;
-            }
-        }
-        Hp_BabyMinus.onclick = function(){
-            var tempAmnt = Hp_Babynum.textContent;
-            if ( +(tempAmnt)>1 ) {
-                Hp_Babynum.textContent = tempAmnt - 1;
-            }
-        }
-        Hp_BabyPlus.onclick = function(){
-            var tempAmnt = Hp_Babynum.textContent;
-            if ( +(tempAmnt)<9 ) {
-                Hp_Babynum.textContent = +(tempAmnt) + 1;
-            }
-        }
-    </script>
 </body>
 
 </html>
