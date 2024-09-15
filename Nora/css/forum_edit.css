@@ -1,3 +1,7 @@
+* {
+    box-sizing: border-box;
+}
+
 .forum_body {
     margin: 0;
 }
@@ -7,13 +11,14 @@
 }
 
 .forum_main > div {
-    width: 80%;
+    width: 60%;
     margin: auto;
 }
 
 .forum_authorInfo {
     display: flex;
-    padding: 30px 0;
+    padding: 30px 0 20px 0;
+    margin: auto;
 }
 
 .forum_authorInfo > img {
@@ -24,17 +29,19 @@
 
 .forum_authorInfo > p {
     display: inline-block;
-    font-size: 32px;
+    font-size: 20px;
     margin: auto 10px;
 }
 
 .forum_where {
-    margin-bottom: 40px;
+    margin-bottom: 30px;
+    display: flex;
+    flex-wrap: wrap;
 }
-
 
 .forum_where > div {
     display: block;
+    width: 350px;
 }
 
 @media(min-width: 992px) {
@@ -44,18 +51,18 @@
 }
 
 .forum_where label {
-    font-size: 24px;
+    font-size: 20px;
 }
 
 .forum_where select, .forum_where input {
     background-color: #E9E4D4;
     border: none;
     border-radius: 8px;
-    width: 220px;
+    width: 200px;
     height: 50px;
     font-size: 20px;
     text-align: center;
-    margin: 5px 5% 5px 0;
+    margin: 5px 3% 5px 0;
 }
 
 .forum_where select:focus, .forum_where input:focus {
@@ -63,7 +70,7 @@
 }
 
 .forum_edit_body {
-    width: 90%;
+    width: 95%;
     margin: auto;
 }
 
@@ -111,9 +118,9 @@
     margin-right: 50px;
 }
 
-.forum_e_star:hover, .forum_e_star:focus {
+/* .forum_e_star:hover, .forum_e_star:checked {
     background-image: url("../img/icon/star_FILL1.svg");
-}
+} */
 
 .forum_e_starFill {
     background-image: url("../img/icon/star_FILL1.svg");
@@ -221,6 +228,7 @@
     flex-wrap: nowrap;
     overflow: hidden;
     width: 95%;
+    height: 120px;
 }
 
 @media(min-width: 992px) {
@@ -245,21 +253,26 @@
     }
 }
 
+.forum_chooseImg > p {
+    margin: 10px 0;
+}
+
 .forum_chooseImg label{
     display: block;
     background-color: #D2D2D2;
-    height: 165px;
-    
+    height: 140px;
 }
 
 .forum_chooseImg div {
     display: flex;
+    height: 100%;
     justify-items: center;
+    align-items: center;
 }
 
 .forum_chooseImg img {
     display: inline-block;
-    margin: 25px 50px;
+    margin: auto 30px;
 }
 
 .forum_chooseImg span {

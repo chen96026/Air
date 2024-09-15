@@ -1,3 +1,7 @@
+* {
+    box-sizing: border-box;
+}
+
 .about_body {
     margin: 0;
 }
@@ -7,21 +11,21 @@
 }
 
 .about_main > div {
-    width: 75%;
+    width: 65%;
     margin: auto;
     padding: 120px 0;
 }
 
 .about_main h1 {
-    font-size: 48px;
+    font-size: 36px;
 }
 
 .about_main h2 {
-    font-size: 32px;
+    font-size: 24px;
 }
 
 .about_main p {
-    font-size: 24px;
+    font-size: 20px;
 }
 
 .about_about {
@@ -32,7 +36,7 @@
 
 .about_about h1 {
     text-align: center;
-    margin: 0 0 50px 0;
+    margin: 0 0 30px 0;
 }
 
 .about_pay {
@@ -44,7 +48,7 @@
 }
 
 .about_p_title{
-    width: 500px;
+    width: 45%;
     text-align: center;
     margin: 0;
 }

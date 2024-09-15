@@ -1,3 +1,7 @@
+* {
+    box-sizing: border-box;
+}
+
 .forum_body {
     margin: 0;
 }
@@ -7,26 +11,30 @@
 }
 
 .forum_main article {
-    width: 84%;
+    width: 65%;
     margin: auto;
 }
 
 .forum_place {
-    width: 80%;
-    font-size: 28px;
+    width: 65%;
+    font-size: 24px;
     padding: 10px 0;
     margin: auto;
 }
 
-.forum_area::before {
-    content: "";
+.forum_place a, .forum_place a:hover, .forum_place a:focus, .forum_place a:visited{
+    color: black;
+    text-decoration: none;
+}
+
+.forum_place span {
     display: inline-block;
     width: 20px;
     height: 20px;
     background-image: url("../img/icon/arrow_forward_ios_24dp_000_FILL1_wght400_GRAD0_opsz24.svg");
     background-repeat: no-repeat;
     background-size: contain;
-    margin-right: 5px;
+    margin: auto 5px;
 }   
 
 .forum_view {
@@ -64,38 +72,67 @@
     transform: scale(1.1) rotate(-90deg);
 }
 
-.forum_photo, .forum_photos {
-    width: 75%;
-    text-align: center;
-}
+/* .forum_photo, .forum_photos {
+    
+} */
 
-.forum_photo {
+/* .forum_photo {
     background-color: #403535;
-    height: 700px;
+    height: auto;
     margin: auto 20px;
-}
+    padding: 0;
+} */
 
-.forum_photo img {
-    height: 100%;
+.forum_photoImg {
+    margin: 0 20px;
+    width: 60%;
     object-fit: cover
 }
 
 .forum_photos {
     display: flex;
     background-color: #140e0e;
-    height: 200px;
+    width: 60%;
+    text-align: center;
+    height: 50px;
     margin: auto;
+    padding: 0;
 }
 
-.forum_photos img{
-    width: 25%;
-    margin: 0;
+@media(min-width: 576px) {
+    .forum_photos {
+        height: 80px;
+    }
+}
+
+@media(min-width: 768px) {
+    .forum_photos {
+        height: 105px;
+    }
+}
+
+@media(min-width: 992px) {
+    .forum_photos {
+        height: 120px;
+    }
+}
+
+@media(min-width: 1200px) {
+    .forum_photos {
+        height: 150px;
+    }
+}
+
+.forum_photos img {
+    width: auto;
+    height: 100%;
+    margin: 0 auto;
     object-fit: cover
 }
 
 .forum_detail_stars {
     height: 45px;
-    margin: 40px 20px 20px 30px;
+    margin: 30px 20px 5px 30px;
 }
 
 .forum_d_star {
@@ -121,22 +158,22 @@
 }
 
 .forum_detail_title h1 {
-    font-size: 48px;
+    font-size: 42px;
     margin: 10px 35px 10px 35px;
 }
 
 .forum_detail_title h2 {
     display: inline-block;
     color: #656565;
-    font-size: 32px;
+    font-size: 24px;
     font-weight:normal;
-    margin: auto 5px auto 60px;
+    margin: auto 5px auto 50px;
 }
 
 .forum_detail_title h3 {
     display: inline-block;
     color: #656565;
-    font-size: 20px;
+    font-size: 18px;
     font-weight:normal;
     font-style: italic;
     margin: auto 35px auto 5px;
@@ -157,14 +194,14 @@
 
 .forum_authorInfo > p {
     display: inline-block;
-    font-size: 32px;
-    margin: auto 30px auto 0;
+    font-size: 18px;
+    margin: auto 40px auto 0;
 }
 
 .forum_detail_body {
-    margin: auto 30px;
-    font-size: 28px;
-    line-height: 40px;
+    margin: auto 40px;
+    font-size: 18px;
+    line-height: 30px;
 }
 
 .forum_detail_body a {
@@ -184,17 +221,17 @@
 .forum_detail_btns {
     display: flex;
     align-items: center;
-    width: 80%;
+    width: 60%;
     margin: 0 auto;
-    padding-bottom: 50px;
+    padding: 20px 0 60px 0;
 }
 
 .forum_detail_checkBtn {
     background-color: transparent;
     display: inline-block;
     border: none;
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
     background-repeat: no-repeat;
     background-size: contain;
     cursor: pointer;
@@ -226,4 +263,24 @@
 
 .forum_d_btnsMargin {
     margin: 0 115px 0 5px;
+}
+
+
+/* 輪播圖 */
+.forum_smallPhoto {
+    opacity: 0.3;
+}
+
+.forum_smallPhoto_active {
+    opacity: 1;
+}
+
+.forum_photoImg {
+    animation-name: fade;
+    animation-duration: 1.5s;
+}
+
+@keyframes fade {
+    from {opacity: .4} 
+    to {opacity: 1}
 }

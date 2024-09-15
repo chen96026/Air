@@ -12,7 +12,7 @@
         <div><a href=""><img src="./圖片/logo.png"></a></div>
         <div>
             <p>製作美好日旅回憶的第一步</p>
-            <a href=""><img src="./圖片/icon_Forum.png"></a>
+            <a href="./forum.html"><img src="./圖片/icon_Forum.png"></a>
             <a href=""><img src="./圖片/icon_logIn.png"></a>
             <div style="clear:both"></div>
         </div>
@@ -20,23 +20,27 @@
     <main class="forum_main">
         <div class="forum_place">
             <p>
-                <a href="">日本</a>
-                <a href="" class="forum_area">熊本</a>
+                <a href="./forum.html">日本</a>
+                <span></span>
+                <a href="./forum.html" class="forum_area">熊本</a>
             </p>
         </div>
         <div>
             <div class="forum_view">
-                <button class="forum_btnLast"></button>
-                <div class="forum_photo">
-                    <img src="https://picsum.photos/1200/700?random=1" alt="photo1">
-                </div>
-                <button class="forum_btnNext"></button>
+                <button class="forum_btnLast" id="forum_lastImg"></button>
+                <!-- <div class="forum_photo"> -->
+                    <img src="https://picsum.photos/1200/700?random=1" alt="photo1" class="forum_photoImg">
+                    <img src="https://picsum.photos/1200/700?random=2" alt="photo2" class="forum_photoImg">
+                    <img src="https://picsum.photos/1200/700?random=3" alt="photo3" class="forum_photoImg">
+                    <img src="https://picsum.photos/1200/700?random=4" alt="photo4" class="forum_photoImg">
+                <!-- </div> -->
+                <button class="forum_btnNext" id="forum_nextImg"></button>
             </div>
             <div class="forum_photos">
-                <img src="https://picsum.photos/1200/700?random=1" alt="photo1">
-                <img src="https://picsum.photos/1200/700?random=2" alt="photo2">
-                <img src="https://picsum.photos/1200/700?random=3" alt="photo3">
-                <img src="https://picsum.photos/1200/700?random=4" alt="photo4">
+                    <img src="https://picsum.photos/1200/700?random=1" alt="photo1" class="forum_smallPhoto">
+                    <img src="https://picsum.photos/1200/700?random=2" alt="photo2" class="forum_smallPhoto">
+                    <img src="https://picsum.photos/1200/700?random=3" alt="photo3" class="forum_smallPhoto">
+                    <img src="https://picsum.photos/1200/700?random=4" alt="photo4" class="forum_smallPhoto">
             </div>
         </div>
         <article>
@@ -84,7 +88,7 @@
             <button class="forum_detail_checkBtn forum_d_good_unchecked"></button>
             <span class="forum_d_goodCount forum_d_btnsMargin">777</span>
             <button class="forum_detail_checkBtn forum_d_bookmark_unchecked forum_d_btnsMargin"></button>
-            <a class="forum_detail_checkBtn forum_d_edit forum_d_showBtn forum_d_btnsMargin" href="./forum_draft.html"></a>
+            <a class="forum_detail_checkBtn forum_d_edit forum_d_showBtn forum_d_btnsMargin" href="./forum_edit.html"></a>
         </div>
     </main>
     <footer>
@@ -92,8 +96,8 @@
             <section>
                 <h3>公司</h3>
                 <div class="footer_line"></div>
-                <div class="footer_list"><a href="">關於我們</a></div>
-                <div class="footer_list"><a href="">聯絡我們</a></div>
+                <div class="footer_list"><a href="./about.html">關於我們</a></div>
+                <div class="footer_list"><a href="./requests.html">聯絡我們</a></div>
             </section>
             <section>
                 <h3>隱私</h3>
@@ -115,5 +119,7 @@
             </section>
         </div>
     </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="./js/forum_carousel.js"></script>
 </body>
 </html>

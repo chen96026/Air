@@ -4,13 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>聯繫我們</title>
+    <link rel="stylesheet" href="./css/a_HeaderFooter.css">
     <link rel="stylesheet" href="./css/requests.css">
 </head>
 <body class="requests_body">
-    <header class="">
-        <nav>
-            Header:Nav
-        </nav>
+    <header>
+        <div><a href=""><img src="./圖片/logo.png"></a></div>
+        <div>
+            <p>製作美好日旅回憶的第一步</p>
+            <a href="./forum.html"><img src="./圖片/icon_Forum.png"></a>
+            <a href=""><img src="./圖片/icon_logIn.png"></a>
+            <div style="clear:both"></div>
+        </div>
     </header>
     <main class="requests_main">
         <div>
@@ -61,18 +66,41 @@
                     <label for="requests_details">問題與建議 <span class="requests_mark">*</span></label>
                     <br>
                     <textarea id="requests_details" class="requests_textarea" placeholder="請輸入問題或建議的詳細內容"></textarea>
-                <button class="requests_btnSubmit" type="submit">送出</button>
+                </div>
             </form>
+            <button id="requests_submit" class="requests_btnSubmit">送出</button>
         </div>
-        <!-- <div class="requests_send">
-            <img class="requests_mail" src="./img/icon/mail_175dp_BC002D_FILL1_wght400_GRAD0_opsz48.svg" alt="mail">
-            <h1>感謝您的信件</h1>
-            <p>我們已收到您的問題與回饋，我們將於近日內回信至您填寫的E-MAIL</p>
-            <button class="requests_btnClose">關閉</button>
-        </div> -->
+        <div class="requests_send"></div>
     </main>
     <footer>
-        Footer
+        <div>
+            <section>
+                <h3>公司</h3>
+                <div class="footer_line"></div>
+                <div class="footer_list"><a href="./about.html">關於我們</a></div>
+                <div class="footer_list"><a href="./requests.html">聯絡我們</a></div>
+            </section>
+            <section>
+                <h3>隱私</h3>
+                <div class="footer_line"></div>
+                <div class="footer_list"><a href="">隱私權政策</a></div>
+                <div class="footer_list"><a href="">隱私設定</a></div>
+            </section>
+            <section>
+                <h3>Cookie</h3>
+                <div class="footer_line"></div>
+                <div class="footer_list"><a href="">Cookie政策</a></div>
+                <div class="footer_list"><a href="">Cookie設定</a></div>
+            </section>
+            <section>
+                <h3>合作夥伴</h3>
+                <div class="footer_line"></div>
+                <div class="footer_list"><a href="">廣告投放</a></div>
+                <div class="footer_list"><a href="">旅遊宣傳合作</a></div>
+            </section>
+        </div>
     </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="./js/request_sendMail.js"></script>
 </body>
 </html>

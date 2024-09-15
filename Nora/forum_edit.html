@@ -26,35 +26,21 @@
             <form action="">
                 <div class="forum_where">
                     <div>
-
-                        <label for="forum_s_country_id">選擇國家：</label>
-                        <select name="forum_s_country" id="forum_s_country_id">
-                            <optgroup label="亞洲">
-                                <option value="">日本</option>
-                                <option value="">中國</option>
-                                <option value="">新加坡</option>
-                                <option value="">馬來西亞</option>
+                        <label for="forum_select_country">選擇國家：</label>
+                        <select name="forum_s_country" id="forum_select_country">
+                            <optgroup label="不分國家">
+                                <option value="all">全世界</option>
                             </optgroup>
-                            <optgroup label="歐美">
-                                <option value="">法國</option>
-                                <option value="">英國</option>
-                                <option value="">美國</option>
+                            <optgroup label="亞洲">
+                                <option value="Japan">日本</option>
                             </optgroup>
                         </select>
                     </div>
                     <div>
-                        <label for="forum_s_area">選擇地區：</label>
-                        <select name="forum_s_area" id="">
-                            <optgroup label="北海道">
-                                <option value="">北海道</option>
-                            </optgroup>
-                            <optgroup label="關西">
-                                <option value="">京都</option>
-                                <option value="">大阪</option>
-                                <option value="">滋賀</option>
-                                <option value="">兵庫</option>
-                                <option value="">奈良</option>
-                                <option value="">和歌山</option>
+                        <label for="forum_select_area">選擇地區：</label>
+                        <select name="forum_s_area" id="forum_select_area">
+                            <optgroup label="全世界">
+                                <option value="">所有地點</option>
                             </optgroup>
                         </select>
                     </div>
@@ -69,13 +55,13 @@
                     <input type="text" placeholder="HashTag… ( #九州, #活火山, #拉麵… )">
                     <div>
                         <div class="forum_e_share">
-                            <input type="radio" name="forum_star" id="forum_star_1" class="forum_e_star">
-                            <input type="radio" name="forum_star" id="forum_star_2" class="forum_e_star">
-                            <input type="radio" name="forum_star" id="forum_star_3" class="forum_e_star">
-                            <input type="radio" name="forum_star" id="forum_star_4" class="forum_e_star">
-                            <input type="radio" name="forum_star" id="forum_star_5" class="forum_e_star ">
+                            <input type="radio" name="forum_star" id="forum_star_1" class="forum_e_star" value="1">
+                            <input type="radio" name="forum_star" id="forum_star_2" class="forum_e_star" value="2">
+                            <input type="radio" name="forum_star" id="forum_star_3" class="forum_e_star" value="3">
+                            <input type="radio" name="forum_star" id="forum_star_4" class="forum_e_star" value="4">
+                            <input type="radio" name="forum_star" id="forum_star_5" class="forum_e_star" value="5">
 
-                            <input type="radio" name="forum_onHomePage" id="forum_onHomePage_id">
+                            <input type="checkbox" name="forum_onHomePage" id="forum_onHomePage_id">
                             <label for="forum_onHomePage_id">願意分享文章在網站首頁</label>
                         </div>
                         <div class="forum_e_textarea">
@@ -114,8 +100,8 @@
             <section>
                 <h3>公司</h3>
                 <div class="footer_line"></div>
-                <div class="footer_list"><a href="">關於我們</a></div>
-                <div class="footer_list"><a href="">聯絡我們</a></div>
+                <div class="footer_list"><a href="./about.html">關於我們</a></div>
+                <div class="footer_list"><a href="./requests.html">聯絡我們</a></div>
             </section>
             <section>
                 <h3>隱私</h3>
@@ -137,5 +123,8 @@
             </section>
         </div>
     </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="./js/forum_selectArea.js"></script>
+    <script src="./js/forum_stars.js"></script>
 </body>
 </html>
