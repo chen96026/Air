@@ -1,81 +1,143 @@
+@charset "UTF-8";
 * {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
+body {
+  background-color: #e8ecef;
+}
+
+a {
+  text-decoration: none;
+}
+
+/* Header */
 header {
-  height: 13vh;
-  /* 140px */
-  background-color: #f4cfe0;
+  background-color: #FFC1E0;
+  position: sticky;
+  top: 0;
+  z-index: 101;
 }
 
-header > div {
-  height: 50%;
-  width: 73.5%;
-  margin: 0 auto;
-  position: relative;
+#header {
+  max-width: 60vw;
+  margin: auto;
+  padding: 2rem 1rem;
   display: flex;
   align-items: center;
-}
-
-header > div img[src*=logo] {
-  position: absolute;
-  bottom: 0;
-}
-
-header > div > p {
-  display: inline-block;
-  font-size: 3vh;
-  width: 85%;
-  margin: 0;
-}
-
-header > div img[src*=icon] {
-  height: 5vh;
-  margin: auto 10px;
-  float: right;
-  /* 48px */
-}
-
-footer {
-  height: 20.8vh;
-  /* 225px */
-  background-color: #f4cfe0;
-}
-
-footer > div {
-  width: 73.5%;
-  margin: 0 auto;
-  display: flex;
   justify-content: space-between;
+  gap: 2rem;
 }
 
-footer > div > section {
-  display: inline-block;
-  width: 17vw;
+.header_logo img {
+  width: 5vw;
+  height: 5vh;
 }
 
-footer > div > section > h3 {
-  font-size: 3vh;
-  margin: 1vh;
+.header_nav_links {
+  list-style: none;
+  display: flex;
+  gap: 2rem;
+}
+
+.header_link a {
+  padding: 5px;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.header_link img {
+  width: 3vw;
+  height: 3vh;
+  -o-object-fit: scale-down;
+     object-fit: scale-down;
+}
+
+/* Footer */
+footer {
+  background-color: #FFC1E0;
+}
+
+.search_section_container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 3rem 1rem;
+}
+
+.search_footer_container {
+  display: grid;
+  grid-template-columns: 400px repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.search_footer_col h5 {
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: black;
+}
+
+.search_footer_col p {
+  max-width: 300px;
+  color: black;
+}
+
+.search_footer_col h4 {
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: black;
+}
+
+.search_footer_col a {
+  display: block;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  font-weight: 500;
+  color: black;
+  transition: 0.3s;
+}
+
+.search_footer_col a:hover {
+  color: blue;
+}
+
+.search_footer_socials {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.search_footer_socials span a {
+  padding: 5px 10px;
+  margin: 0;
+  font-size: 1.25rem;
+  color: white;
+  background-color: #930000;
+  border-radius: 100%;
+}
+
+.search_footer_socials span a:hover {
+  color: white;
+  background-color: #000093;
+}
+
+.search_footer_bar {
+  padding: 1rem;
+  font-size: 0.8rem;
+  color: black;
   text-align: center;
 }
 
-.footer_line {
-  border: 0.2vh solid black;
-  margin: 0 auto;
-  width: 60%;
-}
-
-.footer_list > a {
-  font-size: 2.2vh;
-  font-weight: bold;
-  margin: 1vh 1vh 0;
-  position: relative;
-  left: 20%;
-  color: black;
-  text-decoration: none;
-  display: inline-block;
+hr {
+  margin: 1rem 0;
+  border: 0;
+  border-top: solid;
+  opacity: 0.25;
 }
 
 #member_Main {
@@ -91,136 +153,101 @@ footer > div > section > h3 {
   flex-basis: 25%;
   height: 100%;
   align-items: end;
-  margin-top: 2vh;
 }
-#member_Main #member_LeftSide #member_Left_TopSide {
+#member_Main #member_LeftSide #member_Left_InSide {
   display: flex;
   flex-direction: column;
-  height: 7vh;
-  width: 10vw;
-  padding-left: 1vw;
-  font-size: 1.3rem;
-  font-weight: bold;
-  margin-bottom: 2vh;
-}
-#member_Main #member_LeftSide #member_Left_TopSide div {
-  border-bottom: 1px solid rgb(0, 0, 0);
-  display: flex;
+  justify-content: center;
   align-items: center;
-  height: 5vh;
-  width: 8vw;
-  font-size: 1.7rem;
-  font-weight: bold;
-}
-#member_Main #member_LeftSide #member_Left_BottomSide {
-  display: flex;
-  flex-direction: column;
-  padding-left: 1vw;
-  height: 65vh;
+  gap: 2vh;
+  height: 70vh;
   width: 10vw;
-  gap: 5vh;
-  font-size: 0.9rem;
   cursor: pointer;
 }
-#member_Main #member_LeftSide #member_LeftMember,
-#member_Main #member_LeftSide #member_LeftInfo,
-#member_Main #member_LeftSide #member_LeftPassword,
-#member_Main #member_LeftSide #member_LeftOrder,
-#member_Main #member_LeftSide #member_LeftCard,
-#member_Main #member_LeftSide #member_LeftCollection {
+#member_Main #member_LeftSide #member_Left_InSide #member_Left_TopSide {
   border-bottom: 1px solid rgb(0, 0, 0);
   display: flex;
   align-items: center;
+  justify-content: center;
+  margin-top: -8vh;
   height: 5vh;
   width: 8vw;
-  font-size: 1.2rem;
+  font-size: 1.3vw;
   font-weight: bold;
 }
-#member_Main #member_Home_MiddleSide,
-#member_Main #member_Info_MiddleSide,
-#member_Main #member_Password_MiddleSide {
+#member_Main #member_LeftSide #member_Left_InSide #member_Left_BottomSide {
+  width: 8vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1vh;
+  gap: 3vh;
+}
+#member_Main #member_LeftSide #member_Left_InSide #member_Left_BottomSide #member_LeftInfo,
+#member_Main #member_LeftSide #member_Left_InSide #member_Left_BottomSide #member_LeftTraveler,
+#member_Main #member_LeftSide #member_Left_InSide #member_Left_BottomSide #member_LeftPassword,
+#member_Main #member_LeftSide #member_Left_InSide #member_Left_BottomSide #member_LeftOrder,
+#member_Main #member_LeftSide #member_Left_InSide #member_Left_BottomSide #member_LeftCard,
+#member_Main #member_LeftSide #member_Left_InSide #member_Left_BottomSide #member_LeftCollection,
+#member_Main #member_LeftSide #member_Left_InSide #member_Left_BottomSide #member_LeftForum {
+  border-bottom: 1px solid rgb(0, 0, 0);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 5vh;
+  width: 8vw;
+  font-size: 1vw;
+  font-weight: bold;
+}
+#member_Main #member_LeftSide #member_Left_InSide #member_Left_BottomSide #member_LeftTraveler_Drop {
+  position: relative;
+  display: inline-block;
+}
+#member_Main #member_LeftSide #member_Left_InSide #member_Left_BottomSide #member_LeftTraveler_dropdown-content {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 100%;
+  background-color: #e8ecef;
+  min-width: 8vw;
+  border-radius: 8px; /* 添加圓角 */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* 添加陰影 */
+  opacity: 0;
+  transform: translateX(-10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+#member_Main #member_LeftSide #member_Left_InSide #member_Left_BottomSide #member_LeftTraveler_dropdown-content.show {
+  display: block;
+  opacity: 1;
+  transform: translateX(0); /* 移動至正確位置 */
+}
+#member_Main #member_LeftSide #member_Left_InSide #member_Left_BottomSide #member_LeftTraveler_dropdown-content div {
+  color: black;
+  padding: 1vh 1vw;
+  text-decoration: none;
+  display: block;
+  border-radius: 4px; /* 項目有輕微圓角 */
+  margin: 4px 0; /* 項目間距 */
+  transition: background-color 0.3s ease, color 0.3s ease;
+  font-weight: bold;
+  font-size: 1vw;
+}
+#member_Main #member_LeftSide #member_Left_InSide #member_Left_BottomSide #member_LeftTraveler_dropdown-content div:hover {
+  background-color: #79470d;
+  color: white;
+}
+#member_Main #member_MiddleSide {
   flex-basis: 60%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 5vh;
+  gap: 2vh;
   height: 100%;
+  width: 100%;
 }
-#member_Main #member_Home_MiddleSide #member_Home_MiddleTopSide,
-#member_Main #member_Info_MiddleSide #member_Home_MiddleTopSide,
-#member_Main #member_Password_MiddleSide #member_Home_MiddleTopSide {
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  background-color: #e9e4d4;
-  border-radius: 20px;
-  display: flex;
-  align-items: center;
-  height: 18vh;
-  width: 40vw;
-}
-#member_Main #member_Home_MiddleSide #member_Home_MiddleTopSide #member_Home_LeftSide,
-#member_Main #member_Info_MiddleSide #member_Home_MiddleTopSide #member_Home_LeftSide,
-#member_Main #member_Password_MiddleSide #member_Home_MiddleTopSide #member_Home_LeftSide {
-  border-right: 1px solid rgb(0, 0, 0);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  flex-basis: 50%;
-  height: 14vh;
-}
-#member_Main #member_Home_MiddleSide #member_Home_MiddleTopSide #member_Home_LeftSide #member_Home_Name,
-#member_Main #member_Info_MiddleSide #member_Home_MiddleTopSide #member_Home_LeftSide #member_Home_Name,
-#member_Main #member_Password_MiddleSide #member_Home_MiddleTopSide #member_Home_LeftSide #member_Home_Name {
-  font-size: 1.2rem;
-  font-weight: bold;
-  margin-bottom: 2vh;
-}
-#member_Main #member_Home_MiddleSide #member_Home_MiddleTopSide #member_Home_RightSide,
-#member_Main #member_Info_MiddleSide #member_Home_MiddleTopSide #member_Home_RightSide,
-#member_Main #member_Password_MiddleSide #member_Home_MiddleTopSide #member_Home_RightSide {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 3vh;
-  flex-basis: 50%;
-  height: 14vh;
-}
-#member_Main #member_Home_MiddleSide #member_Home_MiddleTopSide #member_Home_RightSide div,
-#member_Main #member_Info_MiddleSide #member_Home_MiddleTopSide #member_Home_RightSide div,
-#member_Main #member_Password_MiddleSide #member_Home_MiddleTopSide #member_Home_RightSide div {
-  margin-left: 4vw;
-}
-#member_Main #member_Home_MiddleSide #member_Home_MiddleBottomSide,
-#member_Main #member_Info_MiddleSide #member_Home_MiddleBottomSide,
-#member_Main #member_Password_MiddleSide #member_Home_MiddleBottomSide {
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
-  background-color: #e9e4d4;
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  width: 40vw;
-  gap: 3vh;
-}
-#member_Main #member_Home_MiddleSide #member_Home_MiddleBottomSide div,
-#member_Main #member_Info_MiddleSide #member_Home_MiddleBottomSide div,
-#member_Main #member_Password_MiddleSide #member_Home_MiddleBottomSide div {
-  display: flex;
-  justify-content: center;
-  margin-top: 3vh;
-  font-size: 1.2rem;
-  font-weight: bold;
-}
-#member_Main #member_Home_MiddleSide #member_Home_MiddleBottomSide span,
-#member_Main #member_Info_MiddleSide #member_Home_MiddleBottomSide span,
-#member_Main #member_Password_MiddleSide #member_Home_MiddleBottomSide span {
-  display: flex;
-  justify-content: center;
-}
-#member_Main #member_Home_MiddleSide #member_Info_MiddleInside,
-#member_Main #member_Info_MiddleSide #member_Info_MiddleInside,
-#member_Main #member_Password_MiddleSide #member_Info_MiddleInside {
+#member_Main #member_MiddleSide #member_Info_MiddleInside {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   background-color: #e9e4d4;
   border-radius: 20px;
@@ -228,47 +255,185 @@ footer > div > section > h3 {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 3vh;
   height: 55vh;
   width: 40vw;
+  gap: 2vh;
 }
-#member_Main #member_Home_MiddleSide #member_Info_MiddleInside .member_Info_Group,
-#member_Main #member_Info_MiddleSide #member_Info_MiddleInside .member_Info_Group,
-#member_Main #member_Password_MiddleSide #member_Info_MiddleInside .member_Info_Group {
+#member_Main #member_MiddleSide #member_Info_MiddleInside form {
+  display: flex;
+  gap: 2vw;
+}
+#member_Main #member_MiddleSide #member_Info_MiddleInside form .member_Info_Group {
   margin-top: 2vh;
   margin-bottom: 2vh;
   display: flex;
-  flex-direction: column;
 }
-#member_Main #member_Home_MiddleSide #member_Info_MiddleInside .member_Info_Group label,
-#member_Main #member_Info_MiddleSide #member_Info_MiddleInside .member_Info_Group label,
-#member_Main #member_Password_MiddleSide #member_Info_MiddleInside .member_Info_Group label {
+#member_Main #member_MiddleSide #member_Info_MiddleInside form .member_Info_Group label {
   display: block;
-  font-size: 1rem;
+  align-items: center;
+  font-size: 1.1vw;
   color: #555;
-  margin-bottom: 0.5vh;
+  height: 3.5vh;
 }
-#member_Main #member_Home_MiddleSide #member_Info_MiddleInside .member_Info_Group input,
-#member_Main #member_Info_MiddleSide #member_Info_MiddleInside .member_Info_Group input,
-#member_Main #member_Password_MiddleSide #member_Info_MiddleInside .member_Info_Group input {
+#member_Main #member_MiddleSide #member_Info_MiddleInside form .member_Info_Group div {
+  display: block;
+  align-items: center;
+  font-size: 1vw;
+  width: 10vw;
+  height: 3.5vh;
+}
+#member_Main #member_MiddleSide #member_Info_MiddleInside form .member_Info_Group .member_Info_Sex_Word {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2vw;
+}
+#member_Main #member_MiddleSide #member_Info_MiddleInside form .member_Info_Group .member_Info_Sex_Circle {
+  width: 1vw;
+}
+#member_Main #member_MiddleSide #member_Info_MiddleInside form .member_Info_Group input {
   border: 1px solid #ccc;
-  width: 20vw;
-  height: 2vh;
+  height: 3.5vh;
   padding: 0.5vh;
   border-radius: 4px;
 }
-#member_Main #member_Home_MiddleSide #member_Info_MiddleInside #member_Info_ChangeButton,
-#member_Main #member_Info_MiddleSide #member_Info_MiddleInside #member_Info_ChangeButton,
-#member_Main #member_Password_MiddleSide #member_Info_MiddleInside #member_Info_ChangeButton {
+#member_Main #member_MiddleSide #member_Info_MiddleInside #member_Info_User {
+  width: 10vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2vh;
+}
+#member_Main #member_MiddleSide #member_Info_MiddleInside #member_Info_User .member_Info_Avatar {
+  -webkit-clip-path: circle(50%);
+          clip-path: circle(50%);
+  width: 5vw;
+}
+#member_Main #member_MiddleSide #member_Info_MiddleInside #member_Info_Upload {
+  border: 2px solid #c4c4c4;
+  background-color: white;
+  width: 4vw;
+  height: 4vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  font-size: 0.8vw;
+}
+#member_Main #member_MiddleSide #member_Info_MiddleInside .member_Info_Remind {
+  font-size: 0.8vw;
+  color: #555;
+}
+#member_Main #member_MiddleSide #member_Info_MiddleInside #member_Info_BottomButton {
+  display: flex;
+  gap: 3vw;
+}
+#member_Main #member_MiddleSide #member_Info_MiddleInside #member_Info_BottomButton #member_Info_ConfirmButton,
+#member_Main #member_MiddleSide #member_Info_MiddleInside #member_Info_BottomButton #member_Info_DeleteButton {
   color: #ffffff;
   background-color: #79470d;
   height: 3.5vh;
   width: 3.5vw;
+  font-size: 0.8vw;
   cursor: pointer;
 }
-#member_Main #member_Home_MiddleSide #member_Password_MiddleInside,
-#member_Main #member_Info_MiddleSide #member_Password_MiddleInside,
-#member_Main #member_Password_MiddleSide #member_Password_MiddleInside {
+#member_Main #member_MiddleSide #member_Info_MiddleInside #member_Info_ChangeButton {
+  color: #ffffff;
+  background-color: #79470d;
+  height: 3.5vh;
+  width: 3.5vw;
+  font-size: 0.8vw;
+  cursor: pointer;
+}
+#member_Main #member_MiddleSide #member_Traveler_MiddleInside {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background-color: #e9e4d4;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 55vh;
+  width: 40vw;
+  gap: 2vh;
+}
+#member_Main #member_MiddleSide #member_Traveler_MiddleInside #member_Traveler_form_section {
+  height: 40vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+#member_Main #member_MiddleSide #member_Traveler_MiddleInside #member_Traveler_form_section form {
+  display: flex;
+  flex-direction: column;
+  gap: 5vh;
+}
+#member_Main #member_MiddleSide #member_Traveler_MiddleInside #member_Traveler_form_section form label {
+  font-size: 1.1vw;
+  color: #555;
+}
+#member_Main #member_MiddleSide #member_Traveler_MiddleInside #member_Traveler_form_section form span {
+  font-size: 1vw;
+  color: #000000;
+}
+#member_Main #member_MiddleSide #member_Traveler_MiddleInside #member_Traveler_form_section form #member_Traveler_InSide1 {
+  display: flex;
+  grid-template-columns: 25% 42% 45%;
+  margin-bottom: 10px;
+  justify-content: start;
+  align-items: center;
+  padding-left: 1.1vw;
+  gap: 2vw;
+}
+#member_Main #member_MiddleSide #member_Traveler_MiddleInside #member_Traveler_form_section form #member_Traveler_InSide1 .member_Traveler_Title1 {
+  font-size: 1.1vw;
+  color: #555;
+  padding-left: 2vw;
+}
+#member_Main #member_MiddleSide #member_Traveler_MiddleInside #member_Traveler_form_section form #member_Traveler_InSide2 {
+  display: flex;
+  grid-template-columns: 25% 42% 45%;
+  margin-bottom: 10px;
+  justify-content: center;
+  align-items: center;
+  gap: 2.2vw;
+}
+#member_Main #member_MiddleSide #member_Traveler_MiddleInside #member_Traveler_form_section form #member_Traveler_InSide2 .member_Traveler_Title2 {
+  padding-left: 1.8vw;
+  font-size: 1.1vw;
+  color: #555;
+}
+#member_Main #member_MiddleSide #member_Traveler_MiddleInside #member_Traveler_form_section form #member_Traveler_InSide3 {
+  display: flex;
+  grid-template-columns: 25% 42% 45%;
+  margin-bottom: 10px;
+  justify-content: center;
+  align-items: center;
+  gap: 1.8vw;
+}
+#member_Main #member_MiddleSide #member_Traveler_MiddleInside #member_Traveler_form_section form #member_Traveler_InSide3 .member_Traveler_Title3 {
+  padding-right: 1.1vw;
+  font-size: 1.1vw;
+  color: #555;
+}
+#member_Main #member_MiddleSide #member_Traveler_MiddleInside #member_Traveler_form_section form select,
+#member_Main #member_MiddleSide #member_Traveler_MiddleInside #member_Traveler_form_section form input {
+  border: 1px solid #ccc;
+  height: 3.5vh;
+  padding: 0.5vh;
+  border-radius: 4px;
+}
+#member_Main #member_MiddleSide #member_Traveler_MiddleInside #member_Traveler_Button {
+  color: #ffffff;
+  background-color: #79470d;
+  height: 3.5vh;
+  width: 3.5vw;
+  font-size: 0.8vw;
+  cursor: pointer;
+}
+#member_Main #member_Password_MiddleInside {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   background-color: #e9e4d4;
   border-radius: 20px;
@@ -280,139 +445,115 @@ footer > div > section > h3 {
   height: 55vh;
   width: 40vw;
 }
-#member_Main #member_Home_MiddleSide #member_Password_MiddleInside .member_Password_Group,
-#member_Main #member_Info_MiddleSide #member_Password_MiddleInside .member_Password_Group,
-#member_Main #member_Password_MiddleSide #member_Password_MiddleInside .member_Password_Group {
+#member_Main #member_Password_MiddleInside .member_Password_Group {
   margin-top: 2vh;
   margin-bottom: 2vh;
   display: flex;
   flex-direction: column;
 }
-#member_Main #member_Home_MiddleSide #member_Password_MiddleInside .member_Password_Group label,
-#member_Main #member_Info_MiddleSide #member_Password_MiddleInside .member_Password_Group label,
-#member_Main #member_Password_MiddleSide #member_Password_MiddleInside .member_Password_Group label {
+#member_Main #member_Password_MiddleInside .member_Password_Group label {
   display: block;
-  font-size: 1rem;
+  font-size: 1vw;
   color: #555;
   margin-bottom: 0.5vh;
 }
-#member_Main #member_Home_MiddleSide #member_Password_MiddleInside .member_Password_Group input,
-#member_Main #member_Info_MiddleSide #member_Password_MiddleInside .member_Password_Group input,
-#member_Main #member_Password_MiddleSide #member_Password_MiddleInside .member_Password_Group input {
+#member_Main #member_Password_MiddleInside .member_Password_Group input {
   border: 1px solid #ccc;
   width: 20vw;
-  height: 2vh;
+  height: 3.5vh;
   padding: 0.5vh;
   border-radius: 4px;
 }
-#member_Main #member_Home_MiddleSide #member_Password_MiddleInside #member_Password_Remind,
-#member_Main #member_Info_MiddleSide #member_Password_MiddleInside #member_Password_Remind,
-#member_Main #member_Password_MiddleSide #member_Password_MiddleInside #member_Password_Remind {
+#member_Main #member_Password_MiddleInside #member_Password_Remind {
   width: 36vw;
   margin-top: -6vh;
-  font-size: 0.8rem;
-  padding-left: 16vw;
+  font-size: 0.7vw;
+  padding-left: 8.5vw;
   color: #555;
 }
-#member_Main #member_Home_MiddleSide #member_Password_MiddleInside #member_Password_ChangeButton,
-#member_Main #member_Info_MiddleSide #member_Password_MiddleInside #member_Password_ChangeButton,
-#member_Main #member_Password_MiddleSide #member_Password_MiddleInside #member_Password_ChangeButton {
+#member_Main #member_Password_MiddleInside #member_Password_ChangeButton {
   color: #ffffff;
   background-color: #79470d;
   height: 3.5vh;
   width: 3.5vw;
   cursor: pointer;
 }
-#member_Main #member_Order_MiddleSide {
-  flex-basis: 60%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 5vh;
-  margin-top: 2vh;
-}
-#member_Main #member_Order_MiddleSide #member_Order_Operation {
+#member_Main #member_Order_Operation {
   height: 5vh;
   width: 45vw;
   display: flex;
   justify-content: center;
   gap: 2vw;
 }
-#member_Main #member_Order_MiddleSide #member_Order_Operation #member_Order_All,
-#member_Main #member_Order_MiddleSide #member_Order_Operation #member_Order_Pay,
-#member_Main #member_Order_MiddleSide #member_Order_Operation #member_Order_Depart,
-#member_Main #member_Order_MiddleSide #member_Order_Operation #member_Order_Finish,
-#member_Main #member_Order_MiddleSide #member_Order_Operation #member_Order_Cancel {
+#member_Main #member_Order_Operation #member_Order_Depart,
+#member_Main #member_Order_Operation #member_Order_Pay,
+#member_Main #member_Order_Operation #member_Order_Finish,
+#member_Main #member_Order_Operation #member_Order_Cancel {
   border-bottom: 1px solid rgb(0, 0, 0);
   display: flex;
   align-items: center;
   justify-content: center;
   height: 5vh;
   width: 12vw;
-  font-size: 1.2rem;
+  font-size: 1vw;
   font-weight: bold;
   cursor: pointer;
 }
-#member_Main #member_Order_MiddleSide #member_Order_Ticket {
+#member_Main #member_Order_Ticket {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   background-color: #e9e4d4;
-  border-radius: 20px;
   display: flex;
   flex-direction: column;
+  border-radius: 20px;
   gap: 3vh;
   height: 55vh;
   width: 40vw;
 }
-#member_Main #member_Order_MiddleSide #member_Order_Ticket #member_Order_TopSchedule {
-  display: flex;
+#member_Main #member_Order_Ticket #member_Order_TopSchedule {
   margin-top: 2vh;
+  display: flex;
   justify-content: space-between;
   gap: 1vh;
 }
-#member_Main #member_Order_MiddleSide #member_Order_Ticket #member_Order_TopSchedule #member_Order_TotalSchedule {
+#member_Main #member_Order_Ticket #member_Order_TopSchedule #member_Order_TotalSchedule {
   width: 30vw;
-}
-#member_Main #member_Order_MiddleSide #member_Order_Ticket #member_Order_TopSchedule #member_Order_TotalSchedule #member_Order_Order {
   display: flex;
   align-items: center;
-  margin-left: 1vw;
-  font-size: 1rem;
-  width: 28vw;
+  padding-left: 2vw;
 }
-#member_Main #member_Order_MiddleSide #member_Order_Ticket #member_Order_TopSchedule #member_Order_TotalSchedule #member_Order_Order img {
-  width: 2vh;
+#member_Main #member_Order_Ticket #member_Order_TopSchedule #member_Order_TotalSchedule img {
   margin-right: 0.3vw;
-}
-#member_Main #member_Order_MiddleSide #member_Order_Ticket #member_Order_TopSchedule #member_Order_TotalSchedule #member_Order_Order #member_Order_Form,
-#member_Main #member_Order_MiddleSide #member_Order_Ticket #member_Order_TopSchedule #member_Order_TotalSchedule #member_Order_Order #member_Order_Number,
-#member_Main #member_Order_MiddleSide #member_Order_Ticket #member_Order_TopSchedule #member_Order_TotalSchedule #member_Order_Order #member_Order_GoCity,
-#member_Main #member_Order_MiddleSide #member_Order_Ticket #member_Order_TopSchedule #member_Order_TotalSchedule #member_Order_Order #member_Order_BackTime {
-  margin-right: 0.5vw;
-}
-#member_Main #member_Order_MiddleSide #member_Order_Ticket #member_Order_TopSchedule #member_Order_TotalSchedule #member_Order_Schedule {
   display: flex;
-  margin-top: 1vh;
   align-items: center;
-  font-size: 1rem;
-  margin-left: 2.3vw;
-  width: 27vw;
 }
-#member_Main #member_Order_MiddleSide #member_Order_Ticket #member_Order_TopSchedule #member_Order_TotalSchedule #member_Order_Schedule #member_Order_BackTime {
+#member_Main #member_Order_Ticket #member_Order_TopSchedule #member_Order_TotalSchedule #member_Order_Form {
   margin-right: 0.5vw;
+  display: flex;
+  align-items: center;
+  font-size: 1.1vw;
 }
-#member_Main #member_Order_MiddleSide #member_Order_Ticket #member_Order_TopSchedule #member_Order_State {
+#member_Main #member_Order_Ticket #member_Order_TopSchedule #member_Order_TotalSchedule #member_Order_Number,
+#member_Main #member_Order_Ticket #member_Order_TopSchedule #member_Order_TotalSchedule #member_Order_GoCity,
+#member_Main #member_Order_Ticket #member_Order_TopSchedule #member_Order_TotalSchedule #member_Order_BackCity {
+  margin-right: 0.5vw;
+  display: flex;
+  align-items: end;
+  font-size: 1.2vw;
+  font-weight: bold;
+}
+#member_Main #member_Order_Ticket #member_Order_TopSchedule #member_Order_State {
   display: flex;
   align-items: center;
   justify-content: center;
   margin-right: 3vw;
   width: 6vw;
+  font-size: 1vw;
 }
-#member_Main #member_Order_MiddleSide #member_Order_Ticket #member_Order_TopSchedule #member_Order_State img {
+#member_Main #member_Order_Ticket #member_Order_TopSchedule #member_Order_State img {
   width: 1vw;
 }
-#member_Main #member_Order_MiddleSide #member_Order_Ticket #member_Order_WholeTicket {
-  border: 1px solid rgb(0, 0, 0);
+#member_Main #member_Order_Ticket #member_Order_WholeTicket {
+  background-color: #f1f1f1;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -421,69 +562,81 @@ footer > div > section > h3 {
   margin-right: 3vw;
   height: 18vh;
 }
-#member_Main #member_Order_MiddleSide #member_Order_Ticket #member_Order_WholeTicket #member_Order_GoPlane {
+#member_Main #member_Order_Ticket #member_Order_WholeTicket #member_Order_GoPlane {
   display: flex;
   align-items: center;
   margin-left: 1vw;
-  font-size: 1rem;
+  font-size: 1vw;
 }
-#member_Main #member_Order_MiddleSide #member_Order_Ticket #member_Order_WholeTicket #member_Order_MiddleSchedule {
+#member_Main #member_Order_Ticket #member_Order_WholeTicket #member_Order_GoPlane span {
+  display: flex;
+  align-items: end;
+  font-size: 1vw;
+}
+#member_Main #member_Order_Ticket #member_Order_WholeTicket #member_Order_BigMiddle {
+  display: flex;
+  justify-content: center;
+}
+#member_Main #member_Order_Ticket #member_Order_WholeTicket #member_Order_BigMiddle #member_Order_Plane {
+  flex-basis: 10%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2vw;
+}
+#member_Main #member_Order_Ticket #member_Order_WholeTicket #member_Order_BigMiddle #member_Order_Schedule {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 10vh;
-  gap: 2vw;
+  height: 100%;
 }
-#member_Main #member_Order_MiddleSide #member_Order_Ticket #member_Order_WholeTicket #member_Order_MiddleSchedule #member_Order_DepartTime,
-#member_Main #member_Order_MiddleSide #member_Order_Ticket #member_Order_WholeTicket #member_Order_MiddleSchedule #member_Order_LandTime {
+#member_Main #member_Order_Ticket #member_Order_WholeTicket #member_Order_BigMiddle #member_Order_Schedule #member_Order_DepartTime,
+#member_Main #member_Order_Ticket #member_Order_WholeTicket #member_Order_BigMiddle #member_Order_Schedule #member_Order_LandTime {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 5vw;
-  gap: 1vh;
+  gap: 0.5vh;
 }
-#member_Main #member_Order_MiddleSide #member_Order_Ticket #member_Order_WholeTicket #member_Order_MiddleSchedule #member_Order_WholeTime {
+#member_Main #member_Order_Ticket #member_Order_WholeTicket #member_Order_BigMiddle #member_Order_Schedule #member_Order_DepartTime #member_Order_DepartSmallTime,
+#member_Main #member_Order_Ticket #member_Order_WholeTicket #member_Order_BigMiddle #member_Order_Schedule #member_Order_DepartTime #member_Order_DepartCity,
+#member_Main #member_Order_Ticket #member_Order_WholeTicket #member_Order_BigMiddle #member_Order_Schedule #member_Order_DepartTime #member_Order_LandSmallTime,
+#member_Main #member_Order_Ticket #member_Order_WholeTicket #member_Order_BigMiddle #member_Order_Schedule #member_Order_DepartTime #member_Order_LandCity,
+#member_Main #member_Order_Ticket #member_Order_WholeTicket #member_Order_BigMiddle #member_Order_Schedule #member_Order_LandTime #member_Order_DepartSmallTime,
+#member_Main #member_Order_Ticket #member_Order_WholeTicket #member_Order_BigMiddle #member_Order_Schedule #member_Order_LandTime #member_Order_DepartCity,
+#member_Main #member_Order_Ticket #member_Order_WholeTicket #member_Order_BigMiddle #member_Order_Schedule #member_Order_LandTime #member_Order_LandSmallTime,
+#member_Main #member_Order_Ticket #member_Order_WholeTicket #member_Order_BigMiddle #member_Order_Schedule #member_Order_LandTime #member_Order_LandCity {
+  font-size: 1.2vw;
+}
+#member_Main #member_Order_Ticket #member_Order_WholeTicket #member_Order_BigMiddle #member_Order_Schedule #member_Order_WholeTime {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
-#member_Main #member_Order_MiddleSide #member_Order_Ticket #member_Order_WholeTicket #member_Order_MiddleSchedule #member_Order_WholeTime img {
-  width: 1vw;
-}
-#member_Main #member_Order_MiddleSide #member_Order_Ticket #member_Order_BottomPrice {
+#member_Main #member_Order_Ticket #member_Order_BottomPrice {
   display: flex;
   margin-left: 3vw;
   margin-right: 3vw;
   margin-bottom: 2vh;
-  justify-content: space-between;
+  justify-content: end;
 }
-#member_Main #member_Order_MiddleSide #member_Order_Ticket #member_Order_BottomPrice #member_Order_Banngo {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 10vw;
-}
-#member_Main #member_Order_MiddleSide #member_Order_Ticket #member_Order_BottomPrice #member_Order_Banngo div {
-  margin-right: 0.3vw;
-}
-#member_Main #member_Order_MiddleSide #member_Order_Ticket #member_Order_BottomPrice #member_Order_PeoplePrice #member_Order_People,
-#member_Main #member_Order_MiddleSide #member_Order_Ticket #member_Order_BottomPrice #member_Order_PeoplePrice #member_Order_TotalPrice {
+#member_Main #member_Order_Ticket #member_Order_BottomPrice #member_Order_PeoplePrice #member_Order_People,
+#member_Main #member_Order_Ticket #member_Order_BottomPrice #member_Order_PeoplePrice #member_Order_TotalPrice {
   display: flex;
   justify-content: space-between;
+  align-items: end;
   width: 7vw;
   margin-top: 0.5vh;
 }
-#member_Main #member_Card_MiddleSide {
-  flex-basis: 60%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 5vh;
+#member_Main #member_Order_Ticket #member_Order_BottomPrice #member_Order_PeoplePrice #member_Order_People div,
+#member_Main #member_Order_Ticket #member_Order_BottomPrice #member_Order_PeoplePrice #member_Order_People span,
+#member_Main #member_Order_Ticket #member_Order_BottomPrice #member_Order_PeoplePrice #member_Order_TotalPrice div,
+#member_Main #member_Order_Ticket #member_Order_BottomPrice #member_Order_PeoplePrice #member_Order_TotalPrice span {
+  font-size: 1vw;
 }
-#member_Main #member_Card_MiddleSide #member_Card_MiddleInside {
+#member_Main #member_Card_MiddleInside {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   background-color: #e9e4d4;
   border-radius: 20px;
@@ -494,63 +647,66 @@ footer > div > section > h3 {
   height: 55vh;
   width: 40vw;
 }
-#member_Main #member_Card_MiddleSide #member_Card_MiddleInside #member_Card_MiddleInside2 {
+#member_Main #member_Card_MiddleInside #member_Card_MiddleInside2 {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 5vh;
 }
-#member_Main #member_Card_MiddleSide #member_Card_MiddleInside #member_Card_MiddleInside2 .member_Card_inputTitle {
+#member_Main #member_Card_MiddleInside #member_Card_MiddleInside2 .member_Card_inputTitle {
   display: flex;
   align-items: center;
   justify-content: center;
   width: 40vw;
 }
-#member_Main #member_Card_MiddleSide #member_Card_MiddleInside #member_Card_MiddleInside2 .member_Card_inputTitle .fa-star-of-life {
+#member_Main #member_Card_MiddleInside #member_Card_MiddleInside2 .member_Card_inputTitle .fa-star-of-life {
   color: red;
-  font-size: 0.5rem;
+  font-size: 0.4vw;
   margin-right: 0.2vw;
 }
-#member_Main #member_Card_MiddleSide #member_Card_MiddleInside #member_Card_MiddleInside2 .member_Card_inputTitle #member_Card_Name,
-#member_Main #member_Card_MiddleSide #member_Card_MiddleInside #member_Card_MiddleInside2 .member_Card_inputTitle #member_Card_CardName {
+#member_Main #member_Card_MiddleInside #member_Card_MiddleInside2 .member_Card_inputTitle #member_Card_Name {
   flex-basis: 20%;
   color: #555;
 }
-#member_Main #member_Card_MiddleSide #member_Card_MiddleInside #member_Card_MiddleInside2 .member_Card_inputTitle #member_Card_NameInput {
+#member_Main #member_Card_MiddleInside #member_Card_MiddleInside2 .member_Card_inputTitle #member_Card_NameInput {
   height: 3vh;
   width: 20vw;
   border: 1px solid #ccc;
   border-radius: 4px;
 }
-#member_Main #member_Card_MiddleSide #member_Card_MiddleInside #member_Card_MiddleInside2 .member_Card_inputTitle .member_Card_Number {
-  height: 3vh;
-  width: 4.55vw;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-#member_Main #member_Card_MiddleSide #member_Card_MiddleInside #member_Card_MiddleInside2 .member_Card_inputTitle .fa-minus {
-  color: rgb(0, 0, 0);
-  font-size: 0.5rem;
-}
-#member_Main #member_Card_MiddleSide #member_Card_MiddleInside #member_Card_MiddleInside2 .member_Card_inputTitle #member_Card_DateName,
-#member_Main #member_Card_MiddleSide #member_Card_MiddleInside #member_Card_MiddleInside2 .member_Card_inputTitle #member_Card_ThreeName {
+#member_Main #member_Card_MiddleInside #member_Card_MiddleInside2 .member_Card_inputTitle #member_Card_NumberName {
   flex-basis: 20%;
   color: #555;
 }
-#member_Main #member_Card_MiddleSide #member_Card_MiddleInside #member_Card_MiddleInside2 .member_Card_inputTitle .member_Card_inputText {
+#member_Main #member_Card_MiddleInside #member_Card_MiddleInside2 .member_Card_inputTitle .member_Card_Number {
+  height: 3vh;
+  width: 4.7vw;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+#member_Main #member_Card_MiddleInside #member_Card_MiddleInside2 .member_Card_inputTitle .fa-minus {
+  color: rgb(0, 0, 0);
+  font-size: 0.5vw;
+}
+#member_Main #member_Card_MiddleInside #member_Card_MiddleInside2 .member_Card_inputTitle #member_Card_DateName,
+#member_Main #member_Card_MiddleInside #member_Card_MiddleInside2 .member_Card_inputTitle #member_Card_ThreeName {
+  flex-basis: 20%;
+  color: #555;
+}
+#member_Main #member_Card_MiddleInside #member_Card_MiddleInside2 .member_Card_inputTitle .member_Card_inputText {
   display: flex;
   align-items: center;
   width: 20vw;
 }
-#member_Main #member_Card_MiddleSide #member_Card_MiddleInside #member_Card_MiddleInside2 .member_Card_inputTitle .member_Card_inputText #member_Card_Date {
+#member_Main #member_Card_MiddleInside #member_Card_MiddleInside2 .member_Card_inputTitle .member_Card_inputText #member_Card_DateInput {
   height: 3vh;
   width: 3vw;
   margin-right: 0.1vw;
   border: 1px solid #ccc;
   border-radius: 4px;
 }
-#member_Main #member_Card_MiddleSide #member_Card_MiddleInside #member_Card_MiddleInside2 .member_Card_inputTitle .member_Card_inputText #member_Card_Month {
+#member_Main #member_Card_MiddleInside #member_Card_MiddleInside2 .member_Card_inputTitle .member_Card_inputText #member_Card_MonthInput {
   height: 3vh;
   width: 3vw;
   margin-right: 0.1vw;
@@ -558,21 +714,46 @@ footer > div > section > h3 {
   border: 1px solid #ccc;
   border-radius: 4px;
 }
-#member_Main #member_Card_MiddleSide #member_Card_MiddleInside #member_Card_MiddleInside2 .member_Card_inputTitle .member_Card_inputText #member_Card_Three {
+#member_Main #member_Card_MiddleInside #member_Card_MiddleInside2 .member_Card_inputTitle .member_Card_inputText #member_Card_ThreeInput {
   height: 3vh;
   width: 4vw;
   border: 1px solid #ccc;
   border-radius: 4px;
 }
-#member_Main #member_Card_MiddleSide #member_Card_MiddleInside #member_Card_CreditButton {
+#member_Main #member_Card_MiddleInside #member_Card_MiddleCard {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#member_Main #member_Card_MiddleInside #member_Card_MiddleCard .fa-chevron-left {
+  margin-right: 2vw;
+  font-size: 1.5vw;
+  cursor: pointer;
+}
+#member_Main #member_Card_MiddleInside #member_Card_MiddleCard .fa-chevron-right {
+  margin-left: 2vw;
+  font-size: 1.5vw;
+  cursor: pointer;
+}
+#member_Main #member_Card_MiddleInside #member_Card_MiddleCard img {
+  width: 23vw;
+}
+#member_Main #member_Card_MiddleInside #member_Card_CodeCard {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 3vh;
+  width: 20vw;
+  font-size: 1.2vw;
+}
+#member_Main #member_Card_MiddleInside #member_Card_PlusButton {
   color: #ffffff;
   background-color: #79470d;
   height: 4vh;
   width: 5vw;
-  margin-top: 2vh;
   cursor: pointer;
 }
-#member_Main #member_Card_MiddleSide #member_Card_MiddleInside #member_Card_ConfirmButton {
+#member_Main #member_Card_MiddleInside #member_Card_ConfirmButton {
   color: #ffffff;
   background-color: #79470d;
   margin-top: 3vh;
@@ -580,68 +761,15 @@ footer > div > section > h3 {
   width: 5vw;
   cursor: pointer;
 }
-#member_Main #member_Card_MiddleSide #member_Card_MiddleInside #member_Card_PlusButton {
+#member_Main #member_Card_MiddleInside #member_Card_CreditButton {
   color: #ffffff;
   background-color: #79470d;
   height: 4vh;
   width: 5vw;
-  cursor: pointer;
-}
-#member_Main #member_Card_MiddleSide #member_Card_MiddleInside #member_Card_MiddleCard {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-#member_Main #member_Card_MiddleSide #member_Card_MiddleInside #member_Card_MiddleCard .fa-chevron-left {
-  margin-right: 2vw;
-  font-size: 1.5vw;
-  cursor: pointer;
-}
-#member_Main #member_Card_MiddleSide #member_Card_MiddleInside #member_Card_MiddleCard .fa-chevron-right {
-  margin-left: 2vw;
-  font-size: 1.5vw;
-  cursor: pointer;
-}
-#member_Main #member_Card_MiddleSide #member_Card_MiddleInside #member_Card_MiddleCard img {
-  width: 23vw;
-}
-#member_Main #member_Card_MiddleSide #member_Card_MiddleInside #member_Card_CodeCard {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 3vh;
-  width: 20vw;
-  font-size: 1.5rem;
-}
-#member_Main #member_Collection_MiddleSide {
-  flex-basis: 60%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 5vh;
   margin-top: 2vh;
+  cursor: pointer;
 }
-#member_Main #member_Collection_MiddleSide #member_Collection_Operation {
-  border-top: 1px solid rgb(0, 0, 0);
-  border-bottom: 1px solid rgb(0, 0, 0);
-  border-left: 1px solid rgb(0, 0, 0);
-  height: 5vh;
-  width: 45vw;
-  display: flex;
-  margin-top: 5vh;
-}
-#member_Main #member_Collection_MiddleSide #member_Collection_Operation .member_Collection_Operate {
-  border-right: 1px solid rgb(0, 0, 0);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 5vh;
-  width: 12vw;
-  font-size: 1.2rem;
-  font-weight: bold;
-}
-#member_Main #member_Collection_MiddleSide #member_Collection_Ticket {
+#member_Main #member_Collection_Ticket {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
   background-color: #e9e4d4;
@@ -652,57 +780,52 @@ footer > div > section > h3 {
   height: 55vh;
   width: 40vw;
 }
-#member_Main #member_Collection_MiddleSide #member_Collection_Ticket #member_Collection_TopSchedule {
+#member_Main #member_Collection_Ticket #member_Collection_TopSchedule {
   margin-top: 2vh;
   display: flex;
   justify-content: space-between;
   gap: 1vh;
 }
-#member_Main #member_Collection_MiddleSide #member_Collection_Ticket #member_Collection_TopSchedule #member_Collection_TotalSchedule {
+#member_Main #member_Collection_Ticket #member_Collection_TopSchedule #member_Collection_TotalSchedule {
   width: 30vw;
-}
-#member_Main #member_Collection_MiddleSide #member_Collection_Ticket #member_Collection_TopSchedule #member_Collection_TotalSchedule #member_Collection_Order {
   display: flex;
   align-items: center;
-  margin-left: 1vw;
-  font-size: 1rem;
-  width: 28vw;
+  padding-left: 2vw;
 }
-#member_Main #member_Collection_MiddleSide #member_Collection_Ticket #member_Collection_TopSchedule #member_Collection_TotalSchedule #member_Collection_Order img {
-  width: 2vh;
+#member_Main #member_Collection_Ticket #member_Collection_TopSchedule #member_Collection_TotalSchedule img {
   margin-right: 0.3vw;
-}
-#member_Main #member_Collection_MiddleSide #member_Collection_Ticket #member_Collection_TopSchedule #member_Collection_TotalSchedule #member_Collection_Order #member_Collection_Form,
-#member_Main #member_Collection_MiddleSide #member_Collection_Ticket #member_Collection_TopSchedule #member_Collection_TotalSchedule #member_Collection_Order #member_Collection_Number,
-#member_Main #member_Collection_MiddleSide #member_Collection_Ticket #member_Collection_TopSchedule #member_Collection_TotalSchedule #member_Collection_Order #member_Collection_GoCity,
-#member_Main #member_Collection_MiddleSide #member_Collection_Ticket #member_Collection_TopSchedule #member_Collection_TotalSchedule #member_Collection_Order #member_Collection_BackTime {
-  margin-right: 0.5vw;
-}
-#member_Main #member_Collection_MiddleSide #member_Collection_Ticket #member_Collection_TopSchedule #member_Collection_TotalSchedule #member_Collection_Schedule {
   display: flex;
-  margin-top: 1vh;
   align-items: center;
-  font-size: 1rem;
-  margin-left: 2.3vw;
-  width: 27vw;
 }
-#member_Main #member_Collection_MiddleSide #member_Collection_Ticket #member_Collection_TopSchedule #member_Collection_TotalSchedule #member_Collection_Schedule #member_Collection_BackTime {
+#member_Main #member_Collection_Ticket #member_Collection_TopSchedule #member_Collection_TotalSchedule #member_Collection_Form {
   margin-right: 0.5vw;
+  display: flex;
+  align-items: center;
+  font-size: 1.1vw;
 }
-#member_Main #member_Collection_MiddleSide #member_Collection_Ticket #member_Collection_TopSchedule .heart-icon {
-  font-size: 2rem;
+#member_Main #member_Collection_Ticket #member_Collection_TopSchedule #member_Collection_TotalSchedule #member_Collection_Number,
+#member_Main #member_Collection_Ticket #member_Collection_TopSchedule #member_Collection_TotalSchedule #member_Collection_GoCity,
+#member_Main #member_Collection_Ticket #member_Collection_TopSchedule #member_Collection_TotalSchedule #member_Collection_BackCity {
+  margin-right: 0.5vw;
+  display: flex;
+  align-items: end;
+  font-size: 1.2vw;
+  font-weight: bold;
+}
+#member_Main #member_Collection_Ticket #member_Collection_TopSchedule .heart-icon {
+  font-size: 1.6vw;
   -webkit-text-stroke: 1px black;
   color: white;
   transition: color 0.1s;
   margin-right: 1vw;
   cursor: pointer;
 }
-#member_Main #member_Collection_MiddleSide #member_Collection_Ticket #member_Collection_TopSchedule .heart-icon.liked {
+#member_Main #member_Collection_Ticket #member_Collection_TopSchedule .heart-icon.liked {
   -webkit-text-stroke: 1px #e9e4d4;
   color: red;
 }
-#member_Main #member_Collection_MiddleSide #member_Collection_Ticket #member_Collection_WholeTicket {
-  border: 1px solid rgb(0, 0, 0);
+#member_Main #member_Collection_Ticket #member_Collection_WholeTicket {
+  background-color: #f1f1f1;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -711,59 +834,251 @@ footer > div > section > h3 {
   margin-right: 3vw;
   height: 18vh;
 }
-#member_Main #member_Collection_MiddleSide #member_Collection_Ticket #member_Collection_WholeTicket #member_Collection_GoPlane {
+#member_Main #member_Collection_Ticket #member_Collection_WholeTicket #member_Collection_GoPlane {
   display: flex;
   align-items: center;
   margin-left: 1vw;
-  font-size: 1rem;
+  font-size: 1vw;
 }
-#member_Main #member_Collection_MiddleSide #member_Collection_Ticket #member_Collection_WholeTicket #member_Collection_MiddleSchedule {
+#member_Main #member_Collection_Ticket #member_Collection_WholeTicket #member_Collection_GoPlane span {
+  display: flex;
+  align-items: end;
+  font-size: 1vw;
+}
+#member_Main #member_Collection_Ticket #member_Collection_WholeTicket #member_Collection_BigMiddle {
+  display: flex;
+  justify-content: center;
+}
+#member_Main #member_Collection_Ticket #member_Collection_WholeTicket #member_Collection_BigMiddle #member_Collection_Plane {
+  flex-basis: 10%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2vw;
+}
+#member_Main #member_Collection_Ticket #member_Collection_WholeTicket #member_Collection_BigMiddle #member_Collection_Schedule {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 10vh;
-  gap: 2vw;
+  height: 100%;
 }
-#member_Main #member_Collection_MiddleSide #member_Collection_Ticket #member_Collection_WholeTicket #member_Collection_MiddleSchedule #member_Collection_DepartTime,
-#member_Main #member_Collection_MiddleSide #member_Collection_Ticket #member_Collection_WholeTicket #member_Collection_MiddleSchedule #member_Collection_LandTime {
+#member_Main #member_Collection_Ticket #member_Collection_WholeTicket #member_Collection_BigMiddle #member_Collection_Schedule #member_Collection_DepartTime,
+#member_Main #member_Collection_Ticket #member_Collection_WholeTicket #member_Collection_BigMiddle #member_Collection_Schedule #member_Collection_LandTime {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 5vw;
-  gap: 1vh;
+  gap: 0.5vh;
 }
-#member_Main #member_Collection_MiddleSide #member_Collection_Ticket #member_Collection_WholeTicket #member_Collection_MiddleSchedule #member_Collection_WholeTime {
+#member_Main #member_Collection_Ticket #member_Collection_WholeTicket #member_Collection_BigMiddle #member_Collection_Schedule #member_Collection_DepartTime #member_Collection_DepartSmallTime,
+#member_Main #member_Collection_Ticket #member_Collection_WholeTicket #member_Collection_BigMiddle #member_Collection_Schedule #member_Collection_DepartTime #member_Collection_DepartCity,
+#member_Main #member_Collection_Ticket #member_Collection_WholeTicket #member_Collection_BigMiddle #member_Collection_Schedule #member_Collection_DepartTime #member_Collection_LandSmallTime,
+#member_Main #member_Collection_Ticket #member_Collection_WholeTicket #member_Collection_BigMiddle #member_Collection_Schedule #member_Collection_DepartTime #member_Collection_LandCity,
+#member_Main #member_Collection_Ticket #member_Collection_WholeTicket #member_Collection_BigMiddle #member_Collection_Schedule #member_Collection_LandTime #member_Collection_DepartSmallTime,
+#member_Main #member_Collection_Ticket #member_Collection_WholeTicket #member_Collection_BigMiddle #member_Collection_Schedule #member_Collection_LandTime #member_Collection_DepartCity,
+#member_Main #member_Collection_Ticket #member_Collection_WholeTicket #member_Collection_BigMiddle #member_Collection_Schedule #member_Collection_LandTime #member_Collection_LandSmallTime,
+#member_Main #member_Collection_Ticket #member_Collection_WholeTicket #member_Collection_BigMiddle #member_Collection_Schedule #member_Collection_LandTime #member_Collection_LandCity {
+  font-size: 1.2vw;
+}
+#member_Main #member_Collection_Ticket #member_Collection_WholeTicket #member_Collection_BigMiddle #member_Collection_Schedule #member_Collection_WholeTime {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
-#member_Main #member_Collection_MiddleSide #member_Collection_Ticket #member_Collection_WholeTicket #member_Collection_MiddleSchedule #member_Collection_WholeTime img {
-  width: 1vw;
-}
-#member_Main #member_Collection_MiddleSide #member_Collection_Ticket #member_Collection_BottomPrice {
+#member_Main #member_Collection_Ticket #member_Collection_BottomPrice {
   display: flex;
   margin-left: 3vw;
   margin-right: 3vw;
   margin-bottom: 2vh;
   justify-content: space-between;
+  align-items: center;
 }
-#member_Main #member_Collection_MiddleSide #member_Collection_Ticket #member_Collection_BottomPrice #member_Collection_Banngo {
+#member_Main #member_Collection_Ticket #member_Collection_BottomPrice #member_Collection_NowPrice {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  font-size: 1.1vw;
+  width: 10vw;
+  height: 3.5vh;
+}
+#member_Main #member_Collection_Ticket #member_Collection_BottomPrice #member_Collection_GOBuy {
+  color: #ffffff;
+  background-color: #79470d;
+  height: 4.5vh;
+  width: 6vw;
+  font-size: 1vw;
+  cursor: pointer;
+}
+
+#member_Forum_MiddleSide {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+#member_Forum_MiddleSide #member_Forum_Operation {
+  height: 5vh;
+  width: 45vw;
   display: flex;
   justify-content: center;
-  align-items: center;
-  width: 5vw;
+  margin-top: 2vh;
+  gap: 6vw;
 }
-#member_Main #member_Collection_MiddleSide #member_Collection_Ticket #member_Collection_BottomPrice #member_Collection_Banngo div {
-  margin-right: 0.3vw;
-}
-#member_Main #member_Collection_MiddleSide #member_Collection_Ticket #member_Collection_BottomPrice #member_Collection_PeoplePrice #member_Collection_People,
-#member_Main #member_Collection_MiddleSide #member_Collection_Ticket #member_Collection_BottomPrice #member_Collection_PeoplePrice #member_Collection_TotalPrice {
+#member_Forum_MiddleSide #member_Forum_Operation #member_Forum_MyArticle,
+#member_Forum_MiddleSide #member_Forum_Operation #member_Forum_MyCollection {
+  border-bottom: 1px solid rgb(0, 0, 0);
   display: flex;
-  justify-content: space-between;
-  width: 7vw;
-  margin-top: 0.5vh;
+  align-items: center;
+  justify-content: center;
+  height: 5vh;
+  width: 6vw;
+  font-size: 1vw;
+  font-weight: bold;
+  cursor: pointer;
+}
+#member_Forum_MiddleSide #member_Forum_InSide {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+  margin: auto;
+  padding-bottom: 10vh;
+}
+#member_Forum_MiddleSide #member_Forum_InSide a {
+  text-decoration: none;
+  color: black;
+}
+#member_Forum_MiddleSide #member_Forum_InSide a:hover {
+  text-decoration: underline;
+  color: rgb(0, 0, 0);
+}
+#member_Forum_MiddleSide #member_Forum_InSide .member_forum_card {
+  margin: 5vh 0.8vw;
+  background-color: #FFFCFC;
+  display: flex;
+  flex-direction: column;
+  width: 16vw;
+  height: 45vh;
+  border-radius: 10px;
+  box-shadow: 0 5px 5px rgba(80, 80, 80, 0.4);
+}
+#member_Forum_MiddleSide #member_Forum_InSide .member_forum_card article {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#member_Forum_MiddleSide #member_Forum_InSide .member_forum_card article .member_forum_articleImg {
+  width: 100%;
+  border-radius: 10px 10px 0 0;
+}
+#member_Forum_MiddleSide #member_Forum_InSide .member_forum_card article h3 {
+  align-items: start;
+  font-size: 1.3vw;
+  font-weight: bold;
+  margin: 2vh 1vw 2vh 1vw;
+}
+#member_Forum_MiddleSide #member_Forum_InSide .member_forum_card article .member_forum_articleMore {
+  font-size: 0.8vw;
+  line-height: 3vh;
+  margin: 0 1vw 0 1vw;
+  max-width: 12vw;
+  max-height: 10vh;
+  white-space: normal;
+  overflow-wrap: break-word;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
+#member_Forum_MiddleSide #member_Forum_InSide .member_forum_card article .member_forum_articleMore::after {
+  content: "前往文章";
+}
+#member_Forum_MiddleSide #member_Forum_InSide .member_forum_card div {
+  display: flex;
+  height: 8vh;
+  gap: 1vw;
+  justify-content: center;
+  align-items: center;
+}
+#member_Forum_MiddleSide #member_Forum_InSide .member_forum_card div .member_forum_authorImg {
+  -webkit-clip-path: circle(40%);
+          clip-path: circle(40%);
+  width: 3vw;
+}
+#member_Forum_MiddleSide #member_Forum_InSide .member_forum_card div .member_forum_author,
+#member_Forum_MiddleSide #member_Forum_InSide .member_forum_card div .member_forum_postDate {
+  display: inline-block;
+  color: #1f1f1f;
+  margin: 0;
+  font-size: 0.9vw;
+}
+#member_Forum_MiddleSide #member_Forum_InSide .member_forum_card div .member_forum_postDate {
+  display: inline-block;
+  color: #777777;
+  font-size: 0.8vw;
+}
+
+#member_Info_deleteModal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+#member_Info_deleteModal #member_Info_deleteContent {
+  background-color: #e8ecef;
+  padding: 2vw;
+  border: 1px solid #ddd;
+  width: 80%;
+  max-width: 20vw;
+  border-radius: 12px;
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* 讓視窗居中 */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+#member_Info_deleteModal #member_Info_deleteContent p {
+  font-size: 1vw;
+  color: #333;
+}
+#member_Info_deleteModal #member_Info_deleteContent #member_Info_confirmUsername {
+  width: 100%;
+  padding: 1vh;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-top: 2vh;
+  margin-bottom: 2vh;
+}
+#member_Info_deleteModal #member_Info_deleteContent #member_Info_confirmDelete, #member_Info_deleteModal #member_Info_deleteContent #member_Info_cancelDelete {
+  background-color: #79470d;
+  color: white;
+  border: none;
+  padding: 1.2vh 2vw;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 2vh 1vw;
+  transition: background-color 0.3s ease;
+}
+#member_Info_deleteModal #member_Info_close {
+  position: absolute;
+  top: 2vh;
+  right: 1vw;
+  color: #000000; /* 更明顯的紅色 */
+  font-size: 1.5vw;
+  font-weight: bold;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+#member_Info_deleteModal #member_Info_errormessage {
+  display: none;
 }
 
 #member_Sign_BigContainer {
@@ -808,7 +1123,7 @@ footer > div > section > h3 {
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 1vw;
 }
 #member_Sign_BigContainer #member_Sign_Container #member_Sign_Btn:hover {
   background-color: #634727;
