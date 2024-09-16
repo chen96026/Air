@@ -6,16 +6,17 @@
     <title>關於我們</title>
     <link rel="stylesheet" href="./css/a_HeaderFooter.css">
     <link rel="stylesheet" href="./css/about.css">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet" />
 </head>
 <body class="about_body">
     <header>
-        <div><a href="./HomePage.html"><img src="./圖片/logo.png"></a></div>
-        <div>
-            <p>製作美好日旅回憶的第一步</p>
-            <a href="./forum.html"><img src="./圖片/icon_Forum.png"></a>
-            <a href=""><img src="./圖片/icon_logIn.png"></a>
-            <div style="clear:both"></div>
-        </div>
+        <nav id="header">
+            <div class="header_logo"><a href=""><img src="../Yang/圖片/logo.png"></a></div>
+            <ul class="header_nav_links">
+                <li class="header_link"><a href="./forum.html"><img src="../Yang/圖片/icon_logIn.png"></a></li>
+                <li class="header_link"><a href="#"><img src="../Yang/圖片/icon_Forum.png"></a></li>
+            </ul>
+        </nav>
     </header>
     <main class="about_main">
         <div>
@@ -48,31 +49,46 @@
         </div>
     </main>
     <footer>
-        <div>
-            <section>
-                <h3>公司</h3>
-                <div class="footer_line"></div>
-                <div class="footer_list"><a href="./about.html">關於我們</a></div>
-                <div class="footer_list"><a href="./requests.html">聯絡我們</a></div>
-            </section>
-            <section>
-                <h3>隱私</h3>
-                <div class="footer_line"></div>
-                <div class="footer_list"><a href="">隱私權政策</a></div>
-                <div class="footer_list"><a href="">隱私設定</a></div>
-            </section>
-            <section>
-                <h3>Cookie</h3>
-                <div class="footer_line"></div>
-                <div class="footer_list"><a href="">Cookie政策</a></div>
-                <div class="footer_list"><a href="">Cookie設定</a></div>
-            </section>
-            <section>
-                <h3>合作夥伴</h3>
-                <div class="footer_line"></div>
-                <div class="footer_list"><a href="">廣告投放</a></div>
-                <div class="footer_list"><a href="">旅遊宣傳合作</a></div>
-            </section>
+        <div class="search_section_container search_footer_container">
+            <div class="search_footer_col">
+                <h4>追蹤我們</h4>
+                <hr style="width:50%">
+                <div class="search_footer_socials">
+                    <span>
+                        <a href="#"><i class="ri-twitter-fill"></i></a>
+                    </span>
+                    <span>
+                        <a href="#"><i class="ri-linkedin-fill"></i></a>
+                    </span>
+                    <span>
+                        <a href="#"><i class="ri-instagram-line"></i></a>
+                    </span>
+                    <span>
+                        <a href="#"><i class="ri-facebook-fill"></i></a>
+                    </span>
+                </div>
+            </div>
+            <div class="search_footer_col">
+                <h4>隱私</h4>
+                <hr style="width:80%">
+                <a href="#">隱私權政策</a>
+                <a href="#">隱私設定</a>
+            </div>
+            <div class="search_footer_col">
+                <h4>Cookie</h4>
+                <hr style="width:80%">
+                <a href="#">Cookie政策</a>
+                <a href="#">Cookie設定</a>
+            </div>
+            <div class="search_footer_col">
+                <h4>合作夥伴</h4>
+                <hr style="width:80%">
+                <a href="#">廣告投放</a>
+                <a href="#">旅遊宣傳合作</a>
+            </div>
+        </div>
+        <div class="search_footer_bar">
+            Copyright © 2024 Javel. All rights reserved.
         </div>
     </footer>
 </body>

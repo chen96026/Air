@@ -1,7 +1,7 @@
 $(() => {
     $('#requests_submit').click(() => {
         // 讓表單無法送出，讓前端功能能正常展示
-        // 正式加入後端後須拿掉
+        // 正式加入後端後視情況拿掉
         event.preventDefault();
         //
 
@@ -16,7 +16,7 @@ $(() => {
 
     $(document).on('click', '#requests_Close', () => {
         $('.requests_send').fadeOut(100);
-        $('.requests_send').html(``);
+        $('.requests_send').empty();
     });
 });
 

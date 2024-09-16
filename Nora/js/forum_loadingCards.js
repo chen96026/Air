@@ -11,7 +11,6 @@ $(() => {
     });
 });
 
-
 // Loading Cards
 document.addEventListener('DOMContentLoaded', () => {
     const cardsContainer = document.getElementById('cards-container');
