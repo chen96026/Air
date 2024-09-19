@@ -74,7 +74,7 @@
     margin: auto;
 }
 
-.forum_edit_body input[type="text"] {
+.forum_edit_input {
     box-sizing: border-box;
     display: block;
     background-color: #E9E4D4;
@@ -86,7 +86,7 @@
     padding-left: 20px;
 }
 
-.forum_edit_body input[type="text"]:focus {
+.forum_edit_input:focus {
     border-radius: 2px;
     outline: 2px solid black;
 }
@@ -114,10 +114,6 @@
     margin: auto 5px;
 }
 
-#forum_star_5 {
-    margin-right: 50px;
-}
-
 .forum_e_starFill {
     background-image: url("../img/icon/star_FILL1.svg");
 }
@@ -130,7 +126,7 @@
     background-image: url("../img/icon/check_box_outline_blank_24dp_000_FILL0_wght400_GRAD0_opsz24.svg");
     background-repeat: no-repeat;
     background-size: contain;
-    margin: auto 5px;
+    margin: auto 5px auto 50px;
 }
 
 #forum_onHomePage_id:checked {
@@ -190,7 +186,7 @@
     margin: 10px 20px;
 }
 
-.forum_uploadImg {
+#forum_uploadImg {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
@@ -201,7 +197,7 @@
 }
 
 @media(min-width: 992px) {
-    .forum_uploadImg {
+    #forum_uploadImg {
         height: 420px;
     }
 }
@@ -291,7 +287,7 @@
     margin: 10px 0;
 }
 
-.forum_chooseImg label{
+#forum_chooseImg_label{
     display: flex;
     background-color: #D2D2D2;
     height: 140px;
@@ -330,4 +326,10 @@
 
 .forum_chooseImg input {
     display: none;
+}
+
+.forum_edit_emptyInput {
+    border-radius: 2px;
+    outline: 2px solid red;
+    /* box-shadow: 0 0 5px red; */
 }

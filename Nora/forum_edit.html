@@ -15,8 +15,8 @@
         <nav id="header">
             <div class="header_logo"><a href=""><img src="../Yang/圖片/logo.png"></a></div>
             <ul class="header_nav_links">
-                <li class="header_link"><a href="./forum.html"><img src="../Yang/圖片/icon_logIn.png"></a></li>
-                <li class="header_link"><a href="#"><img src="../Yang/圖片/icon_Forum.png"></a></li>
+                <li class="header_link"><a href="#"><img src="../Yang/圖片/icon_logIn.png"></a></li>
+                <li class="header_link"><a href="./forum.html"><img src="../Yang/圖片/icon_Forum.png"></a></li>
             </ul>
         </nav>
     </header>
@@ -26,69 +26,69 @@
                 <img src="https://picsum.photos/50?random=1" alt="author_icon">
                 <p>奇異鳥真奇異啊</p>
             </div>
-            <form action="" enctype="multipart/form-data">
-                <div class="forum_where">
-                    <div>
-                        <label for="forum_select_country">選擇國家：</label>
-                        <select name="forum_s_country" id="forum_select_country">
-                            <optgroup label="不分國家">
-                                <option value="all">全世界</option>
-                            </optgroup>
-                            <optgroup label="亞洲">
-                                <option value="Japan">日本</option>
-                            </optgroup>
-                        </select>
-                    </div>
-                    <div>
-                        <label for="forum_select_area">選擇地區：</label>
-                        <select name="forum_s_area" id="forum_select_area">
-                            <optgroup label="全世界">
-                                <option value="">所有地點</option>
-                            </optgroup>
-                        </select>
-                    </div>
-                    <div>
-                        <label for="">旅遊日期：</label>
-                        <input type="date">
-                    </div>
+            <div class="forum_where">
+                <div>
+                    <label for="forum_select_country">選擇國家：</label>
+                    <select id="forum_select_country">
+                        <option value="all">國家</option>
+                        <optgroup label="亞洲">
+                            <option value="Japan">日本</option>
+                        </optgroup>
+                    </select>
                 </div>
-                <div class="forum_edit_body">
-                    <input type="text" placeholder="主要標題…">
-                    <input type="text" placeholder="次要標題…">
-                    <input type="text" placeholder="HashTag… ( #九州, #活火山, #拉麵… )">
-                    <div>
-                        <div class="forum_e_share">
-                            <input type="radio" name="forum_star" id="forum_star_1" class="forum_e_star" value="1">
-                            <input type="radio" name="forum_star" id="forum_star_2" class="forum_e_star" value="2">
-                            <input type="radio" name="forum_star" id="forum_star_3" class="forum_e_star" value="3">
-                            <input type="radio" name="forum_star" id="forum_star_4" class="forum_e_star" value="4">
-                            <input type="radio" name="forum_star" id="forum_star_5" class="forum_e_star" value="5">
+                <div>
+                    <label for="forum_select_area">選擇地區：</label>
+                    <select id="forum_select_area">
+                        <optgroup label="全世界">
+                            <option value="all">所有地點</option>
+                        </optgroup>
+                    </select>
+                </div>
+                <div>
+                    <label for="">旅遊日期：</label>
+                    <input type="date">
+                </div>
+            </div>
+            <div class="forum_edit_body">
+                <input type="text" placeholder="主要標題…" id="forum_edit_title1" class="forum_edit_input" required minlength="1">
+                <input type="text" placeholder="次要標題…" id="forum_edit_title2" class="forum_edit_input">
+                <input type="text" placeholder="HashTag… ( #九州, #活火山, #拉麵… )" id="forum_edit_tags"
+                    class="forum_edit_input">
+                <div>
+                    <div class="forum_e_share">
+                        <form id="stars">
+                            <input type="radio" name="forum_e_star" id="forum_star_1" class="forum_e_star" value="1" required>
+                            <input type="radio" name="forum_e_star" id="forum_star_2" class="forum_e_star" value="2">
+                            <input type="radio" name="forum_e_star" id="forum_star_3" class="forum_e_star" value="3">
+                            <input type="radio" name="forum_e_star" id="forum_star_4" class="forum_e_star" value="4">
+                            <input type="radio" name="forum_e_star" id="forum_star_5" class="forum_e_star" value="5">
+                        </form>
 
-                            <input type="checkbox" name="forum_onHomePage" id="forum_onHomePage_id">
-                            <label for="forum_onHomePage_id">願意分享文章在網站首頁</label>
+                        <input type="checkbox" id="forum_onHomePage_id">
+                        <label for="forum_onHomePage_id">願意分享文章在網站首頁</label>
+                    </div>
+                    <div class="forum_e_textarea">
+                        <textarea placeholder="撰寫這趟旅程的回憶" id="forum_edit_textarea" required minlength="1"></textarea>
+                        <div>
+                            <p>發布於　2024-09-14</p>
+                            <button id="submit"></button>
                         </div>
-                        <div class="forum_e_textarea">
-                            <textarea name="" id="" placeholder="撰寫這趟旅程的回憶"></textarea>
-                            <div>
-                                <p>發布於　2024-09-14</p>
-                                <button type="submit">
-                                </button>
-                            </div>
-                        </div>
-                        <div class="forum_uploadImg">
+                    </div>
+                    <form enctype="multipart/form-data">
+                        <div id="forum_uploadImg">
                             <div class="forum_noImg"></div>
                             <div class="forum_chooseImg">
-                                <p>目前未選取相片</p>
-                                <label for="forum_chooseImg_id">
+                                <p>至少上傳一張相片，目前未選取相片</p>
+                                <label for="forum_chooseImg_id" id="forum_chooseImg_label">
                                     <img src="./img/icon/add_newImg.svg" alt="chooseImg">
                                     <span>上傳相片…</span>
-                                    <input type="file" name="" id="forum_chooseImg_id" accept="image/*" multiple>
+                                    <input type="file" id="forum_chooseImg_id" accept="image/*" multiple>
                                 </label>
                             </div>
                         </div>
-                    </div>
+                    </form>
                 </div>
-            </form>
+            </div>
         </div>
     </main>
     <footer>
@@ -137,7 +137,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="./js/forum_selectArea.js"></script>
     <script src="./js/forum_stars.js"></script>
-    <script src="./js/forum_upLoadImg.js"></script>
+    <script src="./js/forum_form.js"></script>
 </body>
 
 </html>

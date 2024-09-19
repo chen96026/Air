@@ -257,6 +257,15 @@
     background-image: url("../img/icon/bookmark_FILL1.svg");
 }
 
+.forum_d_report {
+    background-image: url("../img/icon/warning_FILL0.svg");
+    margin: auto 30px auto auto;
+}
+
+.forum_d_report:hover {
+    background-image: url("../img/icon/warning_FILL1.svg");
+}
+
 .forum_d_edit {
     background-image: url("../img/icon/edit_square_24dp_000_FILL0_wght400_GRAD0_opsz24.svg");
 }

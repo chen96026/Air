@@ -1,6 +1,6 @@
 // Stars
 $(() => {
-    $('input[name="forum_star"]').change(function() {
+    $('input[name="forum_e_star"]').change(function() {
         switch (
             $(this).val()
         ) {
