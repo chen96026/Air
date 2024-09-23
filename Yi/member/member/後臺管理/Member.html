@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>會員管理</title>
+  <link rel="stylesheet" href="./Member.css" />
+</head>
+
+<body>
+  <header>
+    <nav id="header">
+      <div class="header_logo"><a href=""><img src="./icon/logo.png"></a></div>
+      <ul class="header_nav_links">
+        <li class="header_link"><a href="#"><img src="./icon/icon_logIn.png"></a></li>
+        <li class="header_link"><a href="#"><img src="./icon/icon_Forum.png"></a></li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    <div id="Backstage_LeftSide">
+      <div id="Backstage_LeftMember">會員管理</div>
+      <div id="Backstage_LeftOrder">訂單管理</div>
+      <div id="Backstage_LeftFlight">航班管理</div>
+      <div id="Backstage_LeftForum">論壇管理</div>
+    </div>
+    <div id="Member_MiddleSide">
+      <h1>會員管理</h1>
+      <div id="Member_search-filter">
+        <div id="Member_LeftSearch">
+          <select id="Member_statusFilter">
+            <option value="all">所有會員</option>
+            <option value="active">已啟用</option>
+            <option value="inactive">已刪除</option>
+          </select>
+          <input type="text" id="Member_searchBar" placeholder="搜尋會員" />
+        </div>
+        <div id="Member_pagination">
+          <span id="Member_prevPage" disabled>上一頁</span>
+          <span><select id="Member_pageSelector"></select></span>
+          <span id="Member_nextPage">下一頁</span>
+        </div>
+      </div>
+      <table id="Member_Table">
+        <thead>
+          <tr>
+            <th>勾選全部&nbsp;<input type="checkbox" id="Member_CheckAll"></th>
+            <th>用戶名</th>
+            <th>Email</th>
+            <th>註冊日期</th>
+            <th>狀態</th>
+            <th>詳細資料</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+      <div id="Member_Notify_ButtonSide">
+        <button id="Member_Notify">發送通知</button>
+      </div>
+      <div id="Member_notification" class="Member_hidden">
+        <p>已成功通知會員！</p>
+      </div>
+    </div>
+
+    <div id="Member_Window">
+      <div id="Member_Window_Content">
+        <span id="Member_CloseModal">&times;</span>
+        <h2>會員詳細資料</h2>
+        <div class="Member2_details">
+          <div class="detail">
+            <label>用戶名：</label>
+            <span id="username"></span>
+          </div>
+
+          <div class="detail">
+            <label>手機：</label>
+            <span id="mobile"></span>
+          </div>
+
+          <div class="detail">
+            <label>電子郵件：</label>
+            <span id="email"></span>
+          </div>
+
+          <div class="detail">
+            <label>出生日期：</label>
+            <span id="dob"></span>
+          </div>
+
+          <div class="detail">
+            <label>性別：</label>
+            <span id="gender"></span>
+          </div>
+
+          <div class="detail">
+            <label>註冊日期：</label>
+            <span id="registrationDate"></span>
+          </div>
+
+          <div class="detail">
+            <label>狀態：</label>
+            <span id="status"></span>
+          </div>
+
+          <div class="detail">
+            <label>證件號碼：</label>
+            <span id="idNumber"></span>
+          </div>
+
+          <div class="detail">
+            <label>國籍：</label>
+            <span id="nationality"></span>
+          </div>
+
+          <div class="detail">
+            <label>證件類型：</label>
+            <span id="idType"></span>
+          </div>
+
+          <div class="detail">
+            <label>證件有效日期：</label>
+            <span id="idExpiry"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  <footer>
+    <div class="search_section_container search_footer_container">
+      <div class="search_footer_col">
+        <h4>追蹤我們</h4>
+        <hr style="width:50%">
+        <div class="search_footer_socials">
+          <span>
+            <a href="#"><i class="ri-twitter-fill"></i></a>
+          </span>
+          <span>
+            <a href="#"><i class="ri-linkedin-fill"></i></a>
+          </span>
+          <span>
+            <a href="#"><i class="ri-instagram-line"></i></a>
+          </span>
+          <span>
+            <a href="#"><i class="ri-facebook-fill"></i></a>
+          </span>
+        </div>
+      </div>
+      <div class="search_footer_col">
+        <h4>隱私</h4>
+        <hr style="width:80%">
+        <a href="#">隱私權政策</a>
+        <a href="#">隱私設定</a>
+      </div>
+      <div class="search_footer_col">
+        <h4>Cookie</h4>
+        <hr style="width:80%">
+        <a href="#">Cookie政策</a>
+        <a href="#">Cookie設定</a>
+      </div>
+      <div class="search_footer_col">
+        <h4>合作夥伴</h4>
+        <hr style="width:80%">
+        <a href="#">廣告投放</a>
+        <a href="#">旅遊宣傳合作</a>
+      </div>
+    </div>
+    <div class="search_footer_bar">
+      Copyright © 2024 Javel. All rights reserved.
+    </div>
+  </footer>
+  <script>
+    const Members = [
+      {
+        "id": 1,
+        "name": "王小明",
+        "email": "xiaoming@gmail.com",
+        "date": "2023-01-15",
+        "status": "active",
+        "mobile": "0912345678",
+        "dob": "1990-01-01",
+        "gender": "男",
+        "idNumber": "A123456789",
+        "nationality": "台灣",
+        "idType": "身份證",
+        "idExpiry": "2030-01-01"
+      },
+      {
+        "id": 2,
+        "name": "李小華",
+        "email": "xiaohua@gmail.com",
+        "date": "2022-12-10",
+        "status": "inactive",
+        "mobile": "0923456789",
+        "dob": "1985-05-12",
+        "gender": "女",
+        "idNumber": "B987654321",
+        "nationality": "台灣",
+        "idType": "護照",
+        "idExpiry": "2028-05-12"
+      },
+      {
+        "id": 3,
+        "name": "陳大文",
+        "email": "dawen@gmail.com",
+        "date": "2023-02-05",
+        "status": "active",
+        "mobile": "0934567890",
+        "dob": "1992-07-23",
+        "gender": "男",
+        "idNumber": "C456789123",
+        "nationality": "台灣",
+        "idType": "身份證",
+        "idExpiry": "2032-07-23"
+      },
+      {
+        "id": 4,
+        "name": "張偉",
+        "email": "wei.zhang@gmail.com",
+        "date": "2023-03-12",
+        "status": "active",
+        "mobile": "0912349876",
+        "dob": "1980-09-15",
+        "gender": "男",
+        "idNumber": "C456789123",
+        "nationality": "台灣",
+        "idType": "身份證",
+        "idExpiry": "2032-07-23"
+      },
+      {
+        "id": 4,
+        "name": "張偉",
+        "email": "wei.zhang@gmail.com",
+        "date": "2023-03-12",
+        "status": "active",
+        "mobile": "0912349876",
+        "dob": "1980-09-15",
+        "gender": "男",
+        "idNumber": "D123456789",
+        "nationality": "台灣",
+        "idType": "身份證",
+        "idExpiry": "2035-09-15"
+      },
+      {
+        "id": 5,
+        "name": "劉海洋",
+        "email": "haiyang.liu@gmail.com",
+        "date": "2023-04-20",
+        "status": "inactive",
+        "mobile": "0921345678",
+        "dob": "1988-11-30",
+        "gender": "男",
+        "idNumber": "E987654321",
+        "nationality": "台灣",
+        "idType": "護照",
+        "idExpiry": "2028-11-30"
+      },
+      {
+        "id": 6,
+        "name": "黃美玲",
+        "email": "meiling.huang@gmail.com",
+        "date": "2023-05-25",
+        "status": "active",
+        "mobile": "0932456789",
+        "dob": "1995-03-18",
+        "gender": "女",
+        "idNumber": "F123987654",
+        "nationality": "台灣",
+        "idType": "身份證",
+        "idExpiry": "2035-03-18"
+      },
+      {
+        "id": 7,
+        "name": "鄭俊傑",
+        "email": "junxie.zheng@gmail.com",
+        "date": "2023-06-18",
+        "status": "inactive",
+        "mobile": "0943567891",
+        "dob": "1979-02-21",
+        "gender": "男",
+        "idNumber": "G654321987",
+        "nationality": "台灣",
+        "idType": "護照",
+        "idExpiry": "2026-02-21"
+      },
+      {
+        "id": 8,
+        "name": "周文強",
+        "email": "wenqiang.zhou@gmail.com",
+        "date": "2023-07-02",
+        "status": "active",
+        "mobile": "0954678912",
+        "dob": "1983-06-15",
+        "gender": "男",
+        "idNumber": "H321654987",
+        "nationality": "台灣",
+        "idType": "身份證",
+        "idExpiry": "2031-06-15"
+      },
+      {
+        "id": 9,
+        "name": "吳小紅",
+        "email": "xiaohong.wu@gmail.com",
+        "date": "2023-08-15",
+        "status": "inactive",
+        "mobile": "0965789123",
+        "dob": "1990-10-05",
+        "gender": "女",
+        "idNumber": "I654987123",
+        "nationality": "台灣",
+        "idType": "護照",
+        "idExpiry": "2029-10-05"
+      },
+      {
+        "id": 10,
+        "name": "鄧志明",
+        "email": "zhiming.deng@gmail.com",
+        "date": "2023-09-05",
+        "status": "active",
+        "mobile": "0976891234",
+        "dob": "1975-04-25",
+        "gender": "男",
+        "idNumber": "J987123456",
+        "nationality": "台灣",
+        "idType": "身份證",
+        "idExpiry": "2030-04-25"
+      },
+      {
+        "id": 11,
+        "name": "蔡婷婷",
+        "email": "tingting.cai@gmail.com",
+        "date": "2023-10-20",
+        "status": "inactive",
+        "mobile": "0987123456",
+        "dob": "1985-08-12",
+        "gender": "女",
+        "idNumber": "K123456789",
+        "nationality": "台灣",
+        "idType": "護照",
+        "idExpiry": "2028-08-12"
+      },
+      {
+        "id": 12,
+        "name": "曾建國",
+        "email": "jianguo.zeng@gmail.com",
+        "date": "2023-11-30",
+        "status": "active",
+        "mobile": "0923456789",
+        "dob": "1969-11-05",
+        "gender": "男",
+        "idNumber": "L987654321",
+        "nationality": "台灣",
+        "idType": "身份證",
+        "idExpiry": "2035-11-05"
+      },
+      {
+        "id": 13,
+        "name": "林佳慧",
+        "email": "jiahui.lin@gmail.com",
+        "date": "2023-12-01",
+        "status": "inactive",
+        "mobile": "0934567891",
+        "dob": "1992-02-18",
+        "gender": "女",
+        "idNumber": "M123987654",
+        "nationality": "台灣",
+        "idType": "護照",
+        "idExpiry": "2026-02-18"
+      },
+      {
+        "id": 14,
+        "name": "黃俊豪",
+        "email": "junhao.huang@gmail.com",
+        "date": "2024-01-10",
+        "status": "active",
+        "mobile": "0912345678",
+        "dob": "1980-05-22",
+        "gender": "男",
+        "idNumber": "N987123456",
+        "nationality": "台灣",
+        "idType": "身份證",
+        "idExpiry": "2032-05-22"
+      },
+      {
+        "id": 15,
+        "name": "李美華",
+        "email": "meihua.li@gmail.com",
+        "date": "2024-02-15",
+        "status": "inactive",
+        "mobile": "0923456781",
+        "dob": "1987-03-15",
+        "gender": "女",
+        "idNumber": "O123654987",
+        "nationality": "台灣",
+        "idType": "護照",
+        "idExpiry": "2025-03-15"
+      },
+      {
+        "id": 16,
+        "name": "張志偉",
+        "email": "zhiwei.zhang@gmail.com",
+        "date": "2024-03-22",
+        "status": "active",
+        "mobile": "0935678912",
+        "dob": "1978-06-30",
+        "gender": "男",
+        "idNumber": "P654321987",
+        "nationality": "台灣",
+        "idType": "身份證",
+        "idExpiry": "2031-06-30"
+      },
+      {
+        "id": 17,
+        "name": "林志強",
+        "email": "zhiqiang.lin@gmail.com",
+        "date": "2024-04-10",
+        "status": "inactive",
+        "mobile": "0946789123",
+        "dob": "1984-11-28",
+        "gender": "男",
+        "idNumber": "Q321654987",
+        "nationality": "台灣",
+        "idType": "護照",
+        "idExpiry": "2028-11-28"
+      },
+      {
+        "id": 18,
+        "name": "彭海玲",
+        "email": "hailing.peng@gmail.com",
+        "date": "2024-05-18",
+        "status": "active",
+        "mobile": "0957891234",
+        "dob": "1991-02-03",
+        "gender": "女",
+        "idNumber": "R654987321",
+        "nationality": "台灣",
+        "idType": "身份證",
+        "idExpiry": "2035-02-03"
+      },
+      {
+        "id": 19,
+        "name": "徐文華",
+        "email": "wenhua.xu@gmail.com",
+        "date": "2024-06-25",
+        "status": "inactive",
+        "mobile": "0968912345",
+        "dob": "1976-08-24",
+        "gender": "男",
+        "idNumber": "S123654987",
+        "nationality": "台灣",
+        "idType": "護照",
+        "idExpiry": "2027-08-24"
+      },
+      {
+        "id": 20,
+        "name": "蔡志豪",
+        "email": "zhihao.cai@gmail.com",
+        "date": "2024-07-30",
+        "status": "active",
+        "mobile": "0979123456",
+        "dob": "1989-09-14",
+        "gender": "男",
+        "idNumber": "T987654123",
+        "nationality": "台灣",
+        "idType": "身份證",
+        "idExpiry": "2031-09-14"
+      },
+      {
+        "id": 21,
+        "name": "林志明",
+        "email": "linzhiming@gmail.com",
+        "date": "2023-03-21",
+        "status": "active",
+        "mobile": "0911234567",
+        "dob": "1995-03-16",
+        "gender": "男",
+        "idNumber": "U987321654",
+        "nationality": "台灣",
+        "idType": "身份證",
+        "idExpiry": "2034-03-16"
+      },
+      {
+        "id": 22,
+        "name": "劉怡君",
+        "email": "liu-yijun@gmail.com",
+        "date": "2023-04-12",
+        "status": "inactive",
+        "mobile": "0923456712",
+        "dob": "1990-04-08",
+        "gender": "女",
+        "idNumber": "V654321987",
+        "nationality": "台灣",
+        "idType": "護照",
+        "idExpiry": "2026-04-08"
+      },
+      {
+        "id": 23,
+        "name": "張家豪",
+        "email": "zhang-jiahao@gmail.com",
+        "date": "2023-05-03",
+        "status": "active",
+        "mobile": "0935678913",
+        "dob": "1982-09-10",
+        "gender": "男",
+        "idNumber": "W321987654",
+        "nationality": "台灣",
+        "idType": "身份證",
+        "idExpiry": "2030-09-10"
+      },
+      {
+        "id": 24,
+        "name": "陳玉蘭",
+        "email": "chen-yulan@gmail.com",
+        "date": "2023-06-14",
+        "status": "inactive",
+        "mobile": "0946789124",
+        "dob": "1984-10-22",
+        "gender": "女",
+        "idNumber": "X987654123",
+        "nationality": "台灣",
+        "idType": "護照",
+        "idExpiry": "2029-10-22"
+      },
+      {
+        "id": 25,
+        "name": "蔡明輝",
+        "email": "cai-minghui@gmail.com",
+        "date": "2023-07-25",
+        "status": "active",
+        "mobile": "0957891235",
+        "dob": "1979-02-27",
+        "gender": "男",
+        "idNumber": "Y654123987",
+        "nationality": "台灣",
+        "idType": "身份證",
+        "idExpiry": "2031-02-27"
+      }
+    ];
+
+    let Member_filtered = Members; // 用一個變數去包裝，不要用原始資料，確保篩選後的資料符合條件
+    const Member_perPage = 10;
+    let Member_currentPage = 1;
+
+    // 生成會員清單
+    function Member_loadList() {
+      const Member_TableBody = document.querySelector("#Member_Table tbody");
+      Member_TableBody.innerHTML = "";
+
+      //從0開始計算，所以減1，乘上10筆資料
+      const startIndex = (Member_currentPage - 1) * Member_perPage;
+      //到第11筆資料結束
+      const endIndex = startIndex + Member_perPage;
+
+      //切從0~9、10~19(這邊是陣列，所以是20筆，只是從0開始)
+      const Member_Slice_Page = Member_filtered.slice(startIndex, endIndex);
+
+      Member_Slice_Page.forEach((Member_Each) => {
+        const Member_row = document.createElement("tr");
+        Member_row.innerHTML = `
+            <td><input type="checkbox" class="Member_Checkbox" data-id="${Member_Each.id
+          }"></td>
+            <td>${Member_Each.name}</td>
+            <td>${Member_Each.email}</td>
+            <td>${Member_Each.date}</td>
+            <td>${Member_Each.status === "active" ? "已啟用" : "已刪除"}</td>
+            <td><button class="Member_Checklook" onclick="Member_Window_Details(${Member_Each.id
+          })">查看</button></td>
+        `;
+        Member_TableBody.appendChild(Member_row);
+      });
+      Member_updateControls();
+    }
+
+    //分頁
+    function Member_updateControls() {
+      //Math.ceil()-確保如果只有少量資料也能顯示在最後一頁
+      const totalPages = Math.ceil(Member_filtered.length / Member_perPage);
+      const pageSelector = document.getElementById("Member_pageSelector");
+      pageSelector.innerHTML = "";
+
+      if (Member_currentPage > totalPages) {
+        Member_currentPage = totalPages;
+      }
+
+      for (let i = 1; i <= totalPages; i++) {
+        const option = document.createElement("option");
+        option.value = i;
+        option.textContent = `第 ${i} 頁`;
+        if (i === Member_currentPage) {
+          option.selected = true;
+        }
+        pageSelector.appendChild(option);
+      }
+
+      //disabled-禁用狀態，第1頁的話禁止按上一頁，最後一頁禁止按下一頁
+      document.getElementById("Member_prevPage").disabled = Member_currentPage === 1;
+      document.getElementById("Member_nextPage").disabled = Member_currentPage === totalPages || totalPages === 0;;
+    }
+
+    document.getElementById("Member_prevPage").addEventListener("click", () => {
+      const totalPages = Math.ceil(Member_filtered.length / Member_perPage);
+      if (Member_currentPage > 1) {
+        Member_currentPage--;
+        Member_loadList();
+      }
+    });
+
+    document.getElementById("Member_nextPage").addEventListener("click", () => {
+      const totalPages = Math.ceil(Member_filtered.length / Member_perPage);
+      if (Member_currentPage < totalPages) {
+        Member_currentPage++;
+        Member_loadList();
+      }
+    });
+
+    document.getElementById("Member_pageSelector").addEventListener("change", (event) => {
+      Member_currentPage = parseInt(event.target.value, 10);
+      Member_loadList();
+    });
+
+    // 搜尋
+    document
+      .getElementById("Member_searchBar")
+      .addEventListener("input", function () {
+        const searchValue = this.value.toLowerCase();
+
+        Member_filtered = Members.filter((Member_Each) => {
+          return (
+            Member_Each.name.toLowerCase().includes(searchValue) ||
+            Member_Each.email.toLowerCase().includes(searchValue)
+          );
+        });
+
+        //重置頁碼
+        Member_currentPage = 1;
+        Member_loadList();
+      });
+
+    // 篩選
+    document
+      .getElementById("Member_statusFilter")
+      .addEventListener("change", function () {
+        const statusValue = this.value;
+
+        Member_filtered = Members.filter((Member) => {
+          return statusValue === "all" ? true : Member.status === statusValue;
+        });
+        Member_currentPage = 1;
+        Member_loadList();
+      });
+
+    //全部勾選
+    document.getElementById("Member_CheckAll").addEventListener("change", function () {
+      const beChecked = this.checked;
+      const checkboxes = document.querySelectorAll(".Member_Checkbox");
+      checkboxes.forEach(checkbox => {
+        checkbox.checked = beChecked;
+      });
+    });
+
+    // 跳出通知
+    function Member_notifyJump() {
+      const notificationDiv = document.getElementById("Member_notification");
+
+      if (notificationDiv) {
+        notificationDiv.style.display = 'flex';
+        setTimeout(() => {
+          notificationDiv.style.display = 'none';
+        }, 5000);
+      } else {
+        console.error("未找到");
+      }
+    }
+    document.getElementById("Member_Notify").addEventListener("click", Member_notifyJump);
+
+    // 顯示會員資料視窗
+    function Member_Window_Details(id) {
+      const member = Members.find(m => m.id === id);
+
+      if (member) {
+        document.getElementById('username').textContent = member.name;
+        document.getElementById('mobile').textContent = member.mobile;
+        document.getElementById('email').textContent = member.email;
+        document.getElementById('dob').textContent = member.dob;
+        document.getElementById('gender').textContent = member.gender;
+        document.getElementById('registrationDate').textContent = member.date;
+        document.getElementById('status').textContent = member.status;
+        document.getElementById('idNumber').textContent = member.idNumber;
+        document.getElementById('nationality').textContent = member.nationality;
+        document.getElementById('idType').textContent = member.idType;
+        document.getElementById('idExpiry').textContent = member.idExpiry;
+
+        document.getElementById('Member_Window').style.display = 'block';
+      }
+
+      document.getElementById('Member_CloseModal').addEventListener('click', function () {
+        document.getElementById('Member_Window').style.display = 'none';
+      });
+    }
+
+    // 點擊彈窗外部關閉彈窗
+    window.onclick = function (event) {
+      const modal = document.getElementById('Member_Window');
+      if (event.target === modal) {
+        modal.style.display = 'none';
+      }
+    };
+
+    // 初始載入會員清單
+    Member_loadList();
+
+  </script>
+</body>
+
+</html>

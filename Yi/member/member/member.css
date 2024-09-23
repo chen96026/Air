@@ -15,7 +15,7 @@ a {
 
 /* Header */
 header {
-  background-color: #FFC1E0;
+  background-color: #F4CFE0;
   position: sticky;
   top: 0;
   z-index: 101;
@@ -57,7 +57,7 @@ header {
 
 /* Footer */
 footer {
-  background-color: #FFC1E0;
+  background-color: #F4CFE0;
 }
 
 .search_section_container {
@@ -141,7 +141,7 @@ hr {
 }
 
 #member_Main {
-  background-color: #e8ecef;
+  background-color: #ffffff;
   height: 100%;
   display: flex;
   align-items: center;
@@ -162,7 +162,6 @@ hr {
   gap: 2vh;
   height: 70vh;
   width: 10vw;
-  cursor: pointer;
 }
 #member_Main #member_LeftSide #member_Left_InSide #member_Left_TopSide {
   border-bottom: 1px solid rgb(0, 0, 0);
@@ -185,7 +184,6 @@ hr {
   gap: 3vh;
 }
 #member_Main #member_LeftSide #member_Left_InSide #member_Left_BottomSide #member_LeftInfo,
-#member_Main #member_LeftSide #member_Left_InSide #member_Left_BottomSide #member_LeftTraveler,
 #member_Main #member_LeftSide #member_Left_InSide #member_Left_BottomSide #member_LeftPassword,
 #member_Main #member_LeftSide #member_Left_InSide #member_Left_BottomSide #member_LeftOrder,
 #member_Main #member_LeftSide #member_Left_InSide #member_Left_BottomSide #member_LeftCard,
@@ -199,43 +197,7 @@ hr {
   width: 8vw;
   font-size: 1vw;
   font-weight: bold;
-}
-#member_Main #member_LeftSide #member_Left_InSide #member_Left_BottomSide #member_LeftTraveler_Drop {
-  position: relative;
-  display: inline-block;
-}
-#member_Main #member_LeftSide #member_Left_InSide #member_Left_BottomSide #member_LeftTraveler_dropdown-content {
-  display: none;
-  position: absolute;
-  top: 0;
-  left: 100%;
-  background-color: #e8ecef;
-  min-width: 8vw;
-  border-radius: 8px; /* 添加圓角 */
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* 添加陰影 */
-  opacity: 0;
-  transform: translateX(-10px);
-  transition: opacity 0.3s ease, transform 0.3s ease;
-}
-#member_Main #member_LeftSide #member_Left_InSide #member_Left_BottomSide #member_LeftTraveler_dropdown-content.show {
-  display: block;
-  opacity: 1;
-  transform: translateX(0); /* 移動至正確位置 */
-}
-#member_Main #member_LeftSide #member_Left_InSide #member_Left_BottomSide #member_LeftTraveler_dropdown-content div {
-  color: black;
-  padding: 1vh 1vw;
-  text-decoration: none;
-  display: block;
-  border-radius: 4px; /* 項目有輕微圓角 */
-  margin: 4px 0; /* 項目間距 */
-  transition: background-color 0.3s ease, color 0.3s ease;
-  font-weight: bold;
-  font-size: 1vw;
-}
-#member_Main #member_LeftSide #member_Left_InSide #member_Left_BottomSide #member_LeftTraveler_dropdown-content div:hover {
-  background-color: #79470d;
-  color: white;
+  cursor: pointer;
 }
 #member_Main #member_MiddleSide {
   flex-basis: 60%;
@@ -249,7 +211,7 @@ hr {
 }
 #member_Main #member_MiddleSide #member_Info_MiddleInside {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  background-color: #e9e4d4;
+  background-color: #FFF2F0;
   border-radius: 20px;
   display: flex;
   flex-direction: column;
@@ -331,101 +293,16 @@ hr {
 }
 #member_Main #member_MiddleSide #member_Info_MiddleInside #member_Info_BottomButton #member_Info_ConfirmButton,
 #member_Main #member_MiddleSide #member_Info_MiddleInside #member_Info_BottomButton #member_Info_DeleteButton {
+  border: none;
+  border-radius: 4px;
   color: #ffffff;
-  background-color: #79470d;
+  background-color: #C2EA88;
   height: 3.5vh;
   width: 3.5vw;
   font-size: 0.8vw;
   cursor: pointer;
 }
 #member_Main #member_MiddleSide #member_Info_MiddleInside #member_Info_ChangeButton {
-  color: #ffffff;
-  background-color: #79470d;
-  height: 3.5vh;
-  width: 3.5vw;
-  font-size: 0.8vw;
-  cursor: pointer;
-}
-#member_Main #member_MiddleSide #member_Traveler_MiddleInside {
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  background-color: #e9e4d4;
-  border-radius: 20px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 55vh;
-  width: 40vw;
-  gap: 2vh;
-}
-#member_Main #member_MiddleSide #member_Traveler_MiddleInside #member_Traveler_form_section {
-  height: 40vh;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-#member_Main #member_MiddleSide #member_Traveler_MiddleInside #member_Traveler_form_section form {
-  display: flex;
-  flex-direction: column;
-  gap: 5vh;
-}
-#member_Main #member_MiddleSide #member_Traveler_MiddleInside #member_Traveler_form_section form label {
-  font-size: 1.1vw;
-  color: #555;
-}
-#member_Main #member_MiddleSide #member_Traveler_MiddleInside #member_Traveler_form_section form span {
-  font-size: 1vw;
-  color: #000000;
-}
-#member_Main #member_MiddleSide #member_Traveler_MiddleInside #member_Traveler_form_section form #member_Traveler_InSide1 {
-  display: flex;
-  grid-template-columns: 25% 42% 45%;
-  margin-bottom: 10px;
-  justify-content: start;
-  align-items: center;
-  padding-left: 1.1vw;
-  gap: 2vw;
-}
-#member_Main #member_MiddleSide #member_Traveler_MiddleInside #member_Traveler_form_section form #member_Traveler_InSide1 .member_Traveler_Title1 {
-  font-size: 1.1vw;
-  color: #555;
-  padding-left: 2vw;
-}
-#member_Main #member_MiddleSide #member_Traveler_MiddleInside #member_Traveler_form_section form #member_Traveler_InSide2 {
-  display: flex;
-  grid-template-columns: 25% 42% 45%;
-  margin-bottom: 10px;
-  justify-content: center;
-  align-items: center;
-  gap: 2.2vw;
-}
-#member_Main #member_MiddleSide #member_Traveler_MiddleInside #member_Traveler_form_section form #member_Traveler_InSide2 .member_Traveler_Title2 {
-  padding-left: 1.8vw;
-  font-size: 1.1vw;
-  color: #555;
-}
-#member_Main #member_MiddleSide #member_Traveler_MiddleInside #member_Traveler_form_section form #member_Traveler_InSide3 {
-  display: flex;
-  grid-template-columns: 25% 42% 45%;
-  margin-bottom: 10px;
-  justify-content: center;
-  align-items: center;
-  gap: 1.8vw;
-}
-#member_Main #member_MiddleSide #member_Traveler_MiddleInside #member_Traveler_form_section form #member_Traveler_InSide3 .member_Traveler_Title3 {
-  padding-right: 1.1vw;
-  font-size: 1.1vw;
-  color: #555;
-}
-#member_Main #member_MiddleSide #member_Traveler_MiddleInside #member_Traveler_form_section form select,
-#member_Main #member_MiddleSide #member_Traveler_MiddleInside #member_Traveler_form_section form input {
-  border: 1px solid #ccc;
-  height: 3.5vh;
-  padding: 0.5vh;
-  border-radius: 4px;
-}
-#member_Main #member_MiddleSide #member_Traveler_MiddleInside #member_Traveler_Button {
   color: #ffffff;
   background-color: #79470d;
   height: 3.5vh;
@@ -1042,7 +919,8 @@ hr {
   position: absolute;
   top: 45%;
   left: 50%;
-  transform: translate(-50%, -50%); /* 讓視窗居中 */
+  transform: translate(-50%, -50%);
+  /* 讓視窗居中 */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 #member_Info_deleteModal #member_Info_deleteContent p {
@@ -1057,7 +935,8 @@ hr {
   margin-top: 2vh;
   margin-bottom: 2vh;
 }
-#member_Info_deleteModal #member_Info_deleteContent #member_Info_confirmDelete, #member_Info_deleteModal #member_Info_deleteContent #member_Info_cancelDelete {
+#member_Info_deleteModal #member_Info_deleteContent #member_Info_confirmDelete,
+#member_Info_deleteModal #member_Info_deleteContent #member_Info_cancelDelete {
   background-color: #79470d;
   color: white;
   border: none;
@@ -1071,7 +950,8 @@ hr {
   position: absolute;
   top: 2vh;
   right: 1vw;
-  color: #000000; /* 更明顯的紅色 */
+  color: #000000;
+  /* 更明顯的紅色 */
   font-size: 1.5vw;
   font-weight: bold;
   cursor: pointer;
