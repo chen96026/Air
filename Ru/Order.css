@@ -138,8 +138,13 @@ hr {
     opacity: .25;
 }
 
+.container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #E9E4D4;
 
-
+}
 
 
 .process_bg {
@@ -226,7 +231,7 @@ select {
 }
 
 .container_right {
-    width: 100%;
+    width: 90%;
     margin: 0 auto;
     padding: 5px 5px;
     background-color: #E9E4D4;
@@ -297,18 +302,21 @@ li {
 }
 
 .col_right {
-    flex: 1;
     padding: 10px;
     position: fixed;
-    bottom:25%;
-    min-height: 50vh;
+    bottom:22%;
     right: 15%;
     width: 20%;
     border: 1px solid #ddd;
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
     z-index: 1000;
 }
+
+.container_right > div {
+    margin: 1px 0; /* 調整行距 */
+}
+
 
 .grid_items {
     display: grid;

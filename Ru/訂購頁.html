@@ -37,32 +37,47 @@
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const passengerContainer = document.getElementById('passenger_container');
+        const luggageContainer = document.getElementById('luggage_container');
 
         function updatePassengerNumbers() {
             const sections = passengerContainer.querySelectorAll('.form_section');
             sections.forEach((section, index) => {
                 section.querySelector('div').textContent = `旅客${index + 1}(成人票)`;
             });
-            const sections_luggage = passengerContainer.querySelectorAll('.form_section');
+
+        }
+
+        function updateLuggageNumbers() {
+            const luggageSections = luggageContainer.querySelectorAll('.luggageform_section');
+            luggageSections.forEach((luggageSection, index) => {
+                luggageSection.querySelector('div').textContent = `旅客${index + 1} 行李:`;
+            });
+
         }
         document.getElementById('add_passenger').addEventListener('click', function () {
             const newSection = passengerContainer.querySelector('.form_section').cloneNode(true);
+            const newLuggageSection = luggageContainer.querySelector('.luggageform_section').cloneNode(true);
             const deleteButton = newSection.querySelector('.delete_btn');
 
             deleteButton.style.display = 'block';
             deleteButton.addEventListener('click', function () {
                 passengerContainer.removeChild(newSection);
+                luggageContainer.removeChild(newLuggageSection);
                 updatePassengerNumbers();
+                updateLuggageNumbers();
             });
 
             passengerContainer.appendChild(newSection);
+            luggageContainer.appendChild(newLuggageSection);
             updatePassengerNumbers();
+            updateLuggageNumbers();
         });
 
         document.querySelectorAll('.form_section').forEach(section => {
             section.querySelector('.delete_btn').style.display = 'none';
         });
         updatePassengerNumbers();
+        updateLuggageNumbers();
     });
 </script>
 
@@ -71,7 +86,7 @@
     document.addEventListener('DOMContentLoaded', function () {
         const luggageContainer = document.getElementById('add');
 
-        function updateLuggageQuantity(){
+        function updateLuggageQuantity() {
 
         }
     })
@@ -315,7 +330,7 @@
                                         <input type="date" id="dob" style="width: 55%;">
                                     </div>
                                     <div>
-                                        證件號碼：<input type="text" style="width:60%;">
+                                        證件號碼：<input type="text" style="width:59%;">
                                     </div>
 
 
@@ -357,7 +372,7 @@
                                     </div>
 
                                     <div>
-                                        證件有效日期至：<input type="date" id="dop" style="width: 51%;">
+                                        證件有效日期至：<input type="date" id="dop" style="width: 48%;">
                                     </div>
                                 </div>
                             </form>
@@ -381,82 +396,88 @@
                 <h5 style="margin-left: 10%; font-size: larger;">行李資訊</h5>
 
                 <div id="luggage_container">
-                    <div class="container_luggage">去程(已包含的行李)</div>
-                    <div class="container_lg">
-                        <div class="grid_luggage">
-                            <div>個人物品<br>
-                                <p style="font-size: 11px;">請聯繫航空公司了解詳細的行李尺寸規定</p>
+                    <div class="luggageform_section">
+                        <div style="margin: 10px auto;width: 80%;">旅客1 行李:</div>
+                        <div class="container_luggage">去程(已包含的行李)</div>
+                        <div class="container_lg">
+                            <div class="grid_luggage">
+                                <div>個人物品<br>
+                                    <p style="font-size: 11px;">請聯繫航空公司了解詳細的行李尺寸規定</p>
+                                </div>
+                                <div>手提行李<br>(50*40*25公分)</div>
+                                <div>托運行李<br>
+                                    <p style="font-size: 11px;">請聯繫航空公司了解詳細的行李尺寸規定</p>
+                                </div>
                             </div>
-                            <div>手提行李<br>(50*40*25公分)</div>
-                            <div>托運行李<br>
-                                <p style="font-size: 11px;">請聯繫航空公司了解詳細的行李尺寸規定</p>
+
+                            <div class="grid_luggage_icon">
+                                <span class="material-symbols-outlined" style="font-size: 60px;">personal_bag</span>
+                                <span class="material-symbols-outlined" style="font-size: 60px;">checked_bag</span>
+                                <span class="material-symbols-outlined" style="font-size: 60px;">luggage</span>
                             </div>
+
+                            <div class="grid_luggage">
+                                <div>1件</div>
+                                <div>1件，共7公斤</div>
+                                <div>1件，共23公斤</div>
+                            </div>
+
+                            <label for="add_luggage_1">
+                                <select name="addLg_1" id="add_luggage_1" class="label_addluggage">
+                                    <option value="add_lg">加購行李</option>
+                                    <option value="non_lg">無額外行李</option>
+                                    <option value="one_lg">1件，共20公斤&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;NT$1,224
+
+                                    </option>
+                                    <option value="two_lg">2件，共40公斤&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;NT$1,698
+                                    </option>
+                                    <option value="three_lg">3件，共60公斤&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;NT$2,171
+                                    </option>>
+                                </select>
+                            </label>
                         </div>
 
-                        <div class="grid_luggage_icon">
-                            <span class="material-symbols-outlined" style="font-size: 60px;">personal_bag</span>
-                            <span class="material-symbols-outlined" style="font-size: 60px;">checked_bag</span>
-                            <span class="material-symbols-outlined" style="font-size: 60px;">luggage</span>
+                        <div class="container_luggage">回程(已包含的行李)</div>
+                        <div class="container_lg" style="margin-bottom: 5%;">
+                            <div class="grid_luggage">
+                                <div>個人物品<br>
+                                    <p style="font-size: 11px;">請聯繫航空公司了解詳細的行李尺寸規定</p>
+                                </div>
+                                <div>手提行李<br>(50*40*25公分)</div>
+                                <div>托運行李<br>
+                                    <p style="font-size: 11px;">請聯繫航空公司了解詳細的行李尺寸規定</p>
+                                </div>
+                            </div>
+
+                            <div class="grid_luggage_icon">
+                                <span class="material-symbols-outlined" style="font-size: 60px;">personal_bag</span>
+                                <span class="material-symbols-outlined" style="font-size: 60px;">checked_bag</span>
+                                <span class="material-symbols-outlined" style="font-size: 60px;">luggage</span>
+                            </div>
+
+                            <div class="grid_luggage">
+                                <div>1件</div>
+                                <div>1件，共7公斤</div>
+                                <div>1件，共23公斤</div>
+                            </div>
+
+                            <label for="add_luggage_2">
+                                <select name="addLg_2" id="add_returnluggage_2" class="label_addluggage">
+                                    <option value="add_lg">加購行李</option>
+                                    <option value="non_lg">無額外行李</option>
+                                    <option value="one_lg">1件，共20公斤&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp; <div
+                                            id="one_price">
+                                            NT$1,224</div>
+                                    </option>
+                                    <option value="two_lg">2件，共40公斤&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;NT$1,698
+                                    </option>
+                                    <option value="three_lg">3件，共60公斤&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;NT$2,171
+                                    </option>>
+                                </select>
+                            </label>
                         </div>
-
-                        <div class="grid_luggage">
-                            <div>1件</div>
-                            <div>1件，共7公斤</div>
-                            <div>1件，共23公斤</div>
-                        </div>
-
-                        <label for="add_luggage_1">
-                            <select name="addLg_1" id="add_luggage_1" class="label_addluggage">
-                                <option value="add_lg">加購行李</option>
-                                <option value="non_lg">無額外行李</option>
-                                <option value="one_lg">1件，共20公斤&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;NT$1,224
-
-                                </option>
-                                <option value="two_lg">2件，共40公斤&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;NT$1,698</option>
-                                <option value="three_lg">3件，共60公斤&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;NT$2,171</option>>
-                            </select>
-                        </label>
                     </div>
-
                 </div>
-
-                <div class="container_luggage" style="margin-top: 10px;">回程(已包含的行李)</div>
-                <div class="container_lg">
-                    <div class="grid_luggage">
-                        <div>個人物品<br>
-                            <p style="font-size: 11px;">請聯繫航空公司了解詳細的行李尺寸規定</p>
-                        </div>
-                        <div>手提行李<br>(50*40*25公分)</div>
-                        <div>托運行李<br>
-                            <p style="font-size: 11px;">請聯繫航空公司了解詳細的行李尺寸規定</p>
-                        </div>
-                    </div>
-
-                    <div class="grid_luggage_icon">
-                        <span class="material-symbols-outlined" style="font-size: 60px;">personal_bag</span>
-                        <span class="material-symbols-outlined" style="font-size: 60px;">checked_bag</span>
-                        <span class="material-symbols-outlined" style="font-size: 60px;">luggage</span>
-                    </div>
-
-                    <div class="grid_luggage">
-                        <div>1件</div>
-                        <div>1件，共7公斤</div>
-                        <div>1件，共23公斤</div>
-                    </div>
-
-                    <label for="add_luggage_2">
-                        <select name="addLg_2" id="add_returnluggage_2" class="label_addluggage">
-                            <option value="add_lg">加購行李</option>
-                            <option value="non_lg">無額外行李</option>
-                            <option value="one_lg">1件，共20公斤&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp; <div id="one_price">
-                                    NT$1,224</div>
-                            </option>
-                            <option value="two_lg">2件，共40公斤&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;NT$1,698</option>
-                            <option value="three_lg">3件，共60公斤&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;NT$2,171</option>>
-                        </select>
-                    </label>
-                </div>
-
             </div>
 
 
@@ -467,7 +488,7 @@
 
             <div>
                 <h5 style="margin-left: 10%; font-size: larger;">聯繫方式</h5>
-                <div class="container" style="display: flex; flex-wrap: wrap; gap: 30px; justify-content: center;">
+                <div class="container" style="display: flex; gap: 10px; justify-content: center;">
                     <div><input type="text" placeholder="聯繫人姓名" class="contact_info"></div>
                     <div><input type="tel" placeholder="手機號碼" class="contact_info">
                     </div>
@@ -487,16 +508,16 @@
             </div>
         </div>
 
-        <div class="col_right" style="min-height: 45vh;">
+        <div class="col_right" style="min-height: 50vh;">
             <div class="container_right">
                 <div style="font-size: 22px; margin-top: 10px">價格詳情</div>
-                <div style="margin: 10px 20px;">
+                <div style="margin: 5px 10px;">
                     <div style="display:flex;justify-content: space-between;">
                         <h3>機票 (2位成人)</h3>
                         <h3 id="ticket_price">NT$ 9,999</h3>
                     </div>
 
-                    <h3>行李</h3>
+                    <h3 style="margin: 0; padding: 2px 0;">行李</h3>
                     <div style="display:flex;justify-content: space-between;">
                         <p>個人物品</p>
                         <p>免費</p>
@@ -512,7 +533,7 @@
                         <p id="price_luggage">免費</p>
                     </div>
 
-                    <hr style="border: 1px dashed;">
+                    <hr style="border: 1px dashed; margin: 5px 0;">
 
                     <div style="display:flex;justify-content: space-between;">
                         <h3>總額</h3>
