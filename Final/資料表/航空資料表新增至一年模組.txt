@@ -1,0 +1,68 @@
+Sub CopyAndExtendDataForMultipleSheets()
+    Dim ws As Worksheet
+    Dim lastRow As Long
+    Dim i As Long, j As Long
+    Dim startDate As Date
+    Dim newRow As Long
+    Dim copyRange As Range
+    Dim dateDelta As Long
+    Dim sheetNames As Variant
+    Dim copyRanges As Variant
+    
+    ' 設定工作表名稱和對應的範圍
+    sheetNames = Array("長榮航空", "中華航空", "星宇航空", "臺灣虎航", "華信航空", "立榮航空", "日本航空", "全日空", "樂桃航空", _
+                       "捷星日本", "大韓航空", "韓亞航空", "濟州航空", "真航空", "易斯達航空", "美國航空", "聯合航空", "達美航空", "夏威夷航空", _
+                       "加拿大航空", "漢莎航空", "荷蘭航空", "澳洲航空", "紐西蘭航空", "法國航空", "以色列航空", "土耳其航空", "新加坡航空", _
+                       "酷航空", "越南航空", "越捷航空", "泰國航空", "曼谷航空", "泰亞洲航空", "泰越捷航空", "泰國獅子航空", "馬來西亞航空", _
+                       "全亞洲航空", "(馬)峇迪航空", "印尼航空", "菲律賓航空", "菲亞洲航空", "宿霧航空", "國泰航空", "香港航空", "大灣區航空", _
+                       "香港快運航空", "中國國際航空", "澳門航空", "廈門航空", "深圳航空", "東方航空", "南方航空", "吉祥航空")
+    
+    copyRanges = Array("A2:L1077", "A2:L864", "A2:L266", "A2:L99", "A2:L15", "A2:L33", "A2:L101", "A2:L101", "A2:L57", _
+                       "A2:L22", "A2:L42", "A2:L33", "A2:L8", "A2:L8", "A2:L5", "A2:L8", "A2:L29", "A2:L63", "A2:L86", _
+                       "A2:L22", "A2:L15", "A2:L40", "A2:L6", "A2:L112", "A2:L22", "A2:L29", "A2:L63", "A2:L119", "A2:L56", _
+                       "A2:L84", "A2:L35", "A2:L192", "A2:L65", "A2:L20", "A2:L36", "A2:L10", "A2:L61", "A2:L22", "A2:L40", _
+                       "A2:L50", "A2:L72", "A2:L29", "A2:L25", "A2:L180", "A2:L163", "A2:L33", "A2:L57", "A2:L77", "A2:L43", _
+                       "A2:L17", "A2:L23", "A2:L57", "A2:L91", "A2:L11")
+
+    ' 遍歷每個工作表
+    For k = LBound(sheetNames) To UBound(sheetNames)
+        ' 設定當前的工作表
+        Set ws = ThisWorkbook.Sheets(sheetNames(k))
+        
+        ' 找到資料的最後一行
+        lastRow = ws.Cells(ws.Rows.Count, "A").End(xlUp).Row
+        
+        ' 設定起始日期（根據您第一筆資料的日期）
+        startDate = DateValue("2024/10/28")
+        
+        ' 從哪一行開始複製資料
+        newRow = lastRow + 1 ' 不插入空行
+        
+        ' 設定要複製的範圍
+        Set copyRange = ws.Range(copyRanges(k))
+        
+        ' 計算原始資料的日期間隔
+        dateDelta = ws.Cells(3, 5).Value - ws.Cells(2, 5).Value ' 假設出發日期在第 5 列
+        
+        ' 複製 7 次 (從第 2 週到第 7 週)
+        For i = 1 To 52
+            ' 複製範圍並貼上到新行
+            copyRange.Copy Destination:=ws.Cells(newRow, 1)
+            
+            ' 調整出發日期和抵達日期
+            For j = 0 To copyRange.Rows.Count - 1
+                ' 保持每週內的日期間隔不變，只增加每週的基準日期
+                ws.Cells(newRow + j, 5).Value = ws.Cells(2 + j, 5).Value + (i * 7) ' 調整出發日期
+                ws.Cells(newRow + j, 6).Value = ws.Cells(2 + j, 6).Value + (i * 7) ' 調整抵達日期
+            Next j
+            
+            ' 更新下一次的起始行，不插入空行
+            newRow = newRow + copyRange.Rows.Count
+        Next i
+    Next k
+    
+    ' 清除複製範圍
+    Application.CutCopyMode = False
+    
+    MsgBox "所有工作表的資料複製並擴展完成！"
+End Sub
