@@ -38,6 +38,7 @@
     document.addEventListener('DOMContentLoaded', function () {
         const passengerContainer = document.getElementById('passenger_container');
         const luggageContainer = document.getElementById('luggage_container');
+        const priceLuggageElement = document.getElementById ('price_luggage')
 
         function updatePassengerNumbers() {
             const sections = passengerContainer.querySelectorAll('.form_section');
@@ -54,53 +55,13 @@
             });
 
         }
-        document.getElementById('add_passenger').addEventListener('click', function () {
-            const newSection = passengerContainer.querySelector('.form_section').cloneNode(true);
-            const newLuggageSection = luggageContainer.querySelector('.luggageform_section').cloneNode(true);
-            const deleteButton = newSection.querySelector('.delete_btn');
-
-            deleteButton.style.display = 'block';
-            deleteButton.addEventListener('click', function () {
-                passengerContainer.removeChild(newSection);
-                luggageContainer.removeChild(newLuggageSection);
-                updatePassengerNumbers();
-                updateLuggageNumbers();
-            });
-
-            passengerContainer.appendChild(newSection);
-            luggageContainer.appendChild(newLuggageSection);
-            updatePassengerNumbers();
-            updateLuggageNumbers();
-        });
-
-        document.querySelectorAll('.form_section').forEach(section => {
-            section.querySelector('.delete_btn').style.display = 'none';
-        });
-        updatePassengerNumbers();
-        updateLuggageNumbers();
-    });
-</script>
-
-
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const luggageContainer = document.getElementById('add');
-
-        function updateLuggageQuantity() {
-
-        }
-    })
-</script>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const selectElements = document.querySelectorAll('select.label_addluggage');
-        const priceLuggageElement = document.getElementById('price_luggage');
 
         function updatePrice() {
+            const selectElements = document.querySelectorAll('select.label_addluggage')
             let total = 0;
 
             selectElements.forEach(selectElement => {
+
                 const selectedOption = selectElement.options[selectElement.selectedIndex];
                 const priceTextMatch = selectedOption.textContent.match(/NT\$\d+,\d+/);
 
@@ -115,20 +76,109 @@
                 priceLuggageElement.textContent = '免費';
             }
         }
-        selectElements.forEach(selectElement => {
+
+        document.getElementById('add_passenger').addEventListener('click', function () {
+            const newSection = passengerContainer.querySelector('.form_section').cloneNode(true);
+            const newLuggageSection = luggageContainer.querySelector('.luggageform_section').cloneNode(true);
+            const deleteButton = newSection.querySelector('.delete_btn');
+
+            deleteButton.style.display = 'block';
+            deleteButton.addEventListener('click', function () {
+                passengerContainer.removeChild(newSection);
+                luggageContainer.removeChild(newLuggageSection);
+                updatePassengerNumbers();
+                updateLuggageNumbers();
+                updatePrice();
+            });
+
+            const newSelectElements = newLuggageSection.querySelectorAll('.label_addluggage')
+            newSelectElements.forEach(selectElement => {
+                selectElement.addEventListener('change', updatePrice);
+            })
+
+
+            passengerContainer.appendChild(newSection);
+            luggageContainer.appendChild(newLuggageSection);
+            updatePassengerNumbers();
+            updateLuggageNumbers();
+            updatePrice();
+        });
+
+        document.querySelectorAll('.form_section').forEach(section => {
+            section.querySelector('.delete_btn').style.display = 'none';
+        });
+        updatePassengerNumbers();
+        updateLuggageNumbers();
+        updatePrice();
+
+        const allselectElements = document.querySelectorAll('.select.label_addluggage')
+        allselectElements.forEach(selectElement => {
             selectElement.addEventListener('change', updatePrice);
         });
-        updatePrice();
     });
 </script>
 
+
+<script>
+    document.getElementById('next_step').addEventListener ('click', function(event)){
+        event.preventDefault();
+    }
+
+    const passengerData = {
+        lastname: document.getElementById('lastname').value,
+        firstname: documnt.getElementById('firstname').value,
+        gender: document.getElementById('gender').value,
+        birthday: document.getElementById('dob').value,
+        country: document.querySelector('country').value,
+        idType: document.querySelector('idtype').value,
+        idNumber: document.querySelector('idnumber"]').value,
+        idDate: document.getElementById('dop').vlaue
+
+    };
+
+    fetch('/api/passengers',{
+        method:'POST',
+        headers:{
+            'Content-Type':'application/json'
+        },
+        body:JSON.stringify(passengerData)
+    })
+
+    .then(response => {
+        if(!response.ok){
+            throw new Error('response was not ok'+ response.statusText);
+        }
+        return response.json();
+    })
+
+    .then(date=>{
+        console.log('Passenger saved:',data);
+        alert('旅客資訊已成功更新!');
+
+        document.getElementById('surname').value = '';
+        document.getElementById('firstname').value = '';
+        document.getElementById('gender').value = 'male';
+        document.getElementById('dob').value = '';
+        document.getElementById('country').value = '';
+        document.getElementById('idtype').value = '';
+        document.getElementById('idnumber').value = '';
+        document.getElementById('dop').value = '';
+    })
+
+    .catch(error =>{
+        console.log ('problem with your fetch operation:', error);
+        alert('提交失敗')
+    })
+</script>
+
+
 <body>
-    <header>
+    <header style="border-bottom: 10px solid #F4CFE0">
         <nav id="header">
             <div class="header_logo"><a href=""><img src="../Yang/圖片/logo.png"></a></div>
             <ul class="header_nav_links">
                 <li class="header_link"><a href="#"><img src="../Yang/圖片/icon_logIn.png"></a></li>
-                <li class="header_link"><a href="#"><img src="../Yang/圖片/icon_Forum.png"></a></li>
+                <li class="header_link"><a href="#"><img src="../Yang/圖片/icon_Forum.png" class="nav_icon"></a></li>
             </ul>
         </nav>
     </header>
@@ -295,32 +345,32 @@
 
             <h5></h5>
             <div class="container">
-                <div>主要旅客資訊</div>
+                <div style="font-weight: bolder;">主要旅客資訊</div>
                 <hr>
                 <div id="passenger_container">
                     <div class="form_section">
                         <div>旅客1(成人票)</div>
-                        <div class="container_info" style="margin-left:7% ;">
+                        <div class="container_info">
 
-                            <form>
-                                <div style="display: grid; grid-template-columns: 55% 55%; margin-bottom: 10px;">
+                            <form style="width: 100%; margin: 0 auto;"> 
+                                <div style="display: grid; grid-template-columns: 50% 50%; margin-bottom: 5px;">
                                     <div>
-                                        <label for="surname">姓氏：</label>
-                                        <input type="text" id="surname" placeholder="姓氏" style="width:80% ;">
+                                        <label for="lastname">姓氏：</label>
+                                        <input type="text" id="lastname" placeholder="姓氏" style="width:70% ;">
 
                                     </div>
 
                                     <div>
                                         <label for="firstname">名字：</label>
-                                        <input type="text" id="firstname" placeholder="名字" style="width:80%;">
+                                        <input type="text" id="firstname" placeholder="名字" style="width:70%;">
                                     </div>
 
                                 </div>
 
-                                <div style="display: grid; grid-template-columns: 25% 42% 45%;margin-bottom: 10px;">
+                                <div style="display: grid; grid-template-columns: 22% 38% 40%;margin-bottom: 10px;">
                                     <div>
                                         <label for="gender">性別：</label>
-                                        <select id="gender" style="width: 50%;">
+                                        <select id="gender" style="width: 45%;">
                                             <option value="male">男性</option>
                                             <option value="female">女性</option>
                                         </select>
@@ -330,15 +380,15 @@
                                         <input type="date" id="dob" style="width: 55%;">
                                     </div>
                                     <div>
-                                        證件號碼：<input type="text" style="width:59%;">
+                                        證件號碼：<input id="idnumber" type="text" style="width:52%;">
                                     </div>
 
 
                                 </div>
-                                <div style="display: grid; grid-template-columns: 25% 35% 50%;">
+                                <div style="display: grid; grid-template-columns: 22% 30% 46%;">
                                     <div>
                                         <label for="">國籍：</label>
-                                        <select style="width: 50%;">
+                                        <select style="width: 50%;" id="country">
                                             <option value="us">台灣</option>
                                             <option value="us">美國</option>
                                             <option value="cn">中國</option>
@@ -366,13 +416,13 @@
                                     </div>
                                     <div>
                                         證件類型：
-                                        <select style="width: 45%;">
+                                        <select style="width: 40%;" id="idtype">
                                             <option value="">護照</option>
                                         </select>
                                     </div>
 
                                     <div>
-                                        證件有效日期至：<input type="date" id="dop" style="width: 48%;">
+                                        證件有效日期至：<input type="date" id="dop" style="width: 45%;">
                                     </div>
                                 </div>
                             </form>
@@ -393,8 +443,7 @@
             </div>
 
             <div>
-                <h5 style="margin-left: 10%; font-size: larger;">行李資訊</h5>
-
+                <div style="margin: 5% 10% 2% 10%; font-weight: bold; font-size: 20px;">行李資訊</div>
                 <div id="luggage_container">
                     <div class="luggageform_section">
                         <div style="margin: 10px auto;width: 80%;">旅客1 行李:</div>
@@ -472,7 +521,7 @@
                                     <option value="two_lg">2件，共40公斤&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;NT$1,698
                                     </option>
                                     <option value="three_lg">3件，共60公斤&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;NT$2,171
-                                    </option>>
+                                    </option>
                                 </select>
                             </label>
                         </div>
@@ -488,11 +537,11 @@
 
             <div>
                 <h5 style="margin-left: 10%; font-size: larger;">聯繫方式</h5>
-                <div class="container" style="display: flex; gap: 10px; justify-content: center;">
-                    <div><input type="text" placeholder="聯繫人姓名" class="contact_info"></div>
-                    <div><input type="tel" placeholder="手機號碼" class="contact_info">
+                <div class="container_contact">
+                    <div><input type="text" placeholder="聯繫人姓名" class="container_contactinfo"></div>
+                    <div><input type="tel" placeholder="手機號碼" class="container_contactinfo">
                     </div>
-                    <div><input type="email" placeholder="電子郵件" class="contact_info">
+                    <div><input type="email" placeholder="電子郵件" class="container_contactinfo">
                     </div>
 
                 </div>
@@ -501,7 +550,7 @@
             <div class="container" style="width: 80%; padding: 20px;margin-top: 50px;">
                 總計<br>
                 <div style="display: flex;justify-content: center;">
-                    <button class="style_nextstep">下一步</button>
+                    <button class="style_nextstep" id="next_step">下一步</button>
                 </div>
 
 
