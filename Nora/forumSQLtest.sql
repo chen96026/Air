@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主機： localhost:3306
--- 產生時間： 2024-09-24 16:48:25
+-- 產生時間： 2024-09-26 17:37:05
 -- 伺服器版本： 5.7.24
 -- PHP 版本： 8.3.1
 
@@ -30,7 +30,8 @@ SET time_zone = "+00:00";
 CREATE TABLE `images` (
   `id` int(10) UNSIGNED NOT NULL,
   `pid` int(10) UNSIGNED NOT NULL COMMENT '文章id(外鍵連接posts.id)',
-  `image` blob NOT NULL COMMENT '附圖'
+  `image` mediumblob NOT NULL COMMENT '附圖',
+  `mimeType` varchar(100) NOT NULL COMMENT '圖片格式'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -41,7 +42,6 @@ CREATE TABLE `images` (
 
 CREATE TABLE `posts` (
   `id` int(10) UNSIGNED NOT NULL,
-  `authorId` int(10) UNSIGNED NOT NULL COMMENT '作者id(外鍵連接user.id)',
   `country` varchar(100) NOT NULL COMMENT '旅遊國家(必填)',
   `city` varchar(100) NOT NULL COMMENT '旅遊地區(必填)',
   `startDate` date DEFAULT NULL COMMENT '旅遊起始日',
@@ -52,6 +52,7 @@ CREATE TABLE `posts` (
   `rate` int(10) UNSIGNED NOT NULL COMMENT '評分星數(必填)',
   `share` tinyint(1) NOT NULL COMMENT '是否願意分享到首頁',
   `content` varchar(1000) NOT NULL COMMENT '文章內容(必填)',
+  `authorId` int(10) UNSIGNED NOT NULL COMMENT '作者id(外鍵連接user.id)',
   `createdTime` datetime NOT NULL COMMENT 'PO文日期',
   `likes` int(10) NOT NULL DEFAULT '0' COMMENT '讚數',
   `reports` int(10) NOT NULL DEFAULT '0' COMMENT '被檢舉次數'
@@ -67,8 +68,17 @@ CREATE TABLE `usertest1` (
   `id` int(10) UNSIGNED NOT NULL,
   `account` varchar(100) NOT NULL,
   `passwd` varchar(100) NOT NULL,
-  `username` varchar(100) NOT NULL
+  `username` varchar(100) NOT NULL,
+  `userIcon` blob,
+  `mimeType` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- 傾印資料表的資料 `usertest1`
+--
+
+INSERT INTO `usertest1` (`id`, `account`, `passwd`, `username`, `userIcon`, `mimeType`) VALUES
+(1, 'satoshi', '123456', '從真新鎮出發27年', NULL, NULL);
 
 --
 -- 已傾印資料表的索引
@@ -114,7 +124,7 @@ ALTER TABLE `posts`
 -- 使用資料表自動遞增(AUTO_INCREMENT) `usertest1`
 --
 ALTER TABLE `usertest1`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- 已傾印資料表的限制式
