@@ -4,143 +4,66 @@
   box-sizing: border-box;
 }
 
-body {
-  background-color: #e8ecef;
-}
-
 a {
   text-decoration: none;
 }
 
-/* Header */
-header {
-  background-color: #F4CFE0;
-  position: sticky;
-  top: 0;
-  z-index: 101;
+#member_Info_custom_Upload_Button {
+  cursor: pointer;
 }
 
-#header {
-  max-width: 60vw;
-  margin: auto;
-  padding: 2rem 1rem;
+.member_button {
+  background-color: #a3d5dc;
+  width: 7vw;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 2rem;
-}
-
-.header_logo img {
-  width: 5vw;
-  height: 5vh;
-}
-
-.header_nav_links {
-  list-style: none;
-  display: flex;
-  gap: 2rem;
-}
-
-.header_link a {
-  padding: 5px;
-  font-size: 1rem;
-  font-weight: 500;
-}
-
-.header_link img {
-  width: 3vw;
-  height: 3vh;
-  object-fit: scale-down;
-}
-
-/* Footer */
-footer {
-  background-color: #F4CFE0;
-}
-
-.search_section_container {
-  max-width: 1200px;
-  margin: auto;
-  padding: 3rem 1rem;
-}
-
-.search_footer_container {
-  display: grid;
-  grid-template-columns: 400px repeat(3, 1fr);
-  gap: 2rem;
-}
-
-.search_footer_col h5 {
-  margin-bottom: 1rem;
-  font-size: 1.1rem;
-  font-weight: 600;
-  color: black;
-}
-
-.search_footer_col p {
-  max-width: 300px;
-  color: black;
-}
-
-.search_footer_col h4 {
-  margin-bottom: 1rem;
-  font-size: 1.2rem;
-  font-weight: 600;
-  color: black;
-}
-
-.search_footer_col a {
-  display: block;
-  margin-bottom: 1rem;
-  font-size: 1rem;
-  font-weight: 500;
-  color: black;
-  transition: 0.3s;
-}
-
-.search_footer_col a:hover {
-  color: blue;
-}
-
-.search_footer_socials {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-
-.search_footer_socials span a {
-  padding: 5px 10px;
-  margin: 0;
-  font-size: 1.25rem;
-  color: white;
-  background-color: #930000;
-  border-radius: 100%;
-}
-
-.search_footer_socials span a:hover {
-  color: white;
-  background-color: #000093;
-}
-
-.search_footer_bar {
-  padding: 1rem;
-  font-size: 0.8rem;
-  color: black;
+  justify-content: center;
+  border: none;
+  border-radius: 4px;
+  color: #FFFFFF;
+  font-size: 0.9vw;
+  font-weight: bold;
   text-align: center;
+  transition: background 0.1s ease-out, transform 0.1s ease-out, box-shadow 0.1s ease-out;
+  padding: 1vh 1vw;
+  cursor: pointer;
 }
 
-hr {
-  margin: 1rem 0;
-  border: 0;
-  border-top: solid;
-  opacity: .25;
+.member_button:focus {
+  outline: none;
+}
+
+.member_button:hover,
+.member_Button:hover {
+  background-color: #a3d5dc;
+  background-image: radial-gradient(circle, transparent 1%, #6adceb 1%);
+}
+
+.member_button:active,
+.member_Button:active {
+  background-color: #a3d5dc;
+  transform: scale(0.95);
+  box-shadow: 0 0 4px #666;
+  transition: transform 0.1s ease-out, background-color 0.2s ease-out;
+}
+
+.member_button:active::after,
+.member_Button:active::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 120%;
+  height: 120%;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  transition: transform 0.3s ease-out;
+  pointer-events: none;
 }
 
 #member_Main {
   // border: 2px solid rgb(221, 24, 198);
-  // margin:0 5vw 0 5vw;
   background-color: #ffffff;
   height: 100%;
   display: flex;
@@ -152,7 +75,7 @@ hr {
     display: flex;
     flex-direction: column;
     flex-basis: 25%;
-    height: 100%;
+    height: 70vh;
     align-items: end;
     // margin-top: 2vh;
 
@@ -162,50 +85,26 @@ hr {
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      gap: 2vh;
+      padding-top: 2vh;
+      gap: 4.5vh;
       height: 70vh;
       width: 10vw;
 
-      #member_Left_TopSide {
-        // border: 2px solid rgb(232, 16, 16);
+      #member_LeftInfo,
+      #member_LeftPassword,
+      #member_LeftOrder,
+      #member_LeftCollection,
+      #member_LeftForum {
+        // border: 2px solid green;
         border-bottom: 1px solid rgb(0, 0, 0);
         display: flex;
         align-items: center;
         justify-content: center;
-        margin-top: -8vh;
         height: 5vh;
         width: 8vw;
-        font-size: 1.3vw;
+        font-size: 1vw;
         font-weight: bold;
-      }
-
-      #member_Left_BottomSide {
-        // border: 2px solid rgb(42, 199, 204);
-        width: 8vw;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        margin-top: 1vh;
-        gap: 3vh;
-
-        #member_LeftInfo,
-        #member_LeftPassword,
-        #member_LeftOrder,
-        #member_LeftCard,
-        #member_LeftCollection,
-        #member_LeftForum {
-          // border: 2px solid green;
-          border-bottom: 1px solid rgb(0, 0, 0);
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          height: 5vh;
-          width: 8vw;
-          font-size: 1vw;
-          font-weight: bold;
-          cursor: pointer;
-        }
+        cursor: pointer;
       }
     }
   }
@@ -224,7 +123,7 @@ hr {
     #member_Info_MiddleInside {
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
       // color: #6EBD86;
-      background-color: #FFF2F0;
+      background-color: #F4CFE0;
       border-radius: 20px;
       display: flex;
       flex-direction: column;
@@ -244,7 +143,7 @@ hr {
           margin-top: 2vh;
           margin-bottom: 2vh;
           display: flex;
-          // flex-direction: column;
+          justify-content: space-between;
 
           label {
             // border: 2px solid green;
@@ -279,7 +178,7 @@ hr {
           input {
             border: 1px solid #ccc;
             // border: 2px solid rgb(27, 7, 179);
-            // width: 10vw;
+            width: 10vw;
             height: 3.5vh;
             padding: 0.5vh;
             border-radius: 4px;
@@ -300,7 +199,6 @@ hr {
           clip-path: circle(50%);
           width: 5vw;
         }
-
       }
 
       #member_Info_Upload {
@@ -325,36 +223,13 @@ hr {
         // border: 2px solid blue;
         display: flex;
         gap: 3vw;
-
-        #member_Info_ConfirmButton,
-        #member_Info_DeleteButton {
-          // border: 2px solid rgb(20, 207, 216);
-          border: none;
-          border-radius: 4px;
-          color: #ffffff;
-          background-color: #C2EA88;
-          height: 3.5vh;
-          width: 3.5vw;
-          font-size: 0.8vw;
-          cursor: pointer;
-        }
-      }
-
-      #member_Info_ChangeButton {
-        // border: 2px solid rgb(20, 207, 216);
-        color: #ffffff;
-        background-color: #79470d;
-        height: 3.5vh;
-        width: 3.5vw;
-        font-size: 0.8vw;
-        cursor: pointer;
       }
     }
   }
 
   #member_Password_MiddleInside {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    background-color: #e9e4d4;
+    background-color: #F4CFE0;
     border-radius: 20px;
     display: flex;
     flex-direction: column;
@@ -395,15 +270,6 @@ hr {
       padding-left: 8.5vw;
       color: #555;
     }
-
-    #member_Password_ChangeButton {
-      // border: 2px solid rgb(20, 207, 216);
-      color: #ffffff;
-      background-color: #79470d;
-      height: 3.5vh;
-      width: 3.5vw;
-      cursor: pointer;
-    }
   }
 
   #member_Order_Operation {
@@ -429,11 +295,19 @@ hr {
       font-weight: bold;
       cursor: pointer;
     }
+
+    #member_Order_Depart:hover,
+    #member_Order_Pay:hover,
+    #member_Order_Finish:hover,
+    #member_Order_Cancel:hover {
+      background-color: #F4CFE0;
+      // box-shadow : 10px 10px 5px rgba(0,0,0,0.8);
+    }
   }
 
   #member_Order_Ticket {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    background-color: #e9e4d4;
+    background-color: #F4CFE0;
     display: flex;
     flex-direction: column;
     border-radius: 20px;
@@ -498,7 +372,7 @@ hr {
 
     #member_Order_WholeTicket {
       // border: 1px solid rgb(0, 0, 0);
-      background-color: #f1f1f1;
+      background-color: #e8ecef;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -569,6 +443,8 @@ hr {
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            max-width: 15vw;
+            height: auto;
           }
         }
       }
@@ -602,172 +478,10 @@ hr {
     }
   }
 
-  #member_Card_MiddleInside {
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    background-color: #e9e4d4;
-    border-radius: 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 55vh;
-    width: 40vw;
-
-    #member_Card_MiddleInside2 {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      gap: 5vh;
-
-      .member_Card_inputTitle {
-        // border: 2px solid rgb(19, 207, 63);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 40vw;
-
-        .fa-star-of-life {
-          color: red;
-          font-size: 0.4vw;
-          margin-right: 0.2vw;
-        }
-
-        #member_Card_Name {
-          // border: 2px solid red;
-          flex-basis: 20%;
-          color: #555;
-        }
-
-        #member_Card_NameInput {
-          height: 3vh;
-          width: 20vw;
-          border: 1px solid #ccc;
-          border-radius: 4px;
-        }
-
-        #member_Card_NumberName {
-          // border: 2px solid rgb(223, 10, 169);
-          flex-basis: 20%;
-          color: #555;
-        }
-
-        .member_Card_Number {
-          // border: 2px solid rgb(11, 23, 190);
-          height: 3vh;
-          width: 4.7vw;
-          border: 1px solid #ccc;
-          border-radius: 4px;
-        }
-
-        .fa-minus {
-          color: rgb(0, 0, 0);
-          font-size: 0.5vw;
-        }
-
-        #member_Card_DateName,
-        #member_Card_ThreeName {
-          flex-basis: 20%;
-          color: #555;
-        }
-
-        .member_Card_inputText {
-          // border: 2px solid rgb(10, 45, 169);
-          display: flex;
-          align-items: center;
-          width: 20vw;
-
-          #member_Card_DateInput {
-            height: 3vh;
-            width: 3vw;
-            margin-right: 0.1vw;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-          }
-
-          #member_Card_MonthInput {
-            height: 3vh;
-            width: 3vw;
-            margin-right: 0.1vw;
-            margin-left: 0.8vw;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-          }
-
-          #member_Card_ThreeInput {
-            height: 3vh;
-            width: 4vw;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-          }
-        }
-      }
-    }
-
-    #member_Card_MiddleCard {
-      // border: 2px solid red;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      .fa-chevron-left {
-        margin-right: 2vw;
-        font-size: 1.5vw;
-        cursor: pointer;
-      }
-
-      .fa-chevron-right {
-        margin-left: 2vw;
-        font-size: 1.5vw;
-        cursor: pointer;
-      }
-
-      img {
-        width: 23vw;
-      }
-    }
-
-    #member_Card_CodeCard {
-      // border: 2px solid rgb(212, 14, 159);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 3vh;
-      width: 20vw;
-      font-size: 1.2vw;
-    }
-
-    #member_Card_PlusButton {
-      color: #ffffff;
-      background-color: #79470d;
-      height: 4vh;
-      width: 5vw;
-      cursor: pointer;
-    }
-
-    #member_Card_ConfirmButton {
-      color: #ffffff;
-      background-color: #79470d;
-      margin-top: 3vh;
-      height: 4vh;
-      width: 5vw;
-      cursor: pointer;
-    }
-
-    #member_Card_CreditButton {
-      color: #ffffff;
-      background-color: #79470d;
-      height: 4vh;
-      width: 5vw;
-      margin-top: 2vh;
-      cursor: pointer;
-    }
-  }
-
   #member_Collection_Ticket {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
-    background-color: #e9e4d4;
+    background-color: #F4CFE0;
     display: flex;
     flex-direction: column;
     border-radius: 20px;
@@ -903,6 +617,8 @@ hr {
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            max-width: 15vw;
+            height: auto;
           }
         }
       }
@@ -927,38 +643,18 @@ hr {
         height: 3.5vh;
 
       }
-
-      #member_Collection_GOBuy {
-        color: #ffffff;
-        background-color: #79470d;
-        height: 4.5vh;
-        width: 6vw;
-        font-size: 1vw;
-        cursor: pointer;
-      }
     }
   }
-}
-
-#member_Forum_MiddleSide {
-  // border: 2px solid blue;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
 
   #member_Forum_Operation {
-    // border: 2px solid rgb(31, 159, 31);
+    // border: 2px solid rgb(207, 27, 27);
     height: 5vh;
     width: 45vw;
     display: flex;
     justify-content: center;
-    margin-top: 2vh;
-    gap: 6vw;
+    gap: 3.5vw;
 
-
-    #member_Forum_MyArticle,
-    #member_Forum_MyCollection {
+    .member_Forum_Button {
       border-bottom: 1px solid rgb(0, 0, 0);
       display: flex;
       align-items: center;
@@ -969,106 +665,118 @@ hr {
       font-weight: bold;
       cursor: pointer;
     }
+
+    .member_Forum_Button:hover {
+      background-color: #6adceb;
+    }
   }
 
-  #member_Forum_InSide {
-
-    a {
-      text-decoration: none;
-      color: black;
-    }
-
-    a:hover {
-      text-decoration: underline;
-      color: rgb(0, 0, 0);
-    }
-
-    // border: 2px solid red;
+  #member_Forum_MiddleSide {
+    // border: 2px solid blue;
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-    width: 100%;
-    margin: auto;
-    padding-bottom: 10vh;
+    flex-direction: column;
+    align-items: center;
+    height: 55vh;
+    width: 55vw;
 
-    .member_forum_card {
-      // border: 2px solid yellow;
-      margin: 5vh 0.8vw;
-      background-color: #FFFCFC;
-      display: flex;
-      flex-direction: column;
-      width: 16vw;
-      height: 45vh;
-      border-radius: 10px;
-      box-shadow: 0 5px 5px rgba(80, 80, 80, 0.4);
+    #member_Forum_InSide {
 
-      article {
-        // border: 2px solid rgb(111, 0, 255);
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-
-        .member_forum_articleImg {
-          width: 100%;
-          border-radius: 10px 10px 0 0;
-        }
-
-        h3 {
-          // border: 2px solid red;
-          align-items: start;
-          font-size: 1.3vw;
-          font-weight: bold;
-          margin: 2vh 1vw 2vh 1vw;
-        }
-
-        .member_forum_articleMore {
-          // border: 2px solid rgb(28, 172, 40);
-          font-size: 0.8vw;
-          line-height: 3vh;
-          margin: 0 1vw 0 1vw;
-          max-width: 12vw;
-          max-height: 10vh;
-          white-space: normal; //文字換行 
-          overflow-wrap: break-word; //長單詞換行
-          overflow: hidden; //隱藏溢出的內容
-          text-overflow: ellipsis; //省略溢出的文字
-          display: -webkit-box; //用於多行文本截斷
-          -webkit-box-orient: vertical; //配合 -webkit-box，讓內容垂直排列
-          -webkit-line-clamp: 3; //限制顯示的行數
-        }
-
-        .member_forum_articleMore::after {
-          content: "前往文章";
-        }
+      a {
+        text-decoration: none;
+        color: black;
       }
 
-      div {
-        // border: 2px solid rgb(28, 172, 40);
+      a:hover {
+        text-decoration: underline;
+        color: rgb(0, 0, 0);
+      }
+
+      // border: 2px solid red;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;
+      width: 100%;
+      margin: auto;
+      padding-bottom: 10vh;
+
+      .member_forum_card {
+        // border: 2px solid yellow;
+        margin: 5vh 0.8vw;
+        background-color: #FFFCFC;
         display: flex;
-        height: 8vh;
-        gap: 1vw;
-        justify-content: center;
-        align-items: center;
+        flex-direction: column;
+        width: 16vw;
+        height: 45vh;
+        border-radius: 10px;
+        box-shadow: 0 5px 5px rgba(80, 80, 80, 0.4);
 
-        .member_forum_authorImg {
-          clip-path: circle(40%);
-          width: 3vw;
+        article {
+          // border: 2px solid rgb(111, 0, 255);
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+
+          .member_forum_articleImg {
+            width: 100%;
+            border-radius: 10px 10px 0 0;
+          }
+
+          h3 {
+            // border: 2px solid red;
+            align-items: start;
+            font-size: 1.3vw;
+            font-weight: bold;
+            margin: 2vh 1vw 2vh 1vw;
+          }
+
+          .member_forum_articleMore {
+            // border: 2px solid rgb(28, 172, 40);
+            font-size: 0.8vw;
+            line-height: 3vh;
+            margin: 0 1vw 0 1vw;
+            max-width: 12vw;
+            max-height: 10vh;
+            white-space: normal; //文字換行 
+            overflow-wrap: break-word; //長單詞換行
+            overflow: hidden; //隱藏溢出的內容
+            text-overflow: ellipsis; //省略溢出的文字
+            display: -webkit-box; //用於多行文本截斷
+            -webkit-box-orient: vertical; //配合 -webkit-box，讓內容垂直排列
+            -webkit-line-clamp: 3; //限制顯示的行數
+          }
+
+          .member_forum_articleMore::after {
+            content: "前往文章";
+          }
         }
 
-        .member_forum_author,
-        .member_forum_postDate {
-          display: inline-block;
-          color: #1f1f1f;
-          margin: 0;
-          font-size: 0.9vw;
+        div {
+          // border: 2px solid rgb(28, 172, 40);
+          display: flex;
+          height: 8vh;
+          gap: 1vw;
+          justify-content: center;
+          align-items: center;
 
-        }
+          .member_forum_authorImg {
+            clip-path: circle(40%);
+            width: 3vw;
+          }
 
-        .member_forum_postDate {
-          display: inline-block;
-          color: #777777;
-          font-size: 0.8vw;
+          .member_forum_author,
+          .member_forum_postDate {
+            display: inline-block;
+            color: #1f1f1f;
+            margin: 0;
+            font-size: 0.9vw;
+          }
+
+          .member_forum_postDate {
+            display: inline-block;
+            color: #777777;
+            font-size: 0.8vw;
+          }
         }
       }
     }
@@ -1086,7 +794,7 @@ hr {
   background-color: rgba(0, 0, 0, 0.5);
 
   #member_Info_deleteContent {
-    background-color: #e8ecef;
+    background-color: #fff;
     padding: 2vw;
     border: 1px solid #ddd;
     width: 80%;
@@ -1096,8 +804,7 @@ hr {
     top: 45%;
     left: 50%;
     transform: translate(-50%, -50%);
-    /* 讓視窗居中 */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); //視窗居中
 
     p {
       font-size: 1vw;
@@ -1113,16 +820,11 @@ hr {
       margin-bottom: 2vh;
     }
 
-    #member_Info_confirmDelete,
-    #member_Info_cancelDelete {
-      background-color: #79470d;
-      color: white;
-      border: none;
-      padding: 1.2vh 2vw;
-      border-radius: 5px;
-      cursor: pointer;
-      margin: 2vh 1vw;
-      transition: background-color 0.3s ease;
+    #member_delete_button_section {
+      // border: 2px solid rgb(20, 207, 216);
+      display: flex;
+      justify-content: space-around;
+      gap: 2vw;
     }
   }
 
@@ -1131,7 +833,6 @@ hr {
     top: 2vh;
     right: 1vw;
     color: #000000;
-    /* 更明顯的紅色 */
     font-size: 1.5vw;
     font-weight: bold;
     cursor: pointer;
@@ -1143,9 +844,9 @@ hr {
   }
 }
 
-#member_Sign_BigContainer {
+#member_register_BigContainer {
   // border: 2px solid green;
-  background-color: #f1f1f1;
+  background-color: #fff;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1153,9 +854,9 @@ hr {
   padding-bottom: 2vh;
   padding-top: 2vh;
 
-  #member_Sign_Container {
+  #member_register_Container {
     // border: 2px solid blue;
-    background-color: #e9e4d4;
+    background-color: #F4CFE0;
     padding: 5vh;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -1165,7 +866,7 @@ hr {
       text-align: center;
     }
 
-    .member_Sign_Group {
+    .member_register_Group {
       // border: 2px solid orange;
       margin-top: 2vh;
       margin-bottom: 2vh;
@@ -1184,10 +885,10 @@ hr {
       border-radius: 4px;
     }
 
-    #member_Sign_Btn {
+    #member_register_Button {
       width: 100%;
       height: 4vh;
-      background-color: #79470d;
+      background-color: #a3d5dc;
       color: #fff;
       border: none;
       border-radius: 4px;
@@ -1195,19 +896,19 @@ hr {
       font-size: 1vw;
     }
 
-    #member_Sign_Btn:hover {
-      background-color: #634727;
+    #member_register_Button:hover {
+      background-color: #a3d5dc;
     }
 
-    #member_Sign_Or {
+    #member_register_Or {
       text-align: center;
       margin: 2vh;
       position: relative;
       color: #aaa;
     }
 
-    #member_Sign_Or::before,
-    #member_Sign_Or::after {
+    #member_register_Or::before,
+    #member_register_Or::after {
       content: "";
       position: absolute;
       top: 50%;
@@ -1216,11 +917,11 @@ hr {
       background-color: #ccc;
     }
 
-    #member_Sign_Or::before {
+    #member_register_Or::before {
       left: 0;
     }
 
-    #member_Sign_Or::after {
+    #member_register_Or::after {
       right: 0;
     }
   }
