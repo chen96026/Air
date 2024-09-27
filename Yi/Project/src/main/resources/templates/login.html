@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>member_login</title>
+    <link rel="stylesheet" th:href="@{/css/member.css}">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+      integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <script th:src="@{/js/script.js}"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <!-- Google註冊 -->
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+  </head>
+
+<script>
+function register(){
+	event.preventDefault();
+	let account=document.getElementById("member_register_Account").value;
+	let password=document.getElementById("member_register_Password").value;
+	
+	let data={
+			account:account,
+			password:password,
+	};
+	
+	fetch('/member/login',{
+		method:"POST",
+		headers:{
+			"Content-Type":"application/json"
+		},
+		body:JSON.stringify(data)
+	})
+	.then(response=>{
+		if(!response.ok){
+			throw new Error('Login failed');
+		}
+		return response.json();
+	})
+	.then(data=>{
+		console.log("Success",data);
+		alert("登入成功！");
+		 	document.getElementById("member_register_Account").value = "";
+	        document.getElementById("member_register_Password").value = "";
+	})
+	.catch(error=>{
+		console.error('err:',error);
+	});
+}
+
+</script>
+
+<!-- <div th:include="header"></div> -->
+  <main id="member_register_BigContainer">
+    <section id="member_register_Container">
+      <div>
+        <h2>會員登入</h2>
+        <form>
+          <div class="member_register_Group">
+            <label for="member_register_Account">帳號</label>
+            <input type="text" id="member_register_Account" name="account"/>
+          </div>
+
+          <div class="member_register_Group">
+            <label for="member_register_Password">密碼</label>
+            <input type="password" id="member_register_Password" name="password" />
+          </div>
+
+          <button type="submit" id="member_register_Button" onclick="register()">登入</button>
+        </form>
+        <div id="member_register_Or">或</div>
+
+        <!--Google註冊-->
+        <div id="g_id_onload" data-client_id="YOUR_GOOGLE_CLIENT_ID" data-callback="handleGoogleSignIn"
+          data-auto_prompt="false"></div>
+        <div class="g_id_signin" data-type="standard" data-size="large" data-theme="outline" data-text="sign_in_with"
+          data-shape="rectangular" data-logo_alignment="left"></div>
+      </div>
+    </section>
+  </main>
+
+<!--<div th:include="footer"></div>  -->
