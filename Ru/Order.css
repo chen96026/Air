@@ -12,9 +12,10 @@ body {
 a {
     text-decoration: none;
 }
+
 /* Header */
 header {
-    background-color: white;
+    background-color: #1f0737;
     position: sticky;
     top: 0;
     z-index: 101;
@@ -55,13 +56,14 @@ header {
 
 /* Footer */
 footer {
-    background-color:#F4CFE0;
+    background-color: #1f0737;
+    color: white;
 }
 
 .search_section_container {
     max-width: 1200px;
     margin: auto;
-    padding: 2rem 1rem;
+    padding: 1rem 1rem;
 }
 
 .search_footer_container {
@@ -80,13 +82,14 @@ footer {
 .search_footer_col p {
     max-width: 300px;
     color: black;
+    
 }
 
 .search_footer_col h4 {
     margin-bottom: 1rem;
     font-size: 1.2rem;
     font-weight: 600;
-    color: black;
+    color: white;
 }
 
 .search_footer_col a {
@@ -94,7 +97,7 @@ footer {
     margin-bottom: 1rem;
     font-size: 1rem;
     font-weight: 500;
-    color: black;
+    color: white;
     transition: 0.3s;
 }
 
@@ -115,7 +118,7 @@ footer {
     margin: 0;
     font-size: 1.25rem;
     color: white;
-    background-color: #930000;
+    background-color: #1f0737;
     border-radius: 100%;
 }
 
@@ -125,9 +128,9 @@ footer {
 }
 
 .search_footer_bar {
-    padding: 1rem;
+    padding: 0.5rem;
     font-size: 0.8rem;
-    color: black;
+    color: white;
     text-align: center;
 }
 
@@ -138,18 +141,10 @@ hr {
     opacity: .25;
 }
 
-.container {
-    width: 80%;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #E9E4D4;
-
-}
-
 
 .process_bg {
     display: block;
-    background-color: gray;
+    background-color: rgb(173, 171, 171);
     border-radius: 10px;
     padding: 10px;
     color: white;
@@ -158,11 +153,22 @@ hr {
 
 .process_info_bg {
     display: block;
-    background-color: brown;
+    background-color: #431274;
     border-radius: 10px;
     padding: 10px;
     color: white;
     font-weight: bold;
+}
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: white;
+    border: 2px solid transparent;
+    border-top: 2px solid #1f0737;
+    border-bottom: 2px solid #1f0737;
+
 }
 
 
@@ -174,20 +180,16 @@ hr {
     margin-left: 10%;
 }
 
-.container {
-    width: 80%;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #E9E4D4;
 
-}
 
 .container_notice {
     width: 80%;
     margin: 0 auto;
     padding: 10px;
-    background-color: #E9E4D4;
+    background-color:  #f5dfe9;
     display: flex;
+    border-radius: 10px;
+    color: black;
 }
 
 
@@ -195,7 +197,7 @@ hr {
     width: 80%;
     margin: 0 auto;
     padding: 20px;
-    background-color: #E9E4D4;
+    background-color: white;
 }
 
 
@@ -204,7 +206,7 @@ hr {
     width: 80%;
     margin: 0 auto;
     background-color: #F4CFE0;
-
+    border-radius: 5px;
 
 }
 
@@ -212,33 +214,34 @@ hr {
     width: 80%;
     margin: 0 auto;
     padding: 20px;
-    background-color: #E9E4D4;
+    background-color: #F4CFE0;
     display: flex;
-    gap: 10px; 
-    justify-content: space-between; 
+    gap: 10px;
+    justify-content: space-between;
+    border-radius: 10px;
 }
 
-.container_contact > div {
+.container_contact>div {
     flex: 1;
 }
 
 .container_contactinfo {
-    width: 100%; 
-    box-sizing: border-box; 
+    width: 100%;
+    box-sizing: border-box;
 }
 
-.container_contactinfo >div, 
+.container_contactinfo>div,
 input {
     height: 30px;
     border-radius: 5px;
 }
 
-.form_section{
+.form_section {
     margin: 0 auto;
 }
 
 .container_info {
-    width: 100%; 
+    width: 100%;
     box-sizing: border-box;
     margin: 5% 2%;
 }
@@ -248,13 +251,13 @@ input {
 }
 
 
-.container_info input, 
+.container_info input,
 .container_info select {
-    width: 100%; 
+    width: 100%;
 }
 
 .container_info div {
-    margin-bottom: 10px; 
+    margin-bottom: 10px;
 }
 
 
@@ -325,7 +328,7 @@ li {
 .container_right {
     width: 100%;
     padding: 5%;
-    background-color: #E9E4D4;
+    background-color: white;
 }
 
 
@@ -341,8 +344,9 @@ li {
     z-index: 1000;
 }
 
-.container_right > div {
-    margin: 1px 0; /* 調整行距 */
+.container_right>div {
+    margin: 1px 0;
+    /* 調整行距 */
 }
 
 
@@ -394,12 +398,13 @@ li {
     width: 40%;
     height: 30px;
     margin-left: auto;
-    font-size: 16px;
-    background-color: brown;
+    font-size: 14px;
+    background-color: #330c5e;
     border-radius: 5px;
     color: white;
     text-align: center;
 }
+
 
 .contact_info {
     height: 30px;
@@ -421,9 +426,9 @@ li {
     padding: 5px 10px;
 }
 
-.delete_btn:hover{
-    background-color: #F4CFE0;
-    color: rgb(41, 40, 40);
+.delete_btn:hover {
+    background-color: #1f0737;
+    color: white(41, 40, 40);
     border: rgb(41, 40, 40) 2px solid;
 }
 
@@ -479,12 +484,12 @@ li {
     border: none;
 }
 
-.style_nextstep:hover{
-    background-color: brown;
-    color:white;
+.style_nextstep:hover {
+    background-color: #1f0737;
+    color: white;
 }
 
-#add_passenger:hover{
-    background-color: brown;
-    color:white;
+#add_passenger:hover {
+    background-color: #1f0737;
+    color: white;
 }
