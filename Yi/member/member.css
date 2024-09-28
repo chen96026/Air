@@ -13,6 +13,35 @@ a {
   cursor: pointer;
 }
 
+.member_LeftButton {
+  border-bottom: 1px solid rgb(0, 0, 0);
+  position: relative;
+  width: 8vw;
+  margin-bottom: 1.5vh;
+  text-align: center;
+  font-size: 1.1vw;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 5vh;
+  width: 8vw;
+  cursor: pointer;
+}
+.member_LeftButton .member_LeftInsideButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  width: 6.5vw;
+  height: 4.5vh;
+  position: relative;
+  transition: transform 0.4s ease;
+}
+.member_LeftButton .member_LeftInsideButton:hover {
+  transform: translateX(0.8vw);
+}
+
 .member_button {
   background-color: #a3d5dc;
   width: 7vw;
@@ -20,7 +49,7 @@ a {
   align-items: center;
   justify-content: center;
   border: none;
-  border-radius: 4px;
+  border-radius: 8px;
   color: #FFFFFF;
   font-size: 0.9vw;
   font-weight: bold;
@@ -30,18 +59,17 @@ a {
   cursor: pointer;
 }
 
-.member_button:focus {
-  outline: none;
-}
-
 .member_button:hover,
-.member_Button:hover {
+.member_LeftInsideButton:hover,
+.member_Forum_InsideButton:hover {
   background-color: #a3d5dc;
   background-image: radial-gradient(circle, transparent 1%, #6adceb 1%);
 }
 
 .member_button:active,
-.member_Button:active {
+.member_LeftInsideButton:active,
+.member_Order_InsideButton:active,
+.member_Forum_InsideButton:active {
   background-color: #a3d5dc;
   transform: scale(0.95);
   box-shadow: 0 0 4px #666;
@@ -49,7 +77,9 @@ a {
 }
 
 .member_button:active::after,
-.member_Button:active::after {
+.member_LeftInsideButton:active::after,
+.member_Order_InsideButton:active::after,
+.member_Forum_InsideButton:active::after {
   content: "";
   position: absolute;
   top: 50%;
@@ -61,6 +91,30 @@ a {
   transform: translate(-50%, -50%) scale(0);
   transition: transform 0.3s ease-out;
   pointer-events: none;
+}
+
+.member_Order_Button,
+.member_Forum_Button {
+  border-bottom: 1px solid rgb(0, 0, 0);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 5vh;
+  width: 8vw;
+  font-size: 1vw;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.member_Order_InsideButton:hover,
+.member_Forum_InsideButton:hover {
+  background-color: #6adceb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  width: 6.5vw;
+  height: 4.5vh;
 }
 
 #member_Main {
@@ -82,25 +136,10 @@ a {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding-top: 2vh;
+  padding-top: 6vh;
   gap: 4.5vh;
   height: 70vh;
   width: 10vw;
-}
-#member_Main #member_LeftSide #member_Left_InSide #member_LeftInfo,
-#member_Main #member_LeftSide #member_Left_InSide #member_LeftPassword,
-#member_Main #member_LeftSide #member_Left_InSide #member_LeftOrder,
-#member_Main #member_LeftSide #member_Left_InSide #member_LeftCollection,
-#member_Main #member_LeftSide #member_Left_InSide #member_LeftForum {
-  border-bottom: 1px solid rgb(0, 0, 0);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 5vh;
-  width: 8vw;
-  font-size: 1vw;
-  font-weight: bold;
-  cursor: pointer;
 }
 #member_Main #member_MiddleSide {
   flex-basis: 60%;
@@ -235,31 +274,12 @@ a {
   color: #555;
 }
 #member_Main #member_Order_Operation {
-  height: 5vh;
-  width: 45vw;
-  display: flex;
-  justify-content: center;
-  gap: 2vw;
-}
-#member_Main #member_Order_Operation #member_Order_Depart,
-#member_Main #member_Order_Operation #member_Order_Pay,
-#member_Main #member_Order_Operation #member_Order_Finish,
-#member_Main #member_Order_Operation #member_Order_Cancel {
-  border-bottom: 1px solid rgb(0, 0, 0);
+  height: 5.5vh;
+  width: 38vw;
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 5vh;
-  width: 12vw;
-  font-size: 1vw;
-  font-weight: bold;
-  cursor: pointer;
-}
-#member_Main #member_Order_Operation #member_Order_Depart:hover,
-#member_Main #member_Order_Operation #member_Order_Pay:hover,
-#member_Main #member_Order_Operation #member_Order_Finish:hover,
-#member_Main #member_Order_Operation #member_Order_Cancel:hover {
-  background-color: #F4CFE0;
+  gap: 2vw;
 }
 #member_Main #member_Order_Ticket {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -542,20 +562,6 @@ a {
   display: flex;
   justify-content: center;
   gap: 3.5vw;
-}
-#member_Main #member_Forum_Operation .member_Forum_Button {
-  border-bottom: 1px solid rgb(0, 0, 0);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 5vh;
-  width: 6vw;
-  font-size: 1vw;
-  font-weight: bold;
-  cursor: pointer;
-}
-#member_Main #member_Forum_Operation .member_Forum_Button:hover {
-  background-color: #6adceb;
 }
 #member_Main #member_Forum_MiddleSide {
   display: flex;

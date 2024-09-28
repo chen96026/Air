@@ -12,6 +12,38 @@ a {
   cursor: pointer;
 }
 
+.member_LeftButton {
+  // border: 2px solid red;
+  border-bottom: 1px solid rgb(0, 0, 0);
+  position: relative;
+  width: 8vw;
+  margin-bottom: 1.5vh;
+  text-align: center;
+  font-size: 1.1vw;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 5vh;
+  width: 8vw;
+  cursor: pointer;
+
+  .member_LeftInsideButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    width: 6.5vw;
+    height: 4.5vh;
+    position: relative;
+    transition: transform 0.4s ease;
+  }
+
+  .member_LeftInsideButton:hover {
+    transform: translateX(0.8vw);
+  }
+}
+
 .member_button {
   background-color: #a3d5dc;
   width: 7vw;
@@ -19,7 +51,7 @@ a {
   align-items: center;
   justify-content: center;
   border: none;
-  border-radius: 4px;
+  border-radius: 8px;
   color: #FFFFFF;
   font-size: 0.9vw;
   font-weight: bold;
@@ -29,18 +61,17 @@ a {
   cursor: pointer;
 }
 
-.member_button:focus {
-  outline: none;
-}
-
 .member_button:hover,
-.member_Button:hover {
+.member_LeftInsideButton:hover,
+.member_Forum_InsideButton:hover {
   background-color: #a3d5dc;
   background-image: radial-gradient(circle, transparent 1%, #6adceb 1%);
 }
 
 .member_button:active,
-.member_Button:active {
+.member_LeftInsideButton:active,
+.member_Order_InsideButton:active,
+.member_Forum_InsideButton:active {
   background-color: #a3d5dc;
   transform: scale(0.95);
   box-shadow: 0 0 4px #666;
@@ -48,7 +79,9 @@ a {
 }
 
 .member_button:active::after,
-.member_Button:active::after {
+.member_LeftInsideButton:active::after,
+.member_Order_InsideButton:active::after,
+.member_Forum_InsideButton:active::after {
   content: "";
   position: absolute;
   top: 50%;
@@ -62,6 +95,31 @@ a {
   pointer-events: none;
 }
 
+.member_Order_Button,
+.member_Forum_Button {
+  // border: 2px solid green;
+  border-bottom: 1px solid rgb(0, 0, 0);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 5vh;
+  width: 8vw;
+  font-size: 1vw;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.member_Order_InsideButton:hover,
+.member_Forum_InsideButton:hover {
+  background-color: #6adceb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  width: 6.5vw;
+  height: 4.5vh;
+}
+
 #member_Main {
   // border: 2px solid rgb(221, 24, 198);
   background-color: #ffffff;
@@ -71,7 +129,7 @@ a {
   justify-content: flex-start;
 
   #member_LeftSide {
-    // border: 2px solid rgb(240, 229, 31);
+    // border: 2px solid rgb(195, 186, 14);
     display: flex;
     flex-direction: column;
     flex-basis: 25%;
@@ -85,27 +143,10 @@ a {
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      padding-top: 2vh;
+      padding-top: 6vh;
       gap: 4.5vh;
       height: 70vh;
       width: 10vw;
-
-      #member_LeftInfo,
-      #member_LeftPassword,
-      #member_LeftOrder,
-      #member_LeftCollection,
-      #member_LeftForum {
-        // border: 2px solid green;
-        border-bottom: 1px solid rgb(0, 0, 0);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        height: 5vh;
-        width: 8vw;
-        font-size: 1vw;
-        font-weight: bold;
-        cursor: pointer;
-      }
     }
   }
 
@@ -274,35 +315,12 @@ a {
 
   #member_Order_Operation {
     // border: 2px solid rgb(236, 47, 182);
-    height: 5vh;
-    width: 45vw;
+    height: 5.5vh;
+    width: 38vw;
     display: flex;
+    align-items: center;
     justify-content: center;
     gap: 2vw;
-    // margin-top: 7vh;
-
-    #member_Order_Depart,
-    #member_Order_Pay,
-    #member_Order_Finish,
-    #member_Order_Cancel {
-      border-bottom: 1px solid rgb(0, 0, 0);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 5vh;
-      width: 12vw;
-      font-size: 1vw;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    #member_Order_Depart:hover,
-    #member_Order_Pay:hover,
-    #member_Order_Finish:hover,
-    #member_Order_Cancel:hover {
-      background-color: #F4CFE0;
-      // box-shadow : 10px 10px 5px rgba(0,0,0,0.8);
-    }
   }
 
   #member_Order_Ticket {
@@ -653,22 +671,6 @@ a {
     display: flex;
     justify-content: center;
     gap: 3.5vw;
-
-    .member_Forum_Button {
-      border-bottom: 1px solid rgb(0, 0, 0);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 5vh;
-      width: 6vw;
-      font-size: 1vw;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    .member_Forum_Button:hover {
-      background-color: #6adceb;
-    }
   }
 
   #member_Forum_MiddleSide {

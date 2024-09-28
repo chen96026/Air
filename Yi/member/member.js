@@ -4,11 +4,11 @@ document.addEventListener("DOMContentLoaded", function () {
     const member_leftside = document.createElement("div");
     member_leftside.id = "member_Left_InSide";
     member_leftside.innerHTML = `
-        <div id="member_LeftInfo" class="member_Button">會員資訊</div>
-        <div id="member_LeftPassword" class="member_Button">更改密碼</div>
-        <div id="member_LeftOrder" class="member_Button">訂單查詢</div>
-        <div id="member_LeftCollection" class="member_Button">機票收藏</div>
-        <div id="member_LeftForum" class="member_Button">論壇收藏</div>
+        <div id="member_LeftInfo" class="member_LeftButton"><span class="member_LeftInsideButton">會員資訊</span></div>
+        <div id="member_LeftPassword" class="member_LeftButton"><span class="member_LeftInsideButton">更改密碼</span></div>
+        <div id="member_LeftOrder" class="member_LeftButton"><span class="member_LeftInsideButton">訂單查詢</span></div>
+        <div id="member_LeftCollection" class="member_LeftButton"><span class="member_LeftInsideButton">機票收藏</span></div>
+        <div id="member_LeftForum" class="member_LeftButton"><span class="member_LeftInsideButton">論壇收藏</span></div>
         `;
     document.getElementById("member_LeftSide").innerHTML = '';
     document.getElementById("member_LeftSide").appendChild(member_leftside);
@@ -50,7 +50,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function member_click_color() {
-    let button_color = document.getElementsByClassName("member_Button");
+    let button_color = document.getElementsByClassName("member_LeftInsideButton");
     for (let i = 0; i < button_color.length; i++) {
       button_color[i].onclick = function () {
         for (let j = 0; j < button_color.length; j++) {
@@ -291,13 +291,37 @@ document.addEventListener("DOMContentLoaded", function () {
       cancel: '已取消'
     };
 
+    const orderNumber = 'AE9268';
+    const ticketCount = '2';
+    const totalPrice = '8,829';
+    const goCity = '台北';
+    const backCity = 'KIX';
+
+    const go_goTime = '2024年8月30日(週五)';
+    const go_orderclass = '經濟艙';
+    const go_plane = '長榮';
+    const go_departSmallTime = '9:00';
+    const go_departCity = 'KIX';
+    const go_wholeTime = '2小時45分鐘';
+    const go_landSmallTime = '11:45';
+    const go_landCity = 'TPE';
+
+    const back_goTime = '2024年8月30日(週五)';
+    const back_orderclass = '經濟艙';
+    const back_plane = '長榮';
+    const back_departSmallTime = '9:00';
+    const back_departCity = 'KIX';
+    const back_wholeTime = '2小時45分鐘';
+    const back_landSmallTime = '11:45';
+    const back_landCity = 'TPE';
+
     const Order_currentState = Order_stateMap[status] || '待出發';
 
     const Order_content = `  <div id="member_Order_Operation">
-          <div id="member_Order_Depart" class="member_Button">待出發</div>
-          <div id="member_Order_Pay" class="member_Button">待付款</div>
-          <div id="member_Order_Finish" class="member_Button">已完成</div>
-          <div id="member_Order_Cancel" class="member_Button">已取消</div>
+          <div class="member_Order_Button"><span id="member_Order_Depart" class="member_Order_InsideButton">待出發</span></div>
+          <div class="member_Order_Button"><span id="member_Order_Pay" class="member_Order_InsideButton">待付款</span></div>
+          <div class="member_Order_Button"><span id="member_Order_Finish" class="member_Order_InsideButton">已完成</span></div>
+          <div class="member_Order_Button"><span id="member_Order_Cancel" class="member_Order_InsideButton">已取消</span></div>
         </div>
         <section id="member_Order_Ticket">
           <section id="member_Order_TopSchedule">
@@ -305,11 +329,11 @@ document.addEventListener("DOMContentLoaded", function () {
                 <img style="width: 1.8vw" src="./icon/plane.png" alt="" />
                 <span id="member_Order_Form">訂單編號</span>
                 <span style="font-size: 1vw">:&nbsp;</span>
-                <span id="member_Order_Number"> AE9268 </span>
+                <span id="member_Order_Number">${orderNumber}</span>
                 <span style="font-size: 1vw">｜&nbsp;</span>
-                <span id="member_Order_GoCity">台北</span>
+                <span id="member_Order_GoCity">${goCity}</span>
                 <img style="width: 1.1vw" src="./icon/arrow-come_back.png" alt="" />
-                <span id="member_Order_BackCity">KIX</span>
+                <span id="member_Order_BackCity">${backCity}</span>
               </div>
               <div id="member_Order_State"> 
                   <div>狀態:</div>
@@ -321,19 +345,19 @@ document.addEventListener("DOMContentLoaded", function () {
               <div id="member_Order_GoPlane">
                 <span id="member_Order_Go">去程</span>
                 <div style="font-size: 1vw">&nbsp;:&nbsp;</div>
-                <span id="member_Order_GoTime">2024年8月30日(週五)</span>
+                <span id="member_Order_GoTime">${go_goTime}</span>
                 <span>｜</span>
-                <span id="member_Order_Class">經濟艙</span>
+                <span id="member_Order_Class">${go_orderclass}</span>
               </div>
               <div id="member_Order_BigMiddle">
-                <span id="member_Order_Plane">長榮</span>
+                <span id="member_Order_Plane">${go_plane}</span>
                 <div id="member_Order_Schedule">
                   <div id="member_Order_DepartTime">
                     <div>
-                      <span id="member_Order_DepartSmallTime">9:00</span>
+                      <span id="member_Order_DepartSmallTime">${go_departSmallTime}</span>
                     </div>
                     <div>
-                      <span id="member_Order_DepartCity">KIX</span>
+                      <span id="member_Order_DepartCity">${go_departCity}</span>
                     </div>
                   </div>
                   <div id="member_Order_WholeTime">
@@ -344,7 +368,7 @@ document.addEventListener("DOMContentLoaded", function () {
                       xmlns="http://www.w3.org/2000/svg"
                     >
                       <text x="115" y="40" text-anchor="middle" font-size="1vw">
-                        2小時45分鐘
+                        ${go_wholeTime}
                       </text>
                    
                       <line 
@@ -364,10 +388,10 @@ document.addEventListener("DOMContentLoaded", function () {
                   </div>
                   <div id="member_Order_LandTime">
                     <div>
-                      <span id="member_Order_LandSmallTime">11:45</span>
+                      <span id="member_Order_LandSmallTime">${go_landSmallTime}</span>
                     </div>
                     <div>
-                      <span id="member_Order_LandCity">TPE</span>
+                      <span id="member_Order_LandCity">${go_landCity}</span>
                     </div>
                   </div>
                 </div>
@@ -378,19 +402,19 @@ document.addEventListener("DOMContentLoaded", function () {
               <div id="member_Order_GoPlane">
                 <span id="member_Order_Go">回程</span>
                 <div style="font-size: 1vw">&nbsp;:&nbsp;</div>
-                <span id="member_Order_GoTime">2024年9月1日(週一)</span>
+                <span id="member_Order_GoTime">${back_goTime}</span>
                 <span>｜</span>
-                <span id="member_Order_Class">經濟艙</span>
+                <span id="member_Order_Class">${back_orderclass}</span>
               </div>
               <div id="member_Order_BigMiddle">
-                <span id="member_Order_Plane">長榮</span>
+                <span id="member_Order_Plane">${back_plane}</span>
                 <div id="member_Order_Schedule">
                   <div id="member_Order_DepartTime">
                     <div>
-                      <span id="member_Order_DepartSmallTime">21:00</span>
+                      <span id="member_Order_DepartSmallTime">${back_departSmallTime}</span>
                     </div>
                     <div>
-                      <span id="member_Order_DepartCity">KIX</span>
+                      <span id="member_Order_DepartCity">${back_departCity}</span>
                     </div>
                   </div>
                   <div id="member_Order_WholeTime">
@@ -401,7 +425,7 @@ document.addEventListener("DOMContentLoaded", function () {
                       xmlns="http://www.w3.org/2000/svg"
                     >
                       <text x="115" y="40" text-anchor="middle" font-size="1vw">
-                        2小時45分鐘
+                        ${back_wholeTime}
                       </text>
                       <line
                         x1="20"
@@ -419,10 +443,10 @@ document.addEventListener("DOMContentLoaded", function () {
                   </div>
                   <div id="member_Order_LandTime">
                     <div>
-                      <span id="member_Order_LandSmallTime">23:45</span>
+                      <span id="member_Order_LandSmallTime">${back_landSmallTime}</span>
                     </div>
                     <div>
-                      <span id="member_Order_LandCity">TPE</span>
+                      <span id="member_Order_LandCity">${back_landCity}</span>
                     </div>
                   </div>
                 </div>
@@ -433,24 +457,17 @@ document.addEventListener("DOMContentLoaded", function () {
               <div id="member_Order_PeoplePrice">
                 <div id="member_Order_People">
                   <span>張數&nbsp;:</span>
-                  <span>1</span>
+                  <span>${ticketCount}</span>
                 </div>
                 <div id="member_Order_TotalPrice">
                   <span>總價&nbsp;NT$</span>
-                  <span>8,829</span>
+                  <span>${totalPrice}</span>
                 </div>
               </div>
             </section>
       </section>`;
 
     member_load_MiddleSide(Order_content);
-    setButtonColor(status);
-
-    function setButtonColor(status) {
-      const orderQueryButton = document.getElementById("member_LeftOrder"); // 訂單查詢按鈕
-      const isDepartOrPay = status === 'depart' || status === 'pay' || status === 'finish' || status === 'cancel';
-      orderQueryButton.style.backgroundColor = isDepartOrPay ? "#6adceb" : ""; // 設置顏色
-    }
 
     document.addEventListener("click", function (event) {
 
@@ -626,8 +643,8 @@ document.addEventListener("DOMContentLoaded", function () {
     if (Forum_type === "article") {
       Forum_content = ` 
       <div id="member_Forum_Operation">
-        <div id="member_Forum_MyArticle" class="member_Forum_Button">我的文章</div>
-        <div id="member_Forum_MyCollection" class="member_Forum_Button">文章收藏</div>
+        <div class="member_Forum_Button"><span id="member_Forum_MyArticle" class="member_Forum_InsideButton">我的文章</span></div>
+        <div class="member_Forum_Button"><span id="member_Forum_MyCollection" class="member_Forum_InsideButton">文章收藏</span></div>
       </div>
       <div id=member_Forum_MiddleSide>
           <div id="member_Forum_InSide">
@@ -690,8 +707,8 @@ document.addEventListener("DOMContentLoaded", function () {
     else if (Forum_type === "collection") {
       Forum_content = `  
       <div id="member_Forum_Operation">
-        <div id="member_Forum_MyArticle" class="member_Forum_Button">我的文章</div>
-        <div id="member_Forum_MyCollection" class="member_Forum_Button">文章收藏</div>
+        <div class="member_Forum_Button"><span id="member_Forum_MyArticle" class="member_Forum_InsideButton">我的文章</span></div>
+        <div class="member_Forum_Button"><span id="member_Forum_MyCollection" class="member_Forum_InsideButton">文章收藏</span></div>
       </div><div id=member_Forum_MiddleSide>
         <div id="member_Forum_InSide">
          <div class="member_forum_card">
