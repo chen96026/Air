@@ -125,6 +125,10 @@ document.addEventListener("DOMContentLoaded", function () {
       <div id=member_Info_MiddleInside>
         <form>
           <div>
+           <div class="member_Info_Group">
+              <label for="member_Info_useraccount">帳號&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+              <input type="text" id="member_Info_useraccount" />
+            </div>
             <div class="member_Info_Group">
               <label for="member_Info_username">用戶名&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
               <input type="text" id="member_Info_username" />
