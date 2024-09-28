@@ -68,6 +68,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function member_load_MiddleSide_Info(Info_type) {
 
+    const userAccount = "adsf0349";
+    const Info_userName = "奇異鳥真奇異啊";
+    const Info_userPhone = "0921651148";
+    const Info_userEmail = "kiwibird@gmail.com";
+    const Info_uerBirth = "2004/5/6";
+    const Info_userSex = "男";
+
     let Info_content = "";
 
     if (Info_type === "info") {
@@ -78,27 +85,27 @@ document.addEventListener("DOMContentLoaded", function () {
           <div>
           <div class="member_Info_Group">
               <label>帳號&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-              <div id="member_Info_userAccount">adsf0349</div>
+              <div id="member_Info_userAccount">${userAccount}</div>
             </div>
             <div class="member_Info_Group">
               <label>用戶名&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-              <div id="member_Info_userName">奇異鳥真奇異啊</div>
+              <div id="member_Info_userName">${Info_userName}</div>
             </div>
             <div class="member_Info_Group">
               <label>手機&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-              <div>0921651148</div>
+              <div>${Info_userPhone}</div>
             </div>
             <div class="member_Info_Group">
               <label>電子郵件&nbsp;&nbsp;&nbsp;&nbsp;</label>
-              <div>kiwibird@gmail.com</div>
+              <div>${Info_userEmail}</div>
             </div>
             <div class="member_Info_Group">
               <label>出生日期&nbsp;&nbsp;&nbsp;&nbsp;</label>
-              <div>2004/5/6</div>
+              <div>${Info_uerBirth}</div>
             </div>
             <div class="member_Info_Group">
               <label>性別&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-              <div>男</div>
+              <div>${Info_userSex}</div>
             </div>
           </div>
           <div id="member_Info_User">
