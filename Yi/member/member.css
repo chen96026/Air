@@ -708,7 +708,8 @@ a {
   display: none;
 }
 
-#member_register_BigContainer {
+#member_register_BigContainer,
+#member_login_BigContainer {
   background-color: #fff;
   display: flex;
   align-items: center;
@@ -717,32 +718,58 @@ a {
   padding-bottom: 2vh;
   padding-top: 2vh;
 }
-#member_register_BigContainer #member_register_Container {
+#member_register_BigContainer #member_register_Container,
+#member_register_BigContainer #member_login_Container,
+#member_login_BigContainer #member_register_Container,
+#member_login_BigContainer #member_login_Container {
   background-color: #F4CFE0;
   padding: 5vh;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   width: 18vw;
 }
-#member_register_BigContainer #member_register_Container h2 {
+#member_register_BigContainer #member_register_Container h2,
+#member_register_BigContainer #member_login_Container h2,
+#member_login_BigContainer #member_register_Container h2,
+#member_login_BigContainer #member_login_Container h2 {
   text-align: center;
 }
-#member_register_BigContainer #member_register_Container .member_register_Group {
+#member_register_BigContainer #member_register_Container .member_register_Group,
+#member_register_BigContainer #member_register_Container .member_login_Group,
+#member_register_BigContainer #member_login_Container .member_register_Group,
+#member_register_BigContainer #member_login_Container .member_login_Group,
+#member_login_BigContainer #member_register_Container .member_register_Group,
+#member_login_BigContainer #member_register_Container .member_login_Group,
+#member_login_BigContainer #member_login_Container .member_register_Group,
+#member_login_BigContainer #member_login_Container .member_login_Group {
   margin-top: 2vh;
   margin-bottom: 2vh;
 }
-#member_register_BigContainer #member_register_Container label {
+#member_register_BigContainer #member_register_Container label,
+#member_register_BigContainer #member_login_Container label,
+#member_login_BigContainer #member_register_Container label,
+#member_login_BigContainer #member_login_Container label {
   display: block;
   margin-bottom: 0.5vh;
   color: #555;
 }
-#member_register_BigContainer #member_register_Container input {
+#member_register_BigContainer #member_register_Container input,
+#member_register_BigContainer #member_login_Container input,
+#member_login_BigContainer #member_register_Container input,
+#member_login_BigContainer #member_login_Container input {
   width: 100%;
   height: 3vh;
   border: 1px solid #ccc;
   border-radius: 4px;
 }
-#member_register_BigContainer #member_register_Container #member_register_Button {
+#member_register_BigContainer #member_register_Container #member_register_Button,
+#member_register_BigContainer #member_register_Container #member_login_Button,
+#member_register_BigContainer #member_login_Container #member_register_Button,
+#member_register_BigContainer #member_login_Container #member_login_Button,
+#member_login_BigContainer #member_register_Container #member_register_Button,
+#member_login_BigContainer #member_register_Container #member_login_Button,
+#member_login_BigContainer #member_login_Container #member_register_Button,
+#member_login_BigContainer #member_login_Container #member_login_Button {
   width: 100%;
   height: 4vh;
   background-color: #a3d5dc;
@@ -752,17 +779,45 @@ a {
   cursor: pointer;
   font-size: 1vw;
 }
-#member_register_BigContainer #member_register_Container #member_register_Button:hover {
+#member_register_BigContainer #member_register_Container #member_register_Button:hover,
+#member_register_BigContainer #member_register_Container #member_login_Button:hover,
+#member_register_BigContainer #member_login_Container #member_register_Button:hover,
+#member_register_BigContainer #member_login_Container #member_login_Button:hover,
+#member_login_BigContainer #member_register_Container #member_register_Button:hover,
+#member_login_BigContainer #member_register_Container #member_login_Button:hover,
+#member_login_BigContainer #member_login_Container #member_register_Button:hover,
+#member_login_BigContainer #member_login_Container #member_login_Button:hover {
   background-color: #a3d5dc;
 }
-#member_register_BigContainer #member_register_Container #member_register_Or {
+#member_register_BigContainer #member_register_Container #member_register_Or,
+#member_register_BigContainer #member_register_Container #member_login_Or,
+#member_register_BigContainer #member_login_Container #member_register_Or,
+#member_register_BigContainer #member_login_Container #member_login_Or,
+#member_login_BigContainer #member_register_Container #member_register_Or,
+#member_login_BigContainer #member_register_Container #member_login_Or,
+#member_login_BigContainer #member_login_Container #member_register_Or,
+#member_login_BigContainer #member_login_Container #member_login_Or {
   text-align: center;
   margin: 2vh;
   position: relative;
   color: #aaa;
 }
 #member_register_BigContainer #member_register_Container #member_register_Or::before,
-#member_register_BigContainer #member_register_Container #member_register_Or::after {
+#member_register_BigContainer #member_register_Container #member_register_Or::after,
+#member_register_BigContainer #member_register_Container #member_login_Or::before,
+#member_register_BigContainer #member_register_Container #member_login_Or::after,
+#member_register_BigContainer #member_login_Container #member_register_Or::before,
+#member_register_BigContainer #member_login_Container #member_register_Or::after,
+#member_register_BigContainer #member_login_Container #member_login_Or::before,
+#member_register_BigContainer #member_login_Container #member_login_Or::after,
+#member_login_BigContainer #member_register_Container #member_register_Or::before,
+#member_login_BigContainer #member_register_Container #member_register_Or::after,
+#member_login_BigContainer #member_register_Container #member_login_Or::before,
+#member_login_BigContainer #member_register_Container #member_login_Or::after,
+#member_login_BigContainer #member_login_Container #member_register_Or::before,
+#member_login_BigContainer #member_login_Container #member_register_Or::after,
+#member_login_BigContainer #member_login_Container #member_login_Or::before,
+#member_login_BigContainer #member_login_Container #member_login_Or::after {
   content: "";
   position: absolute;
   top: 50%;
@@ -770,9 +825,23 @@ a {
   height: 0.1vh;
   background-color: #ccc;
 }
-#member_register_BigContainer #member_register_Container #member_register_Or::before {
+#member_register_BigContainer #member_register_Container #member_register_Or::before,
+#member_register_BigContainer #member_register_Container #member_login_Or::before,
+#member_register_BigContainer #member_login_Container #member_register_Or::before,
+#member_register_BigContainer #member_login_Container #member_login_Or::before,
+#member_login_BigContainer #member_register_Container #member_register_Or::before,
+#member_login_BigContainer #member_register_Container #member_login_Or::before,
+#member_login_BigContainer #member_login_Container #member_register_Or::before,
+#member_login_BigContainer #member_login_Container #member_login_Or::before {
   left: 0;
 }
-#member_register_BigContainer #member_register_Container #member_register_Or::after {
+#member_register_BigContainer #member_register_Container #member_register_Or::after,
+#member_register_BigContainer #member_register_Container #member_login_Or::after,
+#member_register_BigContainer #member_login_Container #member_register_Or::after,
+#member_register_BigContainer #member_login_Container #member_login_Or::after,
+#member_login_BigContainer #member_register_Container #member_register_Or::after,
+#member_login_BigContainer #member_register_Container #member_login_Or::after,
+#member_login_BigContainer #member_login_Container #member_register_Or::after,
+#member_login_BigContainer #member_login_Container #member_login_Or::after {
   right: 0;
 }/*# sourceMappingURL=member.css.map */

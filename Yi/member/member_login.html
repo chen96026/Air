@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>member_login</title>
+  <link rel="stylesheet" href="./member.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="./member.js"></script>
+  <!-- Google登入 -->
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+</head>
+
+<body>
+
+  <main id="member_login_BigContainer">
+    <section id="member_login_Container">
+      <div>
+        <h2>會員登入</h2>
+        <form>
+          <div class="member_login_Group">
+            <label for="member_login_Account">帳號</label>
+            <input type="text" id="member_login_Account" name="account" />
+          </div>
+
+          <div class="member_login_Group">
+            <label for="member_login_Password">密碼</label>
+            <input type="password" id="member_login_Password" name="password" />
+          </div>
+          <button type="submit" id="member_login_Button" class="member_button">登入</button>
+        </form>
+        <div id="member_login_Or">或</div>
+
+        <!--Google登入-->
+        <div id="g_id_onload" data-client_id="YOUR_GOOGLE_CLIENT_ID" data-callback="handleGoogleSignIn"
+          data-auto_prompt="false"></div>
+        <div class="g_id_signin" data-type="standard" data-size="large" data-theme="outline" data-text="sign_in_with"
+          data-shape="rectangular" data-logo_alignment="left"></div>
+      </div>
+    </section>
+  </main>
+
+</body>
+
+</html>

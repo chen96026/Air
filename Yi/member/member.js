@@ -93,19 +93,19 @@ document.addEventListener("DOMContentLoaded", function () {
             </div>
             <div class="member_Info_Group">
               <label>手機&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-              <div>${Info_userPhone}</div>
+              <div id="member_Info_userPhone">${Info_userPhone}</div>
             </div>
             <div class="member_Info_Group">
               <label>電子郵件&nbsp;&nbsp;&nbsp;&nbsp;</label>
-              <div>${Info_userEmail}</div>
+              <div id="member_Info_userPhone">${Info_userEmail}</div>
             </div>
             <div class="member_Info_Group">
               <label>出生日期&nbsp;&nbsp;&nbsp;&nbsp;</label>
-              <div>${Info_uerBirth}</div>
+              <div id="member_Info_userBirth">${Info_uerBirth}</div>
             </div>
             <div class="member_Info_Group">
               <label>性別&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-              <div>${Info_userSex}</div>
+              <div id="member_Info_userSex">${Info_userSex}</div>
             </div>
           </div>
           <div id="member_Info_User">
@@ -125,32 +125,28 @@ document.addEventListener("DOMContentLoaded", function () {
       <div id=member_Info_MiddleInside>
         <form>
           <div>
-           <div class="member_Info_Group">
-              <label for="member_Info_useraccount">帳號&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-              <input type="text" id="member_Info_useraccount" />
-            </div>
             <div class="member_Info_Group">
               <label for="member_Info_username">用戶名&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
               <input type="text" id="member_Info_username" />
             </div>
             <div class="member_Info_Group">
               <label for="member_Info_Phone">手機&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-              <input type="text" id="member_Info_Phone" />
+              <input type="text" id="member_Info_userphone" />
             </div>
             <div class="member_Info_Group">
-              <label for="member_Info_mail">電子郵件&nbsp;&nbsp;&nbsp;&nbsp;</label>
-              <input type="email" id="member_Info_mail" />
+              <label for="member_Info_mail">電子信箱&nbsp;&nbsp;&nbsp;&nbsp;</label>
+              <input type="email" id="member_Info_usermail" />
             </div>
             <div class="member_Info_Group">
               <label for="member_Info_Birth">出生日期&nbsp;&nbsp;&nbsp;&nbsp;</label>
-              <input type="date" id="member_Info_Birth" />
+              <input type="date" id="member_Info_userbirth" />
             </div>
             <div class="member_Info_Group">
               <label>性別&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
               <div class="member_Info_Sex_Word">男&nbsp;</div>
-              <input type="radio" name="sex" value="male" class="member_Info_Sex_Circle" />
+              <input type="radio" name="sex" value="male" class="member_Info_Sex_Circle" id="member_Info_Male"/>
               <div class="member_Info_Sex_Word">女&nbsp;</div>
-              <input type="radio" name="sex" value="female" class="member_Info_Sex_Circle" />
+              <input type="radio" name="sex" value="female" class="member_Info_Sex_Circle" id="member_Info_Female"/>
             </div>
           </div>
           <div id="member_Info_User">
@@ -279,12 +275,12 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     }
 
-    else if (Info_type === "info_revise") {
-      document.getElementById("member_Info_ChangeButton").addEventListener("click", function () {
-        member_load_MiddleSide_Info('info');
-        alert("資料已修改！");
-      });
-    }
+    // else if (Info_type === "info_revise") {
+    //   document.getElementById("member_Info_ChangeButton").addEventListener("click", function () {
+    //     member_load_MiddleSide_Info('info');
+    //     alert("資料已修改！");
+    //   });
+    // }
 
     else if (Info_type === "password") {
       document.getElementById("member_Password_ChangeButton").addEventListener("click", function () {
