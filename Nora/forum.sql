@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主機： localhost:3306
--- 產生時間： 2024-09-26 17:37:05
+-- 產生時間： 2024-10-01 11:59:42
 -- 伺服器版本： 5.7.24
 -- PHP 版本： 8.3.1
 
@@ -24,6 +24,18 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- 資料表結構 `bookmark`
+--
+
+CREATE TABLE `bookmark` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `uid` int(10) UNSIGNED NOT NULL,
+  `pid` int(10) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
 -- 資料表結構 `images`
 --
 
@@ -37,25 +49,47 @@ CREATE TABLE `images` (
 -- --------------------------------------------------------
 
 --
+-- 資料表結構 `likes`
+--
+
+CREATE TABLE `likes` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `uid` int(10) UNSIGNED NOT NULL,
+  `pid` int(10) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
 -- 資料表結構 `posts`
 --
 
 CREATE TABLE `posts` (
   `id` int(10) UNSIGNED NOT NULL,
-  `country` varchar(100) NOT NULL COMMENT '旅遊國家(必填)',
-  `city` varchar(100) NOT NULL COMMENT '旅遊地區(必填)',
+  `country` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '旅遊國家(必填)',
+  `city` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '旅遊地區(必填)',
   `startDate` date DEFAULT NULL COMMENT '旅遊起始日',
   `endDate` date DEFAULT NULL COMMENT '旅遊結束日',
-  `mainTitle` varchar(100) NOT NULL COMMENT '主標題(必填)',
-  `subTitle` varchar(100) DEFAULT NULL COMMENT '副標題',
-  `tags` varchar(1000) DEFAULT NULL COMMENT 'HashTags',
+  `mainTitle` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '主標題(必填)',
+  `subTitle` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '副標題',
+  `tags` varchar(1000) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'HashTags',
   `rate` int(10) UNSIGNED NOT NULL COMMENT '評分星數(必填)',
   `share` tinyint(1) NOT NULL COMMENT '是否願意分享到首頁',
-  `content` varchar(1000) NOT NULL COMMENT '文章內容(必填)',
+  `content` varchar(1000) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '文章內容(必填)',
   `authorId` int(10) UNSIGNED NOT NULL COMMENT '作者id(外鍵連接user.id)',
-  `createdTime` datetime NOT NULL COMMENT 'PO文日期',
-  `likes` int(10) NOT NULL DEFAULT '0' COMMENT '讚數',
-  `reports` int(10) NOT NULL DEFAULT '0' COMMENT '被檢舉次數'
+  `createdTime` datetime NOT NULL COMMENT 'PO文日期'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- 資料表結構 `reports`
+--
+
+CREATE TABLE `reports` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `uid` int(10) UNSIGNED NOT NULL,
+  `pid` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -85,6 +119,14 @@ INSERT INTO `usertest1` (`id`, `account`, `passwd`, `username`, `userIcon`, `mim
 --
 
 --
+-- 資料表索引 `bookmark`
+--
+ALTER TABLE `bookmark`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `bookmarkUid` (`uid`),
+  ADD KEY `bookmarkPid` (`pid`);
+
+--
 -- 資料表索引 `images`
 --
 ALTER TABLE `images`
@@ -92,11 +134,27 @@ ALTER TABLE `images`
   ADD KEY `pid` (`pid`) USING BTREE;
 
 --
+-- 資料表索引 `likes`
+--
+ALTER TABLE `likes`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `likesUid` (`uid`),
+  ADD KEY `likesPid` (`pid`);
+
+--
 -- 資料表索引 `posts`
 --
 ALTER TABLE `posts`
   ADD PRIMARY KEY (`id`),
   ADD KEY `authorId` (`authorId`);
+
+--
+-- 資料表索引 `reports`
+--
+ALTER TABLE `reports`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `reportsUid` (`uid`),
+  ADD KEY `reportsPid` (`pid`);
 
 --
 -- 資料表索引 `usertest1`
@@ -109,15 +167,33 @@ ALTER TABLE `usertest1`
 --
 
 --
+-- 使用資料表自動遞增(AUTO_INCREMENT) `bookmark`
+--
+ALTER TABLE `bookmark`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
 -- 使用資料表自動遞增(AUTO_INCREMENT) `images`
 --
 ALTER TABLE `images`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
+-- 使用資料表自動遞增(AUTO_INCREMENT) `likes`
+--
+ALTER TABLE `likes`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
 -- 使用資料表自動遞增(AUTO_INCREMENT) `posts`
 --
 ALTER TABLE `posts`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- 使用資料表自動遞增(AUTO_INCREMENT) `reports`
+--
+ALTER TABLE `reports`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
@@ -131,16 +207,37 @@ ALTER TABLE `usertest1`
 --
 
 --
+-- 資料表的限制式 `bookmark`
+--
+ALTER TABLE `bookmark`
+  ADD CONSTRAINT `bookmarkPid` FOREIGN KEY (`pid`) REFERENCES `posts` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `bookmarkUid` FOREIGN KEY (`uid`) REFERENCES `usertest1` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
 -- 資料表的限制式 `images`
 --
 ALTER TABLE `images`
   ADD CONSTRAINT `images_ibfk_1` FOREIGN KEY (`pid`) REFERENCES `posts` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
+-- 資料表的限制式 `likes`
+--
+ALTER TABLE `likes`
+  ADD CONSTRAINT `pid` FOREIGN KEY (`pid`) REFERENCES `posts` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `uid` FOREIGN KEY (`uid`) REFERENCES `usertest1` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
 -- 資料表的限制式 `posts`
 --
 ALTER TABLE `posts`
   ADD CONSTRAINT `posts_ibfk_1` FOREIGN KEY (`authorId`) REFERENCES `usertest1` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- 資料表的限制式 `reports`
+--
+ALTER TABLE `reports`
+  ADD CONSTRAINT `reportsPid` FOREIGN KEY (`pid`) REFERENCES `posts` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `reportsUid` FOREIGN KEY (`uid`) REFERENCES `usertest1` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
