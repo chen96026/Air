@@ -1,6 +1,8 @@
 package tw.brad.model;
 
 import java.util.Base64;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ImageDTO {
 	
@@ -60,20 +62,14 @@ public class ImageDTO {
 	
 	private String setFormattedMimeType (String mimeType) {
 		
-		switch (mimeType) {
-			case "image/jpeg":
-	            return ".jpg";
-	        case "image/png":
-	            return ".png";
-	        case "image/gif":
-	            return ".gif";
-	        case "image/webp":
-	            return ".webp";
-	        case "image/svg+xml":
-	            return ".svg";
-	        default:
-	            return "";
-		}
+		Map<String, String> map = new HashMap<>();
+		map.put("image/jpeg", ".jpg");
+		map.put("image/png", ".png");
+		map.put("image/gif", ".gif");
+		map.put("image/webp", ".webp");
+		map.put("image/svg+xml", ".svg");
+		
+		return map.getOrDefault(mimeType, "");
 		
 	}
 

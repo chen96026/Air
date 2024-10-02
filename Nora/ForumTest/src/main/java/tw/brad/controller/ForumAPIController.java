@@ -27,7 +27,6 @@ import tw.brad.model.PostViewDTO;
 import tw.brad.model.Posts;
 import tw.brad.model.Reports;
 import tw.brad.model.User;
-import tw.brad.model.IdRequest;
 import tw.brad.repository.ImagesRepository;
 import tw.brad.repository.LikesRepository;
 import tw.brad.repository.PostsRepository;
@@ -145,8 +144,6 @@ public class ForumAPIController {
 			@RequestParam Long authorId,
 			@RequestParam(required = false) List<MultipartFile> images) {
 		
-		System.out.println("updateStep1");
-		
 		Posts post = new Posts();
 		post.setId(id);
 		post.setCountry(country);
@@ -165,21 +162,15 @@ public class ForumAPIController {
 			post.setShare(false);
 		}
 		
-		System.out.println("updateStep2");
-		
 		Posts updatePosts = new Posts();
 		
 		try {
-			if (images.isEmpty()) {
-				updatePosts = postsService.updatePost(post, new ArrayList<MultipartFile>());
-			} else {
-				updatePosts = postsService.updatePost(post, images);
-			}
-			System.out.println("updateStepOK");
+			updatePosts = postsService.updatePost(post, images);
+			System.out.println("updateOK");
 			return updatePosts;
 		} catch (Exception e) {
-			System.out.println("updateStepXXX");
-			System.out.println(e);
+			System.err.println("updateXXX");
+			System.err.println(e);
 			return null;
 		}			
 	}
@@ -210,15 +201,15 @@ public class ForumAPIController {
 	}
 
 	@PostMapping("/like")
-	public Likes addLike(@RequestBody IdRequest idRequest) {
-		
-		return likesService.addLike(1L, idRequest.getId());
+	public Likes addLike(@RequestBody Long id) {
+		System.out.println(id);
+		return likesService.addLike(1L, id);
 	}
 	
 	@DeleteMapping("/like")
-	public ResponseEntity<Void> deleteLike(@RequestBody IdRequest idRequest) {
+	public ResponseEntity<Void> deleteLike(@RequestBody Long id) {
 		
-		likesService.deleteLike(1L, idRequest.getId());
+		likesService.deleteLike(1L, id);
 		
 		return ResponseEntity.noContent().build();
 	}
@@ -233,30 +224,30 @@ public class ForumAPIController {
 	}
 	
 	@PostMapping("/bookmark")
-	public Bookmark addBookmark(@RequestBody IdRequest idRequest) {
+	public Bookmark addBookmark(@RequestBody Long id) {
 		
-		return bookmarkService.addBookmark(1L, idRequest.getId());
+		return bookmarkService.addBookmark(1L, id);
 	}
 	
 	@DeleteMapping("/bookmark")
-	public ResponseEntity<Void> deleteBookmark(@RequestBody IdRequest idRequest) {
+	public ResponseEntity<Void> deleteBookmark(@RequestBody Long id) {
 		
-		bookmarkService.deleteBookmark(1L, idRequest.getId());
+		bookmarkService.deleteBookmark(1L, id);
 		
 		return ResponseEntity.noContent().build();
 	}
 	
 	@PostMapping("/report")
-	public Reports addReport(@RequestBody IdRequest idRequest) {
+	public Reports addReport(@RequestBody Long id) {
 		
-		return reportsService.addReport(1L, idRequest.getId());
+		return reportsService.addReport(1L, id);
 		
 	}
 	
 	@DeleteMapping("/deletePost")
-	public ResponseEntity<Void> deletePost(@RequestBody IdRequest idRequest) {
+	public ResponseEntity<Void> deletePost(@RequestBody Long id) {
 		
-		postsService.deletePost(idRequest.getId());
+		postsService.deletePost(id);
 		
 		return ResponseEntity.noContent().build();
 	}

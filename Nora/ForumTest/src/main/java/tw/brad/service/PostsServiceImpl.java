@@ -172,7 +172,7 @@ public class PostsServiceImpl implements PostsService {
 			
 			postsRepository.save(postDB);
 			
-			if (!images.isEmpty()) {
+			if (images != null && !images.isEmpty()) {
 
 				for (MultipartFile image : images) {
 					Images img = new Images();

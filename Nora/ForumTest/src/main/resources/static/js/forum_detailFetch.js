@@ -2,13 +2,9 @@ $(() => {
 	const url = window.location.pathname;
 	const urlparts = url.split('/');
 	const postId = urlparts[urlparts.length - 1];
-	const data = {id: postId};
-	console.log(data);
 	
 	$('#forum_detail_like').click(() => {
-		
 		console.log(postId);
-		console.log(JSON.stringify(data));
 		
 		if(!like) {
 			fetch('/forum/api/like', {
@@ -16,7 +12,7 @@ $(() => {
 		    	headers: {
 		        	'Content-Type': 'application/json'
 		        },
-		        body: JSON.stringify(data)
+		        body: JSON.stringify(postId)
 		    })
 		    .then(response => {
 				console.log(response);
@@ -43,7 +39,7 @@ $(() => {
 		    	headers: {
 		        	'Content-Type': 'application/json'
 		        },
-		        body: JSON.stringify(data)
+		        body: JSON.stringify(postId)
 		    })
 			.then(response => {
 			    if (response.ok) {
@@ -72,7 +68,7 @@ $(() => {
 			.catch(error => {
 				console.error('Error loading posts:', error);
 			})			
-		}, 300);
+		}, 200);
 		
 	})
 
@@ -84,7 +80,7 @@ $(() => {
 		    	headers: {
 		        	'Content-Type': 'application/json'
 		        },
-		        body: JSON.stringify(data)
+		        body: JSON.stringify(postId)
 		    })
 		    .then(response => {
 				if (response.ok) {
@@ -107,7 +103,7 @@ $(() => {
 		    	headers: {
 		        	'Content-Type': 'application/json'
 		        },
-		        body: JSON.stringify(data)
+		        body: JSON.stringify(postId)
 		    })
 			.then(response => {
 			    if (response.ok) {
@@ -134,7 +130,7 @@ $(() => {
 		    	headers: {
 		        	'Content-Type': 'application/json'
 		        },
-		        body: JSON.stringify(data)
+		        body: JSON.stringify(postId)
 		    })
 		    .then(response => {
 				if (response.ok) {
@@ -158,7 +154,7 @@ $(() => {
 		    	headers: {
 		        	'Content-Type': 'application/json'
 		        },
-		        body: JSON.stringify(data)
+		        body: JSON.stringify(postId)
 		    })
 		    .then(response => {
 				if (response.ok) {
