@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <!-- 社群媒體的iconnnnnnnnnnnn -->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet" />
+    <style>
+        a {
+            text-decoration: none;
+        }
+
+        /* Header */
+        header {
+            background-color: #FFC1E0;
+            position: sticky;
+            top: 0;
+            z-index: 101;
+        }
+
+        #header {
+            max-width: 60vw;
+            margin: auto;
+            padding: 2rem 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 2rem;
+        }
+
+        .header_logo img {
+            width: 5vw;
+            height: 5vh;
+        }
+
+        .header_nav_links {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+        }
+
+        .header_link a {
+            padding: 5px;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        .header_link img {
+            width: 3vw;
+            height: 3vh;
+            object-fit: scale-down;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #FFC1E0;
+        }
+
+        .search_section_container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 3rem 1rem;
+        }
+
+        .search_footer_container {
+            display: grid;
+            grid-template-columns: 400px repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .search_footer_col h5 {
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: black;
+        }
+
+        .search_footer_col p {
+            max-width: 300px;
+            color: black;
+        }
+
+        .search_footer_col h4 {
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: black;
+        }
+
+        .search_footer_col a {
+            display: block;
+            margin-bottom: 1rem;
+            font-size: 1rem;
+            font-weight: 500;
+            color: black;
+            transition: 0.3s;
+        }
+
+        .search_footer_col a:hover {
+            color: blue;
+        }
+
+        .search_footer_socials {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .search_footer_socials span a {
+            padding: 5px 10px;
+            margin: 0;
+            font-size: 1.25rem;
+            color: white;
+            background-color: #930000;
+            border-radius: 100%;
+        }
+
+        .search_footer_socials span a:hover {
+            color: white;
+            background-color: #000093;
+        }
+
+        .search_footer_bar {
+            padding: 1rem;
+            font-size: 0.8rem;
+            color: black;
+            text-align: center;
+        }
+
+        hr {
+            margin: 1rem 0;
+            border: 0;
+            border-top: solid;
+            opacity: .25;
+        }
+    </style>
+    <link rel="stylesheet" href="./Homepage_rank_news.css">
+</head>
+
+<>
+    <header>
+        <nav id="header">
+            <div class="header_logo"><a href=""><img src="../Yang/圖片/logo.png"></a></div>
+            <ul class="header_nav_links">
+                <li class="header_link"><a href="#"><img src="../Yang/圖片/icon_logIn.png"></a></li>
+                <li class="header_link"><a href="#"><img src="../Yang/圖片/icon_Forum.png"></a></li>
+            </ul>
+        </nav>
+    </header>
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    <section id="HpRank" class="Hp_fadeIn">
+        <h1>2023 年度旅遊熱點 TOP 3</h1>
+        <div class="HpRank_tab">
+            <button class="HpRank_tablinks active" onclick="openCity(event, 'HpRank_rank1')">第一名</button>
+            <button class="HpRank_tablinks" onclick="openCity(event, 'HpRank_rank2')">第二名</button>
+            <button class="HpRank_tablinks" onclick="openCity(event, 'HpRank_rank3')">第三名</button>
+        </div>
+        <div>
+            <div class="HpRank_img" id="HpRank_rank1">
+                <img src="./圖片/rank1_bg.png" class="HpRank_bg">
+                <img src="./圖片/rank1_medal.png" class="HpRank_medal">
+                <div class="HpRank_intro">
+                    <div>中國上海</div>
+                    <div>2023年度台灣遊客數近80萬</div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <div class="HpRank_img" id="HpRank_rank2">
+                <img src="./圖片/rank2_bg.png" class="HpRank_bg">
+                <img src="./圖片/rank2_medal.png" class="HpRank_medal">
+                <div class="HpRank_intro">
+                    <div>日本沖繩</div>
+                    <div>2023年度台灣遊客數近53萬</div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <div class="HpRank_img" id="HpRank_rank3">
+                <img src="./圖片/rank3_bg.png" class="HpRank_bg">
+                <img src="./圖片/rank3_medal.png" class="HpRank_medal">
+                <div class="HpRank_intro">
+                    <div>韓國首爾</div>
+                    <div>2023年度台灣遊客數近43萬</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    <footer>
+        <div class="search_section_container search_footer_container">
+            <div class="search_footer_col">
+                <h4>追蹤我們</h4>
+                <hr style="width:50%">
+                <div class="search_footer_socials">
+                    <span>
+                        <a href="#"><i class="ri-twitter-fill"></i></a>
+                    </span>
+                    <span>
+                        <a href="#"><i class="ri-linkedin-fill"></i></a>
+                    </span>
+                    <span>
+                        <a href="#"><i class="ri-instagram-line"></i></a>
+                    </span>
+                    <span>
+                        <a href="#"><i class="ri-facebook-fill"></i></a>
+                    </span>
+                </div>
+            </div>
+            <div class="search_footer_col">
+                <h4>隱私</h4>
+                <hr style="width:80%">
+                <a href="#">隱私權政策</a>
+                <a href="#">隱私設定</a>
+            </div>
+            <div class="search_footer_col">
+                <h4>Cookie</h4>
+                <hr style="width:80%">
+                <a href="#">Cookie政策</a>
+                <a href="#">Cookie設定</a>
+            </div>
+            <div class="search_footer_col">
+                <h4>合作夥伴</h4>
+                <hr style="width:80%">
+                <a href="#">廣告投放</a>
+                <a href="#">旅遊宣傳合作</a>
+            </div>
+        </div>
+        <div class="search_footer_bar">
+            Copyright © 2024 Javel. All rights reserved.
+        </div>
+    </footer>
+    <script>
+        document.getElementById("HpRank_rank1").style.display = "block";
+        function openCity(evt, rank) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("HpRank_img");
+            tablinks = document.getElementsByClassName("HpRank_tablinks");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+                tablinks[i].classList.remove("active");
+            }
+            document.getElementById(rank).style.display = "block";
+            evt.currentTarget.classList.add("active");
+        }
+    </script>
+    <script>
+        fetch('https://tw.news.yahoo.com/rss/international')
+            .then(response => response.text())
+            .then(data => {
+                const parser = new DOMParser();
+                const xmlDoc = parser.parseFromString(data, 'application/xml');
+                const items = xmlDoc.querySelectorAll('item');
+
+                items.forEach(item => {
+                    const title = item.querySelector('title').textContent;
+                    const link = item.querySelector('link').textContent;
+                    const pubDate = item.querySelector('pubDate').textContent;
+                    const description = item.querySelector('description').textContent;
+
+                    // 動態生成 HTML
+                    const newsItem = `
+        <div class="news-item">
+          <h3>${title}</h3>
+          <p>${description}</p>
+          <small>發佈時間: ${new Date(pubDate).toLocaleDateString()}</small>
+          <a href="${link}" target="_blank">閱讀更多</a>
+        </div>`;
+                    document.querySelector('.news-list').innerHTML += newsItem;
+                });
+            })
+            .catch(error => console.error('Error fetching news:', error));
+    </script>
+    <script>
+        const elements = document.querySelectorAll('.Hp_fadeIn');
+        // 檢查元素是否在視窗範圍內
+        function isInViewport(element) {
+            const rect = element.getBoundingClientRect();
+            return (
+                rect.top >= 0 &&
+                rect.left >= 0 &&
+                rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+                rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+            );
+        }
+        // 監聽滾動事件
+        window.addEventListener('scroll', function () {
+            elements.forEach(function (element) {
+                if (isInViewport(element)) {
+                    element.classList.add('Hp_fadeIn_visible');
+                    element.classList.remove('Hp_fadeIn_hidden');
+                } else {
+                    element.classList.add('Hp_fadeIn_hidden');
+                    element.classList.remove('Hp_fadeIn_visible');
+                }
+            });
+        });
+    </script>
+    </body>
+
+</html>

@@ -1,0 +1,94 @@
+.Hp_fadeIn {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 2s ease, transform 2s ease;
+}
+  
+.Hp_fadeIn_visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+  
+.Hp_fadeIn_hidden {
+    opacity: 0;
+    transform: translateY(40px);
+}
+
+#HpRank {
+    max-width: 60vw;
+    margin: auto;
+}
+
+#HpRank>h1 {
+    font-size: 32px;
+}
+
+.HpRank_tab {
+    width: 1150px;
+    overflow: hidden;
+    background-color: #525B56;
+}
+
+.HpRank_tab>button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 30px;
+    transition: 0.3s;
+    color: #F2EaED;
+    font-size: 24px;
+}
+
+.HpRank_tab>button:hover {
+    background-color: #583E2E;
+}
+
+.HpRank_tab>button.active {
+    background-color: #583E2E;
+}
+
+.HpRank_img {
+    position: relative;
+    display: none;
+    border: 1px solid #ccc;
+    border-top: none;
+    margin-bottom: 10vh;
+    animation: HpRank_contentFade 1s;
+}
+
+@keyframes HpRank_contentFade {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.HpRank_bg {
+    height: 410px;
+    width: 1150px;
+}
+
+.HpRank_medal {
+    position: absolute;
+    height: 150px;
+    z-index: 1;
+    bottom: 260px;
+    left: 10px;
+}
+
+.HpRank_intro {
+    position: absolute;
+    background-color: rgba(78, 69, 69, 0.705);
+    color: #ddd9d9;
+    padding: 10px;
+    font-size: 24px;
+    z-index: 2;
+    bottom: 300px;
+    left: 120px;
+    border-radius: 10px;
+}
