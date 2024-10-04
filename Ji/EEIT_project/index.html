@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://unpkg.com/scrollreveal"></script>
+  <title>大專</title>
+</head>
+
+<body>
+  <header class="header">
+    <nav id="navbar">
+      <div class="nav_logo"><a href="#">(網站名稱)</a></div>
+      <ul class="nav_links">
+        <li class="link"><a href="#home">首頁</a></li>
+        <li class="link"><a href="#destination">熱門</a></li>
+        <li class="link"><a href="#">目的地</a></li>
+        <li class="link"><a href="#">登入</a></li>
+      </ul>
+    </nav>
+    <div class="section_container header_container" id="home">
+      <h1>(一段大家覺得很文青的字句)</h1>
+      <div class="header_form">
+        <form action="">
+          <div class="input_group">
+            <label for="destination">目的地</label>
+            <input type="text" placeholder="國家" />
+          </div>
+          <div class="input_group">
+            <label for="checkIn">出發</label>
+            <input type="text" placeholder="選擇日期" />
+          </div>
+          <div class="input_group">
+            <label for="CheckOut">回程</label>
+            <input type="text" placeholder="選擇日期" />
+          </div>
+          <div class="input_group">
+            <label for="guests">旅客</label>
+            <input type="text" placeholder="人數" />
+          </div>
+          <button class="btn">搜尋</button>
+        </form>
+      </div>
+    </div>
+  </header>
+
+  <section class="section_container destination_container" id="destination">
+    <div class="section_header">
+      <h2 class="section_title">最多人的選擇</h2>
+      <div class="section_nav">
+        <span><i class="ri-arrow-left-s-line"></i></span>
+        <span><i class="ri-arrow-right-s-line"></i></span>
+      </div>
+    </div>
+    <div class="destination_grid">
+      <div class="destination_card">
+        <img src="assets/destination-1.jpg" alt="destination" />
+        <div class="badge">4.7</div>
+        <div class="destination_details">
+          <h4>馬丘比丘</h4>
+          <p>祕魯</p>
+        </div>
+      </div>
+      <div class="destination_card">
+        <img src="assets/destination-2.jpg" alt="destination" />
+        <div class="badge">4.5</div>
+        <div class="destination_details">
+          <h4>倫敦</h4>
+          <p>英國</p>
+        </div>
+      </div>
+      <div class="destination_card">
+        <img src="assets/destination-3.jpg" alt="destination" />
+        <div class="badge">4.3</div>
+        <div class="destination_details">
+          <h4>東京</h4>
+          <p>日本</p>
+        </div>
+      </div>
+      <div class="destination_card">
+        <img src="assets/destination-4.jpg" alt="destination" />
+        <div class="badge">4.8</div>
+        <div class="destination_details">
+          <h4>雅典</h4>
+          <p>希臘</p>
+        </div>
+      </div>
+      <div class="destination_card">
+        <img src="assets/destination-5.jpg" alt="destination" />
+        <div class="badge">4.2</div>
+        <div class="destination_details">
+          <h4>雪梨</h4>
+          <p>澳洲</p>
+        </div>
+      </div>
+      <div class="destination_card">
+        <img src="assets/destination-6.jpg" alt="destination" />
+        <div class="badge">4.7</div>
+        <div class="destination_details">
+          <h4>阿姆斯特丹</h4>
+          <p>荷蘭</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="tour">
+    <div class="section_container tour_container">
+      <h4>(不知道要叫啥,總之就是放一段影片)</h4>
+      <div class="video_container">
+        <video src="assets/video.mp4" autoplay loop muted></video>
+      </div>
+    </div>
+  </section>
+
+  <section class="section_container client_container" id="client">
+    <div class="section_header">
+      <h2 class="section_title">評論</h2>
+      <div class="section_nav">
+        <span><i class="ri-arrow-left-s-line"></i></span>
+        <span><i class="ri-arrow-right-s-line"></i></span>
+      </div>
+    </div>
+    <div class="client_grid">
+      <div class="client_card">
+        <div class="client_card_header">
+          <span><i class="ri-double-quotes-r"></i></span>
+          <div class="ratings">
+            <span><i class="ri-star-fill"></i></span>
+            <span><i class="ri-star-fill"></i></span>
+            <span><i class="ri-star-fill"></i></span>
+            <span><i class="ri-star-half-fill"></i></span>
+            <span><i class="ri-star-line"></i></span>
+          </div>
+        </div>
+        <p>
+          ...(留言1)
+        </p>
+        <div class="client_card_footer">
+          <img src="assets/client-1.jpg" alt="client" />
+          <div class="client_details">
+            <h4>(人名1)</h4>
+            <p>(職稱)</p>
+          </div>
+        </div>
+      </div>
+      <div class="client_card">
+        <div class="client_card_header">
+          <span><i class="ri-double-quotes-r"></i></span>
+          <div class="ratings">
+            <span><i class="ri-star-fill"></i></span>
+            <span><i class="ri-star-fill"></i></span>
+            <span><i class="ri-star-fill"></i></span>
+            <span><i class="ri-star-fill"></i></span>
+            <span><i class="ri-star-fill"></i></span>
+          </div>
+        </div>
+        <p>
+          ...(留言2)
+        </p>
+        <div class="client_card_footer">
+          <img src="assets/client-2.jpg" alt="client" />
+          <div class="client_details">
+            <h4>(人名2)</h4>
+            <p>(職稱)</p>
+          </div>
+        </div>
+      </div>
+      <div class="client_card">
+        <div class="client_card_header">
+          <span><i class="ri-double-quotes-r"></i></span>
+          <div class="ratings">
+            <span><i class="ri-star-fill"></i></span>
+            <span><i class="ri-star-fill"></i></span>
+            <span><i class="ri-star-fill"></i></span>
+            <span><i class="ri-star-fill"></i></span>
+            <span><i class="ri-star-line"></i></span>
+          </div>
+        </div>
+        <p>
+          ...(留言3)
+        </p>
+        <div class="client_card_footer">
+          <img src="assets/client-3.jpg" alt="client" />
+          <div class="client_details">
+            <h4>(人名3)</h4>
+            <p>(職稱)</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact">
+    <div class="section_container contact_container">
+      <h4>聯絡我們</h4>
+      <form action="/">
+        <input type="text" placeholder="輸入信箱" />
+        <button class="btn">送出</button>
+      </form>
+    </div>
+  </section>
+
+  <footer>
+    <div class="section_container footer_container">
+      <div class="footer_col">
+        <h5>(網站名稱)</h5>
+        <p>
+          ...(簡介)
+        </p>
+      </div>
+      <div class="footer_col">
+        <h4>探索</h4>
+        <a href="#home">首頁</a>
+        <a href="#destination">目的地</a>
+        <a href="#">聯絡我們</a>
+        <a href="#">隱私權</a>
+      </div>
+      <div class="footer_col">
+        <h4>用戶</h4>
+        <a href="#">訂單查詢</a>
+        <a href="#">取消訂單</a>
+      </div>
+      <div class="footer_col">
+        <h4>追蹤我們</h4>
+        <div class="footer_socials">
+          <span>
+            <a href="#"><i class="ri-twitter-fill"></i></a>
+          </span>
+          <span>
+            <a href="#"><i class="ri-linkedin-fill"></i></a>
+          </span>
+          <span>
+            <a href="#"><i class="ri-instagram-line"></i></a>
+          </span>
+          <span>
+            <a href="#"><i class="ri-facebook-fill"></i></a>
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="footer_bar">
+      Copyright © 2024 (網站名稱). All rights reserved.
+    </div>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+
+</html>
