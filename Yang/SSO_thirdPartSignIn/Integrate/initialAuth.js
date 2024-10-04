@@ -10,13 +10,7 @@ import { getAuth } from 'https://www.gstatic.com/firebasejs/10.13.2/firebase-aut
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-    apiKey: "AIzaSyCqMg4nhFesKBtEtIbxxOUUKAeIebNip1Q",
-    authDomain: "javel-85c60.firebaseapp.com",
-    projectId: "javel-85c60",
-    storageBucket: "javel-85c60.appspot.com",
-    messagingSenderId: "780056726416",
-    appId: "1:780056726416:web:eae377e64ad572c30a8115",
-    measurementId: "G-5WEC19NR0Z"
+    
 };
 
 // Initialize Firebase 初始化

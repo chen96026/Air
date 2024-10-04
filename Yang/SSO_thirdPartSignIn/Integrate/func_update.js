@@ -4,7 +4,6 @@ import { reauthenticateWithCredential } from 'https://www.gstatic.com/firebasejs
 import { EmailAuthProvider } from 'https://www.gstatic.com/firebasejs/10.13.2/firebase-auth.js';
 import { verifyBeforeUpdateEmail } from 'https://www.gstatic.com/firebasejs/10.13.2/firebase-auth.js';
 import { updatePassword } from 'https://www.gstatic.com/firebasejs/10.13.2/firebase-auth.js';
-import { updateEmail,reauthenticateWithPopup,OAuthProvider } from 'https://www.gstatic.com/firebasejs/10.13.2/firebase-auth.js';
 
 const btnName = document.getElementById("name");
 const btnNameUpdate = document.getElementById("nameUpdate");
