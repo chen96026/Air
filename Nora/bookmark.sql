@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主機： localhost:3306
--- 產生時間： 2024-10-04 03:19:00
+-- 產生時間： 2024-10-04 09:17:33
 -- 伺服器版本： 5.7.24
 -- PHP 版本： 8.3.1
 
@@ -29,7 +29,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `bookmark` (
   `id` int(10) UNSIGNED NOT NULL,
-  `uid` varchar(36) NOT NULL,
+  `memberId` bigint(10) UNSIGNED NOT NULL,
   `pid` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -43,7 +43,7 @@ CREATE TABLE `bookmark` (
 ALTER TABLE `bookmark`
   ADD PRIMARY KEY (`id`),
   ADD KEY `bookmarkPid` (`pid`),
-  ADD KEY `bookmarkUid` (`uid`);
+  ADD KEY `bookmarkMemberId` (`memberId`);
 
 --
 -- 在傾印的資料表使用自動遞增(AUTO_INCREMENT)
@@ -63,8 +63,8 @@ ALTER TABLE `bookmark`
 -- 資料表的限制式 `bookmark`
 --
 ALTER TABLE `bookmark`
-  ADD CONSTRAINT `bookmarkPid` FOREIGN KEY (`pid`) REFERENCES `posts` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `bookmarkUid` FOREIGN KEY (`uid`) REFERENCES `member` (`uid`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `bookmarkMemberId` FOREIGN KEY (`memberId`) REFERENCES `member` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `bookmarkPid` FOREIGN KEY (`pid`) REFERENCES `posts` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

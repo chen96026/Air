@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主機： localhost:3306
--- 產生時間： 2024-10-04 03:19:13
+-- 產生時間： 2024-10-04 09:18:28
 -- 伺服器版本： 5.7.24
 -- PHP 版本： 8.3.1
 
@@ -39,7 +39,7 @@ CREATE TABLE `posts` (
   `rate` int(10) UNSIGNED NOT NULL COMMENT '評分星數(必填)',
   `share` tinyint(1) NOT NULL COMMENT '是否願意分享到首頁',
   `content` varchar(1000) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '文章內容(必填)',
-  `authorId` varchar(36) CHARACTER SET utf8 NOT NULL COMMENT '作者id(外鍵連接member.uid)',
+  `authorId` bigint(10) UNSIGNED NOT NULL COMMENT '作者id(外鍵連接user.id)',
   `createdTime` datetime NOT NULL COMMENT 'PO文日期'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -52,7 +52,7 @@ CREATE TABLE `posts` (
 --
 ALTER TABLE `posts`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `authorId` (`authorId`);
+  ADD KEY `postAuthor` (`authorId`);
 
 --
 -- 在傾印的資料表使用自動遞增(AUTO_INCREMENT)
@@ -72,7 +72,7 @@ ALTER TABLE `posts`
 -- 資料表的限制式 `posts`
 --
 ALTER TABLE `posts`
-  ADD CONSTRAINT `posts_ibfk_1` FOREIGN KEY (`authorId`) REFERENCES `member` (`uid`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `postAuthor` FOREIGN KEY (`authorId`) REFERENCES `member` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

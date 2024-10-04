@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主機： localhost:3306
--- 產生時間： 2024-10-04 03:19:05
+-- 產生時間： 2024-10-04 09:17:38
 -- 伺服器版本： 5.7.24
 -- PHP 版本： 8.3.1
 
@@ -43,7 +43,7 @@ CREATE TABLE `images` (
 --
 ALTER TABLE `images`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `PostsId` (`pid`) USING BTREE;
+  ADD KEY `pid` (`pid`) USING BTREE;
 
 --
 -- 在傾印的資料表使用自動遞增(AUTO_INCREMENT)
