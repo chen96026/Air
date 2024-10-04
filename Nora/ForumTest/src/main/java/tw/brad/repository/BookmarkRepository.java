@@ -6,6 +6,6 @@ import tw.brad.model.Bookmark;
 
 public interface BookmarkRepository extends JpaRepository<Bookmark, Long> {
 	
-	public Bookmark findByUserIdAndPostsId(Long userId, Long postId);
+	public Bookmark findByMemberUidAndPostsId(String memberUid, Long postId);
 	
 }

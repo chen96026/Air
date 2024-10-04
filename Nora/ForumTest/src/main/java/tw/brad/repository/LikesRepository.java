@@ -9,6 +9,6 @@ public interface LikesRepository extends JpaRepository<Likes, Long> {
 
 	public Long countByPosts(Posts post);
 	
-	public Likes findByUserIdAndPostsId(Long userId, Long postId);
+	public Likes findByMemberUidAndPostsId(String memberUid, Long postId);
 	
 }

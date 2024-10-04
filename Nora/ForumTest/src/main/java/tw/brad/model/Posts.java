@@ -55,8 +55,8 @@ public class Posts {
 	private LocalDateTime createdTime;
 	
 	@ManyToOne
-	@JoinColumn(name = "authorId", nullable = false)
-	private User author;
+	@JoinColumn(name = "authorId", referencedColumnName = "uid", nullable = false)
+	private Member author;
 	
 	
 
@@ -156,11 +156,11 @@ public class Posts {
 		this.createdTime = createdTime;
 	}
 
-	public User getAuthor() {
+	public Member getAuthor() {
 		return author;
 	}
 
-	public void setAuthor(User author) {
+	public void setAuthor(Member author) {
 		this.author = author;
 	}
 	

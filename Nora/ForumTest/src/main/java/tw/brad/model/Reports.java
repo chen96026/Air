@@ -19,8 +19,8 @@ public class Reports {
 	private Long id;
 	
 	@ManyToOne
-	@JoinColumn(name = "uid", nullable = false)
-	private User user;
+	@JoinColumn(name = "uid", referencedColumnName = "uid", nullable = false)
+	private Member member;
 	
 	@ManyToOne
 	@JoinColumn(name = "pid", nullable = false)
@@ -35,12 +35,12 @@ public class Reports {
 		this.id = id;
 	}
 
-	public User getUser() {
-		return user;
+	public Member getMember() {
+		return member;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setMember(Member member) {
+		this.member = member;
 	}
 
 	public Posts getPosts() {

@@ -5,8 +5,8 @@ import org.springframework.stereotype.Service;
 
 import tw.brad.model.Likes;
 import tw.brad.repository.LikesRepository;
+import tw.brad.repository.MemberRepository;
 import tw.brad.repository.PostsRepository;
-import tw.brad.repository.UserRepository;
 
 @Service
 public class LikesServiceImpl implements LikesService{
@@ -18,17 +18,15 @@ public class LikesServiceImpl implements LikesService{
 	private PostsRepository postsRepository;
 	
 	@Autowired
-	private UserRepository userRepository;
+	private MemberRepository memberRepository;
 
 	
 	@Override
-	public Likes addLike(Long userId, Long postId) {
-		System.out.println(userId);
-		System.out.println(postId);
+	public Likes addLike(String userId, Long postId) {
 		if (userId != null && postId != null) {
 		
 		Likes like = new Likes();
-		like.setUser(userRepository.findById(userId).orElse(null));
+		like.setMember(memberRepository.findByUid(userId));
 		like.setPosts(postsRepository.findById(postId).orElse(null));
 		
 		return likesRepository.save(like);
@@ -38,9 +36,9 @@ public class LikesServiceImpl implements LikesService{
 	}
 
 	@Override
-	public void deleteLike(Long userId, Long postId) {
+	public void deleteLike(String userId, Long postId) {
 		
-		Likes like = likesRepository.findByUserIdAndPostsId(userId, postId);
+		Likes like = likesRepository.findByMemberUidAndPostsId(userId, postId);
 		
 		if (like != null) likesRepository.delete(like);
 	}

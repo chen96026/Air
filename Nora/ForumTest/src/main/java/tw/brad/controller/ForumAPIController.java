@@ -23,14 +23,14 @@ import tw.brad.model.Bookmark;
 import tw.brad.model.ImageDTO;
 import tw.brad.model.Images;
 import tw.brad.model.Likes;
+import tw.brad.model.Member;
 import tw.brad.model.PostViewDTO;
 import tw.brad.model.Posts;
 import tw.brad.model.Reports;
-import tw.brad.model.User;
 import tw.brad.repository.ImagesRepository;
 import tw.brad.repository.LikesRepository;
+import tw.brad.repository.MemberRepository;
 import tw.brad.repository.PostsRepository;
-import tw.brad.repository.UserRepository;
 import tw.brad.service.BookmarkService;
 import tw.brad.service.ImagesService;
 import tw.brad.service.LikesService;
@@ -46,9 +46,6 @@ public class ForumAPIController {
 	
 	@Autowired
 	private PostsRepository postsRepository;
-	
-	@Autowired
-	private UserRepository userRepository;
 	
 	@Autowired
 	private ImagesService imagesService;
@@ -68,6 +65,9 @@ public class ForumAPIController {
 	@Autowired
 	private ReportsService reportsService;
 	
+	@Autowired
+	private MemberRepository memberRepository;
+
 	
 	@GetMapping("/loadCards")
 	public List<PostViewDTO> loadCards(
@@ -116,8 +116,9 @@ public class ForumAPIController {
 		} else {
 			post.setShare(false);
 		}
-		
-		User author = userRepository.findById(authorId).orElse(null);		
+		Member testMember = memberRepository.findById(1L).orElse(null);	// 暫時寫死的測試用member
+		Member author = memberRepository.findByUid(testMember.getUid());
+		System.err.println(author);
 		post.setAuthor(author);
 		
 		try {
@@ -203,13 +204,14 @@ public class ForumAPIController {
 	@PostMapping("/like")
 	public Likes addLike(@RequestBody Long id) {
 		System.out.println(id);
-		return likesService.addLike(1L, id);
+		Member testMember = memberRepository.findById(1L).orElse(null);	// 暫時寫死的測試用member
+		return likesService.addLike(testMember.getUid(), id);
 	}
 	
 	@DeleteMapping("/like")
 	public ResponseEntity<Void> deleteLike(@RequestBody Long id) {
-		
-		likesService.deleteLike(1L, id);
+		Member testMember = memberRepository.findById(1L).orElse(null);	// 暫時寫死的測試用member
+		likesService.deleteLike(testMember.getUid(), id);
 		
 		return ResponseEntity.noContent().build();
 	}
@@ -225,22 +227,22 @@ public class ForumAPIController {
 	
 	@PostMapping("/bookmark")
 	public Bookmark addBookmark(@RequestBody Long id) {
-		
-		return bookmarkService.addBookmark(1L, id);
+		Member testMember = memberRepository.findById(1L).orElse(null);	// 暫時寫死的測試用member
+		return bookmarkService.addBookmark(testMember.getUid(), id);
 	}
 	
 	@DeleteMapping("/bookmark")
 	public ResponseEntity<Void> deleteBookmark(@RequestBody Long id) {
-		
-		bookmarkService.deleteBookmark(1L, id);
+		Member testMember = memberRepository.findById(1L).orElse(null);	// 暫時寫死的測試用member
+		bookmarkService.deleteBookmark(testMember.getUid(), id);
 		
 		return ResponseEntity.noContent().build();
 	}
 	
 	@PostMapping("/report")
 	public Reports addReport(@RequestBody Long id) {
-		
-		return reportsService.addReport(1L, id);
+		Member testMember = memberRepository.findById(1L).orElse(null);	// 暫時寫死的測試用member
+		return reportsService.addReport(testMember.getUid(), id);
 		
 	}
 	

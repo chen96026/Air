@@ -14,14 +14,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import tw.brad.model.Member;
 import tw.brad.model.PostViewDTO;
 import tw.brad.model.Posts;
 import tw.brad.model.UserNameIconDTO;
 import tw.brad.repository.BookmarkRepository;
 import tw.brad.repository.LikesRepository;
+import tw.brad.repository.MemberRepository;
 import tw.brad.repository.PostsRepository;
 import tw.brad.repository.ReportsRepository;
-import tw.brad.repository.UserRepository;
 import tw.brad.service.PostsService;
 
 
@@ -32,10 +33,8 @@ public class ForumController {
 	@Autowired
 	private PostsService postsService;
 	
-	@Autowired PostsRepository postsRepository;
-	
 	@Autowired
-	private UserRepository userRepository;
+	private PostsRepository postsRepository;
 	
 	@Autowired
 	private LikesRepository likesRepository;
@@ -46,6 +45,9 @@ public class ForumController {
 	@Autowired
 	private ReportsRepository reportsRepository;
 	
+	@Autowired
+	private MemberRepository memberRepository;
+
 	
 	@GetMapping("/forum")
 	public String forum(
@@ -85,9 +87,10 @@ public class ForumController {
 			model.addAttribute("post", postViewDTO);
 			model.addAttribute("tags", tagsList);
 			
-			model.addAttribute("like", likesRepository.findByUserIdAndPostsId(1L, id) != null);				
-			model.addAttribute("bookmark", bookmarkRepository.findByUserIdAndPostsId(1L, id) != null);				
-			model.addAttribute("report", reportsRepository.findByUserIdAndPostsId(1L, id) != null);				
+			Member testMember = memberRepository.findById(1L).orElse(null);	// 暫時寫死的測試用member
+			model.addAttribute("like", likesRepository.findByMemberUidAndPostsId(testMember.getUid(), id) != null);				
+			model.addAttribute("bookmark", bookmarkRepository.findByMemberUidAndPostsId(testMember.getUid(), id) != null);				
+			model.addAttribute("report", reportsRepository.findByMemberUidAndPostsId(testMember.getUid(), id) != null);				
 			
 			return "forum_detail";
 		} else {
@@ -99,8 +102,9 @@ public class ForumController {
 	
 	@GetMapping("/forum/edit")
 	public String editPost(@RequestParam(required = false) Long id, Model model) {
-		
-		UserNameIconDTO userNameIcon = new UserNameIconDTO(userRepository.findById(1L).orElse(null));
+		Member testMember = memberRepository.findById(1L).orElse(null);	// 暫時寫死的測試用member
+		System.err.println(testMember);
+		UserNameIconDTO userNameIcon = new UserNameIconDTO(testMember);
 		model.addAttribute("user", userNameIcon);
 		model.addAttribute("date", LocalDate.now());
 		

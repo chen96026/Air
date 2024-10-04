@@ -9,5 +9,5 @@ public interface ReportsRepository extends JpaRepository<Reports, Long> {
 	
 	public Long countByPosts(Posts post);
 	
-	public Reports findByUserIdAndPostsId(Long userId, Long postId);
+	public Reports findByMemberUidAndPostsId(String memberUid, Long postId);
 }
