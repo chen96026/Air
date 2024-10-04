@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>member_login</title>
+<link rel="stylesheet" href="/css/member.css">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+	integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+	crossorigin="anonymous" referrerpolicy="no-referrer" />
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<!-- Google登入 -->
+<script src="https://accounts.google.com/gsi/client" async defer></script>
+</head>
+
+<body>
+
+	<div class="member_login_container">
+		<div class="member_login_left-side">
+			<div class="member_login_logo-container">
+				<img src="./img/logo.png" alt="Ruix Logo" class="member_login_logo">
+			</div>
+			<h1>Welcome Javel</h1>
+			<h3>登入會員</h3>
+			<br>
+			<!-- Google Sign In -->
+			<div id="g_id_onload" data-client_id="YOUR_GOOGLE_CLIENT_ID"
+				data-callback="handleGoogleSignIn" data-auto_prompt="false"></div>
+			<div class="g_id_signin" data-type="standard" data-size="large"
+				data-theme="outline" data-text="sign_in_with"
+				data-shape="rectangular" data-logo_alignment="left"></div>
+
+			<p class="member_login_or-text">或</p>
+
+			<form>
+				<div class="member_login_eyes">
+					<input type="email" id="member_login_Email" placeholder="信箱"
+						class="member_login_input-field">
+				</div>
+
+				<div class="member_login_eyes">
+					<input type="password" id="member_login_Password" placeholder="密碼"
+						class="member_login_input-field"> <i
+						class="fas fa-eye-slash" id="member_eyes_Password_first"></i>
+				</div>
+
+				<div class="member_login_remember-me">
+					<input type="checkbox" id="remember"> <label for="remember">Remember
+						Me</label>
+				</div>
+				<button id="member_login_login-btn" onclick="login()">登入</button>
+			</form>
+
+			 <p id="member_login_login-link">還不是會員嗎? <a href="member_register.html">註冊</a></p>
+		</div>
+
+		<div class="member_image-container">
+			<div class="member_register_right-side">
+				<img src="./img/倒高腳杯.jpg" alt="Design Image"
+					class="member_register_design-image image-1 active"> <img
+					src=" ./img/倒高腳杯.jpg" alt="Design Image"
+					class="member_register_design-image image-2" />
+			</div>
+		</div>
+
+	</div>
+</body>
+
+<script src="/js/member_login.js"></script>

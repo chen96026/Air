@@ -1,0 +1,1063 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+}
+
+body {
+  // border: 5px solid blue;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f9f9f9;
+}
+
+a {
+  text-decoration: none;
+}
+
+#member_Main {
+  // border: 2px solid rgb(10, 193, 13);
+  background-color: #ffffff;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 3vh;
+  align-items: center;
+  justify-content: center;
+
+  #member_Info_custom_Upload_Button {
+    cursor: pointer;
+  }
+
+  .member_button {
+    background-color: #a3d5dc;
+    width: 7vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    border-radius: 8px;
+    color: #FFFFFF;
+    font-size: 0.9vw;
+    font-weight: bold;
+    text-align: center;
+    transition: background 0.1s ease-out, transform 0.1s ease-out, box-shadow 0.1s ease-out;
+    padding: 1vh 1vw;
+    cursor: pointer;
+  }
+
+  .member_button:hover,
+  .member_Forum_InsideButton:hover {
+    background-color: #a3d5dc;
+    background-image: radial-gradient(circle, transparent 1%, #6adceb 1%);
+  }
+
+  .member_button:active,
+  .member_Order_InsideButton:active,
+  .member_Forum_InsideButton:active {
+    background-color: #a3d5dc;
+    transform: scale(0.95);
+    box-shadow: 0 0 4px #666;
+    transition: transform 0.1s ease-out, background-color 0.2s ease-out;
+  }
+
+  .member_button:active::after,
+  .member_Order_InsideButton:active::after,
+  .member_Forum_InsideButton:active::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 120%;
+    height: 120%;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    transition: transform 0.3s ease-out;
+    pointer-events: none;
+  }
+
+  .member_Order_Button,
+  .member_Forum_Button {
+    // border: 2px solid green;
+    border-bottom: 1px solid rgb(0, 0, 0);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 5vh;
+    width: 8vw;
+    font-size: 1vw;
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+  .member_Order_InsideButton:hover,
+  .member_Forum_InsideButton:hover {
+    background-color: #6adceb;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    width: 6.5vw;
+    height: 4.5vh;
+  }
+
+  //箭頭
+  .arrow-container {
+    // border: 2px solid yellow;
+    position: relative;
+    width: 8vw;
+    height: 0.2vh;
+    background-color: black;
+  }
+
+  .arrow-container::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: -0.45vh;
+    width: 0;
+    height: 0;
+    border-left: 0.5vw solid black;
+    border-top: 0.6vh solid transparent;
+    border-bottom: 0.6vh solid transparent;
+
+  }
+
+  #member_Order_Operation {
+    // border: 2px solid rgb(236, 47, 182);
+    height: 5.5vh;
+    width: 38vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2vw;
+  }
+
+  #member_Order_Ticket {
+    // border: 2px solid red;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: #f5f5f5;
+    display: flex;
+    flex-direction: column;
+    border-radius: 20px;
+    gap: 3vh;
+    height: 62vh;
+    width: 55vw;
+    font-weight: bold;
+    font-size: 1vw;
+
+    #member_Order_TopSchedule {
+      // border: 2px solid rgb(12, 15, 155);
+      margin-top: 2vh;
+      display: flex;
+      justify-content: space-between;
+      gap: 1vh;
+
+      #member_Order_TotalSchedule {
+        // border: 2px solid rgb(208, 9, 9);
+        width: 30vw;
+        display: flex;
+        align-items: center;
+        padding-left: 2vw;
+
+        .fa-plane {
+          margin-right: 0.3vw;
+          font-size: 1.5vw;
+        }
+
+        #member_Order_Form {
+          // border: 1px solid rgb(0, 0, 128);
+          margin-right: 0.5vw;
+          display: flex;
+          align-items: center;
+        }
+
+        #member_Order_Number,
+        #member_Order_GoCity,
+        #member_Order_BackCity {
+          // border: 1px solid green;
+          margin-right: 0.5vw;
+          display: flex;
+          align-items: end;
+        }
+      }
+
+      #member_Order_State {
+        // border: 2px solid rgb(208, 9, 9);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 3vw;
+        width: 8vw;
+
+        img {
+          width: 1vw;
+        }
+      }
+    }
+
+    #member_Order_WholeTicket {
+      // border: 2px solid red;
+      background-color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      border-radius: 20px;
+      margin-left: 3vw;
+      margin-right: 3vw;
+      height: 20vh;
+      padding: 2vw;
+      gap: 1.5vh;
+
+      #member_Order_GoPlane {
+        // border: 2px solid rgb(245, 106, 19);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        #member_Order_Go_side {
+          // border: 2px solid rgb(19, 188, 95);
+          display: flex;
+          align-items: center;
+        }
+
+        #member_Order_Plane_side {
+          // border: 2px solid rgb(179, 28, 106);
+          width: 20vw;
+          display: flex;
+          justify-content: end;
+          align-items: end;
+        }
+ 
+        #member_Order_Plane{
+          //  border: 2px solid rgb(38, 142, 212);
+
+        }
+
+        #member_Order_airline{
+          // border: 2px solid rgb(58, 179, 28);
+          display:flex;
+          align-items: end;
+          justify-content: end;
+          height:3vh;
+          font-size: 1vw;
+
+        }
+
+        #member_Order_Go,
+        #member_Order_GoTime,
+        #member_Order_Class {
+          // border: 2px solid blue;
+          display: flex;
+          align-items: end;
+        }
+
+        #member_Order_Plane {
+          // border: 2px solid rgb(16, 176, 64);
+          width: 12vw;
+          display: flex;
+          justify-content: end;
+        }
+      }
+
+      #member_Order_BigMiddle {
+        // border: 2px solid yellow;
+        display: flex;
+        justify-content: center;
+        height: 10vh;
+        gap: 2vw;
+
+        #member_Order_Plane {
+          // border: 2px solid rgb(38, 155, 171);
+          // flex-basis: 10%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 12vw;
+        }
+
+        #member_Order_Schedule {
+          // border: 2px solid rgb(244, 39, 16);
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 100%;
+          width: 40vw;
+          gap: 1vw;
+
+          #member_Order_DepartTime,
+          #member_Order_LandTime {
+            // border: 2px solid rgb(40, 231, 161);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 5vw;
+            gap: 0.5vw;
+          }
+
+          #member_Order_WholeTime {
+            // border: 2px solid rgb(27, 21, 200);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            max-width: 15vw;
+            height: 14vh;
+            gap: 1vh;
+          }
+        }
+      }
+    }
+
+    #member_Order_BottomPrice {
+      // border: 2px solid rgb(12, 15, 155);
+      display: flex;
+      margin-left: 3vw;
+      margin-right: 3vw;
+      margin-bottom: 2vh;
+      justify-content: end;
+
+      #member_Order_PeoplePrice {
+
+        #member_Order_People,
+        #member_Order_TotalPrice {
+          // border: 2px solid rgb(25, 208, 9);
+          display: flex;
+          justify-content: space-between;
+          align-items: end;
+          width: 7vw;
+          margin-top: 0.5vh;
+        }
+      }
+    }
+  }
+
+  #member_Collection_WholeTicket {
+    // border: 1px solid rgb(0, 0, 0);
+    background-color: #f1f1f1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    height: 18vh;
+    width: 40vw;
+    gap: 2vh;
+    padding: 5vw;
+
+    #member_Collection_BigMiddle {
+      border: 2px solid yellow;
+      background-color: #ffffff;
+      display: flex;
+      justify-content: center;
+      border-radius: 20px;
+      width: 30vw;
+      height: 20vh;
+
+      #member_Collection_Plane {
+        border: 2px solid blue;
+        flex-basis: 10%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.2vw;
+      }
+
+      #member_Collection_Schedule {
+        border: 2px solid rgb(244, 39, 16);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        // gap: 2vw;
+
+        #member_Collection_WholeTime {
+          border: 2px solid rgb(30, 9, 152);
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          max-width: 15vw;
+          height: auto;
+        }
+
+        #member_Collection_DepartTime,
+        #member_Collection_LandTime {
+          border: 2px solid rgb(25, 208, 9);
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          width: 5vw;
+          gap: 0.5vh;
+
+          #member_Collection_DepartSmallTime,
+          #member_Collection_DepartCity,
+          #member_Collection_LandSmallTime,
+          #member_Collection_LandCity {
+            border: 1px solid red;
+            font-size: 1.2vw;
+          }
+        }
+      }
+    }
+  }
+
+  #member_Collection_BottomPrice {
+    border: 2px solid rgb(12, 15, 155);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    #member_Collection_NowPrice {
+      border: 2px solid rgb(15, 184, 167);
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      width: 10vw;
+      height: 3.5vh;
+
+    }
+  }
+
+  #member_Forum_Operation {
+    // border: 2px solid rgb(207, 27, 27);
+    height: 5.5vh;
+    width: 38vw;
+    display: flex;
+    justify-content: center;
+    gap: 2vw;
+  }
+
+  #member_Forum_MiddleSide {
+    // border: 2px solid blue;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    height: 100%;
+    width: 55vw;
+
+    a {
+      text-decoration: none;
+      color: black;
+    }
+
+    a:hover {
+      text-decoration: underline;
+      color: rgb(0, 0, 0);
+    }
+
+    .member_forum_card {
+      // border: 2px solid yellow;  
+      margin: 5vh 0.8vw;
+      background-color: #FFFCFC;
+      display: flex;
+      flex-direction: column;
+      width: 16vw;
+      height: 45vh;
+      border-radius: 10px;
+      box-shadow: 0 5px 5px rgba(80, 80, 80, 0.4);
+
+      article {
+        // border: 2px solid rgb(111, 0, 255);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .member_forum_articleImg {
+          width: 100%;
+          border-radius: 10px 10px 0 0;
+        }
+
+        h3 {
+          // border: 2px solid red;
+          align-items: start;
+          font-size: 1.3vw;
+          font-weight: bold;
+          margin: 2vh 1vw 2vh 1vw;
+        }
+
+        .member_forum_articleMore {
+          // border: 2px solid rgb(28, 172, 40);
+          font-size: 0.8vw;
+          line-height: 3vh;
+          margin: 0 1vw 0 1vw;
+          max-width: 12vw;
+          max-height: 10vh;
+          white-space: normal; //文字換行 
+          overflow-wrap: break-word; //長單詞換行
+          overflow: hidden; //隱藏溢出的內容
+          text-overflow: ellipsis; //省略溢出的文字
+          display: -webkit-box; //用於多行文本截斷
+          -webkit-box-orient: vertical; //配合 -webkit-box，讓內容垂直排列
+          -webkit-line-clamp: 3; //限制顯示的行數
+        }
+
+        .member_forum_articleMore::after {
+          content: "前往文章";
+        }
+      }
+
+      div {
+        // border: 2px solid rgb(28, 172, 40);
+        display: flex;
+        height: 8vh;
+        gap: 1vw;
+        justify-content: center;
+        align-items: center;
+
+        .member_forum_authorImg {
+          clip-path: circle(40%);
+          width: 3vw;
+        }
+
+        .member_forum_author,
+        .member_forum_postDate {
+          display: inline-block;
+          color: #1f1f1f;
+          margin: 0;
+          font-size: 0.9vw;
+        }
+
+        .member_forum_postDate {
+          display: inline-block;
+          color: #777777;
+          font-size: 0.8vw;
+        }
+      }
+    }
+  }
+}
+
+.member_login_container,
+.member_register_container {
+  // border: 2px solid red;
+  display: flex;
+  max-width: 60vw;
+  width: 100%;
+  height: 90vh;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+  overflow: hidden;
+
+  .member_login_left-side,
+  .member_register_left-side {
+    // border: 2px solid rgb(24, 51, 199);
+    background-color: #ffffff;
+    padding: 4vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .member_login_right-side,
+  .member_register_right-side {
+    background-color: #f5f5f5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .member_login_logo-container,
+  .member_register_logo-container {
+    text-align: center;
+  }
+
+  .member_login_logo,
+  .member_register_logo {
+    width: 8vw;
+    margin-bottom: 3vh;
+  }
+
+  h1 {
+    font-weight: 700;
+    font-size: 2vw;
+    margin-bottom: 1vh;
+    color: #000000;
+  }
+
+  p {
+    font-size: 16px;
+    margin-bottom: 2vh;
+    color: #555;
+  }
+
+  .member_login_or-text,
+  .member_register_or-text {
+    text-align: center;
+    margin: 2vh;
+    position: relative;
+    color: #aaa;
+  }
+
+  .member_login_or-text::before,
+  .member_login_or-text::after,
+  .member_register_or-text::before,
+  .member_register_or-text::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    width: 40%;
+    height: 0.1vh;
+    background-color: #ccc;
+  }
+
+  .member_login_or-text::before,
+  .member_login_or-text::before,
+  .member_register_or-text::before,
+  .member_register_or-text::before {
+    left: 0;
+  }
+
+  .member_login_or-text::after,
+  .member_login_or-text::after,
+  .member_register_or-text::after,
+  .member_register_or-text::after {
+    right: 0;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .member_login_eyes,
+  .member_register_eyes {
+    // border: 2px solid red;
+    position: relative;
+    margin-bottom: 3.5vh;
+    display: flex;
+    align-items: center;
+  }
+
+  #member_check_group {
+    // border: 2px solid rgb(207, 163, 17);
+    position: absolute;
+    right: 0.3vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    #checkEmail {
+      // border: 2px solid blue;
+      height: 3vh;
+      display: flex;
+      align-items: start;
+      font-size: 0.9vw;
+    }
+
+    #emailStatusIcon {
+      // border: 2px solid rgb(13, 168, 73);
+      height: 3vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9vw;
+    }
+  }
+
+  .fa-eye-slash,
+  .fa-eye {
+    // border: 2px solid rgb(46, 8, 197);
+    position: absolute;
+    right: 0.5vw;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #333;
+    font-size: 0.8vw;
+    width: 1vw;
+    height: 2vh;
+  }
+
+  .member_login_input-field,
+  .member_register_input-field {
+    width: 25vw;
+    height: 5vh;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 0.8vw;
+    padding-left: 0.5vw;
+  }
+
+  #member_passwordMatchIcon {
+    // border: 2px solid red;
+    position: absolute;
+    right: 2vw;
+    width: 1vw;
+    font-size: 0.9vw;
+  }
+
+  .member_login_remember-me,
+  .member_register_remember-me {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+
+  .member_login_remember-me input,
+  .member_register_remember-me input {
+    margin-right: 10px;
+  }
+
+  #member_login_login-btn,
+  #member_register_register-btn {
+    // border:2px solid red;
+    width: 100%;
+    padding: 15px;
+    background-color: #000000;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+
+  #member_login_login-btn,
+  #member_register_register-btn:hover {
+    transform: scale(1);
+    background-color: #333333;
+  }
+
+  #member_login_login-btn,
+  #member_register_register-btn:active {
+    transform: scale(0.95);
+    background-color: #333333;
+  }
+
+
+
+  #member_login_login-link,
+  #member_register_login-link {
+    // border:2px solid rgb(14, 163, 9);
+    text-align: center;
+    margin-top: 10px;
+  }
+
+  #member_login_login-link a,
+  #member_register_login-link a {
+    color: #000000;
+    text-decoration: none;
+  }
+
+  #member_login_login-link a:hover,
+  #member_register_login-link a:hover {
+    color: #e7951a;
+  }
+
+  .member_image-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    /* 隱藏超出的部分 */
+  }
+
+  .member_register_design-image {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 100%;
+    /* 初始位置在右側，等待滑入 */
+    opacity: 0;
+    /* 初始狀態為透明 */
+    transition: left 1s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.7s ease;
+    /* 調整過渡效果 */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  .member_register_design-image.active {
+    left: 0;
+    /* 新圖片從右側滑入到中央 */
+    opacity: 1;
+    /* 淡入圖片 */
+  }
+
+  .member_register_design-image.prev {
+    left: -100%;
+    /* 當前圖片滑出到左側 */
+    opacity: 0;
+    /* 淡出圖片 */
+    transition: left 1s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.7s ease;
+    /* 調整過渡時間 */
+  }
+
+  .member_register_design-image.initial {
+    left: 0;
+    /* 頁面加載時，初始圖片應該直接顯示 */
+    opacity: 1;
+    /* 初始圖片完全可見 */
+    transition: none;
+    /* 初始圖片不需要過渡 */
+  }
+}
+
+.member_Info_container {
+  //  border: 2px solid rgb(173, 25, 129);
+  background-color: #fff;
+  padding: 40px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  width: 50%;
+  max-width: 700px;
+
+  #member_Info_User {
+    // border: 2px solid blue;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    // padding-bottom: 3vh;
+    // border-bottom: 10vh;
+
+    .member_Info_Avatar {
+      // border: 2px solid rgb(18, 176, 89);
+      width: 8vw;
+      height: 15vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      #member_info_icon {
+        // background-color: rgb(255, 255, 255);
+        width: 6vw;
+        height: 12vh;
+        border-radius: 50%;
+        object-fit: cover;
+        display: block;
+      }
+    }
+
+    #member_Info_Upload_group {
+      // border: 2px solid rgb(0, 255, 191);
+      height: 15vh;
+      display: flex;
+      align-items: start;
+      justify-content: center;
+      flex-direction: column;
+      gap: 1vh;
+
+      #member_customUploadButton {
+        background-color: #dbd7d7;
+        // color: #fff;
+        width: 4vw;
+        height: 3vh;
+        padding: 0.8vh 0.8vw;
+        border: none;
+        border-radius: 4px;
+        font-size: 0.6vw;
+        cursor: pointer;
+      }
+
+      #member_customUploadButton:hover {
+        background-color: #e1e1e1;
+      }
+
+      div {
+        font-size: 0.8vw;
+      }
+    }
+
+    #member_Info_upload_button {
+      background-color: #333;
+      color: #fff;
+      padding: 0.8vh 0.8vw;
+      border: none;
+      border-radius: 4px;
+      font-size: 0.8vw;
+      cursor: pointer;
+
+    }
+
+    #member_Info_upload_button:hover {
+      background-color: #555;
+    }
+
+    .member_Info_Remind {
+      /* border: 2px solid rgb(0, 225, 255); */
+      border-top: -5vh;
+      font-size: 0.8vw;
+      color: #555;
+    }
+  }
+
+  h2 {
+    // border: 2px solid red;
+    font-size: 2vw;
+    margin-bottom: 1.5vh;
+    color: #333;
+  }
+
+  p {
+    // border: 2px solid red;
+    padding-left: 0.3vw;
+    margin-bottom: 1vw;
+    color: #666;
+  }
+
+  .member_Info_form {
+    // border: 2px solid green;
+    border-top: 2vh;
+    display: flex;
+    flex-direction: column;
+
+    .member_Info_form-group {
+      // border: 2px solid red;
+      margin-bottom: 2vh;
+    }
+
+    label {
+      // border: 2px solid rgb(157, 0, 255);
+      display: block;
+      font-size: 0.8vw;
+      font-weight: bold;
+      color: #000;
+    }
+
+    .input-with-icon {
+      // border: 2px solid rgb(14, 165, 21);
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    input[type="date"] {
+      width: 100%;
+      padding: 1vh;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 0.8vw;
+      margin-top: 0.6vh;
+    }
+
+    input {
+      // border: 2px solid rgb(217, 221, 18);
+      background-color: #e9ecef;
+    }
+
+    #member_info_passwordMatchIcon {
+      position: absolute;
+      right: 2vw;
+      top: 33%;
+      font-size: 0.9vw;
+    }
+
+    .input-with-icon {
+      // border: 2px solid rgb(217, 221, 18);
+      position: relative;
+      display: inline-block;
+      width: 100%;
+    }
+
+    .input-with-icon input {
+      width: 100%;
+      padding-right: 2vw;
+    }
+
+    .gear-icon {
+      position: absolute;
+      right: 0.5vw;
+      top: 56%;
+      transform: translateY(-50%);
+      color: #333;
+      font-size: 1vw;
+      cursor: pointer;
+    }
+
+    .gear-icon:hover {
+      color: #0004ff;
+    }
+
+    #member_info_group-btn {
+      display: flex;
+      justify-content: center;
+      gap: 3vw;
+
+      .member_Info_submit-btn {
+        background-color: #333;
+        color: #fff;
+        padding: 1vh 1vw;
+        border: none;
+        border-radius: 4px;
+        font-size: 1vw;
+        cursor: pointer;
+      }
+
+      .member_Info_submit-btn:hover {
+        background-color: #555;
+      }
+    }
+
+    #member_deleteAccountModal {
+      // border: 2px solid blue;
+      display: none;
+      position: fixed;
+      z-index: 1;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.4);
+
+      #member_info_modal-content {
+        background-color: rgb(255, 255, 255);
+        margin: 15% auto;
+        padding: 20px;
+        border-radius: 8px;
+        border: 1px solid #888;
+        width: 16vw;
+        height: 28vh;
+        text-align: center;
+      }
+
+      #member_info_close {
+        color: #aaa;
+        position: relative;
+        // top: 0.3vh;
+        left: 6.5vw;
+        font-size: 28px;
+        font-weight: bold;
+      }
+
+      #member_info_close:hover,
+      #member_info_close:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+      }
+
+      #member_delete_group {
+        // border: 2px solid red;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 2vw;
+
+        #member_confirmDeleteBtn,
+        #member_cancelDeleteBtn {
+          background-color: #333;
+          color: #fff;
+          border: none;
+          border-radius: 4px;
+          width: 3.5vw;
+          height: 3.5vh;
+          cursor: pointer;
+        }
+
+        #member_confirmDeleteBtn:hover,
+        #member_cancelDeleteBtn:hover {
+          background-color: #555;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,772 @@
+@charset "UTF-8";
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+}
+
+#member_Info_custom_Upload_Button {
+  cursor: pointer;
+}
+
+.member_button {
+  background-color: #a3d5dc;
+  width: 7vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 4px;
+  color: #FFFFFF;
+  font-size: 0.9vw;
+  font-weight: bold;
+  text-align: center;
+  transition: background 0.1s ease-out, transform 0.1s ease-out, box-shadow 0.1s ease-out;
+  padding: 1vh 1vw;
+  cursor: pointer;
+}
+
+.member_button:focus {
+  outline: none;
+}
+
+.member_button:hover,
+.member_Button:hover {
+  background-color: #a3d5dc;
+  background-image: radial-gradient(circle, transparent 1%, #6adceb 1%);
+}
+
+.member_button:active,
+.member_Button:active {
+  background-color: #a3d5dc;
+  transform: scale(0.95);
+  box-shadow: 0 0 4px #666;
+  transition: transform 0.1s ease-out, background-color 0.2s ease-out;
+}
+
+.member_button:active::after,
+.member_Button:active::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 120%;
+  height: 120%;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  transition: transform 0.3s ease-out;
+  pointer-events: none;
+}
+
+#member_Main {
+  background-color: #ffffff;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+#member_Main #member_LeftSide {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 25%;
+  height: 70vh;
+  align-items: end;
+}
+#member_Main #member_LeftSide #member_Left_InSide {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 2vh;
+  gap: 4.5vh;
+  height: 70vh;
+  width: 10vw;
+}
+#member_Main #member_LeftSide #member_Left_InSide #member_LeftInfo,
+#member_Main #member_LeftSide #member_Left_InSide #member_LeftPassword,
+#member_Main #member_LeftSide #member_Left_InSide #member_LeftOrder,
+#member_Main #member_LeftSide #member_Left_InSide #member_LeftCollection,
+#member_Main #member_LeftSide #member_Left_InSide #member_LeftForum {
+  border-bottom: 1px solid rgb(0, 0, 0);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 5vh;
+  width: 8vw;
+  font-size: 1vw;
+  font-weight: bold;
+  cursor: pointer;
+}
+#member_Main #member_MiddleSide {
+  flex-basis: 60%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2vh;
+  height: 100%;
+  width: 100%;
+}
+#member_Main #member_MiddleSide #member_Info_MiddleInside {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background-color: #F4CFE0;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 55vh;
+  width: 40vw;
+  gap: 2vh;
+}
+#member_Main #member_MiddleSide #member_Info_MiddleInside form {
+  display: flex;
+  gap: 2vw;
+}
+#member_Main #member_MiddleSide #member_Info_MiddleInside form .member_Info_Group {
+  margin-top: 2vh;
+  margin-bottom: 2vh;
+  display: flex;
+  justify-content: space-between;
+}
+#member_Main #member_MiddleSide #member_Info_MiddleInside form .member_Info_Group label {
+  display: block;
+  align-items: center;
+  font-size: 1.1vw;
+  color: #555;
+  height: 3.5vh;
+}
+#member_Main #member_MiddleSide #member_Info_MiddleInside form .member_Info_Group div {
+  display: block;
+  align-items: center;
+  font-size: 1vw;
+  width: 10vw;
+  height: 3.5vh;
+}
+#member_Main #member_MiddleSide #member_Info_MiddleInside form .member_Info_Group .member_Info_Sex_Word {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2vw;
+}
+#member_Main #member_MiddleSide #member_Info_MiddleInside form .member_Info_Group .member_Info_Sex_Circle {
+  width: 1vw;
+}
+#member_Main #member_MiddleSide #member_Info_MiddleInside form .member_Info_Group input {
+  border: 1px solid #ccc;
+  width: 10vw;
+  height: 3.5vh;
+  padding: 0.5vh;
+  border-radius: 4px;
+}
+#member_Main #member_MiddleSide #member_Info_MiddleInside #member_Info_User {
+  width: 10vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2vh;
+}
+#member_Main #member_MiddleSide #member_Info_MiddleInside #member_Info_User .member_Info_Avatar {
+  -webkit-clip-path: circle(50%);
+          clip-path: circle(50%);
+  width: 5vw;
+}
+#member_Main #member_MiddleSide #member_Info_MiddleInside #member_Info_Upload {
+  border: 2px solid #c4c4c4;
+  background-color: white;
+  width: 4vw;
+  height: 4vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  font-size: 0.8vw;
+}
+#member_Main #member_MiddleSide #member_Info_MiddleInside .member_Info_Remind {
+  font-size: 0.8vw;
+  color: #555;
+}
+#member_Main #member_MiddleSide #member_Info_MiddleInside #member_Info_BottomButton {
+  display: flex;
+  gap: 3vw;
+}
+#member_Main #member_Password_MiddleInside {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background-color: #F4CFE0;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5vh;
+  height: 55vh;
+  width: 40vw;
+}
+#member_Main #member_Password_MiddleInside .member_Password_Group {
+  margin-top: 2vh;
+  margin-bottom: 2vh;
+  display: flex;
+  flex-direction: column;
+}
+#member_Main #member_Password_MiddleInside .member_Password_Group label {
+  display: block;
+  font-size: 1vw;
+  color: #555;
+  margin-bottom: 0.5vh;
+}
+#member_Main #member_Password_MiddleInside .member_Password_Group input {
+  border: 1px solid #ccc;
+  width: 20vw;
+  height: 3.5vh;
+  padding: 0.5vh;
+  border-radius: 4px;
+}
+#member_Main #member_Password_MiddleInside #member_Password_Remind {
+  width: 36vw;
+  margin-top: -6vh;
+  font-size: 0.7vw;
+  padding-left: 8.5vw;
+  color: #555;
+}
+#member_Main #member_Order_Operation {
+  height: 5vh;
+  width: 45vw;
+  display: flex;
+  justify-content: center;
+  gap: 2vw;
+}
+#member_Main #member_Order_Operation #member_Order_Depart,
+#member_Main #member_Order_Operation #member_Order_Pay,
+#member_Main #member_Order_Operation #member_Order_Finish,
+#member_Main #member_Order_Operation #member_Order_Cancel {
+  border-bottom: 1px solid rgb(0, 0, 0);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 5vh;
+  width: 12vw;
+  font-size: 1vw;
+  font-weight: bold;
+  cursor: pointer;
+}
+#member_Main #member_Order_Operation #member_Order_Depart:hover,
+#member_Main #member_Order_Operation #member_Order_Pay:hover,
+#member_Main #member_Order_Operation #member_Order_Finish:hover,
+#member_Main #member_Order_Operation #member_Order_Cancel:hover {
+  background-color: #F4CFE0;
+}
+#member_Main #member_Order_Ticket {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background-color: #F4CFE0;
+  display: flex;
+  flex-direction: column;
+  border-radius: 20px;
+  gap: 3vh;
+  height: 55vh;
+  width: 40vw;
+}
+#member_Main #member_Order_Ticket #member_Order_TopSchedule {
+  margin-top: 2vh;
+  display: flex;
+  justify-content: space-between;
+  gap: 1vh;
+}
+#member_Main #member_Order_Ticket #member_Order_TopSchedule #member_Order_TotalSchedule {
+  width: 30vw;
+  display: flex;
+  align-items: center;
+  padding-left: 2vw;
+}
+#member_Main #member_Order_Ticket #member_Order_TopSchedule #member_Order_TotalSchedule img {
+  margin-right: 0.3vw;
+  display: flex;
+  align-items: center;
+}
+#member_Main #member_Order_Ticket #member_Order_TopSchedule #member_Order_TotalSchedule #member_Order_Form {
+  margin-right: 0.5vw;
+  display: flex;
+  align-items: center;
+  font-size: 1.1vw;
+}
+#member_Main #member_Order_Ticket #member_Order_TopSchedule #member_Order_TotalSchedule #member_Order_Number,
+#member_Main #member_Order_Ticket #member_Order_TopSchedule #member_Order_TotalSchedule #member_Order_GoCity,
+#member_Main #member_Order_Ticket #member_Order_TopSchedule #member_Order_TotalSchedule #member_Order_BackCity {
+  margin-right: 0.5vw;
+  display: flex;
+  align-items: end;
+  font-size: 1.2vw;
+  font-weight: bold;
+}
+#member_Main #member_Order_Ticket #member_Order_TopSchedule #member_Order_State {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 3vw;
+  width: 6vw;
+  font-size: 1vw;
+}
+#member_Main #member_Order_Ticket #member_Order_TopSchedule #member_Order_State img {
+  width: 1vw;
+}
+#member_Main #member_Order_Ticket #member_Order_WholeTicket {
+  background-color: #e8ecef;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-radius: 20px;
+  margin-left: 3vw;
+  margin-right: 3vw;
+  height: 18vh;
+}
+#member_Main #member_Order_Ticket #member_Order_WholeTicket #member_Order_GoPlane {
+  display: flex;
+  align-items: center;
+  margin-left: 1vw;
+  font-size: 1vw;
+}
+#member_Main #member_Order_Ticket #member_Order_WholeTicket #member_Order_GoPlane span {
+  display: flex;
+  align-items: end;
+  font-size: 1vw;
+}
+#member_Main #member_Order_Ticket #member_Order_WholeTicket #member_Order_BigMiddle {
+  display: flex;
+  justify-content: center;
+}
+#member_Main #member_Order_Ticket #member_Order_WholeTicket #member_Order_BigMiddle #member_Order_Plane {
+  flex-basis: 10%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2vw;
+}
+#member_Main #member_Order_Ticket #member_Order_WholeTicket #member_Order_BigMiddle #member_Order_Schedule {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+#member_Main #member_Order_Ticket #member_Order_WholeTicket #member_Order_BigMiddle #member_Order_Schedule #member_Order_DepartTime,
+#member_Main #member_Order_Ticket #member_Order_WholeTicket #member_Order_BigMiddle #member_Order_Schedule #member_Order_LandTime {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 5vw;
+  gap: 0.5vh;
+}
+#member_Main #member_Order_Ticket #member_Order_WholeTicket #member_Order_BigMiddle #member_Order_Schedule #member_Order_DepartTime #member_Order_DepartSmallTime,
+#member_Main #member_Order_Ticket #member_Order_WholeTicket #member_Order_BigMiddle #member_Order_Schedule #member_Order_DepartTime #member_Order_DepartCity,
+#member_Main #member_Order_Ticket #member_Order_WholeTicket #member_Order_BigMiddle #member_Order_Schedule #member_Order_DepartTime #member_Order_LandSmallTime,
+#member_Main #member_Order_Ticket #member_Order_WholeTicket #member_Order_BigMiddle #member_Order_Schedule #member_Order_DepartTime #member_Order_LandCity,
+#member_Main #member_Order_Ticket #member_Order_WholeTicket #member_Order_BigMiddle #member_Order_Schedule #member_Order_LandTime #member_Order_DepartSmallTime,
+#member_Main #member_Order_Ticket #member_Order_WholeTicket #member_Order_BigMiddle #member_Order_Schedule #member_Order_LandTime #member_Order_DepartCity,
+#member_Main #member_Order_Ticket #member_Order_WholeTicket #member_Order_BigMiddle #member_Order_Schedule #member_Order_LandTime #member_Order_LandSmallTime,
+#member_Main #member_Order_Ticket #member_Order_WholeTicket #member_Order_BigMiddle #member_Order_Schedule #member_Order_LandTime #member_Order_LandCity {
+  font-size: 1.2vw;
+}
+#member_Main #member_Order_Ticket #member_Order_WholeTicket #member_Order_BigMiddle #member_Order_Schedule #member_Order_WholeTime {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-width: 15vw;
+  height: auto;
+}
+#member_Main #member_Order_Ticket #member_Order_BottomPrice {
+  display: flex;
+  margin-left: 3vw;
+  margin-right: 3vw;
+  margin-bottom: 2vh;
+  justify-content: end;
+}
+#member_Main #member_Order_Ticket #member_Order_BottomPrice #member_Order_PeoplePrice #member_Order_People,
+#member_Main #member_Order_Ticket #member_Order_BottomPrice #member_Order_PeoplePrice #member_Order_TotalPrice {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  width: 7vw;
+  margin-top: 0.5vh;
+}
+#member_Main #member_Order_Ticket #member_Order_BottomPrice #member_Order_PeoplePrice #member_Order_People div,
+#member_Main #member_Order_Ticket #member_Order_BottomPrice #member_Order_PeoplePrice #member_Order_People span,
+#member_Main #member_Order_Ticket #member_Order_BottomPrice #member_Order_PeoplePrice #member_Order_TotalPrice div,
+#member_Main #member_Order_Ticket #member_Order_BottomPrice #member_Order_PeoplePrice #member_Order_TotalPrice span {
+  font-size: 1vw;
+}
+#member_Main #member_Collection_Ticket {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  background-color: #F4CFE0;
+  display: flex;
+  flex-direction: column;
+  border-radius: 20px;
+  gap: 3vh;
+  height: 55vh;
+  width: 40vw;
+}
+#member_Main #member_Collection_Ticket #member_Collection_TopSchedule {
+  margin-top: 2vh;
+  display: flex;
+  justify-content: space-between;
+  gap: 1vh;
+}
+#member_Main #member_Collection_Ticket #member_Collection_TopSchedule #member_Collection_TotalSchedule {
+  width: 30vw;
+  display: flex;
+  align-items: center;
+  padding-left: 2vw;
+}
+#member_Main #member_Collection_Ticket #member_Collection_TopSchedule #member_Collection_TotalSchedule img {
+  margin-right: 0.3vw;
+  display: flex;
+  align-items: center;
+}
+#member_Main #member_Collection_Ticket #member_Collection_TopSchedule #member_Collection_TotalSchedule #member_Collection_Form {
+  margin-right: 0.5vw;
+  display: flex;
+  align-items: center;
+  font-size: 1.1vw;
+}
+#member_Main #member_Collection_Ticket #member_Collection_TopSchedule #member_Collection_TotalSchedule #member_Collection_Number,
+#member_Main #member_Collection_Ticket #member_Collection_TopSchedule #member_Collection_TotalSchedule #member_Collection_GoCity,
+#member_Main #member_Collection_Ticket #member_Collection_TopSchedule #member_Collection_TotalSchedule #member_Collection_BackCity {
+  margin-right: 0.5vw;
+  display: flex;
+  align-items: end;
+  font-size: 1.2vw;
+  font-weight: bold;
+}
+#member_Main #member_Collection_Ticket #member_Collection_TopSchedule .heart-icon {
+  font-size: 1.6vw;
+  -webkit-text-stroke: 1px black;
+  color: white;
+  transition: color 0.1s;
+  margin-right: 1vw;
+  cursor: pointer;
+}
+#member_Main #member_Collection_Ticket #member_Collection_TopSchedule .heart-icon.liked {
+  -webkit-text-stroke: 1px #e9e4d4;
+  color: red;
+}
+#member_Main #member_Collection_Ticket #member_Collection_WholeTicket {
+  background-color: #f1f1f1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-radius: 20px;
+  margin-left: 3vw;
+  margin-right: 3vw;
+  height: 18vh;
+}
+#member_Main #member_Collection_Ticket #member_Collection_WholeTicket #member_Collection_GoPlane {
+  display: flex;
+  align-items: center;
+  margin-left: 1vw;
+  font-size: 1vw;
+}
+#member_Main #member_Collection_Ticket #member_Collection_WholeTicket #member_Collection_GoPlane span {
+  display: flex;
+  align-items: end;
+  font-size: 1vw;
+}
+#member_Main #member_Collection_Ticket #member_Collection_WholeTicket #member_Collection_BigMiddle {
+  display: flex;
+  justify-content: center;
+}
+#member_Main #member_Collection_Ticket #member_Collection_WholeTicket #member_Collection_BigMiddle #member_Collection_Plane {
+  flex-basis: 10%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2vw;
+}
+#member_Main #member_Collection_Ticket #member_Collection_WholeTicket #member_Collection_BigMiddle #member_Collection_Schedule {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+#member_Main #member_Collection_Ticket #member_Collection_WholeTicket #member_Collection_BigMiddle #member_Collection_Schedule #member_Collection_DepartTime,
+#member_Main #member_Collection_Ticket #member_Collection_WholeTicket #member_Collection_BigMiddle #member_Collection_Schedule #member_Collection_LandTime {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 5vw;
+  gap: 0.5vh;
+}
+#member_Main #member_Collection_Ticket #member_Collection_WholeTicket #member_Collection_BigMiddle #member_Collection_Schedule #member_Collection_DepartTime #member_Collection_DepartSmallTime,
+#member_Main #member_Collection_Ticket #member_Collection_WholeTicket #member_Collection_BigMiddle #member_Collection_Schedule #member_Collection_DepartTime #member_Collection_DepartCity,
+#member_Main #member_Collection_Ticket #member_Collection_WholeTicket #member_Collection_BigMiddle #member_Collection_Schedule #member_Collection_DepartTime #member_Collection_LandSmallTime,
+#member_Main #member_Collection_Ticket #member_Collection_WholeTicket #member_Collection_BigMiddle #member_Collection_Schedule #member_Collection_DepartTime #member_Collection_LandCity,
+#member_Main #member_Collection_Ticket #member_Collection_WholeTicket #member_Collection_BigMiddle #member_Collection_Schedule #member_Collection_LandTime #member_Collection_DepartSmallTime,
+#member_Main #member_Collection_Ticket #member_Collection_WholeTicket #member_Collection_BigMiddle #member_Collection_Schedule #member_Collection_LandTime #member_Collection_DepartCity,
+#member_Main #member_Collection_Ticket #member_Collection_WholeTicket #member_Collection_BigMiddle #member_Collection_Schedule #member_Collection_LandTime #member_Collection_LandSmallTime,
+#member_Main #member_Collection_Ticket #member_Collection_WholeTicket #member_Collection_BigMiddle #member_Collection_Schedule #member_Collection_LandTime #member_Collection_LandCity {
+  font-size: 1.2vw;
+}
+#member_Main #member_Collection_Ticket #member_Collection_WholeTicket #member_Collection_BigMiddle #member_Collection_Schedule #member_Collection_WholeTime {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-width: 15vw;
+  height: auto;
+}
+#member_Main #member_Collection_Ticket #member_Collection_BottomPrice {
+  display: flex;
+  margin-left: 3vw;
+  margin-right: 3vw;
+  margin-bottom: 2vh;
+  justify-content: space-between;
+  align-items: center;
+}
+#member_Main #member_Collection_Ticket #member_Collection_BottomPrice #member_Collection_NowPrice {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  font-size: 1.1vw;
+  width: 10vw;
+  height: 3.5vh;
+}
+#member_Main #member_Forum_Operation {
+  height: 5vh;
+  width: 45vw;
+  display: flex;
+  justify-content: center;
+  gap: 3.5vw;
+}
+#member_Main #member_Forum_Operation .member_Forum_Button {
+  border-bottom: 1px solid rgb(0, 0, 0);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 5vh;
+  width: 6vw;
+  font-size: 1vw;
+  font-weight: bold;
+  cursor: pointer;
+}
+#member_Main #member_Forum_Operation .member_Forum_Button:hover {
+  background-color: #6adceb;
+}
+#member_Main #member_Forum_MiddleSide {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 55vh;
+  width: 55vw;
+}
+#member_Main #member_Forum_MiddleSide #member_Forum_InSide {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+  margin: auto;
+  padding-bottom: 10vh;
+}
+#member_Main #member_Forum_MiddleSide #member_Forum_InSide a {
+  text-decoration: none;
+  color: black;
+}
+#member_Main #member_Forum_MiddleSide #member_Forum_InSide a:hover {
+  text-decoration: underline;
+  color: rgb(0, 0, 0);
+}
+#member_Main #member_Forum_MiddleSide #member_Forum_InSide .member_forum_card {
+  margin: 5vh 0.8vw;
+  background-color: #FFFCFC;
+  display: flex;
+  flex-direction: column;
+  width: 16vw;
+  height: 45vh;
+  border-radius: 10px;
+  box-shadow: 0 5px 5px rgba(80, 80, 80, 0.4);
+}
+#member_Main #member_Forum_MiddleSide #member_Forum_InSide .member_forum_card article {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#member_Main #member_Forum_MiddleSide #member_Forum_InSide .member_forum_card article .member_forum_articleImg {
+  width: 100%;
+  border-radius: 10px 10px 0 0;
+}
+#member_Main #member_Forum_MiddleSide #member_Forum_InSide .member_forum_card article h3 {
+  align-items: start;
+  font-size: 1.3vw;
+  font-weight: bold;
+  margin: 2vh 1vw 2vh 1vw;
+}
+#member_Main #member_Forum_MiddleSide #member_Forum_InSide .member_forum_card article .member_forum_articleMore {
+  font-size: 0.8vw;
+  line-height: 3vh;
+  margin: 0 1vw 0 1vw;
+  max-width: 12vw;
+  max-height: 10vh;
+  white-space: normal;
+  overflow-wrap: break-word;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
+#member_Main #member_Forum_MiddleSide #member_Forum_InSide .member_forum_card article .member_forum_articleMore::after {
+  content: "前往文章";
+}
+#member_Main #member_Forum_MiddleSide #member_Forum_InSide .member_forum_card div {
+  display: flex;
+  height: 8vh;
+  gap: 1vw;
+  justify-content: center;
+  align-items: center;
+}
+#member_Main #member_Forum_MiddleSide #member_Forum_InSide .member_forum_card div .member_forum_authorImg {
+  -webkit-clip-path: circle(40%);
+          clip-path: circle(40%);
+  width: 3vw;
+}
+#member_Main #member_Forum_MiddleSide #member_Forum_InSide .member_forum_card div .member_forum_author,
+#member_Main #member_Forum_MiddleSide #member_Forum_InSide .member_forum_card div .member_forum_postDate {
+  display: inline-block;
+  color: #1f1f1f;
+  margin: 0;
+  font-size: 0.9vw;
+}
+#member_Main #member_Forum_MiddleSide #member_Forum_InSide .member_forum_card div .member_forum_postDate {
+  display: inline-block;
+  color: #777777;
+  font-size: 0.8vw;
+}
+
+#member_Info_deleteModal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+#member_Info_deleteModal #member_Info_deleteContent {
+  background-color: #fff;
+  padding: 2vw;
+  border: 1px solid #ddd;
+  width: 80%;
+  max-width: 20vw;
+  border-radius: 12px;
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+#member_Info_deleteModal #member_Info_deleteContent p {
+  font-size: 1vw;
+  color: #333;
+}
+#member_Info_deleteModal #member_Info_deleteContent #member_Info_confirmUsername {
+  width: 100%;
+  padding: 1vh;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-top: 2vh;
+  margin-bottom: 2vh;
+}
+#member_Info_deleteModal #member_Info_deleteContent #member_delete_button_section {
+  display: flex;
+  justify-content: space-around;
+  gap: 2vw;
+}
+#member_Info_deleteModal #member_Info_close {
+  position: absolute;
+  top: 2vh;
+  right: 1vw;
+  color: #000000;
+  font-size: 1.5vw;
+  font-weight: bold;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+#member_Info_deleteModal #member_Info_errormessage {
+  display: none;
+}
+
+#member_register_BigContainer {
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 70vh;
+  padding-bottom: 2vh;
+  padding-top: 2vh;
+}
+#member_register_BigContainer #member_register_Container {
+  background-color: #F4CFE0;
+  padding: 5vh;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 18vw;
+}
+#member_register_BigContainer #member_register_Container h2 {
+  text-align: center;
+}
+#member_register_BigContainer #member_register_Container .member_register_Group {
+  margin-top: 2vh;
+  margin-bottom: 2vh;
+}
+#member_register_BigContainer #member_register_Container label {
+  display: block;
+  margin-bottom: 0.5vh;
+  color: #555;
+}
+#member_register_BigContainer #member_register_Container input {
+  width: 100%;
+  height: 3vh;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+#member_register_BigContainer #member_register_Container #member_register_Button {
+  width: 100%;
+  height: 4vh;
+  background-color: #a3d5dc;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1vw;
+}
+#member_register_BigContainer #member_register_Container #member_register_Button:hover {
+  background-color: #a3d5dc;
+}
+#member_register_BigContainer #member_register_Container #member_register_Or {
+  text-align: center;
+  margin: 2vh;
+  position: relative;
+  color: #aaa;
+}
+#member_register_BigContainer #member_register_Container #member_register_Or::before,
+#member_register_BigContainer #member_register_Container #member_register_Or::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 40%;
+  height: 0.1vh;
+  background-color: #ccc;
+}
+#member_register_BigContainer #member_register_Container #member_register_Or::before {
+  left: 0;
+}
+#member_register_BigContainer #member_register_Container #member_register_Or::after {
+  right: 0;
+}/*# sourceMappingURL=member.css.map */
