@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="/css/forum.css">
     <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet" />
     <script th:if="${country != null}" th:inline="javascript">
-	    var setCountry = /*[[${country}]]*/ "all";
+	    var setCountry = /*[[${country}]]*/ "全世界";
 	    var setCity = /*[[${city}]]*/ "所有城市";
 	    console.log("Country value:", setCountry);
 	    console.log("City value:", setCity);
@@ -20,7 +20,7 @@
             <div class="header_logo"><a href=""><img src="../Yang/圖片/logo.png"></a></div>
             <ul class="header_nav_links">
                 <li class="header_link"><a href="#"><img src="../Yang/圖片/icon_logIn.png"></a></li>
-                <li class="header_link"><a href="./forum.html"><img src="../Yang/圖片/icon_Forum.png"></a></li>
+                <li class="header_link"><a href="/forum"><img src="../Yang/圖片/icon_Forum.png"></a></li>
             </ul>
         </nav>
     </header>
@@ -34,27 +34,12 @@
                 </select>
                 <select name="country" id="forum_select_country">
                     <optgroup label="不分國家">
-                        <option value="all">全世界</option>
-                    </optgroup>
-                    <optgroup label="亞洲">
-                        <option value="日本">日本</option>
-                        <option value="中國">中國</option>
-                        <option value="新加坡">新加坡</option>
-                        <option value="馬來西亞">馬來西亞</option>
-                    </optgroup>
-                    <optgroup label="歐洲">
-                        <option value="">法國</option>
-                        <option value="">英國</option>
-                    </optgroup>
-                    <optgroup label="歐洲">
-                        <option value="">法國</option>
-                        <option value="">英國</option>
-                        <option value="">美國</option>
+                        <option value="全世界">全世界</option>
                     </optgroup>
                 </select>
                 <select name="city" id="forum_select_city">
                     <optgroup label="全世界">
-                        <option value="all">所有城市</option>
+                        <option value="所有城市">所有城市</option>
                     </optgroup>
                 </select>
                 <input type="search" name="key" id="forum_search_key" placeholder="輸入 文章標題 或 HashTag 關鍵字" th:value="${key != null ? key : ''}">

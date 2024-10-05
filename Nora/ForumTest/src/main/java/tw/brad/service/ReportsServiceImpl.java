@@ -24,14 +24,14 @@ public class ReportsServiceImpl implements ReportsService{
 
 	@Override
 	@Transactional
-	public Reports addReport(String userId, Long postId) {
+	public Reports addReport(Long userId, Long postId) {
 		
 		if (userId != null && postId != null) {
 			
-			if (reportsRepository.findByMemberUidAndPostsId(userId, postId) == null) {
+			if (reportsRepository.findByMemberIdAndPostsId(userId, postId) == null) {
 				
 				Reports report = new Reports();
-				report.setMember(memberRepository.findByUid(userId));
+				report.setMember(memberRepository.findById(userId).orElse(null));
 				report.setPosts(postsRepository.findById(postId).orElse(null));
 				
 				return reportsRepository.save(report);

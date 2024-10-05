@@ -22,12 +22,12 @@ public class BookmarkServiceImpl implements BookmarkService{
 
 	
 	@Override
-	public Bookmark addBookmark(String userId, Long postId) {
+	public Bookmark addBookmark(Long userId, Long postId) {
 		
 		if (userId != null && postId != null) {
 		
 		Bookmark bookmark = new Bookmark();
-		bookmark.setMember(memberRepository.findByUid(userId));
+		bookmark.setMember(memberRepository.findById(userId).orElse(null));
 		bookmark.setPosts(postsRepository.findById(postId).orElse(null));
 		return bookmarkRepository.save(bookmark);
 		
@@ -35,9 +35,9 @@ public class BookmarkServiceImpl implements BookmarkService{
 	}
 
 	@Override
-	public void deleteBookmark(String userId, Long postId) {
+	public void deleteBookmark(Long userId, Long postId) {
 		
-		Bookmark bookmark = bookmarkRepository.findByMemberUidAndPostsId(userId, postId);
+		Bookmark bookmark = bookmarkRepository.findByMemberIdAndPostsId(userId, postId);
 		
 		if (bookmark != null) bookmarkRepository.delete(bookmark);
 		

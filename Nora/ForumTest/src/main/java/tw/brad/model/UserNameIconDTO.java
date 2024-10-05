@@ -1,7 +1,5 @@
 package tw.brad.model;
 
-import java.io.File;
-import java.nio.file.Files;
 import java.util.Base64;
 
 public class UserNameIconDTO {
@@ -50,22 +48,4 @@ public class UserNameIconDTO {
 	    return result;
     }
 	
-//	private String setDefaultIcon() {
-//		
-//		try {		
-//			
-//			File file = new File("src/main/resources/static/img/icon/account_circle.svg");
-//			byte[] defaltIconByte = Files.readAllBytes(file.toPath());
-//			
-//			return Base64.getEncoder().encodeToString(defaltIconByte);
-//
-//		} catch (Exception e) {
-//			
-//			System.out.println(e);
-//			return null;
-//			
-//		}
-//		
-//	}
-
 }

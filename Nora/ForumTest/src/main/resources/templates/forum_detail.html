@@ -7,10 +7,13 @@
     <link rel="stylesheet" href="/css/a_HeaderFooter.css">
     <link rel="stylesheet" href="/css/forum_detail.css">
     <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet" />
-    <script th:inline="javascript">
+    <script th:if=${login} th:inline="javascript">
     	var like = /*[[${like}]]*/ "false";
     	var bookmark = /*[[${bookmark}]]*/ "false";
     	var report = /*[[${report}]]*/ "false";
+    	console.log("like: " + like);
+    	console.log("bookmark: " + bookmark);
+    	console.log("report: " + report);
     </script>
 </head>
 <body class="forum_body">
@@ -84,14 +87,14 @@
             </div>
         </article>
         <div class="forum_detail_btns">
-            <button id="forum_detail_like" class="forum_detail_checkBtn forum_d_like_unchecked"></button>
+            <button id="forum_detail_like" th:class="${like ? 'forum_detail_checkBtn forum_d_like_checked' : 'forum_detail_checkBtn forum_d_like_unchecked'}"></button>
             <span th:text="${post.countLikes}" id="forum_detail_countLike" class="forum_d_countLike forum_d_btnsMargin"></span>
-            <button id="forum_detail_bookmark" class="forum_detail_checkBtn forum_d_bookmark_unchecked forum_d_btnsMargin"></button>
-            <div class="forum_detail_btnsForAuthor">
+            <button id="forum_detail_bookmark" th:if=${login} th:class="${bookmark ? 'forum_detail_checkBtn forum_d_bookmark_checked forum_d_btnsMargin' : 'forum_detail_checkBtn forum_d_bookmark_unchecked forum_d_btnsMargin'}"></button>
+            <div th:if="${edit}" class="forum_detail_btnsForAuthor">
 	            <a th:href="@{/forum/edit(id=${post.post.id})}" class="forum_detail_checkBtn forum_d_edit forum_d_showBtn forum_d_btnsMargin"></a>
 	            <button id="forum_detail_delete" class="forum_detail_checkBtn forum_d_delete forum_d_btnsMargin"></button>
             </div>
-            <button id="forum_detail_report" class="forum_detail_checkBtn forum_d_report"></button>
+            <button id="forum_detail_report" th:if=${login} class="forum_detail_checkBtn forum_d_report"></button>
         </div>
     </main>
     <footer>

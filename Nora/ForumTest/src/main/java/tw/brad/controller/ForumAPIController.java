@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import jakarta.servlet.http.HttpSession;
 import tw.brad.model.Bookmark;
 import tw.brad.model.ImageDTO;
 import tw.brad.model.Images;
@@ -57,9 +59,6 @@ public class ForumAPIController {
 	private LikesService likesService;
 	
 	@Autowired
-	private LikesRepository likesRepository;
-	
-	@Autowired
 	private BookmarkService bookmarkService;
 	
 	@Autowired
@@ -78,7 +77,17 @@ public class ForumAPIController {
 			@RequestParam(defaultValue = "0") int page,
 			Model model) {
 		
-		List<PostViewDTO> posts = postsService.getPosts(country, city, key, sortBy, page);
+		List<Posts> postlist = new ArrayList<Posts>();
+		
+		if ("likes".equals(sortBy)) {
+			postlist = postsService.findPostsSortedByLikes(country, city, key, page);
+		} else {
+			Sort sort = postsService.setSort(sortBy);
+			postlist = postsService.findPosts(country, city, key, sort, page);	// 關鍵字篩選
+		}
+		
+		List<PostViewDTO> posts = postsService.getPosts(postlist);
+		
 		model.addAttribute("posts", posts);
 		
 		return posts;
@@ -96,8 +105,8 @@ public class ForumAPIController {
 			@RequestParam Integer rate,
 			@RequestParam(required = false) Boolean share,
 			@RequestParam String content,
-			@RequestParam Long authorId,
-			@RequestParam List<MultipartFile> images) {
+			@RequestParam List<MultipartFile> images,
+			HttpSession session) {
 		
 		Posts post = new Posts();
 		post.setCountry(country);
@@ -116,8 +125,9 @@ public class ForumAPIController {
 		} else {
 			post.setShare(false);
 		}
-		Member testMember = memberRepository.findById(1L).orElse(null);	// 暫時寫死的測試用member
-		Member author = memberRepository.findByUid(testMember.getUid());
+		
+		String getSessionUid = (String) session.getAttribute("userUid");
+		Member author = memberRepository.findByUid(getSessionUid);
 		System.err.println(author);
 		post.setAuthor(author);
 		
@@ -142,9 +152,8 @@ public class ForumAPIController {
 			@RequestParam Integer rate,
 			@RequestParam(required = false) Boolean share,
 			@RequestParam String content,
-			@RequestParam Long authorId,
 			@RequestParam(required = false) List<MultipartFile> images) {
-		
+		System.out.println("Update1");
 		Posts post = new Posts();
 		post.setId(id);
 		post.setCountry(country);
@@ -202,16 +211,20 @@ public class ForumAPIController {
 	}
 
 	@PostMapping("/like")
-	public Likes addLike(@RequestBody Long id) {
-		System.out.println(id);
-		Member testMember = memberRepository.findById(1L).orElse(null);	// 暫時寫死的測試用member
-		return likesService.addLike(testMember.getUid(), id);
+	public Likes addLike(@RequestBody Long id, HttpSession session) {
+		
+		String getSessionUid = (String) session.getAttribute("userUid");
+		Member member = memberRepository.findByUid(getSessionUid);
+		
+		return likesService.addLike(member.getId(), id);
 	}
 	
 	@DeleteMapping("/like")
-	public ResponseEntity<Void> deleteLike(@RequestBody Long id) {
-		Member testMember = memberRepository.findById(1L).orElse(null);	// 暫時寫死的測試用member
-		likesService.deleteLike(testMember.getUid(), id);
+	public ResponseEntity<Void> deleteLike(@RequestBody Long id, HttpSession session) {
+		
+		String getSessionUid = (String) session.getAttribute("userUid");
+		Member member = memberRepository.findByUid(getSessionUid);
+		likesService.deleteLike(member.getId(), id);
 		
 		return ResponseEntity.noContent().build();
 	}
@@ -222,27 +235,35 @@ public class ForumAPIController {
 		System.out.println("count");
 		Posts post = postsRepository.findById(id).orElse(null);
 		
-		return likesRepository.countByPosts(post);
+		return post.getLikesCount();
 	}
 	
 	@PostMapping("/bookmark")
-	public Bookmark addBookmark(@RequestBody Long id) {
-		Member testMember = memberRepository.findById(1L).orElse(null);	// 暫時寫死的測試用member
-		return bookmarkService.addBookmark(testMember.getUid(), id);
+	public Bookmark addBookmark(@RequestBody Long id, HttpSession session) {
+		
+		String getSessionUid = (String) session.getAttribute("userUid");
+		Member member = memberRepository.findByUid(getSessionUid);
+		
+		return bookmarkService.addBookmark(member.getId(), id);
 	}
 	
 	@DeleteMapping("/bookmark")
-	public ResponseEntity<Void> deleteBookmark(@RequestBody Long id) {
-		Member testMember = memberRepository.findById(1L).orElse(null);	// 暫時寫死的測試用member
-		bookmarkService.deleteBookmark(testMember.getUid(), id);
+	public ResponseEntity<Void> deleteBookmark(@RequestBody Long id, HttpSession session) {
+		
+		String getSessionUid = (String) session.getAttribute("userUid");
+		Member member = memberRepository.findByUid(getSessionUid);
+		bookmarkService.deleteBookmark(member.getId(), id);
 		
 		return ResponseEntity.noContent().build();
 	}
 	
 	@PostMapping("/report")
-	public Reports addReport(@RequestBody Long id) {
-		Member testMember = memberRepository.findById(1L).orElse(null);	// 暫時寫死的測試用member
-		return reportsService.addReport(testMember.getUid(), id);
+	public Reports addReport(@RequestBody Long id, HttpSession session) {
+		
+		String getSessionUid = (String) session.getAttribute("userUid");
+		Member member = memberRepository.findByUid(getSessionUid);
+		
+		return reportsService.addReport(member.getId(), id);
 		
 	}
 	

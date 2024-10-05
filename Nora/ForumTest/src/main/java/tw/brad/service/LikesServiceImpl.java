@@ -22,11 +22,11 @@ public class LikesServiceImpl implements LikesService{
 
 	
 	@Override
-	public Likes addLike(String userId, Long postId) {
+	public Likes addLike(Long userId, Long postId) {
 		if (userId != null && postId != null) {
 		
 		Likes like = new Likes();
-		like.setMember(memberRepository.findByUid(userId));
+		like.setMember(memberRepository.findById(userId).orElse(null));
 		like.setPosts(postsRepository.findById(postId).orElse(null));
 		
 		return likesRepository.save(like);
@@ -36,9 +36,9 @@ public class LikesServiceImpl implements LikesService{
 	}
 
 	@Override
-	public void deleteLike(String userId, Long postId) {
+	public void deleteLike(Long userId, Long postId) {
 		
-		Likes like = likesRepository.findByMemberUidAndPostsId(userId, postId);
+		Likes like = likesRepository.findByMemberIdAndPostsId(userId, postId);
 		
 		if (like != null) likesRepository.delete(like);
 	}

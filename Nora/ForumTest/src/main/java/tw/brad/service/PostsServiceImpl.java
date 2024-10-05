@@ -17,9 +17,7 @@ import tw.brad.model.PostViewDTO;
 import tw.brad.model.Posts;
 import tw.brad.model.UserNameIconDTO;
 import tw.brad.repository.ImagesRepository;
-import tw.brad.repository.LikesRepository;
 import tw.brad.repository.PostsRepository;
-import tw.brad.repository.ReportsRepository;
 
 @Service
 public class PostsServiceImpl implements PostsService {
@@ -33,13 +31,7 @@ public class PostsServiceImpl implements PostsService {
 	@Autowired
 	private ImagesRepository imagesRepository;
 	
-	@Autowired
-	private LikesRepository likesRepository;
-	
-	@Autowired
-	private ReportsRepository reportsRepository;
-	
-	
+	// 創建新文章
 	@Override
 	@Transactional
 	public Posts newPost(Posts post, List<MultipartFile> images) throws Exception {
@@ -59,53 +51,76 @@ public class PostsServiceImpl implements PostsService {
 		return newPost;
 	}
 
-
-
-	@Override
-	public List<PostViewDTO> getPosts(String country, String city, String key, String sortBy, int page) {
-		
-		Sort sort;
-		
-		switch (sortBy) {
-		case "postDate": {
-			sort = Sort.by(Sort.Order.desc("createdTime"));
-			break;
-		}
-		case "likes": {
-			sort = Sort.by(Sort.Order.desc("likes"), Sort.Order.desc("createdTime"));
-			break;
-		}
-		case "rating": {
-			sort = Sort.by(Sort.Order.desc("rate"), Sort.Order.desc("createdTime"));
-			break;
-		}
-		default:
-			sort = Sort.by(Sort.Order.desc("createdTime"));
-			break;
-		}
-		
-		Pageable pageable = PageRequest.of(page, 6, sort);
-		List<Posts> postlist;
-		
-		if (!"所有城市".equals(city) && !"all".equals(country)) {
 	
-			postlist = (key != null && !key.isEmpty())
+	// 論壇首頁卡片排序(讚數除外)
+	@Override
+	public Sort setSort (String sortBy) {
+		
+		if ("rating".equals(sortBy)) {
+			return Sort.by(Sort.Order.desc("rate"), Sort.Order.desc("createdTime"));
+		} else {
+			return Sort.by(Sort.Order.desc("createdTime"));
+		}
+	}
+	
+	// 論壇首頁關鍵字篩選
+	@Override
+	public List<Posts> findPosts (String country, String city, String key, Sort sort, int page) {
+		
+		Pageable pageable = PageRequest.of(page, 6, sort);	// 設定卡片讀取頁數、張數、排序
+			
+		if (!"所有城市".equals(city) && !"全世界".equals(country)) {
+				
+			return (key != null && !key.isEmpty())
 				? postsRepository.searchByCityAndKey(city, key, pageable).getContent()
 				: postsRepository.findByCity(city, pageable).getContent();
-			
-		} else if  (!"all".equals(country)) {
-			
-			postlist = (key != null && !key.isEmpty())
+				
+		} else if  (!"全世界".equals(country)) {
+				
+			return (key != null && !key.isEmpty())
 				? postsRepository.searchByCountryAndKey(country, key, pageable).getContent()
-	            : postsRepository.findByCountry(country, pageable).getContent();
-			
+				: postsRepository.findByCountry(country, pageable).getContent();
+				
 		} else {
-			
-			postlist = (key != null && !key.isEmpty())
+				
+			return (key != null && !key.isEmpty())
 				? postsRepository.searchByKey(key, pageable).getContent()
 				: postsRepository.findAll(pageable).getContent();
-	
 		}
+	}		
+		
+		
+	// 論壇首頁依讚數排序+關鍵字篩選
+	@Override
+	public List<Posts> findPostsSortedByLikes (String country, String city, String key, int page) {
+		
+		Pageable pageable = PageRequest.of(page, 6);
+			
+		if (!"所有城市".equals(city) && !"全世界".equals(country)) {
+				
+			return (key != null && !key.isEmpty())
+				? postsRepository.searchByCityAndKeySortedBylikes(city, key, pageable).getContent()
+				: postsRepository.findByCitySortedBylikes(city, pageable).getContent();
+				
+		} else if  (!"全世界".equals(country)) {
+				
+			return (key != null && !key.isEmpty())
+				? postsRepository.searchByCountryAndKeySortedBylikes(country, key, pageable).getContent()
+				: postsRepository.findByCountrySortedBylikes(country, pageable).getContent();
+				
+		} else {
+				
+			return (key != null && !key.isEmpty())
+				? postsRepository.searchByKeySortedBylikes(key, pageable).getContent()
+				: postsRepository.findAllSortedBylikes(pageable).getContent();
+		}
+			
+	}
+		
+	
+	// 取得論壇首頁卡片資料
+	@Override
+	public List<PostViewDTO> getPosts (List<Posts> postlist) {
 		
 		List<PostViewDTO> result = new ArrayList<PostViewDTO>();
 		
@@ -118,22 +133,22 @@ public class PostsServiceImpl implements PostsService {
 			
 			UserNameIconDTO userNameIconDTO = new UserNameIconDTO(post.getAuthor());
 			
-			Long countLikes = likesRepository.countByPosts(post);
-			Long countReports = reportsRepository.countByPosts(post);
+			Long countLikes = post.getLikesCount();
+			Long countReports = post.getReportsCount();
 			
 			result.add(new PostViewDTO(post, imageURL, createdDate, userNameIconDTO, countLikes, countReports));
 		}
 		
 		return result;
-		
 	}
 	
 	
-	
+	// 論壇文章完整內容
 	@Override
 	public PostViewDTO getPostDetail(Long id) {
 		
 		Posts post = postsRepository.findById(id).orElse(null);
+		post.setContent(post.getContent().replace("\r\n", "<br/>"));
 			
 		LocalDate createdDate = post.getCreatedTime().toLocalDate();
 		
@@ -141,8 +156,8 @@ public class PostsServiceImpl implements PostsService {
 		
 		List<String> imageURLlist = imagesService.getImgURLList(post);
 		
-		Long countLikes = likesRepository.countByPosts(post);
-		Long countReports = reportsRepository.countByPosts(post);
+		Long countLikes = post.getLikesCount();
+		Long countReports = post.getReportsCount();
 		
 		PostViewDTO result = new PostViewDTO(post, imageURLlist, createdDate, userNameIconDTO, countLikes, countReports);
 		
@@ -151,7 +166,7 @@ public class PostsServiceImpl implements PostsService {
 	}
 	
 	
-	
+	// 更新文章
 	@Override
 	@Transactional
 	public Posts updatePost(Posts post, List<MultipartFile> images) throws Exception {
@@ -194,7 +209,7 @@ public class PostsServiceImpl implements PostsService {
 	}
 
 
-
+	// 刪除文章
 	@Override
 	public void deletePost(Long id) {
 		

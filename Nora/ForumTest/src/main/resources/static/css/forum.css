@@ -92,9 +92,14 @@
 }
 
 .forum_card h2 {
+	display: -webkit-box;
     font-size: 26px;
     font-weight: bold;
     margin: 20px 22px 12px 22px;
+    -webkit-box-orient: vertical;	/* 垂直排列 */
+    -webkit-line-clamp: 1;			/* 限制最大行數*/
+    overflow: hidden;                
+    text-overflow: ellipsis;		/* 隱藏超出部分 */
 }
 
 .forum_content {
@@ -106,6 +111,8 @@
     -webkit-line-clamp: 4;			/* 限制最大行數*/
     overflow: hidden;                
     text-overflow: ellipsis;		/* 隱藏超出部分 */
+    word-wrap: break-word;        /* 使長單詞在邊界時換行 */
+    white-space: normal;          /* 允許換行 */
 }
 
 .forum_articleImg {

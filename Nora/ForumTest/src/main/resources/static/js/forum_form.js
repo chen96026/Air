@@ -263,8 +263,6 @@ $(() => {
 				})
 			}
 
-            data.append('authorId', '1')
-
             data.forEach((value, key) => {
                 console.log(key, value);
             });

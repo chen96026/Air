@@ -2,6 +2,7 @@ package tw.brad.model;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -10,6 +11,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -55,11 +57,26 @@ public class Posts {
 	private LocalDateTime createdTime;
 	
 	@ManyToOne
-	@JoinColumn(name = "authorId", referencedColumnName = "uid", nullable = false)
+	@JoinColumn(name = "authorId", nullable = false)
 	private Member author;
 	
 	
+	@OneToMany(mappedBy = "posts")
+	private List<Likes> likes;
+	
+	public Long getLikesCount() {
+		return likes != null ? (long) likes.size() : 0;
+	}
+	
+	@OneToMany(mappedBy = "posts")
+	private List<Reports> reports;
+	
+	public Long getReportsCount() {
+		return reports != null ? (long) reports.size() : 0;
+	}
+	
 
+	
 	public Long getId() {
 		return id;
 	}

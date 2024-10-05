@@ -19,7 +19,7 @@ public class Reports {
 	private Long id;
 	
 	@ManyToOne
-	@JoinColumn(name = "uid", referencedColumnName = "uid", nullable = false)
+	@JoinColumn(name = "memberId", nullable = false)
 	private Member member;
 	
 	@ManyToOne
