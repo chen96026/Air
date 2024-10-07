@@ -1,5 +1,6 @@
 package tw.air.service;
 
+import java.sql.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +37,7 @@ public class PassengerServiceImpl implements PassengerService{
 	public List<Passenger> savePassengers(List<Passenger> passengers) {
 		return passengerRepository.saveAll(passengers);
 	}
+
 
 
 

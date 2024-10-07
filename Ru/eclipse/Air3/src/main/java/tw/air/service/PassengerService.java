@@ -1,5 +1,6 @@
 package tw.air.service;
 
+import java.sql.Date;
 import java.util.List;
 
 import tw.air.model.Luggage;
@@ -15,5 +16,7 @@ public interface PassengerService {
 	 
 	public Passenger getPassengerById(Long pid);
 	
-
+//	public void validatePassportExpiry(Date idDate);
+//	
+//	public void processPassenget(Passenger passenger);
 }

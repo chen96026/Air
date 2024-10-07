@@ -148,7 +148,7 @@
                                 <div>出發日期</div>
                                 <div>2024-9-12</div>
                             </div>
-                            <div th:text="${order.finalPrice}" style="display:flex;justify-content: flex-end; margin-right: 10%; color:red;">14,437元
+                            <div th:text="${formattedPrice}" style="display:flex;justify-content: flex-end; margin-right: 10%; color:red;">14,437元
                             </div>
 
 
@@ -158,7 +158,7 @@
                                 <div style="font-size: 16px; font-weight:bold;">待付金額</div>
                                 <div style="display: flex; color:red; font-weight:bold">
                                     <div>NT$</div>
-                                    <div th:text="${order.finalPrice}">14,347</div>
+                                    <div th:text="${formattedPrice}">14,347</div>
                                     <div>元</div>
                                 </div>
                             </div>
@@ -173,14 +173,22 @@
                                     </div>
                                 </div>
                             </div>
-
                         </div>
+                       
                     </div>
 
                 </div>
+                
             </div>
+             <div style="display: flex; justify-content: center;">
+                <form style="width:80%" th:action="@{/ecpayCheckout/{oid}(oid=${order.oid})}" method="get">
+                    <button class="style_nextstep" type="submit">前往付款</button>                        	
+                /form>
+             </div>
         </div>
+        
     </div>
+    
    <footer>
         <div class="search_section_container search_footer_container">
             <div class="search_footer_col">

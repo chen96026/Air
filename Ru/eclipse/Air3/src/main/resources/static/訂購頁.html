@@ -43,6 +43,7 @@
         const ticketPriceElement = document.getElementById('ticket_price');
         const finalPriceElement = document.getElementById('final_price');
         const priceTotalElement = document.getElementById('price_total');
+        const mainTicketPriceElement = document.getElementById('main_ticket_price')
 
         function updatePassengerNumbers() {
             const sections = passengerContainer.querySelectorAll('.form_section');
@@ -51,7 +52,7 @@
                 section.querySelectorAll('input, select').forEach(input => {
                 	const name = input.getAttribute('name');
                 	if (name) {
-                        input.setAttribute('name', `${name.split('_')[0]}_${index}`);  // 確保 name 唯一性
+                        input.setAttribute('name', `${name.split('_')[0]}_${index}`);
                     }
                 });
             });
@@ -82,6 +83,7 @@
             const ticketPrice = parseInt(ticketPriceElement.textContent.replace('NT$', '').replace(',', ''), 10);
             const finalPrice = ticketPrice + totalLuggagePrice; 
 
+            mainTicketPriceElement.textContent = `NT$${finalPrice.toLocaleString()}`;
             priceTotalElement.textContent = `NT$${finalPrice.toLocaleString()}`;
             finalPriceElement.value = finalPrice; 
         }
@@ -141,11 +143,81 @@ document.addEventListener('DOMContentLoaded', function () {
     const nextStepButton = document.getElementById('next_step');
     const passengerContainer = document.getElementById('passenger_container');
     const luggageContainer = document.getElementById('luggage_container');
+    
+    document.querySelectorAll('input, select').forEach(input => {
+        input.addEventListener('blur', function () {
+            validateField(input);
+        });
+        
+    });
+    
+    
+    
+    async function validateField(input) {
+        const name = input.name;
+        const value = input.value.trim();
+        let errorMessage = '';
 
+        const requestData = {
+            [name]: value
+        };
+
+        try {
+            const response = await fetch('/validation/validateContact', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(requestData)
+            });
+
+            if (!response.ok) {
+                const errors = await response.json();
+                if (errors[name]) {
+                    errorMessage = errors[name];
+                }
+            }
+        } catch (error) {
+            console.error('驗證過程中出現問題：', error);
+        }
+
+        if (errorMessage) {
+            showFieldError(name, errorMessage);
+        } else {
+            clearFieldError(name);
+        }
+    }
+
+    function showFieldError(fieldName, message) {
+        let inputElement = document.querySelector(`[name="${fieldName}"]`);
+        if (!inputElement) {
+            console.error(`Cannot find element with name: ${fieldName}`);
+            return;
+        }
+        let errorSpan = inputElement.nextElementSibling;
+        if (!errorSpan || errorSpan.tagName !== 'SPAN') {
+            errorSpan = document.createElement('span');
+            errorSpan.style.color = 'black';
+            inputElement.parentNode.appendChild(errorSpan);
+        }
+        errorSpan.textContent = message;
+    }
+
+    function clearFieldError(fieldName) {
+        let inputElement = document.querySelector(`[name="${fieldName}"]`);
+        if (!inputElement) {
+            console.error(`Cannot find element with name: ${fieldName}`);
+            return;
+        }
+        let errorSpan = inputElement.nextElementSibling;
+        if (errorSpan && errorSpan.tagName === 'SPAN') {
+            errorSpan.textContent = '';
+        }
+    }
+    
     if (nextStepButton) {
         nextStepButton.addEventListener('click', async function (event) {
             event.preventDefault();
-
+            
+                      
             const contactData = {
                 contactName: document.getElementById('contact_name').value,
                 contactPhone: document.getElementById('contact_phone').value,
@@ -163,7 +235,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 const { cid } = await contactResponse.json();
                 console.log('獲取的 contactId:', cid);
                 
-                // 在這裡調用 createOrderData 並獲取 orderId
+                // createOrderData 並獲取 orderId
                 const orderData = createOrderData(cid);
                 const orderResponse = await fetch('/orders/createOrder', {
                     method: 'POST',
@@ -175,11 +247,11 @@ document.addEventListener('DOMContentLoaded', function () {
                 const { oid } = await orderResponse.json();
                 console.log("Order ID:", oid);
 
-                // 現在在這裡調用 createPassengerData
+                
                 const passengerData = createPassengerData(cid);
                 
                 const passengerOrderRequest = {
-                	    passengers: passengerData, // 這是一個乘客的數組
+                	    passengers: passengerData,
                 	    orderId: oid
                 	};
 
@@ -212,6 +284,10 @@ document.addEventListener('DOMContentLoaded', function () {
     	console.error('next_step not found');
     }
     
+    
+   
+
+      
     
        
     function createPassengerData(contactId, orderId) {
@@ -257,7 +333,7 @@ document.addEventListener('DOMContentLoaded', function () {
     	const finalPriceElement = document.getElementById('final_price');
         const finalPrice = finalPriceElement ? parseFloat(finalPriceElement.value) || 0 : 0;
         return{
-    		orderNumber: 'OD-' + new Date().getTime(),
+    		orderNumber: 'OD' + new Date().getTime(),
             contactId: contactId,
             finalPrice: finalPrice
     	};
@@ -519,13 +595,13 @@ document.addEventListener('DOMContentLoaded', function () {
                                 <div style="display: grid; grid-template-columns: 50% 50%; margin-bottom: 5px;">
                                     <div>
                                         <label for="lastname">姓氏：</label>
-                                        <input type="text" id="lastname" name="lastname" placeholder="姓氏" style="width:70% ;">
+                                        <input type="text" id="lastname" name="lastname" placeholder="英文姓氏" style="width:70% ;">
 
                                     </div>
 
                                     <div>
                                         <label for="firstname">名字：</label>
-                                        <input type="text" id="firstname" name="firstname" placeholder="名字" style="width:70%;">
+                                        <input type="text" id="firstname" name="firstname" placeholder="英文名字" style="width:70%;">
                                     </div>
 
                                 </div>
@@ -581,6 +657,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                         證件類型：
                                         <select style="width: 40%;" id="idtype" name="idtype">
                                             <option value="passport">護照</option>
+                                            <option value="chinaId">台胞證（台灣居民來往大陸通行證）</option>
                                         </select>
                                     </div>
 
@@ -691,17 +768,21 @@ document.addEventListener('DOMContentLoaded', function () {
             <div>
                 <h5 style="margin-left: 10%; font-size: larger;">聯繫方式</h5>
                 <div class="container_contact">
-                    <div><input type="text" placeholder="聯繫人姓名" class="container_contactinfo" id="contact_name"></div>
-                    <div><input type="tel" placeholder="手機號碼" class="container_contactinfo" id="contact_phone">
+                    <div><input type="text" placeholder="聯繫人姓名" class="container_contactinfo" id="contact_name" name="contactName"></div>
+                    <div><input type="tel" placeholder="手機號碼" class="container_contactinfo" id="contact_phone" name= "contactPhone">
                     </div>
-                    <div><input type="email" placeholder="電子郵件" class="container_contactinfo" id="contact_email">
+                    <div><input type="email" placeholder="電子郵件" class="container_contactinfo" id="contact_email" name = "contactEmail" >
                     </div>
 
                 </div>
             </div>
 
-            <div class="container" style="width: 80%; padding: 20px;margin-top: 50px;">
-                總計<br>
+            <div class="container" style="width: 80%;padding: 20px;margin-top: 50px; ">
+            <div style="display: flex; justify-content:space-between; align-items: center;">
+            	<div>總計:</div> 
+            	<div id="main_ticket_price" style="font-size:24px; color:red;">NT$ 9,999</div><br>
+            </div>
+                
                 <div style="display: flex;justify-content: center;">
                     <button class="style_nextstep" id="next_step">下一步</button>
                 </div>
