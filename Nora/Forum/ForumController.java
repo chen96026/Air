@@ -108,7 +108,7 @@ public class ForumController {
 
 			} else {
 				model.addAttribute("login", false);
-				model.addAttribute("like", false);	
+				model.addAttribute("like", false);
 				model.addAttribute("bookmark", false);	
 				model.addAttribute("report", false);
 				return "forum_detail";

@@ -10,10 +10,8 @@
     <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet" />
     <script th:if="${isEdit}" th:inline="javascript">
     	var isEdit = true;
-	    var setCountry = /*[[${post.post.country}]]*/ "all";
-	    var setCity = /*[[${post.post.city}]]*/ "所有城市";
-	    var urlParams = new URLSearchParams(window.location.search);
-	    var postId = urlParams.get('id');
+	    var country = /*[[${post.post.country}]]*/ "all";
+	    var city = /*[[${post.post.city}]]*/ "所有城市";
 	</script>
 </head>
 
