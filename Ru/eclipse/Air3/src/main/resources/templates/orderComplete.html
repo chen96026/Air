@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>訂單成立頁</title>
+
+
+    <link rel="stylesheet" th:href="@{/complete_order.css}">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <!-- 社群媒體的iconnnnnnnnnnnn -->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet" />
+
+</head>
+
+
+<body>
+    <header style="border-bottom: 10px solid #F4CFE0">
+        <nav id="header">
+            <div class="header_logo"><a href=""><img src="/picture/logo.png"></a></div>
+            <ul class="header_nav_links">
+                <li class="header_link"><a href="#"><img src="/picture/icon_logIn.png"></a></li>
+                <li class="header_link"><a href="#"><img src="/picture/icon_Forum.png" class="nav_icon"></a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div style="margin: 2%  5% 0 5% ; text-align: center; font-size: 20px;">
+        <ul>
+            <li>
+                <div class="process_bg">填寫旅客資訊</div>
+            </li>
+            <li><span class="material-symbols-outlined" style="vertical-align: middle;">arrow_forward_ios</span></li>
+            <li>
+                <div class="process_bg">會員登入/註冊</div>
+            </li>
+            <li><span class="material-symbols-outlined" style="vertical-align: middle;">arrow_forward_ios</span></li>
+            <li>
+                <div class="process_info_bg">訂單成立</div>
+            </li>
+            <li><span class="material-symbols-outlined" style="vertical-align: middle;">arrow_forward_ios</span></li>
+            <li>
+                <div class="process_bg">選擇付款方式</div>
+            </li>
+            <li><span class="material-symbols-outlined" style="vertical-align: middle;">arrow_forward_ios</span></li>
+            <li>
+                <div class="process_bg">結帳</div>
+            </li>
+            <li><span class="material-symbols-outlined" style="vertical-align: middle;">arrow_forward_ios</span></li>
+            <li>
+                <div class="process_bg">完成訂購</div>
+            </li>
+        </ul>
+    </div>
+
+    <div class="container_bg ">
+        <div class="container" style="width: 80%; padding: 20px; font-size: 20px;margin-top: 5%;">
+            <div class="box">
+                <div style="font-weight: bold;">顧客您好，</div>
+                <div style="font-weight: bold;">您的訂單已成立！</div>
+                <div style="display: flex;">
+                    請於 <div style="color: red;" th:text="${payBeforeTime}">2024-09-06 13:49前支付款項！</div>
+                </div>
+                <div>逾時您的預訂將會被取消</div>
+
+            </div>
+        </div>
+
+        <div class="container_order_title" style="margin-top: 5%;">
+            <div style="display:flex; justify-content: space-between; align-items: center;">
+                <div style="font-weight: bold; font-size:20px">訂單明細</div>
+                <div>
+                    <div style="display: flex; justify-content: space-between;">
+                        <div>訂單編號</div>
+                        <div th:text="${order.orderNumber}">00119656</div>
+
+                    </div>
+                    <div style="display:flex;justify-content: space-between;">
+                        <div>訂單成立時間&nbsp;</div>
+                        <div th:text="${formattedCreateDateTime}">2024-09-06</div>
+                    </div>
+                    
+
+                </div>
+
+            </div>
+
+        </div>
+        <div class="container_order_detail" style="margin-bottom: 5%;">
+            <div>
+                <div style="font-size: 16px; font-weight:bold;">聯絡人資訊</div>
+                <div class="container" style="width: 100%; padding: 20px;">
+                    <div class="box_orderInfo" style>
+                        <div>
+                            <div>中文姓名</div>
+                            <div th:text="${contactName}">XXXXX</div>
+                        </div>
+                        <div style="display: flex ; margin-top: 20px; width: 80%; justify-content: space-between;">
+                            <div>
+                                <div>E-MAIL</div>
+                                <div th:text="${contactEmail}">asdf@gmail.com</div>
+                            </div>
+                            <div>
+                                <div>聯絡電話</div>
+                                <div th:text="${contactPhone}">0921-123456</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div style="font-size: 16px; font-weight:bold;">確認付款金額</div>
+                    <div class="container" style="width: 100%; padding: 20px;">
+                        <div class="box_orderInfo">
+                            <div style="display: flex; justify-content:start; width:90%">
+                                <div style="margin-right:42%">訂單編號</div>
+                                <div th:text="${order.orderNumber}">00119656</div>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; width:82%;">
+                                <div>訂單成立時間</div>
+                                <div th:text="${formattedCreateDateTime}">2024-09-06</div>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; width:82%;">
+                                <div>聯絡人</div>
+                                <div th:text= "${contactName}">ＸＸＸ</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container" style="width: 100%; padding: 20px;">
+                        <div class="box">
+                            <div
+                                style="color:red; border:1px solid red; width:10%; text-align:center;border-radius: 5px;">
+                                處理中
+                            </div>
+                            <hr style="border: 1px solid gray; width: 100%;">
+                            <div style="display:flex; font-weight: bold;">
+                                <div>中華航空&nbsp;</div>
+                                <div>桃園國際機場</div>-<div>成田機場</div>
+                                <div>&nbsp;機票</div>
+                            </div>
+                            <div style="font-size: 12px; color:gray; margin: 0 20%;">人數：2</div>
+                            <div
+                                style="font-size: 12px; color:gray; display: flex; justify-content: space-between; margin: 0 10% 0 20%;">
+                                <div>出發日期</div>
+                                <div>2024-9-12</div>
+                            </div>
+                            <div th:text="${order.finalPrice}" style="display:flex;justify-content: flex-end; margin-right: 10%; color:red;">14,437元
+                            </div>
+
+
+                        </div>
+                        <div class="box">
+                            <div style="display: flex; justify-content: space-between; margin:0 10% 0 20%;">
+                                <div style="font-size: 16px; font-weight:bold;">待付金額</div>
+                                <div style="display: flex; color:red; font-weight:bold">
+                                    <div>NT$</div>
+                                    <div th:text="${order.finalPrice}">14,347</div>
+                                    <div>元</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="box">
+                            <div style="font-weight:bold; width:100%;">
+                                <div style="display: flex; justify-content: space-between; margin:0 10% 0 20%;">
+                                    <div style="font-size: 16px; font-weight:bold;">付款方式</div>
+                                    <div style="display: flex; justify-items: center;">
+                                        <input type="checkbox" name="" id="">信用卡
+                                        <img src="/picture/credit_card.png" alt="credit_card" style="width: 20px">
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+   <footer>
+        <div class="search_section_container search_footer_container">
+            <div class="search_footer_col">
+                <h4>追蹤我們</h4>
+                <hr style="width:50%">
+                <div class="search_footer_socials">
+                    <span>
+                        <a href="#"><i class="ri-twitter-fill"></i></a>
+                    </span>
+                    <span>
+                        <a href="#"><i class="ri-linkedin-fill"></i></a>
+                    </span>
+                    <span>
+                        <a href="#"><i class="ri-instagram-line"></i></a>
+                    </span>
+                    <span>
+                        <a href="#"><i class="ri-facebook-fill"></i></a>
+                    </span>
+                </div>
+            </div>
+            <div class="search_footer_col">
+                <h4>隱私</h4>
+                <hr style="width:80%">
+                <a href="#">隱私權政策</a>
+                <a href="#">隱私設定</a>
+            </div>
+            <div class="search_footer_col">
+                <h4>Cookie</h4>
+                <hr style="width:80%">
+                <a href="#">Cookie政策</a>
+                <a href="#">Cookie設定</a>
+            </div>
+            <div class="search_footer_col">
+                <h4>合作夥伴</h4>
+                <hr style="width:80%">
+                <a href="#">廣告投放</a>
+                <a href="#">旅遊宣傳合作</a>
+            </div>
+        </div>
+        <div class="search_footer_bar">
+            Copyright © 2024 Javel. All rights reserved.
+        </div>
+    </footer>
+</body>
+
+</html>

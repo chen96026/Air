@@ -30,9 +30,9 @@ public class Contact {
 	@Column(name = "ContactEmail")
 	private String contactEmail;
 	
-	
-	@OneToMany(mappedBy = "contact") 
-    private List<Orders> orders;
+//	
+//	@OneToMany(mappedBy = "contact") 
+//    private List<Orders> orders;
 
 
 
@@ -75,15 +75,6 @@ public class Contact {
 		this.contactEmail = contactEmail;
 	}
 
-
-	public List<Orders> getOrders() {
-		return orders;
-	}
-
-
-	public void setOrders(List<Orders> orders) {
-		this.orders = orders;
-	}
 
 
 

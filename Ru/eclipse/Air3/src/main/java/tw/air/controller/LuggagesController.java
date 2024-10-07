@@ -36,15 +36,28 @@ public class LuggagesController {
 	
 	@PostMapping("/createluggages")
 	public List<Luggage> createLuggages(@RequestBody List<Luggage> luggageList) {
-	    for (Luggage luggage : luggageList) {
-	        Passenger passenger = passengerService.getPassengerById(luggage.getPassenger().getPid());
-	        Orders orders = ordersService.getOrderById(luggage.getOrders().getOid());  // 確保這裡的 oid 是有效的
-	        luggage.setPassenger(passenger);
-	        luggage.setOrders(orders); // 將 orders 設置為查詢到的 orders
+		try {
+	        for (Luggage luggage : luggageList) {
+	            Passenger passenger = passengerService.getPassengerById(luggage.getPassenger().getPid());
+	            Orders orders = ordersService.getOrderById(luggage.getOrders().getOid());
+
+	            if (passenger == null) {
+	                throw new IllegalArgumentException("Invalid Passenger ID: " + luggage.getPassenger().getPid());
+	            }
+	            if (orders == null) {
+	                throw new IllegalArgumentException("Invalid Order ID: " + luggage.getOrders().getOid());
+	            }
+
+	            luggage.setPassenger(passenger);
+	            luggage.setOrders(orders);
+	        }
+
+	        return luggagesService.saveAllLuggages(luggageList);
+	    } catch (Exception e) {
+	        // 輸出錯誤日誌
+	        System.err.println("Error processing luggage data: " + e.getMessage());
+	        throw e;  // 重新拋出異常以便 Spring 進行處理
 	    }
-	    
-	    List<Luggage> savedLuggageList = luggagesService.saveAllLuggages(luggageList);
-	    return savedLuggageList;
 	}
 	
 	@GetMapping("/getluggages")

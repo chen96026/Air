@@ -7,7 +7,7 @@ import tw.air.model.Luggage;
 public interface LuggagesService {
 	
 	
-	public List<Luggage> saveAllLuggages(List<Luggage> luggageList);
+	public List<Luggage> saveAllLuggages(List<Luggage> luggages);
 	
     public List<Luggage> getAllLuggages();
 	

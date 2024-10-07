@@ -49,10 +49,6 @@ public class Luggage {
 	    RETURN
 	}
 	
-	
-	
-	
-	
 	@Column(name = "AdditionalLuggage")
 	private String addLuggage;
 	

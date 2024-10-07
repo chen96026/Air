@@ -15,6 +15,10 @@ public class LuggagesServiceImpl implements LuggagesService{
 	@Autowired
 	private LuggagesRepository luggagesRepository;
 	
+    public Luggage saveLuggage(Luggage luggage) {
+        return luggagesRepository.save(luggage);
+    }
+	
 	@Override
     public List<Luggage> saveAllLuggages(List<Luggage> luggageList) {
         return luggagesRepository.saveAll(luggageList);

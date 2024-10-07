@@ -35,148 +35,287 @@
 
 
 </script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const passengerContainer = document.getElementById('passenger_container');
+        const luggageContainer = document.getElementById('luggage_container');
+        const priceLuggageElement = document.getElementById('price_luggage');
+        const ticketPriceElement = document.getElementById('ticket_price');
+        const finalPriceElement = document.getElementById('final_price');
+        const priceTotalElement = document.getElementById('price_total');
+
+        function updatePassengerNumbers() {
+            const sections = passengerContainer.querySelectorAll('.form_section');
+            sections.forEach((section, index) => {
+                section.querySelector('div').textContent = `旅客${index + 1}(成人票)`;
+                section.querySelectorAll('input, select').forEach(input => {
+                	const name = input.getAttribute('name');
+                	if (name) {
+                        input.setAttribute('name', `${name.split('_')[0]}_${index}`);  // 確保 name 唯一性
+                    }
+                });
+            });
+        }
+
+        function updateLuggageNumbers() {
+            const luggageSections = luggageContainer.querySelectorAll('.luggageform_section');
+            luggageSections.forEach((luggageSection, index) => {
+                luggageSection.querySelector('div').textContent = `旅客${index + 1} 行李:`;
+            });
+        }
+
+        function updatePrice() {
+            const selectElements = document.querySelectorAll('select.label_addluggage');
+            let totalLuggagePrice = 0; 
+            selectElements.forEach(selectElement => {
+                const selectedOption = selectElement.options[selectElement.selectedIndex];
+                const priceTextMatch = selectedOption.textContent.match(/NT\$\d+,\d+/);
+
+                if (priceTextMatch) {
+                    totalLuggagePrice += parseInt(priceTextMatch[0].replace('NT$', '').replace(',', ''), 10);
+                }
+            });
+
+            priceLuggageElement.textContent = totalLuggagePrice > 0 ? `NT$${totalLuggagePrice.toLocaleString()}` : '免費';
+
+            
+            const ticketPrice = parseInt(ticketPriceElement.textContent.replace('NT$', '').replace(',', ''), 10);
+            const finalPrice = ticketPrice + totalLuggagePrice; 
+
+            priceTotalElement.textContent = `NT$${finalPrice.toLocaleString()}`;
+            finalPriceElement.value = finalPrice; 
+        }
+
+        document.getElementById('add_passenger').addEventListener('click', function () {
+            const newSection = passengerContainer.querySelector('.form_section').cloneNode(true);
+            const newLuggageSection = luggageContainer.querySelector('.luggageform_section').cloneNode(true);
+            const deleteButton = newSection.querySelector('.delete_btn');
+
+            deleteButton.style.display = 'block';
+            deleteButton.addEventListener('click', function () {
+                passengerContainer.removeChild(newSection);
+                luggageContainer.removeChild(newLuggageSection);
+                updatePassengerNumbers();
+                updateLuggageNumbers();
+                updatePrice();
+            });
+            
+            newSection.querySelectorAll('input[type="text"], input[type="number"], input[type="date"]').forEach(input=>{
+            	input.value='';
+            });
+            
+            newSection.querySelectorAll('[id]').forEach(input=>{
+            	input.removeAttribute('id');
+            })
+            
+            const newSelectElements = newLuggageSection.querySelectorAll('.label_addluggage');
+            newSelectElements.forEach(selectElement => {
+                selectElement.addEventListener('change', updatePrice);
+            });
+            
+            passengerContainer.appendChild(newSection);
+            luggageContainer.appendChild(newLuggageSection);
+            updatePassengerNumbers();
+            updateLuggageNumbers();
+            updatePrice();  
+        });
+
+        document.querySelectorAll('.form_section').forEach(section => {
+            section.querySelector('.delete_btn').style.display = 'none';
+        });
+        
+        updatePassengerNumbers();
+        updateLuggageNumbers();
+        updatePrice();
+
+        const allSelectElements = document.querySelectorAll('.label_addluggage');
+        allSelectElements.forEach(selectElement => {
+            selectElement.addEventListener('change', updatePrice); 
+        });
+    });
+</script>
+
 
 <script>
 document.addEventListener('DOMContentLoaded', function () {
     const nextStepButton = document.getElementById('next_step');
-    let passengerId;
-    let orderId;
+    const passengerContainer = document.getElementById('passenger_container');
+    const luggageContainer = document.getElementById('luggage_container');
 
     if (nextStepButton) {
-        nextStepButton.addEventListener('click', function (event) {
+        nextStepButton.addEventListener('click', async function (event) {
             event.preventDefault();
 
-            // 初始化聯絡人資料
             const contactData = {
                 contactName: document.getElementById('contact_name').value,
                 contactPhone: document.getElementById('contact_phone').value,
                 contactEmail: document.getElementById('contact_email').value,
             };
 
-            // 初始化乘客資料
-            const passengerData = {
-                lastName: document.getElementById('lastname').value,
-                firstName: document.getElementById('firstname').value,
-                gender: document.getElementById('gender').value,
-                birthday: document.getElementById('dob').value,
-                country: document.getElementById('country').value,
-                idType: document.getElementById('idtype').value,
-                idNumber: document.getElementById('idnumber').value,
-                idDate: document.getElementById('dop').value,
-                // contactId 會在聯絡人成功提交後設置
-            };
-
-            // 提交聯絡人資料
-            fetch('/orders/createContact', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(contactData)
-            })
-            .then(contactResponse => {
-                if (!contactResponse.ok) {
-                    throw new Error('Contact submission failed: ' + contactResponse.statusText);
-                }
-                return contactResponse.json();
-            })
-            .then(contactData => {
-                console.log('聯絡人已成功提交:', contactData);
-                passengerData.contactId = contactData.cid; // 在這裡設置聯絡人 ID
-
-                return fetch('/passenger/createpassenger', {
+            try {
+                const contactResponse = await fetch('/orders/createContact', {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(passengerData)
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify(contactData)
                 });
-            })
-            .then(passengerResponse => {
-                if (!passengerResponse.ok) {
-                    throw new Error('Passenger submission failed: ' + passengerResponse.statusText);
-                }
-                return passengerResponse.json();
-            })
-            .then(passengerData => {
-                console.log('乘客已成功提交:', passengerData);
-                passengerId = passengerData.pid;
 
-                // 構建訂單資料
-                const orderData = {
-                    orderNumber: 'ORDER-' + new Date().getTime(),
-                    contact: { 
-                        CId: passengerData.contactId // 確保這裡的值是有效的
-                    },
-                };
-
-                console.log('訂單資料:', JSON.stringify(orderData, null, 2));
-
-                return fetch('/orders/createOrder', {
+                if (!contactResponse.ok) throw new Error ('Contact submission failed');
+                const { cid } = await contactResponse.json();
+                console.log('獲取的 contactId:', cid);
+                
+                // 在這裡調用 createOrderData 並獲取 orderId
+                const orderData = createOrderData(cid);
+                const orderResponse = await fetch('/orders/createOrder', {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
+                    headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(orderData)
                 });
-            })
-            .then(orderResponse => {
-                if (!orderResponse.ok) {
-                    throw new Error('訂單提交失敗: ' + orderResponse.statusText);
-                }
-                return orderResponse.json();
-            })
-            .then(orderData => {
-                console.log('訂單提交成功', orderData);
-                orderId = orderData.oid;
 
-                // 收集行李資料
-                const luggageData = [
-                    {
-                        tripType: "OUTBOUND",
-                        addLuggage: document.getElementById('add_luggage_1').value, // 例如: 取得行李選項
-                        lgprice: getLuggagePrice(document.getElementById('add_luggage_1').value),
-                        passengerId: passengerId, // 設置乘客 ID
-                        orderId: orderId // 設置訂單 ID
-                    },
-                    {
-                        tripType: "RETURN",
-                        addLuggage: document.getElementById('add_returnluggage_2').value,
-                        lgprice: getLuggagePrice(document.getElementById('add_returnluggage_2').value),
-                        passengerId: passengerId,
-                        orderId: orderId
-                    }
-                ];
+                if (!orderResponse.ok) throw new Error('Order submission failed');
+                const { oid } = await orderResponse.json();
+                console.log("Order ID:", oid);
 
-                // 提交行李數據
-                return fetch('/luggage/createluggages', {
+                // 現在在這裡調用 createPassengerData
+                const passengerData = createPassengerData(cid);
+                
+                const passengerOrderRequest = {
+                	    passengers: passengerData, // 這是一個乘客的數組
+                	    orderId: oid
+                	};
+
+           
+                const passengerResponse = await fetch('/passenger/createpassenger', {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(luggageData)
+                    headers: {'Content-Type': 'application/json' },
+                    body: JSON.stringify(passengerOrderRequest)
                 });
-            })
-            .then(luggageResponse => {
-                if (!luggageResponse.ok) {
-                    throw new Error('Luggage submission failed: ' + luggageResponse.statusText);
-                }
-                return luggageResponse.json();
-            })
-            .then(luggageData => {
-                console.log('行李資訊已成功更新:', luggageData);
-                alert('所有資料已成功提交');
-            })
-            .catch(error => {
-                console.log('資料提交過程中出現問題:', error);
-                alert('提交失敗: ' + error.message);
-            });
-        });
-    } else {
-        console.error('next_step not found.');
-    }
 
-    // 獲取行李價格的函數
+                if (!passengerResponse.ok) throw new Error('Passenger submission failed');
+
+                
+                const passengerResponseData = await passengerResponse.json(); 
+                console.log("Passenger response data:", passengerResponseData);
+                
+                const savedPassengerIds = passengerResponseData.map(passenger => passenger.pid);
+                console.log("Passenger IDs:", savedPassengerIds);
+
+                await submitLuggageData(oid, savedPassengerIds);
+
+                alert('所有資料已提交');
+                window.location.href = `/orders/Complete/${oid}`;
+            } catch (error) {
+                console.error('資料提交過程中出現問題：', error);
+                alert('提交失敗：' + error.message);
+            }
+        });
+    }else{
+    	console.error('next_step not found');
+    }
+    
+    
+       
+    function createPassengerData(contactId, orderId) {
+        const passengers = [];
+        const sections = document.querySelectorAll('.form_section');
+        for (let i = 0; i < sections.length; i++) {
+            const section = sections[i];
+
+            const lastNameInput = section.querySelector(`[name="lastname_${i}"]`);
+            const firstNameInput = section.querySelector(`[name="firstname_${i}"]`);
+            const genderInput = section.querySelector(`[name="gender_${i}"]`);
+            const birthdayInput = section.querySelector(`[name="dob_${i}"]`);
+            const countryInput = section.querySelector(`[name="country_${i}"]`);
+            const idTypeInput = section.querySelector(`[name="idtype_${i}"]`);
+            const idNumberInput = section.querySelector(`[name="idnumber_${i}"]`);
+            const idDateInput = section.querySelector(`[name="dop_${i}"]`);
+
+            if (!lastNameInput || !firstNameInput || !genderInput || !birthdayInput || !countryInput || !idTypeInput || !idNumberInput || !idDateInput) {
+                console.error(`旅客 ${i + 1} 的某些欄位沒有找到`);
+                return passengers; 
+            }
+
+            const passenger = {
+                lastName: lastNameInput.value,
+                firstName: firstNameInput.value,
+                gender: genderInput.value,
+                birthday: birthdayInput.value,
+                country: countryInput.value,
+                idType: idTypeInput.value,
+                idNumber: idNumberInput.value,
+                idDate: idDateInput.value,
+                contactId: contactId,
+                orderId: orderId
+            };
+
+            console.log(`旅客 ${i+1}資料:`, passenger);
+            passengers.push(passenger);
+        }
+        return passengers;
+    }
+    
+    function createOrderData(contactId){
+    	const finalPriceElement = document.getElementById('final_price');
+        const finalPrice = finalPriceElement ? parseFloat(finalPriceElement.value) || 0 : 0;
+        return{
+    		orderNumber: 'OD-' + new Date().getTime(),
+            contactId: contactId,
+            finalPrice: finalPrice
+    	};
+    	
+    }
+   
+    
+    async function submitLuggageData(orderId, passengerIds) {
+        const luggageData = [];
+        const luggageSections = document.querySelectorAll('.luggageform_section');
+        
+        luggageSections.forEach((luggageSection, index) => {
+        	const tripType = luggageSection.dataset.tripType;
+            const luggageOption1 = luggageSection.querySelector('#add_luggage_1').value;
+            const luggageOption2 = luggageSection.querySelector('#add_returnluggage_2').value;
+            
+            const passengerId = passengerIds[index];
+            if (passengerId === undefined) {
+                console.error(`Passenger ID at index ${index} is undefined.`);
+                return;  
+            }
+            
+            if (index < 0 || index >= passengerIds.length) {
+                console.error(`Index ${index} is out of bounds for passengerIds.`);
+                return;  
+            }
+
+            if (luggageOption1 !== "add_lg") { 
+                luggageData.push({
+                    tripType: "OUTBOUND", 
+                    addLuggage: luggageOption1,
+                    lgprice: getLuggagePrice(luggageOption1),
+                    passenger: { pid: passengerId },
+                    orders: { oid: orderId }
+                });
+            }
+
+            if (luggageOption2 !== "add_lg") { 
+                luggageData.push({
+                    tripType: "RETURN", 
+                    addLuggage: luggageOption2,
+                    lgprice: getLuggagePrice(luggageOption2),
+                    passenger: { pid: passengerId },
+                    orders: { oid: orderId }
+                });
+            }
+        });
+
+        const luggageResponse = await fetch('/luggage/createluggages', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(luggageData) 
+        });   
+
+        if (!luggageResponse.ok) throw new Error('Luggage submission failed');
+    }
+   
+              
     function getLuggagePrice(optionValue) {
         switch (optionValue) {
             case 'non_lg':
@@ -380,13 +519,13 @@ document.addEventListener('DOMContentLoaded', function () {
                                 <div style="display: grid; grid-template-columns: 50% 50%; margin-bottom: 5px;">
                                     <div>
                                         <label for="lastname">姓氏：</label>
-                                        <input type="text" id="lastname" placeholder="姓氏" style="width:70% ;">
+                                        <input type="text" id="lastname" name="lastname" placeholder="姓氏" style="width:70% ;">
 
                                     </div>
 
                                     <div>
                                         <label for="firstname">名字：</label>
-                                        <input type="text" id="firstname" placeholder="名字" style="width:70%;">
+                                        <input type="text" id="firstname" name="firstname" placeholder="名字" style="width:70%;">
                                     </div>
 
                                 </div>
@@ -394,17 +533,17 @@ document.addEventListener('DOMContentLoaded', function () {
                                 <div style="display: grid; grid-template-columns: 22% 38% 40%;margin-bottom: 10px;">
                                     <div>
                                         <label for="gender">性別：</label>
-                                        <select id="gender" style="width: 45%;">
+                                        <select id="gender" name="gender" style="width: 45%;">
                                             <option value="male">男性</option>
                                             <option value="female">女性</option>
                                         </select>
                                     </div>
                                     <div>
                                         <label for="dob">出生日期：</label>
-                                        <input type="date" id="dob" style="width: 55%;">
+                                        <input type="date" id="dob" name="dob" style="width: 55%;">
                                     </div>
                                     <div>
-                                        證件號碼：<input id="idnumber" type="text" style="width:52%;">
+                                        證件號碼：<input id="idnumber" name="idnumber" type="text" style="width:52%;">
                                     </div>
 
 
@@ -412,7 +551,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                 <div style="display: grid; grid-template-columns: 22% 30% 46%;">
                                     <div>
                                         <label for="">國籍：</label>
-                                        <select style="width: 50%;" id="country">
+                                        <select style="width: 50%;" id="country" name="country">
                                             <option value="tw">台灣</option>
                                             <option value="us">美國</option>
                                             <option value="cn">中國</option>
@@ -440,13 +579,13 @@ document.addEventListener('DOMContentLoaded', function () {
                                     </div>
                                     <div>
                                         證件類型：
-                                        <select style="width: 40%;" id="idtype">
+                                        <select style="width: 40%;" id="idtype" name="idtype">
                                             <option value="passport">護照</option>
                                         </select>
                                     </div>
 
                                     <div>
-                                        證件有效日期至：<input type="date" id="dop" style="width: 45%;">
+                                        證件有效日期至：<input type="date" id="dop" name="dop" style="width: 45%;">
                                     </div>
                                 </div>
                             </form>

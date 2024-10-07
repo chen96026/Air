@@ -51,16 +51,26 @@ public class Passenger {
 	@Column(name = "Contact_Id")
 	private Long contactId;
 	
-	
 	@ManyToOne
-	@JoinColumn(name = "Order_id",referencedColumnName = "Oid")
+	@JoinColumn(name = "Order_Id",referencedColumnName = "Oid")
 	private Orders orders;
 	
 	@ManyToOne
     @JoinColumn(name = "Contact_Id", referencedColumnName = "CId", insertable = false, updatable = false)
     private Contact contact;
 	
+	@OneToMany(mappedBy = "passenger",cascade = CascadeType.ALL)
+	private List<Luggage> luggageList;
 	
+	
+	public List<Luggage> getLuggageList() {
+		return luggageList;
+	}
+
+	public void setLuggageList(List<Luggage> luggageList) {
+		this.luggageList = luggageList;
+	}
+
 	public Date getIdDate() {
 		return idDate;
 	}

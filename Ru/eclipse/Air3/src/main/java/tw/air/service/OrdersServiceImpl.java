@@ -28,8 +28,7 @@ public class OrdersServiceImpl implements OrdersService{
 
 	@Override
 	public Orders getOrderById(long oid) {
-		Optional<Orders> orderOptional = ordersRepository.findById(oid);
-		return orderOptional.orElse(null);
+		return ordersRepository.findById(oid).orElse(null);
 	}
 
 	

@@ -10,7 +10,7 @@ public interface OrdersService {
 	
 	public List<Orders> getAllOrders();
 	
-	public Orders getOrderById(long id);
+	public Orders getOrderById(long oid);
 	
 
 

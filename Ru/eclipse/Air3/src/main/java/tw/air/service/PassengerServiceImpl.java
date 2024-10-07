@@ -32,6 +32,11 @@ public class PassengerServiceImpl implements PassengerService{
 		return passenger;
 	}
 
+	@Override
+	public List<Passenger> savePassengers(List<Passenger> passengers) {
+		return passengerRepository.saveAll(passengers);
+	}
+
 
 
 }
