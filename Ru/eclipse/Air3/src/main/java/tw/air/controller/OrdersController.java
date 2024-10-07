@@ -1,5 +1,6 @@
 package tw.air.controller;
 
+import java.text.DecimalFormat;
 import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
@@ -101,10 +102,14 @@ public class OrdersController {
 	    String formattedCreateDateTime = order.getCreateDate().format(formatter);
 	    
 	    LocalDateTime createDate = order.getCreateDate();
-	    OffsetDateTime offsetDateTime = createDate.atOffset(ZoneOffset.ofHours(1));
-	    String payBeforeTime = offsetDateTime.format(formatter);
+	    LocalDateTime adjustedTime = createDate.plusHours(1);
+	    String payBeforeTime = adjustedTime.format(formatter);
 	    
 	    Contact contact = contactRepository.findByCId(order.getContactId());
+	    
+	    DecimalFormat df = new DecimalFormat("#,###");
+	    String formattedPrice = df.format(order.getFinalPrice());
+	    		
 	    
 	    model.addAttribute("order", order); 
 	    model.addAttribute("contactName", contact.getContactName());
@@ -112,6 +117,9 @@ public class OrdersController {
 	    model.addAttribute("contactPhone", contact.getContactPhone()); 
 	    model.addAttribute("formattedCreateDateTime", formattedCreateDateTime);
 	    model.addAttribute("payBeforeTime", payBeforeTime + " 前支付款項！");
+	    model.addAttribute("formattedPrice", formattedPrice);
+	    
+	    
 	    return "orderComplete";
 	}
 

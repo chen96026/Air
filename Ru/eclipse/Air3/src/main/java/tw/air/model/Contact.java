@@ -24,6 +24,7 @@ public class Contact {
 	@Column(name = "ContactName")
 	private String contactName;
 	
+	
 	@Column(name = "ContactPhone")
 	private String contactPhone;
 	

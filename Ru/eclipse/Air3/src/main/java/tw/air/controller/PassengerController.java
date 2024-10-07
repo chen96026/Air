@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.cassandra.CassandraProperties.Request;
+import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,10 +13,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.BindingResult;
+import javax.validation.Valid;
+import java.util.stream.Collectors;
 
 import tw.air.model.Orders;
 import tw.air.model.Orders.PassengerOrderRequest;
 import tw.air.model.Passenger;
+import tw.air.service.OrdersService;
 import tw.air.service.PassengerService;
 
 @RequestMapping("/passenger")
@@ -24,11 +29,21 @@ public class PassengerController {
 
 	@Autowired
 	private PassengerService passengerService;
+	
+	@Autowired
+	private OrdersService ordersService;
 
 	@PostMapping("/createpassenger")
-	public ResponseEntity<Object> createPassenger(@RequestBody PassengerOrderRequest requestBody) {
+	public ResponseEntity<Object> createPassenger(@Valid @RequestBody PassengerOrderRequest requestBody, BindingResult result) {
 	    List<Passenger> passengers = requestBody.getPassengers();
 	    Long orderId = requestBody.getOrderId();
+	    
+	    if (result.hasErrors()) {
+	    	String errorMessage = result.getAllErrors().stream()
+	    								.map(DefaultMessageSourceResolvable::getDefaultMessage)
+	    								.collect(Collectors.joining(", "));
+	    	return ResponseEntity.badRequest().body("Validation Error: " + errorMessage);
+	    }
 
 	    if (passengers == null || passengers.isEmpty()) {
 	        return ResponseEntity.badRequest().body("Passenger list cannot be empty");
@@ -55,6 +70,7 @@ public class PassengerController {
 	                             .body("Internal Server Error: " + e.getMessage());
 	    }
 	}
+	
 	
 	
 	@GetMapping("/getpassenger")

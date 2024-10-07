@@ -303,3 +303,20 @@ li {
 .box_orderInfo div > div {
     margin: 5px 0;
 }
+
+
+.style_nextstep {
+    width: 50%;
+    height: 40px;
+    margin-top: 5%;
+    font-size: 20px;
+    font-weight: bold;
+    background-color: #F4CFE0;
+    border-radius: 5px;
+    border: none;
+}
+
+
+
+
+

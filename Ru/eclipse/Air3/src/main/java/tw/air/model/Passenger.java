@@ -13,6 +13,9 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Past;
+
 import java.util.List;
 
 @Entity
@@ -25,15 +28,19 @@ public class Passenger {
 	private Long pid;
 	
 	@Column(name = "LastName")
+	@NotEmpty(message = "姓氏為必填項")
 	private String lastName;
 	
 	@Column(name = "FirstName")
+	@NotEmpty(message = "名字為必填項")
 	private String firstName;
 	
 	@Column(name = "Gender")
+	@NotEmpty(message = "性別為必選項")
 	private String gender;
 	
 	@Column(name = "Birthday")
+	@Past(message = "出生日期必須是過去的日期")
 	private Date birthday;
 	
 	@Column(name = "IdType")
@@ -43,6 +50,7 @@ public class Passenger {
 	private Long idNumber;
 	
 	@Column(name = "Country")
+	@NotEmpty(message = "國籍為必選項")
 	private String country;
 	
 	@Column(name = "idDate")
