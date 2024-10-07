@@ -1,0 +1,110 @@
+@charset "UTF-8";
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
+}
+
+body {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f9f9f9;
+}
+
+a {
+  text-decoration: none;
+}
+
+#member_Main {
+  background-color: #ffffff;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 3vh;
+  align-items: center;
+  justify-content: center;
+}
+#member_Forum_MiddleSide {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  height: 100%;
+  width: 55vw;
+}
+#member_Forum_MiddleSide a {
+  text-decoration: none;
+  color: black;
+}
+#member_Forum_MiddleSide a:hover {
+  text-decoration: underline;
+  color: rgb(0, 0, 0);
+}
+.member_forum_card {
+  margin: 5vh 0.8vw;
+  background-color: #FFFCFC;
+  display: flex;
+  flex-direction: column;
+  width: 16vw;
+  height: 45vh;
+  border-radius: 10px;
+  box-shadow: 0 5px 5px rgba(80, 80, 80, 0.4);
+}
+.member_forum_card article {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.member_forum_articleImg {
+  width: 100%;
+  border-radius: 10px 10px 0 0;
+}
+.member_forum_card article h3 {
+  align-items: start;
+  font-size: 1.3vw;
+  font-weight: bold;
+  margin: 2vh 1vw 2vh 1vw;
+}
+.member_forum_articleMore {
+  font-size: 0.8vw;
+  line-height: 3vh;
+  margin: 0 1vw 0 1vw;
+  max-width: 12vw;
+  max-height: 10vh;
+  white-space: normal;
+  overflow-wrap: break-word;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
+.member_forum_articleMore::after {
+  content: "前往文章";
+}
+.member_forum_card div {
+  display: flex;
+  height: 8vh;
+  gap: 1vw;
+  justify-content: center;
+  align-items: center;
+}
+.member_forum_authorImg {
+  -webkit-clip-path: circle(40%);
+          clip-path: circle(40%);
+  width: 3vw;
+}
+.member_forum_author,
+.member_forum_postDate {
+  display: inline-block;
+  color: #1f1f1f;
+  margin: 0;
+  font-size: 0.9vw;
+}
+.member_forum_postDate {
+  display: inline-block;
+  color: #777777;
+  font-size: 0.8vw;
+}

@@ -1,7 +1,7 @@
 const images = [
-  './img/倒高腳杯.jpg',
-  './img/調酒中.jpg',
-  './img/寧靜.jpg'
+  '../img/倒高腳杯.jpg',
+  '../img/調酒中.jpg',
+  '../img/寧靜.jpg'
 ];
 
 let currentIndex = 0;

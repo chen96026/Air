@@ -39,12 +39,7 @@ function member_load_MiddleSide_Order(status) {
 
   const Order_currentState = Order_stateMap[status] || '待出發';
 
-  const Order_content = `  <div id="member_Order_Operation">
-          <div class="member_Order_Button"><span id="member_Order_Depart" class="member_Order_InsideButton">目前訂單</span></div>
-          <div class="member_Order_Button"><span id="member_Order_Finish" class="member_Order_InsideButton">歷史訂單</span></div>
-          <div class="member_Order_Button"><span id="member_Order_Cancel" class="member_Order_InsideButton">已取消訂單</span></div>
-        </div>
-        
+  const Order_content = `    
         <section id="member_Order_Ticket">
           <section id="member_Order_TopSchedule">
               <div id="member_Order_TotalSchedule">

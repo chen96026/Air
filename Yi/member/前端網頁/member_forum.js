@@ -23,10 +23,6 @@ function member_forum_generateHTML(member_forum_imageUrl, member_forum_title, me
 
 function member_load_MiddleSide_Forum(Forum_type = "article") {
   let Forum_content = `
-    <div id="member_Forum_Operation">
-      <div class="member_Forum_Button"><span id="member_Forum_MyArticle" class="member_Forum_InsideButton">我的文章</span></div>
-      <div class="member_Forum_Button"><span id="member_Forum_MyCollection" class="member_Forum_InsideButton">文章收藏</span></div>
-    </div>
     <div id="member_Forum_MiddleSide">
   `;
 
