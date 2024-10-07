@@ -1,3 +1,5 @@
+https://hackmd.io/@Kiwibird/r1FE4uU0C
+
 1. 新增一個spring starter project，只需要Spring Web 和 Spring Boot Devtools依賴
 
 2. 到 https://github.com/ECPay/ECPayAIO_Java 下載整份SDK
