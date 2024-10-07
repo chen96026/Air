@@ -1,0 +1,25 @@
+1. 新增一個spring starter project，只需要Spring Web 和 Spring Boot Devtools依賴
+
+2. 到 https://github.com/ECPay/ECPayAIO_Java 下載整份SDK
+
+3. 設定Log4j Core依賴在pom內
+
+<!-- <https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core> -->
+<dependency>
+	<groupId>org.apache.logging.log4j</groupId>
+        <artifactId>log4j-core</artifactId>
+        <version>2.17.1</version>
+</dependency>
+4. 將SDK中ecpay整個資料夾丟到src/main/java底下
+
+5. 將SDK中payment_conf.xml檔案進到src/main/resources底下
+
+6. 把報錯的ecpay.payment.integration.AllInOne.java的導入包
+
+import javax.servlet.http.HttpServletRequest;
+改成
+import jakarta.servlet.http.HttpServletRequest;
+
+7. 製作service，裡面放上各種設定(obj.set. . .)，最後製作表單回傳
+
+8. 製作controller，有兩個路由，第一個只是單純呼叫service的表單，第二個是接收交易成功後回傳資訊的路徑。 
