@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="zh-Hans-TW" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>旅遊論壇</title>
+    <link rel="stylesheet" href="/css/a_HeaderFooter.css">
+    <link rel="stylesheet" href="/css/forum.css">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet" />
+    <script th:if="${country != null}" th:inline="javascript">
+	    var setCountry = /*[[${country}]]*/ "全世界";
+	    var setCity = /*[[${city}]]*/ "所有城市";
+	    console.log("Country value:", setCountry);
+	    console.log("City value:", setCity);
+	</script>
+</head>
+<body class="forum_body">
+    <header>
+        <nav id="header">
+            <div class="header_logo"><a href=""><img src="../Yang/圖片/logo.png"></a></div>
+            <ul class="header_nav_links">
+                <li class="header_link"><a href="#"><img src="../Yang/圖片/icon_logIn.png"></a></li>
+                <li class="header_link"><a href="/forum"><img src="../Yang/圖片/icon_Forum.png"></a></li>
+            </ul>
+        </nav>
+    </header>
+    <main class="forum_main">
+        <div class="forum_search">
+            <h1>探索世界各地的旅遊心得</h1>
+            	<select name="sortBy" id="forum_sort">
+                    <option value="postDate">日期新到舊</option>
+                    <option value="likes">讚數多到少</option>
+                    <option value="rating">星級高到低</option>
+                </select>
+                <select name="country" id="forum_select_country">
+                    <optgroup label="不分國家">
+                        <option value="全世界">全世界</option>
+                    </optgroup>
+                </select>
+                <select name="city" id="forum_select_city">
+                    <optgroup label="全世界">
+                        <option value="所有城市">所有城市</option>
+                    </optgroup>
+                </select>
+                <input type="search" name="key" id="forum_search_key" placeholder="輸入 文章標題 或 HashTag 關鍵字" th:value="${key != null ? key : ''}">
+        </div>
+        <div class="forum_cards" id="cards-container"></div>
+        <div id="loading" class="forum_loading">
+            <p>Loading...</p>
+        </div>
+    </main>
+    <div class="forum_write">
+        <a href="/forum/edit">
+            <div class="forum_writeImg"></div>
+            <p class="forum_writeP">撰寫心得</p>
+        </a>
+    </div>
+    <footer>
+        <div class="search_section_container search_footer_container">
+            <div class="search_footer_col">
+                <h4>追蹤我們</h4>
+                <hr style="width:50%">
+                <div class="search_footer_socials">
+                    <span>
+                        <a href="#"><i class="ri-twitter-fill"></i></a>
+                    </span>
+                    <span>
+                        <a href="#"><i class="ri-linkedin-fill"></i></a>
+                    </span>
+                    <span>
+                        <a href="#"><i class="ri-instagram-line"></i></a>
+                    </span>
+                    <span>
+                        <a href="#"><i class="ri-facebook-fill"></i></a>
+                    </span>
+                </div>
+            </div>
+            <div class="search_footer_col">
+                <h4>隱私</h4>
+                <hr style="width:80%">
+                <a href="#">隱私權政策</a>
+                <a href="#">隱私設定</a>
+            </div>
+            <div class="search_footer_col">
+                <h4>Cookie</h4>
+                <hr style="width:80%">
+                <a href="#">Cookie政策</a>
+                <a href="#">Cookie設定</a>
+            </div>
+            <div class="search_footer_col">
+                <h4>合作夥伴</h4>
+                <hr style="width:80%">
+                <a href="#">廣告投放</a>
+                <a href="#">旅遊宣傳合作</a>
+            </div>
+        </div>
+        <div class="search_footer_bar">
+            Copyright © 2024 Javel. All rights reserved.
+        </div>
+    </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="/js/forum_sort.js"></script>
+    <script src="/js/forum_selectArea.js"></script>
+    <script src="/js/forum_loadingCards.js"></script>
+</body>
+</html>
