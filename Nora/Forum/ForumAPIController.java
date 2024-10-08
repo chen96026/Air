@@ -89,8 +89,6 @@ public class ForumAPIController {
 		
 		List<PostViewDTO> posts = postsService.getPosts(postlist);
 		
-//		model.addAttribute("posts", posts);
-		
 		return posts;
 	}
 	
@@ -133,7 +131,6 @@ public class ForumAPIController {
 		post.setAuthor(author);
 		
 		try {
-//			Posts newPost = postsService.newPost(post, images);		
 			return postsService.newPost(post, images);
 		} catch (Exception e) {
 			return null;
@@ -211,8 +208,8 @@ public class ForumAPIController {
 		return ResponseEntity.noContent().build();
 	}
 
-	@PostMapping("/like")
-	public Likes addLike(@RequestParam Long id, HttpSession session) {
+	@PostMapping("/like/{id}")
+	public Likes addLike(@PathVariable Long id, HttpSession session) {
 		
 		String getSessionUid = (String) session.getAttribute("userUid");
 		Member member = memberRepository.findByUid(getSessionUid);
@@ -220,8 +217,8 @@ public class ForumAPIController {
 		return likesService.addLike(member.getId(), id);
 	}
 	
-	@DeleteMapping("/like")
-	public ResponseEntity<Void> deleteLike(@RequestParam Long id, HttpSession session) {
+	@DeleteMapping("/like/{id}")
+	public ResponseEntity<Void> deleteLike(@PathVariable Long id, HttpSession session) {
 		
 		String getSessionUid = (String) session.getAttribute("userUid");
 		Member member = memberRepository.findByUid(getSessionUid);
@@ -230,8 +227,8 @@ public class ForumAPIController {
 		return ResponseEntity.noContent().build();
 	}
 	
-	@GetMapping("/countLikes")
-	public Long countLikes(@RequestParam Long id) {
+	@GetMapping("/countLikes/{id}")
+	public Long countLikes(@PathVariable Long id) {
 		
 		System.out.println("count");
 		Posts post = postsRepository.findById(id).orElse(null);
@@ -239,8 +236,8 @@ public class ForumAPIController {
 		return post.getLikesCount();
 	}
 	
-	@PostMapping("/bookmark")
-	public Bookmark addBookmark(@RequestParam Long id, HttpSession session) {
+	@PostMapping("/bookmark/{id}")
+	public Bookmark addBookmark(@PathVariable Long id, HttpSession session) {
 		
 		String getSessionUid = (String) session.getAttribute("userUid");
 		Member member = memberRepository.findByUid(getSessionUid);
@@ -248,8 +245,8 @@ public class ForumAPIController {
 		return bookmarkService.addBookmark(member.getId(), id);
 	}
 	
-	@DeleteMapping("/bookmark")
-	public ResponseEntity<Void> deleteBookmark(@RequestParam Long id, HttpSession session) {
+	@DeleteMapping("/bookmark/{id}")
+	public ResponseEntity<Void> deleteBookmark(@PathVariable Long id, HttpSession session) {
 		
 		String getSessionUid = (String) session.getAttribute("userUid");
 		Member member = memberRepository.findByUid(getSessionUid);
@@ -258,8 +255,8 @@ public class ForumAPIController {
 		return ResponseEntity.noContent().build();
 	}
 	
-	@PostMapping("/report")
-	public Reports addReport(@RequestParam Long id, HttpSession session) {
+	@PostMapping("/report/{id}")
+	public Reports addReport(@PathVariable Long id, HttpSession session) {
 		
 		String getSessionUid = (String) session.getAttribute("userUid");
 		Member member = memberRepository.findByUid(getSessionUid);
@@ -267,8 +264,8 @@ public class ForumAPIController {
 		return reportsService.addReport(member.getId(), id);
 	}
 	
-	@DeleteMapping("/deletePost")
-	public ResponseEntity<Void> deletePost(@RequestParam Long id) {
+	@DeleteMapping("/deletePost/{id}")
+	public ResponseEntity<Void> deletePost(@PathVariable Long id) {
 		
 		postsService.deletePost(id);
 		
@@ -286,8 +283,8 @@ public class ForumAPIController {
 		return new PostsViewGetPagesDTO(postViesDTO, posts.getTotalPages());
 	}
 	
-	@GetMapping("/adminGetReportedPostDetail")
-	public PostViewDTO getReportedPostDetail(@RequestParam Long id) {
+	@GetMapping("/adminGetReportedPostDetail/{id}")
+	public PostViewDTO getReportedPostDetail(@PathVariable Long id) {
 		
 		Posts post = postsRepository.findById(id).orElse(null);
 		
@@ -301,8 +298,8 @@ public class ForumAPIController {
 			
 	} 
 	
-	@DeleteMapping("/adminClearReports")
-	public ResponseEntity<Void> clearReports(@RequestParam Long id) {
+	@DeleteMapping("/adminClearReports/{id}")
+	public ResponseEntity<Void> clearReports(@PathVariable Long id) {
 		
 		reportsService.deleteAllReports(id);
 		

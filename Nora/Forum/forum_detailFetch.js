@@ -23,7 +23,7 @@ $(() => {
 	})
 
 	$('#forum_detail_like').click(() => {
-		fetch(`/forum/api/like?id=${id}`, {
+		fetch(`/forum/api/like/${id}`, {
 			method: (like) ? 'DELETE' : 'POST'	// 判斷是否已點過讚
 		})
 			.then(response => {
@@ -46,7 +46,7 @@ $(() => {
 			})
 
 		setTimeout(() => {
-			fetch(`/forum/api/countLikes?id=${id}`)
+			fetch(`/forum/api/countLikes/${id}`)
 				.then(response => response.json())
 				.then(data => {
 					console.log("data:");
@@ -63,7 +63,7 @@ $(() => {
 
 	$('#forum_detail_bookmark').click(() => {
 
-		fetch(`/forum/api/bookmark?id=${id}`, {
+		fetch(`/forum/api/bookmark/${id}`, {
 			method: (bookmark) ? 'DELETE' : 'POST',
 		})
 			.then(response => {
@@ -110,7 +110,7 @@ $(() => {
 
 
 	$(document).on('click', '#forum_reportPost', () => {
-		fetch(`/forum/api/report?id=${id}`, {
+		fetch(`/forum/api/report/${id}`, {
 			method: 'POST',
 		})
 			.then(response => {
@@ -149,7 +149,7 @@ $(() => {
 
 
 	$(document).on('click', '#forum_deletePost', () => {
-		fetch(`/forum/api/deletePost?id=${id}`, {
+		fetch(`/forum/api/deletePost/${id}`, {
 			method: 'DELETE'
 		})
 			.then(response => {

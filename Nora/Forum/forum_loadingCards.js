@@ -10,9 +10,6 @@ $(() => {
             $('.forum_writeP').removeClass('forum_writeP_hover');
         }
     );
-
-	
-	
 	
 	
 // Loading Cards
@@ -21,12 +18,6 @@ $(() => {
 
     let page = 0;
     let isLoading = false;
-	
-	// 設定get預設值
-	if(typeof setCountry !== 'undefined') {
-		$('#forum_select_country').val(setCountry);
-		if(setCity != null) $('#forum_select_city').val(setCity);
-	}
 	
 	setTimeout(() => { loadCards() }, 100);
 

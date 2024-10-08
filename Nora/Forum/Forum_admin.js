@@ -1,9 +1,12 @@
 $(() => {
 	let id;
 	let page = 0;
+	let postListLength;
 
 	function getPosts(page) {
+		$('.Forum_page').empty();
 		$('.Forum_divTable').empty();
+
 		$('.Forum_divTable').append(`
             <table class="Forum_table">
                 <thead>
@@ -21,9 +24,10 @@ $(() => {
 		fetch(`/forum/api/adminGetReportedPosts?page=${page}`)
 			.then(response => response.json())
 			.then(data => {
-				console.log(data);
+				postListLength = data.postViewDTOList.length;
+
 				const tbody = $(`<tbody>`)
-				if (data.postViewDTOList.length > 0) {
+				if (postListLength > 0) {
 					data.postViewDTOList.forEach(post => {
 						const reportedPost =
 							`<tr class="Forum_tbody_tr">
@@ -47,16 +51,11 @@ $(() => {
 
 					$('.Forum_table').append(tbody);
 
-					$('.Forum_page').empty();
 					for (let i = 1; i <= data.totalPage; i++) {
 						$('.Forum_page').append(`<button class="Forum_pageBtn">${i}</button>`)
 					}
 
 					$('.Forum_pageBtn').eq(page).addClass('Forum_thisPage');
-
-					if (data.postViewDTOList.length == 1 && page != 0) {
-						page -= 1;
-					}
 
 				} else {
 					$('.Forum_divTable').append(`
@@ -72,10 +71,17 @@ $(() => {
 			})
 	}
 
+	function changeLastPage() {
+		if (postListLength === 1 && page > 0) {
+			page -= 1;
+		}
+	}
+
 	function getPostDetail(id) {
-		fetch(`/forum/api/adminGetReportedPostDetail?id=${id}`)
+		fetch(`/forum/api/adminGetReportedPostDetail/${id}`)
 			.then(response => response.json())
 			.then(data => {
+				console.log(data);
 				let images = `<div>`;
 				console.log(images);
 				data.imageURL.forEach(imgURL => {
@@ -125,12 +131,13 @@ $(() => {
 	}
 
 	function keepPost(id) {
-		fetch(`/forum/api/adminClearReports?id=${id}`, {
+		fetch(`/forum/api/adminClearReports/${id}`, {
 			method: 'DELETE'
 		})
 			.then(response => {
 				if (response.ok) {
 					console.log('Success: ', response);
+					changeLastPage();
 					getPosts(page);
 					removeWidows();
 				} else {
@@ -144,128 +151,131 @@ $(() => {
 	}
 
 	function deletePost(id) {
-		fetch(`/forum/api/deletePost?id=${id}`, {
+		fetch(`/forum/api/deletePost/${id}`, {
 			method: 'DELETE'
 		})
-		.then(response => {
-			if (response.ok) {
-				console.log('Success: ', response);
-				getPosts(page);
-				removeWidows();
-			} else {
-				console.error('Failed to delete the post');
-			}
-		})
-		.catch(error => {
-			console.error('err', error);
-		})
-    }
+			.then(response => {
+				if (response.ok) {
+					console.log('Success: ', response);
+					changeLastPage();
+					getPosts(page);
+					removeWidows();
+				} else {
+					console.error('Failed to delete the post');
+				}
+			})
+			.catch(error => {
+				console.error('err', error);
+			})
+	}
 
-function removeWidows() {
-	$('.forum_detail_checkwindow').remove();
-	$('.Forum_post').remove();
-	$('.Forum_bg').fadeOut(100)
-	$('.Forum_bg').remove();
-}
-
-
-getPosts(page);
+	function removeWidows() {
+		$('.forum_detail_checkwindow').remove();
+		$('.Forum_post').remove();
+		$('.Forum_bg').fadeOut(100)
+		$('.Forum_bg').remove();
+	}
 
 
-$('main').on('click', '.Forum_tbody_tr', function() {
-	id = $(this).find('.Forum_table_id').text();
-
-	getPostDetail(id);
-})
-
-$('main').on('click', '.Forum_keep', function(e) {
-	const tr = $(this).closest('.Forum_tbody_tr');
-	id = tr.find('.Forum_table_id').text();
-
-	e.stopPropagation();
-	$('main').append(`
-            <div class="Forum_bg"></div> 
-            <div class="forum_detail_checkwindow">
-                <p>確定要保留這篇文章嗎？</p>
-                <button id="Forum_keepPost" class="forum_checkwindow_OK">確定</button>
-                <button id="Forum_closeWindow" class="forum_checkwindow_cancel">取消</button>
-            </div>
-        `)
-	$('.Forum_bg').fadeIn(100);
-})
-
-$('main').on('click', '.Forum_delete', (e) => {
-	e.stopPropagation();
-	$('main').append(`
-            <div class="Forum_bg"></div> 
-            <div class="forum_detail_checkwindow">
-                <p>確定要刪除這篇文章嗎？</p>
-                <button id="Forum_deletePost" class="forum_checkwindow_OK">確定</button>
-                <button id="Forum_closeWindow" class="forum_checkwindow_cancel">取消</button>
-            </div>
-        `)
-	$('.Forum_bg').fadeIn(100);
-})
-
-$('main').on('click', '#Forum_post_keep', () => {
-	$('.Forum_bg').addClass('Forum_bg_zIndex2');
-	$('main').append(`
-            <div class="forum_detail_checkwindow">
-                <p>確定要保留這篇文章嗎？</p>
-                <button id="Forum_keepPost" class="forum_checkwindow_OK">確定</button>
-                <button id="Forum_post_closeWindow" class="forum_checkwindow_cancel">取消</button>
-            </div>
-        `)
-})
-
-$('main').on('click', '#Forum_post_delete', () => {
-	$('.Forum_bg').addClass('Forum_bg_zIndex2');
-	$('main').append(`
-            <div class="forum_detail_checkwindow">
-                <p>確定要刪除這篇文章嗎？</p>
-                <button id="Forum_deletePost" class="forum_checkwindow_OK">確定</button>
-                <button id="Forum_post_closeWindow" class="forum_checkwindow_cancel">取消</button>
-            </div>
-        `)
-})
-
-$('main').on('click', '#Forum_keepPost', () => {
-	keepPost(id);
-})
-
-$('main').on('click', '#Forum_deletePost', () => {
-	deletePost(id);
-})
-
-$('main').on('click', '#Forum_closeWindow, .forum_bg', () => {
-	$('.forum_detail_checkwindow').remove();
-	$('.Forum_bg').fadeOut(100)
-	$('.Forum_bg').remove();
-})
-
-$('main').on('click', '#Forum_closePost, .forum_bg', () => {
-	$('.Forum_post').remove();
-	$('.Forum_bg').fadeOut(100)
-	$('.Forum_bg').remove();
-})
-
-$('main').on('click', '#Forum_post_closeWindow, .forum_bg', () => {
-	$('.forum_detail_checkwindow').remove();
-	$('.Forum_bg').removeClass('Forum_bg_zIndex2');
-})
-
-$('main').on('click', '.Forum_pageBtn', function() {
-	$('.Forum_pageBtn').removeClass('Forum_thisPage');
-	$(this).addClass('Forum_thisPage');
-
-	page = $(this).index();
 	getPosts(page);
-})
 
-$('main').on('click', '.Forum_detail_img', function(e) {
-	e.stopPropagation();
-	$(this).toggleClass('Froum_Img');
+	$('main').on('click', '.Forum_tbody_tr', function () {
+		id = $(this).find('.Forum_table_id').text();
 
-})
-    
+		getPostDetail(id);
+	})
+
+	$('main').on('click', '.Forum_keep', function (e) {
+		const tr = $(this).closest('.Forum_tbody_tr');
+		id = tr.find('.Forum_table_id').text();
+
+		e.stopPropagation();
+		$('main').append(`
+            <div class="Forum_bg"></div> 
+            <div class="forum_detail_checkwindow">
+                <p>確定要保留這篇文章嗎？</p>
+                <button id="Forum_keepPost" class="forum_checkwindow_OK">確定</button>
+                <button id="Forum_closeWindow" class="forum_checkwindow_cancel">取消</button>
+            </div>
+        `)
+		$('.Forum_bg').fadeIn(100);
+	})
+
+	$('main').on('click', '.Forum_delete', function (e) {
+		const tr = $(this).closest('.Forum_tbody_tr');
+		id = tr.find('.Forum_table_id').text();
+
+		e.stopPropagation();
+		$('main').append(`
+            <div class="Forum_bg"></div> 
+            <div class="forum_detail_checkwindow">
+                <p>確定要刪除這篇文章嗎？</p>
+                <button id="Forum_deletePost" class="forum_checkwindow_OK">確定</button>
+                <button id="Forum_closeWindow" class="forum_checkwindow_cancel">取消</button>
+            </div>
+        `)
+		$('.Forum_bg').fadeIn(100);
+	})
+
+	$('main').on('click', '#Forum_post_keep', () => {
+		$('.Forum_bg').addClass('Forum_bg_zIndex2');
+		$('main').append(`
+            <div class="forum_detail_checkwindow">
+                <p>確定要保留這篇文章嗎？</p>
+                <button id="Forum_keepPost" class="forum_checkwindow_OK">確定</button>
+                <button id="Forum_post_closeWindow" class="forum_checkwindow_cancel">取消</button>
+            </div>
+        `)
+	})
+
+	$('main').on('click', '#Forum_post_delete', () => {
+		$('.Forum_bg').addClass('Forum_bg_zIndex2');
+		$('main').append(`
+            <div class="forum_detail_checkwindow">
+                <p>確定要刪除這篇文章嗎？</p>
+                <button id="Forum_deletePost" class="forum_checkwindow_OK">確定</button>
+                <button id="Forum_post_closeWindow" class="forum_checkwindow_cancel">取消</button>
+            </div>
+        `)
+	})
+
+	$('main').on('click', '#Forum_keepPost', () => {
+		keepPost(id);
+	})
+
+	$('main').on('click', '#Forum_deletePost', () => {
+		deletePost(id);
+	})
+
+	$('main').on('click', '#Forum_closeWindow, .forum_bg', () => {
+		$('.forum_detail_checkwindow').remove();
+		$('.Forum_bg').fadeOut(100)
+		$('.Forum_bg').remove();
+	})
+
+	$('main').on('click', '#Forum_closePost, .forum_bg', () => {
+		$('.Forum_post').remove();
+		$('.Forum_bg').fadeOut(100)
+		$('.Forum_bg').remove();
+	})
+
+	$('main').on('click', '#Forum_post_closeWindow, .forum_bg', () => {
+		$('.forum_detail_checkwindow').remove();
+		$('.Forum_bg').removeClass('Forum_bg_zIndex2');
+	})
+
+	$('main').on('click', '.Forum_pageBtn', function () {
+		$('.Forum_pageBtn').removeClass('Forum_thisPage');
+		$(this).addClass('Forum_thisPage');
+
+		page = $(this).index();
+		getPosts(page);
+	})
+
+	$('main').on('click', '.Forum_detail_img', function (e) {
+		e.stopPropagation();
+		$(this).toggleClass('Froum_Img');
+
+	})
+
 })
