@@ -4,6 +4,8 @@ $(() => {
 	const imageDB = [];	// 記錄圖片原先在資料庫中的id
 	const deleteImg = [];	// 記錄要從資料庫中刪除的圖片id
     const uploadImg = $('#forum_uploadImg');    // 所有 html 新文字、圖片寫入的對象
+	const urlParams = new URLSearchParams(window.location.search);
+	const postId = urlParams.get('id');
     let check = false;	// 檢查所有必填欄位皆不為空
 	let fetchURL;
 	let fetchMethod;

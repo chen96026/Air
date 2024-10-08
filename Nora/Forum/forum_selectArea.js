@@ -1,6 +1,18 @@
-// Select Area
 $(() => {
     let cityData = [];  // 存放讀到的 city.json 資料
+	
+	const urlParams = new URLSearchParams(window.location.search);
+	var setCountry;
+	var setCity;
+	if (typeof country == 'undefined') {
+		setCountry = urlParams.get('country');
+		setCity = urlParams.get('city');		
+	} else {
+		setCountry = country;
+		setCity = city;	
+	}
+	console.log(setCountry);	
+	console.log(setCity);	
 
     // 讀取 JSON 檔案
     // 國家
@@ -16,7 +28,7 @@ $(() => {
             })
             $('#forum_select_country').append(group);
 			
-			if (typeof setCountry !== 'undefined') $(`select[name='country'] option[value='${setCountry}']`).prop('selected', true);
+			if (setCountry !== null) $(`select[name='country'] option[value='${setCountry}']`).prop('selected', true);
         })
     })
 
@@ -61,5 +73,6 @@ $(() => {
             $('#forum_select_city').append(citys);
         })
     }
+// Select Area
 })
 

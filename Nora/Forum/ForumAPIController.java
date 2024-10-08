@@ -212,7 +212,7 @@ public class ForumAPIController {
 	}
 
 	@PostMapping("/like")
-	public Likes addLike(@RequestBody Long id, HttpSession session) {
+	public Likes addLike(@RequestParam Long id, HttpSession session) {
 		
 		String getSessionUid = (String) session.getAttribute("userUid");
 		Member member = memberRepository.findByUid(getSessionUid);
@@ -221,7 +221,7 @@ public class ForumAPIController {
 	}
 	
 	@DeleteMapping("/like")
-	public ResponseEntity<Void> deleteLike(@RequestBody Long id, HttpSession session) {
+	public ResponseEntity<Void> deleteLike(@RequestParam Long id, HttpSession session) {
 		
 		String getSessionUid = (String) session.getAttribute("userUid");
 		Member member = memberRepository.findByUid(getSessionUid);
@@ -230,8 +230,8 @@ public class ForumAPIController {
 		return ResponseEntity.noContent().build();
 	}
 	
-	@GetMapping("/countLikes/{id}")
-	public Long countLikes(@PathVariable Long id) {
+	@GetMapping("/countLikes")
+	public Long countLikes(@RequestParam Long id) {
 		
 		System.out.println("count");
 		Posts post = postsRepository.findById(id).orElse(null);
@@ -240,7 +240,7 @@ public class ForumAPIController {
 	}
 	
 	@PostMapping("/bookmark")
-	public Bookmark addBookmark(@RequestBody Long id, HttpSession session) {
+	public Bookmark addBookmark(@RequestParam Long id, HttpSession session) {
 		
 		String getSessionUid = (String) session.getAttribute("userUid");
 		Member member = memberRepository.findByUid(getSessionUid);
@@ -249,7 +249,7 @@ public class ForumAPIController {
 	}
 	
 	@DeleteMapping("/bookmark")
-	public ResponseEntity<Void> deleteBookmark(@RequestBody Long id, HttpSession session) {
+	public ResponseEntity<Void> deleteBookmark(@RequestParam Long id, HttpSession session) {
 		
 		String getSessionUid = (String) session.getAttribute("userUid");
 		Member member = memberRepository.findByUid(getSessionUid);
@@ -259,7 +259,7 @@ public class ForumAPIController {
 	}
 	
 	@PostMapping("/report")
-	public Reports addReport(@RequestBody Long id, HttpSession session) {
+	public Reports addReport(@RequestParam Long id, HttpSession session) {
 		
 		String getSessionUid = (String) session.getAttribute("userUid");
 		Member member = memberRepository.findByUid(getSessionUid);
@@ -268,7 +268,7 @@ public class ForumAPIController {
 	}
 	
 	@DeleteMapping("/deletePost")
-	public ResponseEntity<Void> deletePost(@RequestBody Long id) {
+	public ResponseEntity<Void> deletePost(@RequestParam Long id) {
 		
 		postsService.deletePost(id);
 		
