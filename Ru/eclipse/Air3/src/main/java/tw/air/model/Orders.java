@@ -44,7 +44,27 @@ public class Orders {
 	@Column(name = "createDate")
 	private LocalDateTime createDate;
 	
-    // 關聯到 ContactInformation
+	@Column(name = "orderStatus")
+	private String orderStatus;
+	
+    public String getOrderStatus() {
+		return orderStatus;
+	}
+
+	public void setOrderStatus(String orderStatus) {
+		this.orderStatus = orderStatus;
+	}
+
+	public Contact getContactInformation() {
+		return contactInformation;
+	}
+
+	public void setContactInformation(Contact contactInformation) {
+		this.contactInformation = contactInformation;
+	}
+
+
+	// 關聯到 ContactInformation
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "contact_id", referencedColumnName = "CId", insertable = false, updatable = false)
     private Contact contactInformation;  // 關聯的聯絡人資訊

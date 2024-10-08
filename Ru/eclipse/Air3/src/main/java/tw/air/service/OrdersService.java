@@ -15,4 +15,6 @@ public interface OrdersService {
 	
 	public List<Map<String, Object>> getOrdersWithContactName();
 	
+	public Orders getOrderByOrderNumber(String orderNumber);
+	
 }

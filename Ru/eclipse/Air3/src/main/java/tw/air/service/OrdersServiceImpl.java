@@ -82,6 +82,11 @@ public class OrdersServiceImpl implements OrdersService{
 		return null;
 	}
 
+	@Override
+	public Orders getOrderByOrderNumber(String orderNumber) {
+		return ordersRepository.findByOrderNumber(orderNumber);
+	}
+
 	
 
 }
