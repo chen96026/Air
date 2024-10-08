@@ -1,4 +1,4 @@
-import { auth } from "../initialAuth.js";
+import { auth } from "./initialAuth.js";
 import { signInWithPopup, OAuthProvider } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-auth.js";
 
 const btnLine = document.getElementById("lineLogin");
