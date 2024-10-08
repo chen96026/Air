@@ -26,16 +26,9 @@ document.addEventListener('DOMContentLoaded', function(){
 	       order_list.forEach(order => {
 	           const orderNumber = order.orderNumber;
 	           const contactName = order.contactName;
-			   const finalPrice = new Intl.NumberFormat('zh-TW', { 
-			                   style: 'currency', 
-			                   currency: 'TWD', 
-			                   currencyDisplay: 'symbol',  // 顯示 NT$
-			                   maximumFractionDigits: 0    // 不顯示小數點
-			               }).format(order.finalPrice);
-				
+			   const finalPrice = order.finalPrice;
 	           const createDate = order.createDate;
 			   
-			   console.log(order.finalPrice);
 
 	           const row = `<tr>
 	               <td>${orderNumber}</td>
