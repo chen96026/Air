@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>訂單後台</title>
+
+
+    <link rel="stylesheet" href="./Order_background.css">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+	<!-- 社群媒體的iconnnnnnnnnnnn -->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet" />
+
+</head>
+
+
+<body>
+    <header style="border-bottom: 10px solid #F4CFE0">
+        <nav id="header">
+            <div class="header_logo"><a href=""><img src="/picture/logo.png"></a></div>
+            <ul class="header_nav_links">
+                <li class="header_link"><a href="#"><img src="/picture/icon_logIn.png"></a></li>
+                <li class="header_link"><a href="#"><img src="/picture/icon_Forum.png" class="nav_icon"></a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="container_bg">
+
+        <h1>訂單管理</h1>
+        <div class="container">
+            <div class="tabs">
+                <div data-tab="order_list" class="tab">訂單列表</div>
+                <div data-tab="cancel_refund" class="tab">已取消訂單</div>
+            </div>
+
+            <div id="order_list" class="tab_content">
+                <h2>訂單列表</h2>
+                <form id="order_search_form">
+                    <input type="text" placeholder="請輸入訂單編號..." />
+                    <button type="submit">搜尋</button>
+                </form>
+
+                <h3>排序依據</h3>
+                <div style="display: flex;">
+                    <div>
+                        <label><input type="checkbox" value="order_number">訂單編號</label>
+                        <label><input type="checkbox" value="order_status">訂單狀態</label>
+                    </div>
+                    <button id="sort_button"
+                        style="margin-left: 15px; background-color: brown; color:whites;">排序</button>
+                </div>
+
+
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>訂單編號</th>
+                            <th style="width: 20%;">聯絡人姓名</th>
+                            <th>訂單金額</th>
+                            <th>訂單成立時間</th>
+                        </tr>
+                    </thead>
+                    <tbody id="order_tbody">
+
+                    </tbody>
+                </table>
+
+
+
+            </div>
+            
+
+            <div id="cancel_refund" class="tab_content">
+                <h2>已取消訂單</h2>
+                <form id="order_search_form">
+                    <input type="text" placeholder="請輸入訂單編號..." />
+                    <button type="submit">搜尋</button>
+                </form>
+                <h3>排序依據</h3>
+                <div style="display: flex;">
+                    <div>
+                        <label><input type="checkbox" value="order2_number">訂單編號</label>
+                        <label><input type="checkbox" value="order2_status">訂單狀態</label>
+                    </div>
+                    <button id="sort_button"
+                        style="margin-left: 15px; background-color: brown; color:whites;">排序</button>
+                </div>
+                <table>
+                    <tr>
+                        <th style="width: 25%;">訂單編號</th>
+                        <th>聯絡人姓名</th>
+                        <th>訂單金額</th>
+                        <th>訂單成立時間</th>
+                    </tr>
+                </table>
+
+
+
+
+                </script>
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+
+        <footer>
+        <div class="search_section_container search_footer_container">
+            <div class="search_footer_col">
+                <h4>追蹤我們</h4>
+                <hr style="width:50%">
+                <div class="search_footer_socials">
+                    <span>
+                        <a href="#"><i class="ri-twitter-fill"></i></a>
+                    </span>
+                    <span>
+                        <a href="#"><i class="ri-linkedin-fill"></i></a>
+                    </span>
+                    <span>
+                        <a href="#"><i class="ri-instagram-line"></i></a>
+                    </span>
+                    <span>
+                        <a href="#"><i class="ri-facebook-fill"></i></a>
+                    </span>
+                </div>
+            </div>
+            <div class="search_footer_col">
+                <h4>隱私</h4>
+                <hr style="width:80%">
+                <a href="#">隱私權政策</a>
+                <a href="#">隱私設定</a>
+            </div>
+            <div class="search_footer_col">
+                <h4>Cookie</h4>
+                <hr style="width:80%">
+                <a href="#">Cookie政策</a>
+                <a href="#">Cookie設定</a>
+            </div>
+            <div class="search_footer_col">
+                <h4>合作夥伴</h4>
+                <hr style="width:80%">
+                <a href="#">廣告投放</a>
+                <a href="#">旅遊宣傳合作</a>
+            </div>
+        </div>
+        <div class="search_footer_bar">
+            Copyright © 2024 Javel. All rights reserved.
+        </div>
+    </footer>
+
+     <script src="BackOrders.js"></script>
+
+</body>
+
+</html>

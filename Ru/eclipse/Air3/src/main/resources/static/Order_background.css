@@ -210,113 +210,115 @@ footer {
     text-align: center;
 }
 
-.process_bg {
-    display: block;
-    background-color: rgb(173, 171, 171);
-    border-radius: 10px;
-    padding: 10px;
-    color: white;
-    font-weight: bold;
-}
-
-.process_info_bg {
-    display: block;
-    background-color:#1f0737;
-    border-radius: 10px;
-    padding: 10px;
-    color: white;
-    font-weight: bold;
-}
-
-
 .container_bg {
-    width: 60%;
+    width: 80%;
     margin: 0 auto;
+
 }
 
 .container {
-    width: 80%;
+    width: 90%;
     margin: 0 auto;
     padding: 20px;
     background-color: white;
+    height: auto;
+    margin-bottom: 5%;
 
 }
 
-ul {
-    list-style: none;
-    padding-left: 0;
-}
-
-li {
-    display: inline-block;
-    /* margin-right: 30px; */
-}
-
-.box {
-    background-color: white;
-    margin: 10px;
-    height: 80%;
-    padding: 20px;
-    border: 1px solid #1f0737;
-    border-radius: 10px;
-}
-
-.container_order_title {
-    padding: 10px 20px;
-    width: 80%;
-    margin: 0 auto;
-    background-color: #F4CFE0;
-
-}
-
-
-.container_order_detail {
-    width: 80%;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #1f0737;
-}
-
-.box_amount {
-    background-color: rgba(255, 255, 255, 0.5);
-    margin: 10px;
-    height: 80%;
+.tabs {
     display: flex;
-    justify-content: flex-end;
+    cursor: pointer;
+}
+
+.tab {
+    padding: 10px 20px;
+    margin-right: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px 5px 0 0;
+    background: #f1f1f1;
+}
+
+.tab.active {
+    background: #fff;
+    border-bottom: 1px solid transparent;
+}
+
+.tab_content {
+    display: none;
     padding: 20px;
-    border: 2px solid #1f0737;
-    border-radius: 10px;
+    border: 1px solid #ccc;
+    border-radius: 0 0 5px 5px;
+    height: auto;
 }
 
-.box_orderInfo {
-    background-color:white;
-    margin: 10px;
-    height: 80%;
-    padding:30px 8% 30px 15%;
-    border: 5px solid #1f0737;
-    border-radius: 10px;
-    display: grid;
-    align-content: center;
-
+#order_list {
+    font-family: Arial, sans-serif;
 }
 
-.box_orderInfo div > div {
-    margin: 5px 0;
+#order_search_form {
+    margin-bottom: 20px;
 }
 
+#order_search_form input {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-right: 10px;
+}
 
-.style_nextstep {
-    width: 50%;
-    height: 40px;
-    margin-top: 5%;
-    font-size: 20px;
-    font-weight: bold;
-    background-color: #F4CFE0;
-    border-radius: 5px;
+#order_search_form button {
+    padding: 10px 15px;
+    font-size: 16px;
+    background-color: brown;
+    color: white;
     border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#order_search_form button:hover {
+    background-color:#F4CFE0;
+    color:#333
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+th, td {
+    padding: 8px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+th {
+    background-color: #f2f2f2;
+    color: #333;
 }
 
 
 
+tr:hover {
+    background-color: #f5f5f5;
+}
 
+button {
+    padding: 6px 10px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
 
+button:hover {
+    background-color: #0056b3;
+}
+
+.order_number{
+    white-space: nowrap;
+}
