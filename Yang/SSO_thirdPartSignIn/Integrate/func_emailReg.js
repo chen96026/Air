@@ -1,4 +1,4 @@
-import { auth } from "../initialAuth.js";
+import { auth } from "./initialAuth.js";
 import { createUserWithEmailAndPassword,sendEmailVerification } from 'https://www.gstatic.com/firebasejs/10.13.2/firebase-auth.js';
 
 const btnRegist = document.getElementById("regist");

@@ -1,4 +1,4 @@
-import { auth } from "../initialAuth.js";
+import { auth } from "./initialAuth.js";
 import { signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-auth.js";
 import { sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-auth.js";
 

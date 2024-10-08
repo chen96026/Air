@@ -1,4 +1,4 @@
-import { auth } from "../initialAuth.js";
+import { auth } from "./initialAuth.js";
 const btnLogout = document.getElementById("logout");
 // 登出
 btnLogout.addEventListener("click", (e) => {

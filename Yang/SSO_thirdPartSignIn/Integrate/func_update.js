@@ -1,4 +1,4 @@
-import { auth } from "../initialAuth.js";
+import { auth } from "./initialAuth.js";
 import { updateProfile } from 'https://www.gstatic.com/firebasejs/10.13.2/firebase-auth.js';
 import { reauthenticateWithCredential } from 'https://www.gstatic.com/firebasejs/10.13.2/firebase-auth.js';
 import { EmailAuthProvider } from 'https://www.gstatic.com/firebasejs/10.13.2/firebase-auth.js';
