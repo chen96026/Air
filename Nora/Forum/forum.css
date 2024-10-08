@@ -142,11 +142,11 @@
 }
 
 .forum_write {
-    /* background-color: blue; */
     position: fixed;
     right: 10%;
     bottom: 100px;
     text-align: center;
+    z-index: 1;
 }
 
 .forum_writeImg {

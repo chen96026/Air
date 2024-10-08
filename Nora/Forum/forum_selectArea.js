@@ -73,6 +73,6 @@ $(() => {
             $('#forum_select_city').append(citys);
         })
     }
-// Select Area
+    
 })
 

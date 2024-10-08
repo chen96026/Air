@@ -1,0 +1,231 @@
+@charset "UTF-8";
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
+}
+
+body {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f9f9f9;
+}
+
+a {
+  text-decoration: none;
+}
+
+.member_Info_container {
+  background-color: #fff;
+  padding: 40px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  width: 50%;
+  max-width: 700px;
+}
+#member_Info_User {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.member_Info_Avatar {
+  width: 8vw;
+  height: 15vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#member_info_icon {
+  width: 6vw;
+  height: 12vh;
+  border-radius: 50%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  display: block;
+}
+#member_Info_Upload_group {
+  height: 15vh;
+  display: flex;
+  align-items: start;
+  justify-content: center;
+  flex-direction: column;
+  gap: 1vh;
+}
+#member_customUploadButton {
+  background-color: #dbd7d7;
+  width: 4vw;
+  height: 3vh;
+  padding: 0.8vh 0.8vw;
+  border: none;
+  border-radius: 4px;
+  font-size: 0.6vw;
+  cursor: pointer;
+}
+#member_customUploadButton:hover {
+  background-color: #e1e1e1;
+}
+#member_Info_Upload_group div {
+  font-size: 0.8vw;
+}
+#member_Info_upload_button {
+  background-color: #333;
+  color: #fff;
+  padding: 0.8vh 0.8vw;
+  border: none;
+  border-radius: 4px;
+  font-size: 0.8vw;
+  cursor: pointer;
+}
+#member_Info_upload_button:hover {
+  background-color: #555;
+}
+.member_Info_Remind {
+  /* border: 2px solid rgb(0, 225, 255); */
+  border-top: -5vh;
+  font-size: 0.8vw;
+  color: #555;
+}
+h2 {
+  font-size: 2vw;
+  margin-bottom: 1.5vh;
+  color: #333;
+}
+p {
+  padding-left: 0.3vw;
+  margin-bottom: 1vw;
+  color: #666;
+}
+.member_Info_form {
+  border-top: 2vh;
+  display: flex;
+  flex-direction: column;
+}
+.member_Info_form-group {
+  margin-bottom: 2vh;
+}
+.member_Info_form label {
+  display: block;
+  font-size: 0.8vw;
+  font-weight: bold;
+  color: #000;
+}
+.input-with-icon {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.member_Info_form input[type=text],
+.member_Info_form input[type=email],
+.member_Info_form input[type=password],
+.member_Info_form input[type=date] {
+  width: 100%;
+  padding: 1vh;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 0.8vw;
+  margin-top: 0.6vh;
+}
+.member_Info_form input {
+  background-color: #e9ecef;
+}
+#member_info_passwordMatchIcon {
+  position: absolute;
+  right: 2vw;
+  top: 33%;
+  font-size: 0.9vw;
+}
+.input-with-icon {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+.input-with-icon input {
+  width: 100%;
+  padding-right: 2vw;
+}
+.gear-icon {
+  position: absolute;
+  right: 0.5vw;
+  top: 56%;
+  transform: translateY(-50%);
+  color: #333;
+  font-size: 1vw;
+  cursor: pointer;
+}
+.gear-icon:hover {
+  color: #0004ff;
+}
+#member_info_group-btn {
+  display: flex;
+  justify-content: center;
+  gap: 3vw;
+}
+.member_Info_submit-btn {
+  background-color: #333;
+  color: #fff;
+  padding: 1vh 1vw;
+  border: none;
+  border-radius: 4px;
+  font-size: 1vw;
+  cursor: pointer;
+}
+.member_Info_submit-btn:hover {
+  background-color: #555;
+}
+#member_deleteAccountModal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+#member_info_modal-content {
+  background-color: rgb(255, 255, 255);
+  margin: 15% auto;
+  padding: 20px;
+  border-radius: 8px;
+  border: 1px solid #888;
+  width: 16vw;
+  height: 28vh;
+  text-align: center;
+}
+#member_info_close {
+  color: #aaa;
+  position: relative;
+  left: 6.5vw;
+  font-size: 28px;
+  font-weight: bold;
+}
+#member_info_close:hover,
+#member_info_close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+#member_delete_group {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2vw;
+}
+#member_confirmDeleteBtn,
+#member_cancelDeleteBtn {
+  background-color: #333;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  width: 3.5vw;
+  height: 3.5vh;
+  cursor: pointer;
+}
+#member_confirmDeleteBtn:hover,
+#member_cancelDeleteBtn:hover {
+  background-color: #555;
+}
