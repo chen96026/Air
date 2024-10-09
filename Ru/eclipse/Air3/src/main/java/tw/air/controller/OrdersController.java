@@ -6,7 +6,9 @@ import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.bind.annotation.RequestBody;
 import tw.air.model.Contact;
@@ -83,10 +86,7 @@ public class OrdersController {
 		return ResponseEntity.ok(savedOrder);
 	}
 	
-	@GetMapping("/getOrder")
-    public List<Orders> getAllOrders() {
-        return ordersService.getAllOrders(); 
-    }
+	
 	
 	@GetMapping("/Complete/{oid}")
 	public String getOrderById(@PathVariable("oid") int oid, Model model) {
@@ -121,6 +121,15 @@ public class OrdersController {
 	    
 	    
 	    return "orderComplete";
+	}
+	
+	
+	
+	@GetMapping("/Toback")
+	@ResponseBody
+	public List<Map<String, Object>> getOrdersWithContactName(){
+		return ordersService.getOrdersWithContactName();
+		
 	}
 
 }

@@ -12,457 +12,57 @@
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <!-- 社群媒體的iconnnnnnnnnnnn -->
     <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
 </head>
 
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        var modal = document.getElementById("myModal");
-        var btn = document.getElementById("view_details");
-        var span = document.getElementsByClassName("close")[0];
-        btn.onclick = function () {
-            modal.style.display = "block";
-        }
-        span.onclick = function () {
-            modal.style.display = "none";
-        }
-        window.onclick = function (event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
-        }
-    });
-
-
-</script>
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const passengerContainer = document.getElementById('passenger_container');
-        const luggageContainer = document.getElementById('luggage_container');
-        const priceLuggageElement = document.getElementById('price_luggage');
-        const ticketPriceElement = document.getElementById('ticket_price');
-        const finalPriceElement = document.getElementById('final_price');
-        const priceTotalElement = document.getElementById('price_total');
-        const mainTicketPriceElement = document.getElementById('main_ticket_price')
-
-        function updatePassengerNumbers() {
-            const sections = passengerContainer.querySelectorAll('.form_section');
-            sections.forEach((section, index) => {
-                section.querySelector('div').textContent = `旅客${index + 1}(成人票)`;
-                section.querySelectorAll('input, select').forEach(input => {
-                	const name = input.getAttribute('name');
-                	if (name) {
-                        input.setAttribute('name', `${name.split('_')[0]}_${index}`);
-                    }
-                });
-            });
-        }
-
-        function updateLuggageNumbers() {
-            const luggageSections = luggageContainer.querySelectorAll('.luggageform_section');
-            luggageSections.forEach((luggageSection, index) => {
-                luggageSection.querySelector('div').textContent = `旅客${index + 1} 行李:`;
-            });
-        }
-
-        function updatePrice() {
-            const selectElements = document.querySelectorAll('select.label_addluggage');
-            let totalLuggagePrice = 0; 
-            selectElements.forEach(selectElement => {
-                const selectedOption = selectElement.options[selectElement.selectedIndex];
-                const priceTextMatch = selectedOption.textContent.match(/NT\$\d+,\d+/);
-
-                if (priceTextMatch) {
-                    totalLuggagePrice += parseInt(priceTextMatch[0].replace('NT$', '').replace(',', ''), 10);
-                }
-            });
-
-            priceLuggageElement.textContent = totalLuggagePrice > 0 ? `NT$${totalLuggagePrice.toLocaleString()}` : '免費';
-
-            
-            const ticketPrice = parseInt(ticketPriceElement.textContent.replace('NT$', '').replace(',', ''), 10);
-            const finalPrice = ticketPrice + totalLuggagePrice; 
-
-            mainTicketPriceElement.textContent = `NT$${finalPrice.toLocaleString()}`;
-            priceTotalElement.textContent = `NT$${finalPrice.toLocaleString()}`;
-            finalPriceElement.value = finalPrice; 
-        }
-
-        document.getElementById('add_passenger').addEventListener('click', function () {
-            const newSection = passengerContainer.querySelector('.form_section').cloneNode(true);
-            const newLuggageSection = luggageContainer.querySelector('.luggageform_section').cloneNode(true);
-            const deleteButton = newSection.querySelector('.delete_btn');
-
-            deleteButton.style.display = 'block';
-            deleteButton.addEventListener('click', function () {
-                passengerContainer.removeChild(newSection);
-                luggageContainer.removeChild(newLuggageSection);
-                updatePassengerNumbers();
-                updateLuggageNumbers();
-                updatePrice();
-            });
-            
-            newSection.querySelectorAll('input[type="text"], input[type="number"], input[type="date"]').forEach(input=>{
-            	input.value='';
-            });
-            
-            newSection.querySelectorAll('[id]').forEach(input=>{
-            	input.removeAttribute('id');
-            })
-            
-            const newSelectElements = newLuggageSection.querySelectorAll('.label_addluggage');
-            newSelectElements.forEach(selectElement => {
-                selectElement.addEventListener('change', updatePrice);
-            });
-            
-            passengerContainer.appendChild(newSection);
-            luggageContainer.appendChild(newLuggageSection);
-            updatePassengerNumbers();
-            updateLuggageNumbers();
-            updatePrice();  
-        });
-
-        document.querySelectorAll('.form_section').forEach(section => {
-            section.querySelector('.delete_btn').style.display = 'none';
-        });
-        
-        updatePassengerNumbers();
-        updateLuggageNumbers();
-        updatePrice();
-
-        const allSelectElements = document.querySelectorAll('.label_addluggage');
-        allSelectElements.forEach(selectElement => {
-            selectElement.addEventListener('change', updatePrice); 
-        });
-    });
-</script>
-
-
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-    const nextStepButton = document.getElementById('next_step');
-    const passengerContainer = document.getElementById('passenger_container');
-    const luggageContainer = document.getElementById('luggage_container');
-    
-    document.querySelectorAll('input, select').forEach(input => {
-        input.addEventListener('blur', function () {
-            validateField(input);
-        });
-        
-    });
-    
-    
-    
-    async function validateField(input) {
-        const name = input.name;
-        const value = input.value.trim();
-        let errorMessage = '';
-
-        const requestData = {
-            [name]: value
-        };
-
-        try {
-            const response = await fetch('/validation/validateContact', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(requestData)
-            });
-
-            if (!response.ok) {
-                const errors = await response.json();
-                if (errors[name]) {
-                    errorMessage = errors[name];
-                }
-            }
-        } catch (error) {
-            console.error('驗證過程中出現問題：', error);
-        }
-
-        if (errorMessage) {
-            showFieldError(name, errorMessage);
-        } else {
-            clearFieldError(name);
-        }
-    }
-
-    function showFieldError(fieldName, message) {
-        let inputElement = document.querySelector(`[name="${fieldName}"]`);
-        if (!inputElement) {
-            console.error(`Cannot find element with name: ${fieldName}`);
-            return;
-        }
-        let errorSpan = inputElement.nextElementSibling;
-        if (!errorSpan || errorSpan.tagName !== 'SPAN') {
-            errorSpan = document.createElement('span');
-            errorSpan.style.color = 'black';
-            inputElement.parentNode.appendChild(errorSpan);
-        }
-        errorSpan.textContent = message;
-    }
-
-    function clearFieldError(fieldName) {
-        let inputElement = document.querySelector(`[name="${fieldName}"]`);
-        if (!inputElement) {
-            console.error(`Cannot find element with name: ${fieldName}`);
-            return;
-        }
-        let errorSpan = inputElement.nextElementSibling;
-        if (errorSpan && errorSpan.tagName === 'SPAN') {
-            errorSpan.textContent = '';
-        }
-    }
-    
-    if (nextStepButton) {
-        nextStepButton.addEventListener('click', async function (event) {
-            event.preventDefault();
-            
-                      
-            const contactData = {
-                contactName: document.getElementById('contact_name').value,
-                contactPhone: document.getElementById('contact_phone').value,
-                contactEmail: document.getElementById('contact_email').value,
-            };
-
-            try {
-                const contactResponse = await fetch('/orders/createContact', {
-                    method: 'POST',
-                    headers: {'Content-Type': 'application/json'},
-                    body: JSON.stringify(contactData)
-                });
-
-                if (!contactResponse.ok) throw new Error ('Contact submission failed');
-                const { cid } = await contactResponse.json();
-                console.log('獲取的 contactId:', cid);
-                
-                // createOrderData 並獲取 orderId
-                const orderData = createOrderData(cid);
-                const orderResponse = await fetch('/orders/createOrder', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(orderData)
-                });
-
-                if (!orderResponse.ok) throw new Error('Order submission failed');
-                const { oid } = await orderResponse.json();
-                console.log("Order ID:", oid);
-
-                
-                const passengerData = createPassengerData(cid);
-                
-                const passengerOrderRequest = {
-                	    passengers: passengerData,
-                	    orderId: oid
-                	};
-
-           
-                const passengerResponse = await fetch('/passenger/createpassenger', {
-                    method: 'POST',
-                    headers: {'Content-Type': 'application/json' },
-                    body: JSON.stringify(passengerOrderRequest)
-                });
-
-                if (!passengerResponse.ok) throw new Error('Passenger submission failed');
-
-                
-                const passengerResponseData = await passengerResponse.json(); 
-                console.log("Passenger response data:", passengerResponseData);
-                
-                const savedPassengerIds = passengerResponseData.map(passenger => passenger.pid);
-                console.log("Passenger IDs:", savedPassengerIds);
-
-                await submitLuggageData(oid, savedPassengerIds);
-
-                alert('所有資料已提交');
-                window.location.href = `/orders/Complete/${oid}`;
-            } catch (error) {
-                console.error('資料提交過程中出現問題：', error);
-                alert('提交失敗：' + error.message);
-            }
-        });
-    }else{
-    	console.error('next_step not found');
-    }
-    
-    
-   
-
-      
-    
-       
-    function createPassengerData(contactId, orderId) {
-        const passengers = [];
-        const sections = document.querySelectorAll('.form_section');
-        for (let i = 0; i < sections.length; i++) {
-            const section = sections[i];
-
-            const lastNameInput = section.querySelector(`[name="lastname_${i}"]`);
-            const firstNameInput = section.querySelector(`[name="firstname_${i}"]`);
-            const genderInput = section.querySelector(`[name="gender_${i}"]`);
-            const birthdayInput = section.querySelector(`[name="dob_${i}"]`);
-            const countryInput = section.querySelector(`[name="country_${i}"]`);
-            const idTypeInput = section.querySelector(`[name="idtype_${i}"]`);
-            const idNumberInput = section.querySelector(`[name="idnumber_${i}"]`);
-            const idDateInput = section.querySelector(`[name="dop_${i}"]`);
-
-            if (!lastNameInput || !firstNameInput || !genderInput || !birthdayInput || !countryInput || !idTypeInput || !idNumberInput || !idDateInput) {
-                console.error(`旅客 ${i + 1} 的某些欄位沒有找到`);
-                return passengers; 
-            }
-
-            const passenger = {
-                lastName: lastNameInput.value,
-                firstName: firstNameInput.value,
-                gender: genderInput.value,
-                birthday: birthdayInput.value,
-                country: countryInput.value,
-                idType: idTypeInput.value,
-                idNumber: idNumberInput.value,
-                idDate: idDateInput.value,
-                contactId: contactId,
-                orderId: orderId
-            };
-
-            console.log(`旅客 ${i+1}資料:`, passenger);
-            passengers.push(passenger);
-        }
-        return passengers;
-    }
-    
-    function createOrderData(contactId){
-    	const finalPriceElement = document.getElementById('final_price');
-        const finalPrice = finalPriceElement ? parseFloat(finalPriceElement.value) || 0 : 0;
-        return{
-    		orderNumber: 'OD' + new Date().getTime(),
-            contactId: contactId,
-            finalPrice: finalPrice
-    	};
-    	
-    }
-   
-    
-    async function submitLuggageData(orderId, passengerIds) {
-        const luggageData = [];
-        const luggageSections = document.querySelectorAll('.luggageform_section');
-        
-        luggageSections.forEach((luggageSection, index) => {
-        	const tripType = luggageSection.dataset.tripType;
-            const luggageOption1 = luggageSection.querySelector('#add_luggage_1').value;
-            const luggageOption2 = luggageSection.querySelector('#add_returnluggage_2').value;
-            
-            const passengerId = passengerIds[index];
-            if (passengerId === undefined) {
-                console.error(`Passenger ID at index ${index} is undefined.`);
-                return;  
-            }
-            
-            if (index < 0 || index >= passengerIds.length) {
-                console.error(`Index ${index} is out of bounds for passengerIds.`);
-                return;  
-            }
-
-            if (luggageOption1 !== "add_lg") { 
-                luggageData.push({
-                    tripType: "OUTBOUND", 
-                    addLuggage: luggageOption1,
-                    lgprice: getLuggagePrice(luggageOption1),
-                    passenger: { pid: passengerId },
-                    orders: { oid: orderId }
-                });
-            }
-
-            if (luggageOption2 !== "add_lg") { 
-                luggageData.push({
-                    tripType: "RETURN", 
-                    addLuggage: luggageOption2,
-                    lgprice: getLuggagePrice(luggageOption2),
-                    passenger: { pid: passengerId },
-                    orders: { oid: orderId }
-                });
-            }
-        });
-
-        const luggageResponse = await fetch('/luggage/createluggages', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(luggageData) 
-        });   
-
-        if (!luggageResponse.ok) throw new Error('Luggage submission failed');
-    }
-   
-              
-    function getLuggagePrice(optionValue) {
-        switch (optionValue) {
-            case 'non_lg':
-                return 0;
-            case 'one_lg':
-                return 1224;
-            case 'two_lg':
-                return 1698;
-            case 'three_lg':
-                return 2171;
-            default:
-                return 0;
-        }
-    }
-});
-        
-</script>
-
-
 <body>
-    <header style="border-bottom: 10px solid #F4CFE0">
+    <header style="border-bottom: 10px solid #bad6ee">
         <nav id="header">
             <div class="header_logo"><a href=""><img src="/picture/logo.png"></a></div>
             <ul class="header_nav_links">
                 <li class="header_link"><a href="#"><img src="/picture/icon_logIn.png"></a></li>
                 <li class="header_link"><a href="#"><img src="/picture/icon_Forum.png" class="nav_icon"></a></li>
+                
             </ul>
         </nav>
     </header>
 
-    <div style="margin: 2%  5% 0 5% ; text-align: center; font-size: 20px;">
-        <ul>
-            <li>
-                <div class="process_info_bg">填寫旅客資訊</div>
+    <div class="process-container" style="margin: 2% 5% 0 5%; text-align: center; font-size: 20px;">
+        <ul class="process-steps" style="list-style: none; padding: 0; display: flex; flex-wrap: wrap; justify-content: center; align-items: center;">
+            <li style="flex-grow:0.05; display: flex; align-items: center; margin: 10px;">
+                <div class="process_info_bg" style="padding: 10px; border-radius: 5px; background-color: #1a156d;">填寫旅客資訊</div>
             </li>
-            <li><span class="material-symbols-outlined" style="vertical-align: middle;">arrow_forward_ios</span></li>
-
-            <li>
-                <div class="process_bg">會員登入/註冊</div>
+            <li><i class="fas fa-angle-double-right" style="font-size:36px" ></i></li>
+            
+            <li style="flex-grow:0.05;display: flex; align-items: center; margin: 10px;">
+                <div class="process_bg" style="padding: 10px; border-radius: 5px; background-color: #c7c4c4; ">訂單成立/信用卡付款</div>
             </li>
-            <li><span class="material-symbols-outlined" style="vertical-align: middle;">arrow_forward_ios</span></li>
-            <li>
-                <div class="process_bg">訂單成立</div>
+            <li><i class="fas fa-angle-double-right" style="font-size:36px" ></i></li>
+            <li style="flex-grow:0.05;display: flex; align-items: center; margin: 10px;">
+                <div class="process_bg" style="padding: 10px; border-radius: 5px; background-color: #c7c4c4;width:100px;">結帳</div>
             </li>
-            <li><span class="material-symbols-outlined" style="vertical-align: middle;">arrow_forward_ios</span></li>
-            <li>
-                <div class="process_bg">選擇付款方式</div>
-            </li>
-            <li><span class="material-symbols-outlined" style="vertical-align: middle;">arrow_forward_ios</span></li>
-            <li>
-                <div class="process_bg">結帳</div>
-            </li>
-            <li><span class="material-symbols-outlined" style="vertical-align: middle;">arrow_forward_ios</span></li>
-            <li>
-                <div class="process_bg">完成訂購</div>
+            <li><i class="fas fa-angle-double-right" style="font-size:36px" ></i></li>
+            <li style="flex-grow:0.05;display: flex; align-items: center; margin: 10px;">
+                <div class="process_bg" style="padding: 10px; border-radius: 5px; background-color: #c7c4c4;">完成訂購</div>
             </li>
         </ul>
     </div>
     <div class="container_bg row">
         <div class="col_left">
-            <h5 style="margin-left: 10%; font-size: 24px;">東京之旅</h5>
-            <div class="container" style="width: 80%; padding: 20px; font-size: 18px;">行程總覽
+            <h5 style="margin-left: 10%; font-size: 30px; font-weight: bold;">東京之旅</h5>
+            <div class="container" style="width: 80%; padding: 20px; font-size: 18px; font-weight: bold;">行程總覽
                 <br>
-                <hr style="border: none; border-top: 5px solid #1f0737;">
+                <hr style="border: none; border-top: 5px solid #132953;">
                 <div class="box">
-                    <div style="font-weight: bold;">台北->東京</div>
+                    <div style="font-weight: bold;">
+                    <span id="departure_city">台北</span>-><span id="arrival_city">東京</span>
+                    </div>
                     <div style="display: flex;padding:20px 0">
                         <div
-                            style="background-color: #431274; color:white; margin: 0 5px; padding: 0 10px; border-radius: 5px;">
+                            style="background-color: #1a156d; color:white; margin: 0 5px; padding: 0 10px; border-radius: 5px;">
                             去程</div>
-                        <div>9月21日 週六 ｜</div>
+                        <div><span>9月21日</span> <span>週六</span>｜</div>
                         <div>所需時間: 3小時25分</div>
                     </div>
                     <div style="display: flex; gap: 30px;">
@@ -484,12 +84,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
                     </div>
                 </div>
-                <hr style="border: none; border-top: 5px dashed #1f0737;">
+                <hr style="border: none; border-top: 5px dashed #132953;">
                 <div class="box">
                     <div style="font-weight: bold;">東京->台北</div>
                     <div style="display: flex;padding:20px 0">
                         <div
-                            style="background-color: #431274; color:white;margin: 0 5px; padding: 0 10px; border-radius: 5px;">
+                            style="background-color: #1a156d;; color:white;margin: 0 5px; padding: 0 10px; border-radius: 5px;">
                             回程</div>
                         <div>9月26日 週四 ｜</div>
                         <div>所需時間: 3小時40分</div>
@@ -590,44 +190,40 @@ document.addEventListener('DOMContentLoaded', function () {
                     <div class="form_section">
                         <div>旅客1(成人票)</div>
                         <div class="container_info">
-
                             <form style="width: 100%; margin: 0 auto;">
-                                <div style="display: grid; grid-template-columns: 50% 50%; margin-bottom: 5px;">
+                                <div class="form_container form_name">
                                     <div>
                                         <label for="lastname">姓氏：</label>
-                                        <input type="text" id="lastname" name="lastname" placeholder="英文姓氏" style="width:70% ;">
-
+                                        <input type="text" id="lastname" name="lastname" placeholder="英文姓氏" style="width: 80%;">
                                     </div>
-
                                     <div>
                                         <label for="firstname">名字：</label>
-                                        <input type="text" id="firstname" name="firstname" placeholder="英文名字" style="width:70%;">
+                                        <input type="text" id="firstname" name="firstname" placeholder="英文名字" style="width: 80%;">
                                     </div>
-
                                 </div>
-
-                                <div style="display: grid; grid-template-columns: 22% 38% 40%;margin-bottom: 10px;">
+            
+                                <div class="form_row">
                                     <div>
                                         <label for="gender">性別：</label>
-                                        <select id="gender" name="gender" style="width: 45%;">
+                                        <select id="gender" name="gender">
                                             <option value="male">男性</option>
                                             <option value="female">女性</option>
                                         </select>
                                     </div>
                                     <div>
                                         <label for="dob">出生日期：</label>
-                                        <input type="date" id="dob" name="dob" style="width: 55%;">
+                                        <input type="date" id="dob" name="dob" style="width: 100%;">
                                     </div>
                                     <div>
-                                        證件號碼：<input id="idnumber" name="idnumber" type="text" style="width:52%;">
+                                        <label for="idnumber">證件號碼：</label>
+                                        <input id="idnumber" name="idnumber" type="text" style="width: 100%;">
                                     </div>
-
-
                                 </div>
-                                <div style="display: grid; grid-template-columns: 22% 30% 46%;">
+            
+                                <div class="form_row">
                                     <div>
-                                        <label for="">國籍：</label>
-                                        <select style="width: 50%;" id="country" name="country">
+                                        <label for="country">國籍：</label>
+                                        <select id="country" name="country">
                                             <option value="tw">台灣</option>
                                             <option value="us">美國</option>
                                             <option value="cn">中國</option>
@@ -651,28 +247,29 @@ document.addEventListener('DOMContentLoaded', function () {
                                             <option value="ch">瑞士</option>
                                             <option value="sg">新加坡</option>
                                         </select>
-
                                     </div>
                                     <div>
-                                        證件類型：
-                                        <select style="width: 40%;" id="idtype" name="idtype">
+                                        <label for="idtype">證件類型：</label>
+                                        <select id="idtype" name="idtype" style="width: 100%;">
                                             <option value="passport">護照</option>
                                             <option value="chinaId">台胞證（台灣居民來往大陸通行證）</option>
                                         </select>
                                     </div>
-
                                     <div>
-                                        證件有效日期至：<input type="date" id="dop" name="dop" style="width: 45%;">
+                                        <label for="dop">證件有效日期至：</label>
+                                        <input type="date" id="dop" name="dop" style="width: 100%;">
                                     </div>
                                 </div>
                             </form>
                         </div>
                         <hr style="border: 1px dashed;">
                         <button class="delete_btn">刪除</button>
-                    </div>
-
-                    <div>
-                        <p>一經確認即無法變更訂單。如果您的姓名不正確，您可能無法登機且將必須支付退票費用。</p>
+                        <div style="font-weight: bold; color: #19156df1;">
+                            <div>來自港澳台之乘客需要同時攜帶回鄉證／台胞證和護照。</div>
+                            <div>請確保您輸入的姓名與辦理登機時使用的證件上的姓名一致</div>
+                            <div>為確保您的旅程順利，請確保乘客的旅遊文件 <span style="color: red;">由旅程完結日起至少6個月內有效</span></div>
+                            <div>確認後，訂單將無法更改。如果您的姓名有誤，您可能無法登機並將被收取取消費用。</div>
+                        </div>
                     </div>
                     <div style="display: flex;justify-content: center; padding: 20px">
                         <button id="add_passenger"
@@ -711,8 +308,8 @@ document.addEventListener('DOMContentLoaded', function () {
                                 <div>1件，共23公斤</div>
                             </div>
 
-                            <label for="add_luggage_1">
-                                <select name="addLg_1" id="add_luggage_1" class="label_addluggage">
+                            <label for="add_luggage_1" style="padding-top: 20px;">
+                                <select name="addLg_1" id="add_luggage_1" class="label_addluggage" >
                                     <option value="add_lg">加購行李</option>
                                     <option value="non_lg">無額外行李</option>
                                     <option value="one_lg">1件，共20公斤&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;NT$1,224
@@ -777,11 +374,11 @@ document.addEventListener('DOMContentLoaded', function () {
                 </div>
             </div>
 
-            <div class="container" style="width: 80%;padding: 20px;margin-top: 50px; ">
-            <div style="display: flex; justify-content:space-between; align-items: center;">
-            	<div>總計:</div> 
-            	<div id="main_ticket_price" style="font-size:24px; color:red;">NT$ 9,999</div><br>
-            </div>
+            <div class="container" style="width: 80%;padding: 20px; margin-top: 50px;  margin-bottom:50px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; width: 80%; margin: 0 auto;">
+                    <div style="text-align: left; font-size: 20px; font-weight:bold">總計:</div>
+                    <div id="main_ticket_price" style="font-size:24px; color:red; text-align: right;">NT$ 9,999</div>
+                </div>
                 
                 <div style="display: flex;justify-content: center;">
                     <button class="style_nextstep" id="next_step">下一步</button>
@@ -789,7 +386,7 @@ document.addEventListener('DOMContentLoaded', function () {
             </div>
         </div>
 
-        <div class="col_right" style="min-height: 50vh;">
+        <div class="col_right" style="min-height: 40vh;">
             <div class="container_right">
                 <form id="booking_form">
                     <div style="font-size: 22px; margin-top: 10px">價格詳情</div>
@@ -871,4 +468,7 @@ document.addEventListener('DOMContentLoaded', function () {
             Copyright © 2024 Javel. All rights reserved.
         </div>
     </footer>
+    
+    
+     <script src="FormFunction.js"></script>
 </body>

@@ -1,6 +1,7 @@
 package tw.air.service;
 
 import java.util.List;
+import java.util.Map;
 
 import tw.air.model.Orders;
 
@@ -12,6 +13,8 @@ public interface OrdersService {
 	
 	public Orders getOrderById(long oid);
 	
-
-
+	public List<Map<String, Object>> getOrdersWithContactName();
+	
+	public Orders getOrderByOrderNumber(String orderNumber);
+	
 }

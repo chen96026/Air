@@ -5,9 +5,12 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -32,6 +35,7 @@ public class Orders {
     private Long contactId; // 儲存聯絡人的 CId
 
 	@OneToMany(mappedBy = "orders", cascade = CascadeType.ALL, orphanRemoval = true)
+	@JsonIgnore
 	private List<Passenger> passengerList = new ArrayList<>();
 	
 	@Column(name = "finalprice")
@@ -40,6 +44,30 @@ public class Orders {
 	@Column(name = "createDate")
 	private LocalDateTime createDate;
 	
+	@Column(name = "orderStatus")
+	private String orderStatus;
+	
+    public String getOrderStatus() {
+		return orderStatus;
+	}
+
+	public void setOrderStatus(String orderStatus) {
+		this.orderStatus = orderStatus;
+	}
+
+	public Contact getContactInformation() {
+		return contactInformation;
+	}
+
+	public void setContactInformation(Contact contactInformation) {
+		this.contactInformation = contactInformation;
+	}
+
+
+	// 關聯到 ContactInformation
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "contact_id", referencedColumnName = "CId", insertable = false, updatable = false)
+    private Contact contactInformation;  // 關聯的聯絡人資訊
 	
 	public LocalDateTime getCreateDate() {
 		return createDate;

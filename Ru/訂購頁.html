@@ -2,210 +2,57 @@
 <html lang="zh-tw">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>訂購頁</title>
+    <!-- load stylesheets -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">  <!-- Google web font "Open Sans" -->
+    <link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.min.css">                <!-- Font Awesome -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">                                      <!-- Bootstrap style -->
+    <link rel="stylesheet" type="text/css" href="css/datepicker.css"/>
+    <link rel="stylesheet" type="text/css" href="slick/slick.css"/>
+    <link rel="stylesheet" type="text/css" href="slick/slick-theme.css"/>
+    <link rel="stylesheet" href="css/templatemo-style.css">                                   <!-- Templatemo style -->
 
-    <link rel="stylesheet" href="./Order.css">
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-    <!-- 社群媒體的iconnnnnnnnnnnn -->
-    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet" />
-
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+            <!--[if lt IE 9]>
+              <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+              <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+          <![endif]-->
 </head>
 
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        var modal = document.getElementById("myModal");
-        var btn = document.getElementById("view_details");
-        var span = document.getElementsByClassName("close")[0];
-        btn.onclick = function () {
-            modal.style.display = "block";
-        }
-        span.onclick = function () {
-            modal.style.display = "none";
-        }
-        window.onclick = function (event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
-        }
-    });
-
-
-</script>
-
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-    const nextStepButton = document.getElementById('next_step');
-    let passengerId;
-    let orderId;
-
-    if (nextStepButton) {
-        nextStepButton.addEventListener('click', function (event) {
-            event.preventDefault();
-
-            // 初始化聯絡人資料
-            const contactData = {
-                contactName: document.getElementById('contact_name').value,
-                contactPhone: document.getElementById('contact_phone').value,
-                contactEmail: document.getElementById('contact_email').value,
-            };
-
-            // 初始化乘客資料
-            const passengerData = {
-                lastName: document.getElementById('lastname').value,
-                firstName: document.getElementById('firstname').value,
-                gender: document.getElementById('gender').value,
-                birthday: document.getElementById('dob').value,
-                country: document.getElementById('country').value,
-                idType: document.getElementById('idtype').value,
-                idNumber: document.getElementById('idnumber').value,
-                idDate: document.getElementById('dop').value,
-                // contactId 會在聯絡人成功提交後設置
-            };
-
-            // 提交聯絡人資料
-            fetch('/orders/createContact', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(contactData)
-            })
-            .then(contactResponse => {
-                if (!contactResponse.ok) {
-                    throw new Error('Contact submission failed: ' + contactResponse.statusText);
-                }
-                return contactResponse.json();
-            })
-            .then(contactData => {
-                console.log('聯絡人已成功提交:', contactData);
-                passengerData.contactId = contactData.cid; // 在這裡設置聯絡人 ID
-
-                return fetch('/passenger/createpassenger', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(passengerData)
-                });
-            })
-            .then(passengerResponse => {
-                if (!passengerResponse.ok) {
-                    throw new Error('Passenger submission failed: ' + passengerResponse.statusText);
-                }
-                return passengerResponse.json();
-            })
-            .then(passengerData => {
-                console.log('乘客已成功提交:', passengerData);
-                passengerId = passengerData.pid;
-
-                // 構建訂單資料
-                const orderData = {
-                    orderNumber: 'ORDER-' + new Date().getTime(),
-                    contact: { 
-                        CId: passengerData.contactId // 確保這裡的值是有效的
-                    },
-                };
-
-                console.log('訂單資料:', JSON.stringify(orderData, null, 2));
-
-                return fetch('/orders/createOrder', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(orderData)
-                });
-            })
-            .then(orderResponse => {
-                if (!orderResponse.ok) {
-                    throw new Error('訂單提交失敗: ' + orderResponse.statusText);
-                }
-                return orderResponse.json();
-            })
-            .then(orderData => {
-                console.log('訂單提交成功', orderData);
-                orderId = orderData.oid;
-
-                // 收集行李資料
-                const luggageData = [
-                    {
-                        tripType: "OUTBOUND",
-                        addLuggage: document.getElementById('add_luggage_1').value, // 例如: 取得行李選項
-                        lgprice: getLuggagePrice(document.getElementById('add_luggage_1').value),
-                        passengerId: passengerId, // 設置乘客 ID
-                        orderId: orderId // 設置訂單 ID
-                    },
-                    {
-                        tripType: "RETURN",
-                        addLuggage: document.getElementById('add_returnluggage_2').value,
-                        lgprice: getLuggagePrice(document.getElementById('add_returnluggage_2').value),
-                        passengerId: passengerId,
-                        orderId: orderId
-                    }
-                ];
-
-                // 提交行李數據
-                return fetch('/luggage/createluggages', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(luggageData)
-                });
-            })
-            .then(luggageResponse => {
-                if (!luggageResponse.ok) {
-                    throw new Error('Luggage submission failed: ' + luggageResponse.statusText);
-                }
-                return luggageResponse.json();
-            })
-            .then(luggageData => {
-                console.log('行李資訊已成功更新:', luggageData);
-                alert('所有資料已成功提交');
-            })
-            .catch(error => {
-                console.log('資料提交過程中出現問題:', error);
-                alert('提交失敗: ' + error.message);
-            });
-        });
-    } else {
-        console.error('next_step not found.');
-    }
-
-    // 獲取行李價格的函數
-    function getLuggagePrice(optionValue) {
-        switch (optionValue) {
-            case 'non_lg':
-                return 0;
-            case 'one_lg':
-                return 1224;
-            case 'two_lg':
-                return 1698;
-            case 'three_lg':
-                return 2171;
-            default:
-                return 0;
-        }
-    }
-});
-        
-</script>
-
-
 <body>
-    <header style="border-bottom: 10px solid #F4CFE0">
-        <nav id="header">
-            <div class="header_logo"><a href=""><img src="/picture/logo.png"></a></div>
-            <ul class="header_nav_links">
-                <li class="header_link"><a href="#"><img src="/picture/icon_logIn.png"></a></li>
-                <li class="header_link"><a href="#"><img src="/picture/icon_Forum.png" class="nav_icon"></a></li>
-            </ul>
-        </nav>
-    </header>
+    <div class="tm-main-content" id="top">
+        <div class="tm-top-bar-bg"></div>    
+        <div class="tm-top-bar" id="tm-top-bar">
+            <div class="container">
+                <div class="row">
+                    <nav class="navbar navbar-expand-lg narbar-light">
+                        <a class="navbar-brand mr-auto" href="#">
+                            <img src="img/logo.png" alt="Site logo">
+                            Journey
+                        </a>
+                        <button type="button" id="nav-toggle" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#mainNav" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div id="mainNav" class="collapse navbar-collapse tm-bg-white">
+                            <ul class="navbar-nav ml-auto">
+                              <li class="nav-item">
+                                <a class="nav-link active" href="#top">Home <span class="sr-only">(current)</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#tm-section-2">Top Destinations</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#tm-section-3">Recommended Places</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#tm-section-4">Contact Us</a>
+                            </li>
+                        </ul>
+                    </div>                            
+                </nav>
+            </div> <!-- row -->
+        </div> <!-- container -->
+    </div> <!-- .tm-top-bar -->
 
     <div style="margin: 2%  5% 0 5% ; text-align: center; font-size: 20px;">
         <ul>
@@ -242,12 +89,14 @@ document.addEventListener('DOMContentLoaded', function () {
                 <br>
                 <hr style="border: none; border-top: 5px solid #1f0737;">
                 <div class="box">
-                    <div style="font-weight: bold;">台北->東京</div>
+                    <div style="font-weight: bold;">
+                    <span id="departure_city">台北</span>-><span id="arrival_city">東京</span>
+                    </div>
                     <div style="display: flex;padding:20px 0">
                         <div
                             style="background-color: #431274; color:white; margin: 0 5px; padding: 0 10px; border-radius: 5px;">
                             去程</div>
-                        <div>9月21日 週六 ｜</div>
+                        <div><span>9月21日</span> <span>週六</span>｜</div>
                         <div>所需時間: 3小時25分</div>
                     </div>
                     <div style="display: flex; gap: 30px;">
@@ -380,13 +229,13 @@ document.addEventListener('DOMContentLoaded', function () {
                                 <div style="display: grid; grid-template-columns: 50% 50%; margin-bottom: 5px;">
                                     <div>
                                         <label for="lastname">姓氏：</label>
-                                        <input type="text" id="lastname" placeholder="姓氏" style="width:70% ;">
+                                        <input type="text" id="lastname" name="lastname" placeholder="英文姓氏" style="width:70% ;">
 
                                     </div>
 
                                     <div>
                                         <label for="firstname">名字：</label>
-                                        <input type="text" id="firstname" placeholder="名字" style="width:70%;">
+                                        <input type="text" id="firstname" name="firstname" placeholder="英文名字" style="width:70%;">
                                     </div>
 
                                 </div>
@@ -394,17 +243,17 @@ document.addEventListener('DOMContentLoaded', function () {
                                 <div style="display: grid; grid-template-columns: 22% 38% 40%;margin-bottom: 10px;">
                                     <div>
                                         <label for="gender">性別：</label>
-                                        <select id="gender" style="width: 45%;">
+                                        <select id="gender" name="gender" style="width: 45%;">
                                             <option value="male">男性</option>
                                             <option value="female">女性</option>
                                         </select>
                                     </div>
                                     <div>
                                         <label for="dob">出生日期：</label>
-                                        <input type="date" id="dob" style="width: 55%;">
+                                        <input type="date" id="dob" name="dob" style="width: 55%;">
                                     </div>
                                     <div>
-                                        證件號碼：<input id="idnumber" type="text" style="width:52%;">
+                                        證件號碼：<input id="idnumber" name="idnumber" type="text" style="width:52%;">
                                     </div>
 
 
@@ -412,7 +261,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                 <div style="display: grid; grid-template-columns: 22% 30% 46%;">
                                     <div>
                                         <label for="">國籍：</label>
-                                        <select style="width: 50%;" id="country">
+                                        <select style="width: 50%;" id="country" name="country">
                                             <option value="tw">台灣</option>
                                             <option value="us">美國</option>
                                             <option value="cn">中國</option>
@@ -440,13 +289,14 @@ document.addEventListener('DOMContentLoaded', function () {
                                     </div>
                                     <div>
                                         證件類型：
-                                        <select style="width: 40%;" id="idtype">
+                                        <select style="width: 40%;" id="idtype" name="idtype">
                                             <option value="passport">護照</option>
+                                            <option value="chinaId">台胞證（台灣居民來往大陸通行證）</option>
                                         </select>
                                     </div>
 
                                     <div>
-                                        證件有效日期至：<input type="date" id="dop" style="width: 45%;">
+                                        證件有效日期至：<input type="date" id="dop" name="dop" style="width: 45%;">
                                     </div>
                                 </div>
                             </form>
@@ -552,17 +402,21 @@ document.addEventListener('DOMContentLoaded', function () {
             <div>
                 <h5 style="margin-left: 10%; font-size: larger;">聯繫方式</h5>
                 <div class="container_contact">
-                    <div><input type="text" placeholder="聯繫人姓名" class="container_contactinfo" id="contact_name"></div>
-                    <div><input type="tel" placeholder="手機號碼" class="container_contactinfo" id="contact_phone">
+                    <div><input type="text" placeholder="聯繫人姓名" class="container_contactinfo" id="contact_name" name="contactName"></div>
+                    <div><input type="tel" placeholder="手機號碼" class="container_contactinfo" id="contact_phone" name= "contactPhone">
                     </div>
-                    <div><input type="email" placeholder="電子郵件" class="container_contactinfo" id="contact_email">
+                    <div><input type="email" placeholder="電子郵件" class="container_contactinfo" id="contact_email" name = "contactEmail" >
                     </div>
 
                 </div>
             </div>
 
-            <div class="container" style="width: 80%; padding: 20px;margin-top: 50px;">
-                總計<br>
+            <div class="container" style="width: 80%;padding: 20px;margin-top: 50px; ">
+            <div style="display: flex; justify-content:space-between; align-items: center;">
+            	<div>總計:</div> 
+            	<div id="main_ticket_price" style="font-size:24px; color:red;">NT$ 9,999</div><br>
+            </div>
+                
                 <div style="display: flex;justify-content: center;">
                     <button class="style_nextstep" id="next_step">下一步</button>
                 </div>
@@ -651,4 +505,7 @@ document.addEventListener('DOMContentLoaded', function () {
             Copyright © 2024 Javel. All rights reserved.
         </div>
     </footer>
+    
+    
+     <script src="FormFunction.js"></script>
 </body>
