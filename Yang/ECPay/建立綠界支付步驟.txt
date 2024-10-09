@@ -25,3 +25,7 @@ import jakarta.servlet.http.HttpServletRequest;
 7. 製作service，裡面放上各種設定(obj.set. . .)，最後製作表單回傳
 
 8. 製作controller，有兩個路由，第一個只是單純呼叫service的表單，第二個是接收交易成功後回傳資訊的路徑。 
+
+測試用信用卡號: 4311 9522 2222 2222
+卡片有效期限: 大於今天都行
+安全碼: 222
