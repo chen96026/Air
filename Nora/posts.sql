@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主機： localhost:3306
--- 產生時間： 2024-10-04 09:18:28
+-- 產生時間： 2024-10-09 12:34:23
 -- 伺服器版本： 5.7.24
 -- PHP 版本： 8.3.1
 
@@ -40,7 +40,8 @@ CREATE TABLE `posts` (
   `share` tinyint(1) NOT NULL COMMENT '是否願意分享到首頁',
   `content` varchar(1000) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '文章內容(必填)',
   `authorId` bigint(10) UNSIGNED NOT NULL COMMENT '作者id(外鍵連接user.id)',
-  `createdTime` datetime NOT NULL COMMENT 'PO文日期'
+  `createdTime` datetime NOT NULL COMMENT 'PO文日期',
+  `status` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
