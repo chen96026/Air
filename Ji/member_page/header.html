@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<link rel="stylesheet" th:href="@{/css/header.css}">
+</head>
+<body th:fragment="header">
+	<button class="overlay" id="overlay"></button>
+	<header class="search_header" id="search_header">
+		<nav id="search_navbar">
+			<div class="search_nav_logo">
+				<a href="/main_page"><img src="/assets/logo.png"></a>
+			</div>
+			<ul class="search_nav_links">
+				<li class="search_link"><a href="/forum"><img
+						src="/assets/forum.png"></a></li>
+				<li class="search_link" id="LoginOrMember"></li>
+				<li class="search_link"><a href="/main_page" onclick="localStorage.removeItem('uid');"><img src="/assets/logout.png"></a></li>
+			</ul>
+		</nav>
+	</header>
+</body>
+</html>
