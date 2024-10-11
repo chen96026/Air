@@ -40,6 +40,12 @@ public class Member {
 	@Column(name="birthday")
 	private String birthday;
 	
+	@Column(name="provider")
+	private String provider;
+	
+	@Column(name="thirdpartyid")
+	private String thirdPartyId;
+	
 	@Column(name="order_information",columnDefinition = "json")
 	public String order_information;
 	
@@ -112,6 +118,22 @@ public class Member {
 
 	public void setIcon(byte[] icon) {
 		this.icon = icon;
+	}
+
+	public String getProvider() {
+		return provider;
+	}
+
+	public void setProvider(String provider) {
+		this.provider = provider;
+	}
+
+	public String getThirdPartyId() {
+		return thirdPartyId;
+	}
+
+	public void setThirdPartyId(String thirdPartyId) {
+		this.thirdPartyId = thirdPartyId;
 	}
 
 	public String getOrder_information() {

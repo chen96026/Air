@@ -47,11 +47,4 @@ public class WebController {
 		return "forum_page_edit";
 	}
 	
-	@GetMapping("/order")
-	public String order() {
-		return "order";
-	}
-	
-	
-	
 }

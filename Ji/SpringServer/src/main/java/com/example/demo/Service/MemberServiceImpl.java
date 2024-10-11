@@ -11,6 +11,7 @@ import com.example.demo.ResponseMember;
 import com.example.demo.Model.Member;
 import com.example.demo.Repository.MemberRepository;
 import com.example.demo.bcrypt.BCrypt;
+import com.example.demo.dto.CheckPasswordDTO;
 
 @Service
 public class MemberServiceImpl implements MemberService {
@@ -36,28 +37,49 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public ResponseMember registerMember(Member member) {
-		ResponseMember responseMember = isExistEmail(member.getEmail());
-		if (responseMember.getMemberStatus() == MemberStatus.NOT_EXIST) {
-			// 生成唯一的 UID
-			String uid = UUID.randomUUID().toString();
-			member.setUid(uid); // 將 UID 設置到 Member 物件中
-
-			member.setPassword(BCrypt.hashpw(member.getPassword(), BCrypt.gensalt()));
-
-			Member newMember = memberRepository.save(member);
-
-			if (newMember.getId() != null) {
-				responseMember.setMemberStatus(MemberStatus.ADD_SUCCESS);
-				responseMember.setMesg("註冊成功");
-				responseMember.setMember(member);
-			} else {
+		ResponseMember responseMember = new ResponseMember();
+		// 如果是非第三方註冊，檢查 email 和 password 是否為 null
+		if (member.getProvider() == null || member.getProvider().isEmpty()) {
+			// 檢查 email 是否為空
+			if (member.getEmail() == null || member.getEmail().isEmpty()) {
 				responseMember.setMemberStatus(MemberStatus.ADD_FAILURE);
-				responseMember.setMesg("註冊失敗");
-				responseMember.setMember(member);
+				responseMember.setMesg("Email是必填的");
+				return responseMember;
 			}
-		} else {
-			responseMember.setMesg("帳號重複");
+			// 檢查 password 是否為空
+			if (member.getPassword() == null || member.getPassword().isEmpty()) {
+				responseMember.setMemberStatus(MemberStatus.ADD_FAILURE);
+				responseMember.setMesg("Password是必填的");
+				return responseMember;
+			}
+			// 檢查 email 是否已經存在
+			responseMember = isExistEmail(member.getEmail());
+			if (responseMember.getMemberStatus() == MemberStatus.NOT_EXIST) {
+				// 生成唯一的 UID
+				String uid = UUID.randomUUID().toString();
+				member.setUid(uid); // 將 UID 設置到 Member 物件中
+
+				// 密碼加密
+				member.setPassword(BCrypt.hashpw(member.getPassword(), BCrypt.gensalt()));
+			} else {
+				// 如果 email 已經存在，返回失敗狀態
+				responseMember.setMesg("Email重複");
+				return responseMember;
+			}
 		}
+		// 保存新會員至資料庫
+		Member newMember = memberRepository.save(member);
+
+		if (newMember.getId() != null) {
+			responseMember.setMemberStatus(MemberStatus.ADD_SUCCESS);
+			responseMember.setMesg("註冊成功");
+			responseMember.setMember(member);
+		} else {
+			responseMember.setMemberStatus(MemberStatus.ADD_FAILURE);
+			responseMember.setMesg("註冊失敗");
+			responseMember.setMember(member);
+		}
+
 		return responseMember;
 	}
 
@@ -123,6 +145,18 @@ public class MemberServiceImpl implements MemberService {
 		}
 		return responseMember;
 	}
+	
+	@Override
+	public String updatePassword(CheckPasswordDTO checkPasswordDTO) {
+		Member member = memberRepository.findByUid(checkPasswordDTO.getUid());
+		if (member.getPassword() != null && BCrypt.checkpw(checkPasswordDTO.getOld_password(), member.getPassword())) {
+			member.setPassword(BCrypt.hashpw(checkPasswordDTO.getPassword(),BCrypt.gensalt()));
+			memberRepository.save(member);
+		}else {
+			return "舊密碼不符";
+		}
+		return null;
+	}
 
 	@Override
 	public Member findMemberuid(String uid) {
@@ -150,13 +184,50 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public boolean deleteAccount(String email,String password) {
+	public boolean deleteAccount(String email, String password) {
 		Member member = memberRepository.findByEmail(email);
-		if(BCrypt.checkpw(password,member.getPassword()) && member.getUid()!=null) {
+		if (BCrypt.checkpw(password, member.getPassword()) && member.getUid() != null) {
 			memberRepository.delete(member);
 			return true;
-		}else {
+		} else {
 			return false;
 		}
+	}
+	
+	@Override
+	public Member findByThirdPartyId(String thirdPartyId) {
+		// 查詢是否有thirdPartyId的會員
+		 return memberRepository.findByThirdPartyId(thirdPartyId);
+	}
+
+	@Override
+	public ResponseMember thirdPartyLogin(String thirdPartyId, String provider, String name, String email,
+			byte[] icon) {
+		 Member existingMember = memberRepository.findByThirdPartyId(thirdPartyId);
+		 ResponseMember responseMember = new ResponseMember();
+		  if (existingMember != null) {
+		        // 如果會員已經存在，返回登入成功
+		        responseMember.setMemberStatus(MemberStatus.LOGIN_SUCCESS);
+		        responseMember.setMesg("登入成功");
+		        responseMember.setMember(existingMember);
+		        return responseMember;
+		    }
+		 
+		 // 如果會員不存在，則進行註冊
+		    Member newMember = new Member();
+		    newMember.setThirdPartyId(thirdPartyId);  // 設定第三方ID
+		    newMember.setProvider(provider);          // 設定提供商 (Google, Line等)
+		    newMember.setName(name);           		  // 使用第三方的 displayname 存到 name 欄位
+		    newMember.setEmail(email);                // 設定 email，允許為 null
+		    newMember.setIcon(icon);                  // 存儲頭像數據
+		    
+		    // 生成唯一的 UID
+		    String uid = UUID.randomUUID().toString();
+		    newMember.setUid(uid); // 為第三方用戶設置 UID
+		 
+		    // 註冊新會員，並將會員資料保存到資料庫
+		    ResponseMember registerResponse = registerMember(newMember);
+		    
+		    return registerResponse;  // 返回註冊結果
 	}
 }

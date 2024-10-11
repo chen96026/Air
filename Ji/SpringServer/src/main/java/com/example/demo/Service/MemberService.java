@@ -5,6 +5,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.example.demo.ResponseMember;
 import com.example.demo.Model.Member;
+import com.example.demo.dto.CheckPasswordDTO;
 
 @Service
 public interface MemberService {
@@ -17,10 +18,16 @@ public interface MemberService {
 	public ResponseMember loginMember(Member member);
 	//uid查詢會員資料
 	public Member findMemberuid(String uid);
-	//更新
+	//更新帳戶資料
 	public ResponseMember updateMember(Member member);
+	//更新密碼
+	public String updatePassword(CheckPasswordDTO checkPasswordDTO);
 	//上傳頭像
-	void uploadMembericon(String uid, MultipartFile file) throws Exception;
+	public void uploadMembericon(String uid, MultipartFile file) throws Exception;
 	//刪除
-	boolean deleteAccount(String email,String password);
+	public boolean deleteAccount(String email,String password);
+	//第三方平台提供的uid查詢member
+	public Member findByThirdPartyId(String thirdPartyId);
+	//第三方登入
+	public ResponseMember thirdPartyLogin(String thirdPartyId,String provider,String name,String email,byte[] icon);
 }

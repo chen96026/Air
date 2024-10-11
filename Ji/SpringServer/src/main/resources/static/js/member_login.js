@@ -96,6 +96,7 @@ function login() {
 		email: email,
 		password: password,
 	};
+	console.log(data)
 	fetch('/member/login', {
 		method: "POST",
 		headers: {
@@ -110,6 +111,7 @@ function login() {
 			return response.json();
 		})
 		.then(data => {
+			console.log(data)
 			if (data.memberStatus === 'LOGIN_SUCCESS') {
 				localStorage.setItem('uid',data.member.uid);
 				window.location.href = "/main_page";

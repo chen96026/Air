@@ -18,6 +18,8 @@ import com.example.demo.MemberStatus;
 import com.example.demo.ResponseMember;
 import com.example.demo.Model.Member;
 import com.example.demo.Service.MemberService;
+import com.example.demo.dto.CheckPasswordDTO;
+import com.example.demo.dto.ThirdPartyDTO;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -42,7 +44,7 @@ public class MemberController {
 		}
 		return responseMember;
 	}
-	
+
 	@PostMapping("/login")
 	public ResponseMember login(@RequestBody Member member, HttpSession session) {
 		ResponseMember responsemember = memberService.loginMember(member);
@@ -73,6 +75,11 @@ public class MemberController {
 		return memberService.updateMember(member);
 	}
 
+	@PutMapping("/updatepassword")
+	public String updatepassword(@RequestBody CheckPasswordDTO checkPasswordDTO) {
+		return memberService.updatePassword(checkPasswordDTO);
+	}
+
 	@PostMapping("/uploadicon")
 	public ResponseEntity<String> uploadIcon(@RequestParam("avatar") MultipartFile file,
 			@RequestParam("uid") String uid) {
@@ -95,14 +102,39 @@ public class MemberController {
 			return ResponseEntity.status(500).body("圖片上傳失敗");
 		}
 	}
-	
+
 	@DeleteMapping("/delete")
 	public String delete(@RequestBody Member member) {
-		boolean isDeleted = memberService.deleteAccount(member.getEmail(),member.getPassword());
+		boolean isDeleted = memberService.deleteAccount(member.getEmail(), member.getPassword());
 		if (isDeleted) {
 			return "已刪除";
 		} else {
 			return "未找到會員，無法刪除";
 		}
+	}
+
+	@PostMapping("/thirdparty/login")
+	public ResponseEntity<ResponseMember> thirdPartyLogin(@RequestBody ThirdPartyDTO thirdPartuDTO,
+			HttpSession session) {
+
+		// 從 ThirdPartyLoginRequest 中提取數據
+		String thirdPartyId = thirdPartuDTO.getThirdPartyId();
+		String provider = thirdPartuDTO.getProvider();
+		String name = thirdPartuDTO.getName();
+		String email = thirdPartuDTO.getEmail(); // 允許為 null
+		byte[] icon = thirdPartuDTO.getIcon(); // 允許為 null
+
+		// 調用 Service 處理邏輯
+		ResponseMember responseMember = memberService.thirdPartyLogin(thirdPartyId, provider, name, email, icon);
+
+		// 如果登入成功，將信息存入 session
+		if (responseMember.getMemberStatus() == MemberStatus.LOGIN_SUCCESS
+				|| responseMember.getMemberStatus() == MemberStatus.ADD_SUCCESS) {
+			session.setAttribute("userEmail", responseMember.getMember().getEmail());
+			session.setAttribute("userUid", responseMember.getMember().getUid());
+		}
+
+		// 返回結果
+		return ResponseEntity.ok(responseMember);
 	}
 }

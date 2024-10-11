@@ -1,8 +1,8 @@
 const LoginOrMember = document.getElementById('LoginOrMember');
-if(localStorage.getItem('uid')!=null){
+if (localStorage.getItem('uid') != null) {
 	LoginOrMember.innerHTML = `<a href="/member_page"><img src="./assets/member.png"></a>`
-}else{
-	LoginOrMember.innerHTML = `<a href="/login"><img src="./assets/login.png"></a>`	
+} else {
+	LoginOrMember.innerHTML = `<a href="/login"><img src="./assets/login.png"></a>`
 }
 
 
@@ -12,7 +12,7 @@ fetch('/member/info')
 		if (member.icon != null) {
 			let base64Image = member.icon;
 			if (!base64Image.startsWith('data:image/')) {
-				base64Image = 'data:image/jpeg;base64,' + base64Image; 
+				base64Image = 'data:image/jpeg;base64,' + base64Image;
 			}
 			document.getElementById('member_info_icon2').src = base64Image;
 		}
@@ -42,19 +42,100 @@ function toggleDropdown(dropdownId) {
 		currentDropdown.style.visibility = 'hidden';
 	} else {
 		currentDropdown.classList.add('show');
-		currentDropdown.style.maxHeight = '200px'; 
+		currentDropdown.style.maxHeight = '200px';
 		currentDropdown.style.opacity = '1';
 		currentDropdown.style.visibility = 'visible';
 	}
 }
 
-document.getElementById('logout').addEventListener('click',() => {
+document.getElementById('logout').addEventListener('click', () => {
 	localStorage.removeItem('uid');
 	window.location.href = '/main_page';
 })
 
 const mainContent = document.getElementById('main-content');
+//以下有修改
 // 個人資料
+const account = document.getElementById('account');
+const password = document.getElementById('password');
+
+account.addEventListener('click', loadMemberInfoPage);
+password.addEventListener('click', loadPasswordPage);
+
+//更改齒輪功能拉出來變成一個function，新增點擊齒輪後標題也會變黑色
+function gearuse() {
+	// 處理齒輪圖標的邏輯
+	document.querySelectorAll('.gear-icon').forEach(icon => {
+		icon.addEventListener('click', function(event) {
+			event.stopPropagation();
+
+			const inputId = this.getAttribute('data-input');
+			const inputField = document.getElementById(inputId);
+
+			// 獲取當前齒輪對應的表單組，找到對應的標籤
+			const formGroup = this.closest('.member_Info_form-group') || this.closest('.member_Password_form-group');
+			const label = formGroup ? formGroup.querySelector('label') : null;
+
+			// 先禁用所有輸入框和重設所有標籤顏色為灰色
+			document.querySelectorAll('.member_Info_form input, .member_Password_form input').forEach(input => {
+				input.disabled = true;
+				const group = input.closest('.member_Info_form-group') || input.closest('.member_Password_form-group');
+				const inputLabel = group ? group.querySelector('label') : null;
+				if (inputLabel) {
+					inputLabel.style.color = "gray"; // 重設標籤顏色為灰色
+				}
+			});
+
+			// 如果當前欄位被禁用，啟用它，並將標籤顏色設為黑色
+			if (inputField.disabled) {
+				inputField.disabled = false;
+				inputField.focus();
+				inputField.style.backgroundColor = "#fff";
+				if (label) {
+					label.style.color = "#000"; // 將標籤顏色設為黑色
+				}
+			}
+		});
+	});
+
+	// 點擊空白處時禁用所有輸入欄位並恢復標籤顏色
+	document.addEventListener('click', function() {
+		document.querySelectorAll('.member_Info_form input, .member_Password_form input').forEach(input => {
+			input.disabled = true;
+			input.style.backgroundColor = "#fff";
+
+			const formGroup = input.closest('.member_Info_form-group') || input.closest('.member_Password_form-group');
+			const label = formGroup ? formGroup.querySelector('label') : null;
+			if (label) {
+				label.style.color = "gray"; // 將標籤顏色變回灰色
+			}
+		});
+	});
+
+	// 防止點擊輸入框時觸發全局事件
+	document.querySelectorAll('.member_Info_form input, .member_Password_form input').forEach(input => {
+		input.addEventListener('click', function(event) {
+			event.stopPropagation();
+		});
+
+		// 當按下 Enter 鍵時，自動禁用輸入框並恢復標籤顏色
+		input.addEventListener('keydown', function(event) {
+			if (event.key === "Enter") {
+				event.preventDefault();
+				input.disabled = true;
+				input.style.backgroundColor = "#fff";
+
+				const formGroup = input.closest('.member_Info_form-group') || input.closest('.member_Password_form-group');
+				const label = formGroup ? formGroup.querySelector('label') : null;
+				if (label) {
+					label.style.color = "gray"; // 將標籤顏色變回灰色
+				}
+			}
+		});
+	});
+}
+
+//更改密碼欄位剃除
 const memberInfoHTML = `
 <div class="member_Info_container">
     <h2>個人資料</h2>
@@ -81,27 +162,14 @@ const memberInfoHTML = `
                 <input type="text" id="member_info_name" name="member_info_name" placeholder="請輸入用戶名" disabled> <i class="fas fa-cog gear-icon" data-input="member_info_name"></i>
             </div>
         </div>
+
         <div class="member_Info_form-group">
             <label for="member_info_email">E-mail</label>
             <div class="input-with-icon">
                 <input type="email" id="member_info_email" name="member_info_email" disabled> <i class="fas fa-cog gear-icon" data-input="member_info_email"></i>
             </div>
         </div>
-
-        <div class="member_Info_form-group">
-            <label for="member_info_password">更新密碼</label>
-            <div class="input-with-icon">
-                <input type="password" id="member_info_password" name="member_info_password"> <i class="fas fa-cog gear-icon" data-input="member_info_password"></i>
-            </div>
-        </div>
-
-        <div class="member_Info_form-group">
-            <label for="member_info_password">確認更新密碼</label>
-            <div class="input-with-icon">
-                <input type="password" id="member_info_confirm_password" name="member_info_confirm_password"> <span id="member_info_passwordMatchIcon"></span> <i class="fas fa-cog gear-icon" data-input="member_info_confirm_password"></i>
-            </div>
-        </div>
-
+      
         <div class="member_Info_form-group">
             <label for="member_info_phone_number">手機</label>
             <div class="input-with-icon">
@@ -139,9 +207,50 @@ const memberInfoHTML = `
 </div>
 `;
 
-const account = document.getElementById('account');
-account.addEventListener('click', () => {
+//更改密碼單獨拉出(新增舊密碼欄位)
+const memberPasswordHTML = `
+<div class="member_Password_container">
+    <h2>更改密碼</h2>
+    <div id="member_Info_User">
+
+    <input type="hidden" id="member_info_uid" value="uid">
+
+    <div class="member_Password_form">
+
+	  <div class="member_Password_form-group">
+            <label for="member_info_old_password">舊密碼</label>
+            <div class="input-with-icon">
+                <input type="password" id="member_info_old_password" name="member_info_old_password"> <i class="fas fa-cog gear-icon" data-input="member_info_old_password"></i>
+            </div>
+        </div>
+       
+        <div class="member_Password_form-group">
+            <label for="member_info_password">新密碼</label>
+            <div class="input-with-icon">
+                <input type="password" id="member_info_password" name="member_info_password"> <i class="fas fa-cog gear-icon" data-input="member_info_password"></i>
+            </div>
+        </div>
+
+        <div class="member_Password_form-group">
+            <label for="member_info_confirm_password">確認新密碼</label>
+            <div class="input-with-icon">
+                <input type="password" id="member_info_confirm_password" name="member_info_confirm_password"> <span id="member_info_passwordMatchIcon"></span> <i class="fas fa-cog gear-icon" data-input="member_info_confirm_password"></i>
+            </div>
+        </div>
+
+        <div id="member_info_group-btn">
+            <button type="submit" class="member_Info_submit-btn" id="member_Info_revisebtn">確認修改</button>
+        </div>
+
+    </div>
+</div>
+`;
+
+//更改帳號資料頁面(把跟密碼相關的拉掉)
+function loadMemberInfoPage() {
 	mainContent.innerHTML = memberInfoHTML;
+	gearuse();
+
 	let initialMemberData = {};
 	fetch('/member/info')
 		.then(response => {
@@ -161,7 +270,7 @@ account.addEventListener('click', () => {
 				icon: member.icon
 			};
 
-			// 將會員信息顯示在頁面上
+			// 將會員訊息顯示在頁面上
 			document.getElementById('member_info_uid').value = member.uid;
 			document.getElementById('member_info_name').value = member.name;
 			document.getElementById('member_info_email').value = member.email;
@@ -171,7 +280,7 @@ account.addEventListener('click', () => {
 			if (member.icon != null) {
 				let base64Image = member.icon;
 				if (!base64Image.startsWith('data:image/')) {
-					base64Image = 'data:image/jpeg;base64,' + base64Image; 
+					base64Image = 'data:image/jpeg;base64,' + base64Image;
 				}
 				document.getElementById('member_info_icon').src = base64Image;
 				document.getElementById('member_info_icon2').src = base64Image;
@@ -183,7 +292,6 @@ account.addEventListener('click', () => {
 
 
 	document.getElementById("member_Info_revisebtn").addEventListener("click", function() {
-
 		let updatedMember = {
 			uid: document.getElementById('member_info_uid').value
 		};
@@ -203,11 +311,6 @@ account.addEventListener('click', () => {
 		const birthday = document.getElementById('member_info_birth').value;
 		if (birthday !== initialMemberData.birthday) {
 			updatedMember.birthday = birthday !== "" ? birthday : null;  // 確保不傳空字符串
-		}
-
-		const password = document.getElementById('member_info_password').value;
-		if (password && password !== "") {
-			updatedMember.password = password;
 		}
 
 		fetch('/member/update', {
@@ -232,63 +335,6 @@ account.addEventListener('click', () => {
 			});
 	});
 
-	document.querySelectorAll('.gear-icon').forEach(icon => {
-		icon.addEventListener('click', function(event) {
-			event.stopPropagation(); 
-
-			const inputId = this.getAttribute('data-input');
-			const inputField = document.getElementById(inputId);
-
-			if (inputField.disabled) {
-				inputField.disabled = false; 
-				inputField.focus();          
-				inputField.style.backgroundColor = "#fff"; 
-			} else {
-				inputField.disabled = true;  
-				inputField.style.backgroundColor = "#e9ecef"; 
-			}
-		});
-	});
-
-	document.addEventListener('click', function() {
-		document.querySelectorAll('input').forEach(input => {
-			if (!input.disabled && input.type !== 'file' && input.type !== 'email') {  
-				input.disabled = true;  
-				input.style.backgroundColor = "#e9ecef";  
-			}
-		});
-	});
-
-	document.querySelectorAll('input').forEach(input => {
-		input.addEventListener('click', function(event) {
-			event.stopPropagation(); 
-		});
-
-		input.addEventListener('keydown', function(event) {
-			if (event.key === "Enter") {
-				event.preventDefault(); 
-				input.disabled = true; 
-				input.style.backgroundColor = "#e9ecef"; 
-			}
-		});
-	});
-
-
-	document.getElementById('member_info_confirm_password').addEventListener('input', function() {
-		const password = document.getElementById('member_info_password').value;
-		const confirmPassword = this.value;
-		const passwordMatchIcon = document.getElementById('member_info_passwordMatchIcon');
-
-		if (confirmPassword === password && confirmPassword !== "") {
-			passwordMatchIcon.innerHTML = '<i class="fas fa-check-circle" style="color: green;"></i>';
-		} else if (confirmPassword !== password && confirmPassword !== "") {
-			passwordMatchIcon.innerHTML = '<i class="fas fa-times-circle" style="color: red;"></i>';
-		} else {
-			passwordMatchIcon.innerHTML = '';
-		}
-	});
-
-
 	//上傳頭像
 	document.getElementById('member_Info_upload_button').addEventListener('click', function() {
 		const fileInput = document.getElementById('member_Info_upload_Image');
@@ -298,10 +344,10 @@ account.addEventListener('click', () => {
 		console.log("Selected file:", file);
 		console.log("UID:", uid);
 
-		if (file && file.size <= 1 * 1024 * 1024) {  
+		if (file && file.size <= 1 * 1024 * 1024) {
 			const formData = new FormData();
 			formData.append('avatar', file);
-			formData.append('uid', uid);  
+			formData.append('uid', uid);
 
 			fetch('/member/uploadicon', {
 				method: 'POST',
@@ -315,7 +361,7 @@ account.addEventListener('click', () => {
 					}
 				})
 				.then(data => {
-					console.log("後端響應：", data);  
+					console.log("後端響應：", data);
 					alert('頭像上傳成功！');
 				})
 				.catch(error => {
@@ -327,13 +373,13 @@ account.addEventListener('click', () => {
 	});
 
 	//刪除帳號
-	const deleteBtn = document.getElementById("member_Info_deletebtn");  
-	const modal = document.getElementById("member_deleteAccountModal");  
-	const closeModal = document.getElementById("member_info_close");  
-	const cancelDeleteBtn = document.getElementById("member_cancelDeleteBtn");  
-	const confirmDeleteBtn = document.getElementById("member_confirmDeleteBtn");  
-	const confirmEmailInput = document.getElementById("member_confirmEmail");  
-	const registeredEmail = document.getElementById("member_info_email").value;  
+	const deleteBtn = document.getElementById("member_Info_deletebtn");
+	const modal = document.getElementById("member_deleteAccountModal");
+	const closeModal = document.getElementById("member_info_close");
+	const cancelDeleteBtn = document.getElementById("member_cancelDeleteBtn");
+	const confirmDeleteBtn = document.getElementById("member_confirmDeleteBtn");
+	const confirmEmailInput = document.getElementById("member_confirmEmail");
+	const registeredEmail = document.getElementById("member_info_email").value;
 
 
 	deleteBtn.addEventListener("click", function() {
@@ -356,13 +402,13 @@ account.addEventListener('click', () => {
 
 	confirmDeleteBtn.addEventListener("click", function() {
 		const enteredPassword = confirmEmailInput.value;
-		const registeredEmail = document.getElementById("member_info_email").value;  
+		const registeredEmail = document.getElementById("member_info_email").value;
 		const data = { email: registeredEmail, password: enteredPassword };
-		
+
 		fetch(`/member/delete`, {
 			method: 'DELETE',
 			headers: {
-				'Content-Type': 'application/json' 
+				'Content-Type': 'application/json'
 			},
 			body: JSON.stringify(data)
 		})
@@ -382,27 +428,85 @@ account.addEventListener('click', () => {
 	});
 
 	document.getElementById('member_customUploadButton').addEventListener('click', function() {
-		document.getElementById('member_Info_upload_Image').click(); 
+		document.getElementById('member_Info_upload_Image').click();
 	});
 
 	const fileInput = document.getElementById('member_Info_upload_Image');
 	const imagePreview = document.getElementById('member_info_icon');
 	fileInput.addEventListener('change', function() {
-		const file = fileInput.files[0]; 
+		const file = fileInput.files[0];
 		if (file && file.type.startsWith('image/')) {
-			const reader = new FileReader(); 
+			const reader = new FileReader();
 			reader.onload = function(e) {
-				imagePreview.src = e.target.result; 
-				imagePreview.style.display = 'block'; 
+				imagePreview.src = e.target.result;
+				imagePreview.style.display = 'block';
 			}
-			reader.readAsDataURL(file); 
+			reader.readAsDataURL(file);
 		} else {
 			alert('請選擇 JPEG 或 PNG 格式的檔案。');
 		}
 	});
+}
 
-});
+//更改密碼頁面(只留下跟密碼相關的)
+function loadPasswordPage() {
+	mainContent.innerHTML = memberPasswordHTML;
 
+	let initialMemberData = {};
+	gearuse();
+
+	document.getElementById("member_Info_revisebtn").addEventListener("click", function() {
+
+		const old_password = document.getElementById("member_info_old_password").value;
+		const new_password = document.getElementById("member_info_password").value;
+		const confirm_password = document.getElementById("member_info_confirm_password").value;
+
+		if (new_password !== confirm_password) {
+			alert("密碼不符")
+			return
+		}
+
+		let checkPassword = {
+			uid: localStorage.getItem("uid"),
+			old_password: old_password,
+			password: confirm_password
+		};
+
+		console.log(checkPassword)
+
+		fetch('/member/updatepassword', {
+			method: 'PUT',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify(checkPassword)
+		}).then(response => {
+			return response.text();
+		}).then(data => {
+			if (data == "") {
+				alert("密碼已更改")
+			}
+		})
+			.catch(error => {
+				console.error('Error:', error);
+			});
+	});
+
+	document.getElementById('member_info_confirm_password').addEventListener('input', function() {
+		const password = document.getElementById('member_info_password').value;
+		const confirmPassword = this.value;
+		const passwordMatchIcon = document.getElementById('member_info_passwordMatchIcon');
+
+		if (confirmPassword === password && confirmPassword !== "") {
+			passwordMatchIcon.innerHTML = '<i class="fas fa-check-circle" style="color: green;"></i>';
+		} else if (confirmPassword !== password && confirmPassword !== "") {
+			passwordMatchIcon.innerHTML = '<i class="fas fa-times-circle" style="color: red;"></i>';
+		} else {
+			passwordMatchIcon.innerHTML = '';
+		}
+	});
+}
+//修改如上
 
 
 // 當前訂單

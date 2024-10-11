@@ -5,7 +5,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Javel</title>
-<link rel="stylesheet" th:href="@{/css/member_page.css}">
+<link rel="stylesheet" href="/css/member_page.css">
 <link th:replace="fragments/header :: head"></link>
 <link th:replace="fragments/footer :: head"></link>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
@@ -27,19 +27,20 @@
 			</div>
 			<hr />
 			<div class="account-info" onclick="toggleDropdown('accountDropdown')">
+				<span class="branch-square"></span>
 				<h3>帳號資料</h3>
 			</div>
 			<div class="dropdown" id="accountDropdown">
 				<div class="dropdown-item" id="account">
 					<span class="branch-line"></span>個人資料
 				</div>
-				<div class="dropdown-item">
+				<div class="dropdown-item" id="password">
 					<span class="branch-line"></span>更改密碼
 				</div>
 			</div>
 			<hr />
-			<div class="order-management"
-				onclick="toggleDropdown('orderDropdown')">
+			<div class="order-management" onclick="toggleDropdown('orderDropdown')">
+				<span class="branch-square"></span>
 				<h3>訂單管理</h3>
 			</div>
 			<div class="dropdown" id="orderDropdown">
@@ -52,14 +53,15 @@
 			</div>
 			<hr />
 			<div class="my-comments" onclick="toggleDropdown('commentDropdown')">
+				<span class="branch-square"></span>
 				<h3>我的評論</h3>
 			</div>
 			<div class="dropdown" id="commentDropdown">
 				<div class="dropdown-item" id="forumByMe">
-					<span class="branch-line"></span>歷史評論
+					<span class="branch-line">&nbsp;</span>歷史評論
 				</div>
 				<div class="dropdown-item">
-					<span class="branch-line"></span>收藏評論
+					<span class="branch-line">&nbsp;</span>收藏評論
 				</div>
 			</div>
 			<hr />
