@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Javel</title>
+    <link th:replace="fragments/source :: head"></link>
+    <link rel="stylesheet" th:href="@{/css/search_page.css}">
+    <link th:replace="fragments/header :: head"></link>
+    <link th:replace="fragments/footer :: head"></link>
+    
+</head>
+
+<body>
+    
+    <div th:replace="fragments/header :: header"></div>
+    
+    <section class="search_section_container search_destination_container" id="destination">
+        <h2 class="search_section_title" id="section_title"></h2>
+        <div class="search_container_grid" id="cards-container"></div>
+        <div id="loading" class="search_loading">Loading...</div>
+    </section>
+    
+    <div th:replace="fragments/footer :: footer"></div>
+    
+    <script src="/js/search.js"></script>
+    <script src="/js/search_page.js"></script>
+    
+</body>
+
+</html>
