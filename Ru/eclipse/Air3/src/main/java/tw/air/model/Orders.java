@@ -10,6 +10,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -44,16 +46,6 @@ public class Orders {
 	@Column(name = "createDate")
 	private LocalDateTime createDate;
 	
-	@Column(name = "orderStatus")
-	private String orderStatus;
-	
-    public String getOrderStatus() {
-		return orderStatus;
-	}
-
-	public void setOrderStatus(String orderStatus) {
-		this.orderStatus = orderStatus;
-	}
 
 	public Contact getContactInformation() {
 		return contactInformation;
@@ -61,6 +53,24 @@ public class Orders {
 
 	public void setContactInformation(Contact contactInformation) {
 		this.contactInformation = contactInformation;
+	}
+	
+	@Enumerated(EnumType.STRING)  // 使用 EnumType.STRING 來將枚舉值存為字串
+	@Column(name = "orderStatus", nullable = false)
+	private OrderStatus orderStatus;
+	
+	public OrderStatus getOrderStatus() {
+		return orderStatus;
+	}
+
+	public void setOrderStatus(OrderStatus orderStatus) {
+		this.orderStatus = orderStatus;
+	}
+
+	public enum OrderStatus {
+	    訂單已成立,
+	    逾期付款已取消,
+	    已付款完成
 	}
 
 

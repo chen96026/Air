@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import com.example.demo.Model.Contact;
 import com.example.demo.Model.Luggage;
 import com.example.demo.Model.Orders;
+import com.example.demo.Model.Orders.OrderStatus;
 import com.example.demo.Model.Passenger;
 import com.example.demo.Model.Plane;
 import com.example.demo.Repository.ContactRepository;
@@ -33,6 +34,7 @@ import com.example.demo.Service.ContactService;
 import com.example.demo.Service.LuggagesService;
 import com.example.demo.Service.OrdersService;
 import com.example.demo.Service.PassengerService;
+
 
 @Controller
 @RequestMapping("/orders")
@@ -65,6 +67,7 @@ public class OrdersController {
 		if (order.getCreateDate() == null) {
 			order.setCreateDate(LocalDateTime.now());
 		}
+		order.setOrderStatus(OrderStatus.訂單已成立);
 
 		Orders savedOrder = ordersService.saveOrder(order);
 

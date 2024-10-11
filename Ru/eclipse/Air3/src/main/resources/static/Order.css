@@ -16,7 +16,7 @@ a {
 
 /* Header */
 header {
-    background-color: #132953;
+    background-color: rgba(34, 34, 34, 0.9);
     position: sticky;
     top: 0;
     z-index: 101;
@@ -58,8 +58,8 @@ header {
 
 /* Footer */
 footer {
-    background-color: #132953;
-    color: white;
+    background-color: rgba(34, 34, 34, 0.9);
+    color: #f8b600;
 }
 
 .search_section_container {
@@ -120,7 +120,7 @@ footer {
     margin: 0;
     font-size: 1.25rem;
     color: white;
-    background-color: #132953;
+    background-color: #f8b600;
     border-radius: 100%;
 }
 
@@ -168,8 +168,8 @@ hr {
     padding: 20px;
     background-color: white;
     border: 2px solid transparent;
-    border-top: 2px solid #132953;
-    border-bottom: 2px solid #132953;
+    border-top: 2px solid rgba(34, 34, 34, 0.9);
+    border-bottom: 2px solid rgba(34, 34, 34, 0.9);
 
 }
 
@@ -188,7 +188,7 @@ hr {
     width: 80%;
     margin: 0 auto;
     padding: 10px;
-    background-color:  #d1e3f3;
+    background-color:  rgba(221, 221, 221, 0.9);
     display: flex;
     color: black;
 }
@@ -206,7 +206,8 @@ hr {
     padding: 10px 20px;
     width: 80%;
     margin: 0 auto;
-    background-color: #d1e3f3;
+    background-color: rgba(34, 34, 34, 0.9);
+    color: white;
     border-radius: 5px;
 
 }
@@ -215,7 +216,7 @@ hr {
     width: 80%;
     margin: 0 auto;
     padding: 20px;
-    background-color: #bbd2e7;
+    background-color: rgba(34, 34, 34, 0.9);
     display: flex;
     gap: 10px;
     justify-content: space-between;
@@ -345,7 +346,7 @@ label {
 }
 
 .navBar {
-    background-color: #bad6ee;
+    background-color:rgba(34, 34, 34, 0.9);
     padding: 20px;
     display: flex;
     align-items: flex-start;
@@ -428,9 +429,10 @@ li {
     height: 30px;
     margin-left: auto;
     font-size: 14px;
-    background-color: #132953;
+    background-color: #f8b600;
     border-radius: 5px;
-    color: white;
+    font-weight: bold;
+    color: rgba(34, 34, 34, 0.9);
     text-align: center;
     margin-top: 20px
 }
@@ -458,7 +460,7 @@ li {
 }
 
 .delete_btn:hover {
-    background-color: #1f0737;
+    background-color: #f8b600;
     color: white(41, 40, 40);
     border: rgb(41, 40, 40) 2px solid;
 }
@@ -509,19 +511,19 @@ li {
     margin-top: 5%;
     font-size: 20px;
     font-weight: bold;
-    background-color: #132953;
+    background-color: rgba(34, 34, 34, 0.9);
     border-radius: 5px;
     border: none;
     color: white;
 }
 
 .style_nextstep:hover {
-    background-color: #bad6ee;
-    color: #132953;
+    background-color: #f8b600;
+    color: rgba(34, 34, 34, 0.9);
 }
 
 #add_passenger:hover {
-    background-color: #132953;
+    background-color: #f8b600;
     color: white;
 }
 
