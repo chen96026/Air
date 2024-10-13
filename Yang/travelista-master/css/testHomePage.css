@@ -87,3 +87,76 @@
         opacity: 1
     }
 }
+
+/* 頁尾 */
+footer {
+    background-color: #04091e;
+}
+
+.search_section_container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 3rem 1rem;
+}
+
+.search_footer_container {
+    display: grid;
+    grid-template-columns: 400px repeat(3, 1fr);
+    gap: 2rem;
+}
+
+.search_footer_col h4 {
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #fff;
+}
+
+.search_footer_col a {
+    display: block;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #777777;
+    transition: 0.3s;
+}
+
+.search_footer_col a:hover {
+    color: #f8b600;
+}
+
+.search_footer_socials {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.search_footer_socials span a {
+    padding: 5px 10px;
+    margin: 0;
+    font-size: 1.25rem;
+    color: white;
+    background-color: #930000;
+    border-radius: 100%;
+}
+
+.search_footer_socials span a:hover {
+    color: white;
+    background-color: #f8b600;
+}
+
+.search_footer_bar {
+    padding: 1rem;
+    font-size: 0.8rem;
+    color: black;
+    text-align: center;
+}
+
+hr {
+    margin: 1rem 0;
+    border: 0;
+    border-top: solid;
+    opacity: .25;
+}

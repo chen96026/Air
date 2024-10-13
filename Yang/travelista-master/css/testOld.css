@@ -1,0 +1,83 @@
+/* ============== linearicons.css ============== */
+@font-face {
+	font-family: 'Linearicons-Free';
+	src:url('../fonts/Linearicons-Free.eot?w118d');
+	src:url('../fonts/Linearicons-Free.eot?#iefixw118d') format('embedded-opentype'),
+		url('../fonts/Linearicons-Free.woff2?w118d') format('woff2'),
+		url('../fonts/Linearicons-Free.woff?w118d') format('woff'),
+		url('../fonts/Linearicons-Free.ttf?w118d') format('truetype'),
+		url('../fonts/Linearicons-Free.svg?w118d#Linearicons-Free') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+.lnr {
+	font-family: 'Linearicons-Free';
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+.lnr-location:before {
+	content: "\e835";
+}
+
+/* ============== font-awesome.min.css ============== */
+@font-face {
+    font-family: 'FontAwesome';
+    src: url('../fonts/fontawesome-webfont.eot?v=4.7.0');
+    src: url('../fonts/fontawesome-webfont.eot?#iefix&v=4.7.0') format('embedded-opentype'), url('../fonts/fontawesome-webfont.woff2?v=4.7.0') format('woff2'), url('../fonts/fontawesome-webfont.woff?v=4.7.0') format('woff'), url('../fonts/fontawesome-webfont.ttf?v=4.7.0') format('truetype'), url('../fonts/fontawesome-webfont.svg?v=4.7.0#fontawesomeregular') format('svg');
+    font-weight: normal;
+    font-style: normal
+}
+.fa {
+    display: inline-block;
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale
+}
+.fa-heart-o:before {
+    content: "\f08a"
+}
+.fa-facebook:before {
+    content: "\f09a"
+}
+.fa-twitter:before {
+    content: "\f099"
+}
+.fa-dribbble:before {
+    content: "\f17d"
+}
+.fa-behance:before {
+    content: "\f1b4"
+}
+
+/* ============== bootstrap.css ============== */
+/* 留著不刪，所以這邊就不挑出來了 */
+
+/* ============== magnific-popup.css ============== */
+button::-moz-focus-inner {
+    padding: 0;
+    border: 0; }
+
+/* ============== jquery-ui.css ============== */
+/* 搜尋"ui-"，發現完全沒用到，但發現關了會影響搜尋欄日期選擇 */
+
+/* ============== nice-select.css ============== */
+/* 搜尋"nice-"，發現完全沒用到 */
+
+/* ============== animate.min.css ============== */
+/* 留著不刪，所以這邊就不挑出來了 */
+
+/* ============== owl.carousel.css ============== */
+/* 搜尋"owl-"，發現完全沒用到，但發現關了會影響最後部落格的輪播 */
+
+/* ============== main.css ============== */
+/* 留著不刪，所以這邊就不挑出來了 */
