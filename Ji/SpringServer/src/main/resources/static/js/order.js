@@ -1,4 +1,3 @@
-
 document.addEventListener('DOMContentLoaded', function() {
 	var modal = document.getElementById("myModal");
 	var btn = document.getElementById("view_details");
@@ -41,7 +40,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		                    </div>
 		                    <div style="display: flex;padding:20px 0">
 		                        <div
-		                            style="background-color: #431274; color:white; margin: 0 5px; padding: 0 10px; border-radius: 5px;">
+		                            style="background-color: #f8b600; color:white; margin: 0 5px; padding: 0 10px; border-radius: 5px;">
 		                            去程</div>
 		                        <div><span >${flight_start.plane.date_start.slice(5, 7).replace(/^0/, '')}月${flight_start.plane.date_start.slice(8, 10).replace(/^0/, '')}日</span> <span>${weekday[getday(flight_start.plane.date_start)]}</span>｜</div>
 		                        <div>所需時間: ${Math.floor(flight_start.duration / 60)}小時${flight_start.duration % 60}分</div>
@@ -65,14 +64,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
 		                    </div>
 		                </div>
-		                <hr style="border: none; border-top: 5px dashed #1f0737;">
+		                <hr style="border: none; border-top: 5px dashed rgba(34, 34, 34, 0.9);">
 		                <div class="box">
 		                    <div style="font-weight: bold;">
 								<span id="departure_city">${flight_start.city}</span>-><span id="arrival_city">${flight_end.city}</span>
 							</div>
 		                    <div style="display: flex;padding:20px 0">
 		                        <div
-		                            style="background-color: #431274; color:white;margin: 0 5px; padding: 0 10px; border-radius: 5px;">
+		                            style="background-color: #f8b600; color:white;margin: 0 5px; padding: 0 10px; border-radius: 5px;">
 		                            回程</div>
 									<div><span >${flight_end.plane.date_start.slice(5, 7).replace(/^0/, '')}月${flight_end.plane.date_start.slice(8, 10).replace(/^0/, '')}日</span> <span>${weekday[getday(flight_end.plane.date_start)]}</span>｜</div>
 									<div>所需時間: ${Math.floor(flight_end.duration / 60)}小時${flight_end.duration % 60}分</div>
@@ -106,7 +105,10 @@ document.addEventListener('DOMContentLoaded', function() {
 	const ticketPriceElement = document.getElementById('ticket_price');
 	const finalPriceElement = document.getElementById('final_price');
 	const priceTotalElement = document.getElementById('price_total');
-	const mainTicketPriceElement = document.getElementById('main_ticket_price')
+	const mainTicketPriceElement = document.getElementById('main_ticket_price');
+	
+	const passengerForm = document.querySelector('.form_section');
+	const luggageForm = document.querySelector('.luggageform_section');
 
 	// 票價 
 	let human = flight_start.quantity;
@@ -116,6 +118,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	}else{
 		ticketPriceElement.innerHTML = `NT$ ${Number(flight_start.plane.bus_price)*human+Number(flight_end.plane.bus_price)*human}`			
 	}
+	
 
 	function updatePassengerNumbers() {
 		const sections = passengerContainer.querySelectorAll('.form_section');
@@ -169,65 +172,42 @@ document.addEventListener('DOMContentLoaded', function() {
 		});
 	}
 
+	
+	refreshPassengerAndLuggage();
 
-	document.getElementById('add_passenger').addEventListener('click', function() {
-		const newSection = passengerContainer.querySelector('.form_section').cloneNode(true);
-		const newLuggageSection = luggageContainer.querySelector('.luggageform_section').cloneNode(true);
-		const deleteButton = newSection.querySelector('.delete_btn');
+	function refreshPassengerAndLuggage() {
+	
+	    passengerContainer.innerHTML = '';
+	    luggageContainer.innerHTML = '';
 
-		deleteButton.style.display = 'block';
-		deleteButton.addEventListener('click', function() {
-			passengerContainer.removeChild(newSection);
-			luggageContainer.removeChild(newLuggageSection);
-			updatePassengerNumbers();
-			updateLuggageNumbers();
-			updatePrice();
-		});
+	    for (let i = 0; i < human; i++) {
+	        const newSection = passengerForm.cloneNode(true);
+	        const newLuggageSection = luggageForm.cloneNode(true);
 
-		newSection.querySelectorAll('input[type="text"], input[type="number"], input[type="date"]').forEach(input => {
-			input.value = '';
-		});
+	        newSection.removeAttribute('id');
+	        newLuggageSection.removeAttribute('id');
 
-		newSection.querySelectorAll('[id]').forEach(input => {
-			input.removeAttribute('id');
-		})
+	        newSection.querySelector('div').textContent = `旅客${i + 1} 成人票`;
+	        newSection.querySelectorAll('input, select').forEach(input => {
+	            const name = input.getAttribute('name');
+	            if (name) {
+	                input.setAttribute('name', `${name.split('_')[0]}_${i}`);
+	            }
+	        });
 
-		newSection.querySelectorAll('span').forEach(span => {
-			span.remove(); // 移除所有現有的錯誤訊息
-		});
+	        newLuggageSection.querySelector('div').textContent = `旅客${i + 1} 行李:`;
+	        newLuggageSection.querySelectorAll('.label_addluggage').forEach(selectElement => {
+	            selectElement.addEventListener('change', updatePrice);
+	        });
 
-		const newSelectElements = newLuggageSection.querySelectorAll('.label_addluggage');
-		newSelectElements.forEach(selectElement => {
-			selectElement.addEventListener('change', updatePrice);
-		});
+	        passengerContainer.appendChild(newSection);
+	        luggageContainer.appendChild(newLuggageSection);
 
-		passengerContainer.appendChild(newSection);
-		luggageContainer.appendChild(newLuggageSection);
-		updatePassengerNumbers();
-		updateLuggageNumbers();
-		updatePrice();
-
-
-		bindBlurEvents();
-	});
-
-	document.querySelectorAll('.form_section').forEach(section => {
-		section.querySelector('.delete_btn').style.display = 'none';
-	});
-
-	updatePassengerNumbers();
-	updateLuggageNumbers();
+	        console.log(`Generating form for passenger ${i + 1}`);
+	    }
+	}
 	updatePrice();
-
 	bindBlurEvents();
-
-	const allSelectElements = document.querySelectorAll('.label_addluggage');
-	allSelectElements.forEach(selectElement => {
-		selectElement.addEventListener('change', updatePrice);
-	});
-});
-
-
 
 
 /*-------------------------------------------------------------------------------*/
@@ -355,14 +335,15 @@ function clearFieldError(fieldName) {
 	if (errorSpan && errorSpan.tagName === 'SPAN') {
 		errorSpan.textContent = '';
 	}
-}
+};
 
 
 
-document.addEventListener('DOMContentLoaded', function() {
-	const passengerContainer = document.getElementById('passenger_container');
+// document.addEventListener('DOMContentLoaded', function() {
 
-	const luggageContainer = document.getElementById('luggage_container');
+	//const passengerContainer = document.getElementById('passenger_container');
+
+	//const luggageContainer = document.getElementById('luggage_container');
 
 	document.querySelectorAll('input, select').forEach(input => {
 		input.addEventListener('blur', function() {
@@ -373,10 +354,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
 	// 付款完成後,再update到資料庫
 	const nextStepButton = document.getElementById('next_step');
+
+	
 	if (nextStepButton) {
 		nextStepButton.addEventListener('click', async function(event) {
 			event.preventDefault();
-
+			console.log('Next Step button clicked!');
 
 			try {
 				const isContactValid = await validateContactFields();
@@ -414,14 +397,27 @@ document.addEventListener('DOMContentLoaded', function() {
 				const { oid } = await orderResponse.json();
 				console.log("Order ID:", oid);
 
-
 				const passengerData = createPassengerData(cid);
 
 				const passengerOrderRequest = {
 					passengers: passengerData,
 					orderId: oid
 				};
-
+				
+				try {
+				    const contactResponse = await fetch('/orders/createContact', {
+				        method: 'POST',
+				        headers: { 'Content-Type': 'application/json' },
+				        body: JSON.stringify(contactData)
+				    });
+				    if (!contactResponse.ok) throw new Error('Contact submission failed');
+				    const { cid } = await contactResponse.json();
+				    console.log('獲取的 contactId:', cid);
+				} catch (error) {
+				    console.error('聯絡人資料提交失敗：', error);
+				    alert('聯絡人資料提交失敗：' + error.message);
+				    return;  // 阻止後續操作
+				}
 
 				const passengerResponse = await fetch('/passenger/createpassenger', {
 					method: 'POST',
@@ -568,5 +564,3 @@ document.addEventListener('DOMContentLoaded', function() {
 		}
 	}
 });
-
-

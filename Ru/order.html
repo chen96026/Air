@@ -7,24 +7,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>訂購頁</title>
 
-    <link rel="stylesheet" th:href="@{/css/order.css}">
-    <link rel="stylesheet" th:href="@{/css/bootstrap.css}">
-    <link rel="stylesheet" th:href="@{/css/main.css}">
-   <!--  <link th:replace="fragments/header :: head"></link>
+    <link rel="stylesheet" href="./order.css">
+    <!-- <link th:replace="fragments/header :: head"></link>
 	<link th:replace="fragments/footer :: head"></link> -->
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <!-- 社群媒體的iconnnnnnnnnnnn -->
-       <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="./bootstrap.css">
+    <link rel="stylesheet" href="./main.css">
 
 </head>
 
 <body>
-    <!-- <div th:replace="fragments/header :: header"></div> -->
-     <header id="header">
+    <header id="header">
         <div class="header-top">
         </div>
         <div class="container main-menu">
@@ -60,7 +59,6 @@
       <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
       <script src="./main.js"></script>
-    
 
     <div class="process-container" style="margin: 2% 5% 0 5%; text-align: center; font-size: 20px;">
         <ul class="process-steps" style="list-style: none; padding: 0; display: flex; flex-wrap: wrap; justify-content: center; align-items: center;">
@@ -82,18 +80,18 @@
             </li>
         </ul>
     </div>
-    <div class="container_bg row" style= "margin-top:5%;">
+    <div class="container_bg row" style= "margin:5% 3%;">
         <div class="col_left">
-            <div class="container" id="container" style="width: 80%; padding: 20px; font-size: 18px;">行程總覽
+            <div class="container_all" id="container_all" style="width: 80%; padding: 20px; font-size: 18px;">行程總覽
                 <br>
                 <hr style="border: none; border-top: 5px solid #132953;">
                 
             </div>
 
 
-            <h5 style="margin-left: 10%; font-size: larger; margin-top:5%;">您的機票</h5>
+            <h5 style="margin-left: 10%; font-size: larger; margin:5% 10%;">您的機票</h5>
             <div class="container_notice">
-                <div style="display: flex; width: 50%; justify-content: start; ">
+                <div style="display: flex; width: 50%; justify-content:start;align-items: center; ">
                     <div style="margin: 10%;"><span class="material-symbols-outlined"
                             style="font-size: 68px;">campaign</span></div>
                     <div>
@@ -103,7 +101,7 @@
                     </div>
                 </div>
 
-                <div style="display: flex; width: 50%;">
+                <div style="display: flex; width: 50%; justify-content:start;align-items: center; ">
                     <div style="margin: 10%;"><span class="material-symbols-outlined"
                             style="font-size: 68px;">flight_takeoff</span></div>
                     <div>
@@ -142,22 +140,22 @@
                 </div>
             </div>
 
-            <div class="row container_notice" style="padding: 20px; margin-top: 20px; ">
+            <div class="row container_notice" style="padding: 20px; margin: 5% 10%; ">
                 <div class="col_ticket">行李限額
-                    <p><span class="material-symbols-outlined" style="vertical-align: middle">checked_bag</span>手提行李：1 x
-                        7 公斤</p>
-                    <p><span class="material-symbols-outlined" style="vertical-align: middle;">luggage</span>托運行李：1 件
-                    </p>
+                    <h5 style="padding-top: 5%;"><span class="material-symbols-outlined" style="vertical-align: middle;">checked_bag</span style=" padding-top: 3%;">手提行李：1 x
+                        7 公斤</h5>
+                    <h5 style="padding-top: 5%;"><span class="material-symbols-outlined" style="vertical-align: middle;">luggage</span style=" padding-top: 3%;">托運行李：1 件
+                    </h5>
                 </div>
                 <div class="col_ticket">政策
-                    <p>部分無法退款</p>
-                    <p>更改費用：NT$7,352</p>
+                    <h5 style="padding-top: 6%;">部分無法退款</h5>
+                    <h5 style="padding-top: 6%;">更改費用：NT$7,352</h5>
                 </div>
             </div>
 
 
 
-            <div class="container" style="margin-top:5%;">
+            <div class="container_all" style="margin-top:5%;">
                 <div style="font-weight: bolder;">主要旅客資訊</div>
                 <hr>
                 <div id="passenger_container">
@@ -168,11 +166,11 @@
                                 <div class="form_container form_name">
                                     <div>
                                         <label for="lastname">姓氏：</label>
-                                        <input type="text" id="lastname" name="lastname" placeholder="英文姓氏" style="width: 80%;">
+                                        <input type="text" id="lastname" name="lastname" placeholder="英文姓氏" style="width: 78%;">
                                     </div>
                                     <div>
                                         <label for="firstname">名字：</label>
-                                        <input type="text" id="firstname" name="firstname" placeholder="英文名字" style="width: 80%;">
+                                        <input type="text" id="firstname" name="firstname" placeholder="英文名字" style="width: 78%;">
                                     </div>
                                 </div>
             
@@ -245,10 +243,7 @@
                             <div>確認後，訂單將無法更改。如果您的姓名有誤，您可能無法登機並將被收取取消費用。</div>
                         </div>
                     </div>
-                    <div style="display: flex;justify-content: center; padding: 20px">
-                        <button id="add_passenger"
-                            style="width: 200px; font-size: 16px; border-radius: 5px;">新增另位旅客</button>
-                    </div>
+                    
                 </div>
 
             </div>
@@ -348,7 +343,7 @@
                 </div>
             </div>
 
-            <div class="container" style="width: 80%;padding: 20px; margin-top: 50px;  margin-bottom:50px;">
+            <div class="container_all" style="width: 80%;padding: 20px; margin-top: 50px;  margin-bottom:50px;">
                 <div style="display: flex; justify-content: space-between; align-items: center; width: 80%; margin: 0 auto;">
                     <div style="text-align: left; font-size: 20px; font-weight:bold">總計:</div>
                     <div id="main_ticket_price" style="font-size:24px; color:red; text-align: right;">NT$ 9,999</div>
@@ -364,14 +359,14 @@
             <div class="container_right">
                 <form id="booking_form">
                     <div style="font-size: 22px; margin-top: 10px">價格詳情</div>
-                    <div style="margin: 5px 10px;">
+                    <div style="margin: 10px 10px;">
                          <div style="display:flex;justify-content: space-between;">
                             <h3 id="ticket_people"></h3>
                             <h3 id="ticket_price" name="ticket_price"></h3>
                         </div>
 
 
-                        <h3 style="margin: 0; padding: 2px 0;">行李</h3>
+                        <h4 style="margin: 0; padding: 10px 0;">行李</h4>
                         <div style="display:flex;justify-content: space-between;">
                             <p>個人物品</p>
                             <p>免費</p>
@@ -389,8 +384,8 @@
 
                         <hr style="border: 1px dashed; margin: 5px 0;">
                         <div style="display:flex;justify-content: space-between;">
-                            <h3>總額</h3>
-                            <h3 id="price_total">Total</h3>
+                            <h4 style="padding: 10px 0;">總額</h4>
+                            <h4 id="price_total" style="padding: 10px 0;">Total</h4>
                             <input type="hidden" id="final_price" name="final_price">
                         </div>
                     </div>
@@ -400,9 +395,7 @@
         </div>
     </div>
 
-
-  <!--   <div th:replace="fragments/footer :: footer"></div> -->
-    <footer>
+<footer>
     <div class="search_section_container search_footer_container">
       <div class="search_footer_col">
         <h4>追蹤我們</h4>
@@ -443,7 +436,7 @@
       <div class="search_footer_col">
         <h4>InstaFeed</h4>
         <hr>
-       <!--  <ul class="instafeed d-flex flex-wrap">
+        <ul class="instafeed d-flex flex-wrap">
           <li><img src="img/i1.jpg" alt=""></li>
           <li><img src="img/i2.jpg" alt=""></li>
           <li><img src="img/i3.jpg" alt=""></li>
@@ -452,7 +445,7 @@
           <li><img src="img/i6.jpg" alt=""></li>
           <li><img src="img/i7.jpg" alt=""></li>
           <li><img src="img/i8.jpg" alt=""></li>
-        </ul> -->
+        </ul>
       </div>
     </div>
     <div class="search_footer_bar">

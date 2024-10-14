@@ -12,6 +12,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,13 +27,18 @@ import org.springframework.web.bind.annotation.RequestBody;
 import com.example.demo.Model.Contact;
 import com.example.demo.Model.Luggage;
 import com.example.demo.Model.Orders;
+import com.example.demo.Model.Orders.OrderStatus;
 import com.example.demo.Model.Passenger;
 import com.example.demo.Model.Plane;
 import com.example.demo.Repository.ContactRepository;
 import com.example.demo.Service.ContactService;
+import com.example.demo.Service.EcpayService;
 import com.example.demo.Service.LuggagesService;
 import com.example.demo.Service.OrdersService;
 import com.example.demo.Service.PassengerService;
+
+import jakarta.servlet.http.HttpSession;
+
 
 @Controller
 @RequestMapping("/orders")
@@ -52,6 +58,9 @@ public class OrdersController {
 
 	@Autowired
 	private LuggagesService luggagesService;
+	
+	@Autowired
+	private EcpayService ecpayService;
 
 	@PostMapping("/createContact")
 	public ResponseEntity<Contact> createContact(@RequestBody Contact contact) {
@@ -65,6 +74,7 @@ public class OrdersController {
 		if (order.getCreateDate() == null) {
 			order.setCreateDate(LocalDateTime.now());
 		}
+		order.setOrderStatus(OrderStatus.訂單已成立);
 
 		Orders savedOrder = ordersService.saveOrder(order);
 
@@ -85,22 +95,34 @@ public class OrdersController {
 
 		return ResponseEntity.ok(savedOrder);
 	}
+	
 
 	@GetMapping("/Complete/{oid}")
-	public String getOrderById(@PathVariable("oid") int oid, Model model) {
+	public String getOrderById(@PathVariable("oid") Long oid, Model model, HttpSession session) {
 		Orders order = ordersService.getOrderById(oid);
 		if (order == null) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "訂單未找到"); // 處理未找到訂單的情況
 		}
-
-		if (order.getCreateDate() == null) {
-			order.setCreateDate(LocalDateTime.now());
-		}
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-		String formattedCreateDateTime = order.getCreateDate().format(formatter);
+		
+		session.setAttribute("currentOrderId", oid);
 
 		LocalDateTime createDate = order.getCreateDate();
-		LocalDateTime adjustedTime = createDate.plusHours(1);
+	    LocalDateTime adjustedTime = createDate.plusHours(1);
+	    
+	    
+	    if (LocalDateTime.now().isAfter(adjustedTime) && order.getOrderStatus() != OrderStatus.已付款完成) {
+	        
+	        order.setOrderStatus(OrderStatus.逾期付款已取消);
+	        ordersService.saveOrder(order);
+	        model.addAttribute("message", "訂單已逾期，請重新下單");
+	        return "order_expired"; // 跳轉到訂單逾期頁面
+	    }
+	    
+		
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+		DateTimeFormatter formatterISO = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
+		String formattedCreateDateTime = order.getCreateDate().format(formatter);
+		String payBeforeTimeISO = adjustedTime.format(formatterISO); 
 		String payBeforeTime = adjustedTime.format(formatter);
 
 		Contact contact = contactRepository.findByCId(order.getContactId());
@@ -113,28 +135,84 @@ public class OrdersController {
 		model.addAttribute("contactEmail", contact.getContactEmail());
 		model.addAttribute("contactPhone", contact.getContactPhone());
 		model.addAttribute("formattedCreateDateTime", formattedCreateDateTime);
-		model.addAttribute("payBeforeTime", payBeforeTime + " 前支付款項！");
+		model.addAttribute("payBeforeTime", payBeforeTime);
 		model.addAttribute("formattedPrice", formattedPrice);
+		model.addAttribute("payBeforeTimeISO", payBeforeTimeISO); 
 
 		return "order_complete";
+	}
+	
+	
+	@GetMapping("/getoid")
+	public ResponseEntity<Map<String, Object>> getOid(HttpSession session) {
+	    Long oid = (Long) session.getAttribute("currentOrderId");
+	    if (oid == null) {
+	        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+	    }
+
+	    Map<String, Object> response = new HashMap<>();
+	    response.put("oid", oid);
+
+	    return ResponseEntity.ok(response);
+	}
+	
+	@GetMapping("/payBeforeTime/{oid}")
+    public ResponseEntity<Map<String, Object>> getPayBeforeTime(@PathVariable("oid") Long oid) {
+        Orders order = ordersService.getOrderById(oid);
+        if (order == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
+
+        LocalDateTime createDate = order.getCreateDate();
+        LocalDateTime adjustedTime = createDate.plusHours(1);
+
+        DateTimeFormatter formatterISO = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
+        String payBeforeTimeISO = adjustedTime.format(formatterISO);
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("payBeforeTimeISO", payBeforeTimeISO);
+
+        return ResponseEntity.ok(response);
+    }
+	
+	
+	@GetMapping("/checkout/{oid}")
+	public ResponseEntity<String> checkout(@PathVariable Long oid){
+		String paymentForm = ecpayService.ecpayCheckout(oid);
+		return ResponseEntity.ok(paymentForm);
 	}
 
 	@PostMapping("/Toback")
 	public ResponseEntity<String> handleEcpayCallback(@RequestParam Map<String, String> params) {
-		String orderNumber = params.get("MerchantTradeNo");
-		String paymentStatus = params.get("RtnCode");
-		String paymentAmount = params.get("TradeAmt");
+		params.forEach((key, value) -> {
+	        System.out.println(key + ": " + value);
+	    });
+		try {
+			String orderNumber = params.get("MerchantTradeNo");
+			String paymentStatus = params.get("RtnCode");
+			
+			
+			if ("1".equals(paymentStatus)) { // 支付成功
+		        Orders order = ordersService.getOrderByOrderNumber(orderNumber);
+		        if (order != null) {
+		            order.setOrderStatus(Orders.OrderStatus.已付款完成);
+		            ordersService.saveOrder(order);
+		            System.out.println("Order updated: " + orderNumber);
+		        } else {
+		            System.out.println("Order not found: " + orderNumber);
+		            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Order not found");
+		        }
+		    } else {
+		        System.out.println("Payment failed for order: " + orderNumber);
+		    }
 
-		if ("1".equals(paymentStatus)) { // 支付成功
-			Orders newOrder = new Orders();
-			newOrder.setOrderNumber(orderNumber);
-			newOrder.setFinalPrice(Double.valueOf(paymentAmount));
-			// 其他字段设置...
-
-			ordersService.saveOrder(newOrder);
+			return ResponseEntity.ok("OK");
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error");
 		}
-
-		return ResponseEntity.ok("OK");
+		
 	}
 
 	@GetMapping("/order")
@@ -147,13 +225,27 @@ public class OrdersController {
 	public String showOrderAdminPage(Model model) {
 		return "back/order_admin"; // 返回 order_admin.html
 	}
-
-	// 返回订单数据的 JSON 响应
-	@GetMapping("/api/orders")
-	@ResponseBody // 将响应体返回为 JSON
-	public ResponseEntity<List<Orders>> getOrders() {
-		List<Orders> ordersList = ordersService.getAllOrders(); // 获取所有订单信息
-		return ResponseEntity.ok(ordersList); // 返回 JSON 数据
+	
+	@PostMapping("/ordercancel")
+	public ResponseEntity<String> OrderCancel(HttpSession session){
+		Long oid = (Long) session.getAttribute("currentOrderId");
+		if (oid == null) {
+	        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("無效的訂單ID");
+	    }
+		Orders order = ordersService.getOrderById(oid);
+		if(order != null) {
+			if(order.getOrderStatus() != OrderStatus.已付款完成) {
+				order.setOrderStatus(OrderStatus.逾期付款已取消);
+				ordersService.saveOrder(order);
+				return ResponseEntity.ok("訂單狀態已更新為:逾期付款已取消");
+			}else {
+				return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("訂單已付款，無法更新狀態");
+			}
+		}else {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("訂單未找到");
+		}
+		
+		
 	}
-
+	
 }
