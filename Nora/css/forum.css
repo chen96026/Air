@@ -1,57 +1,67 @@
-* {
+/* * {
     box-sizing: border-box;
-}
-
-.forum_body {
-    margin: 0;
-}
+} */
 
 .forum_main {
-    background-color: #F1F1F1;
+    background-color: #f9f9ff;
 }
 
 .forum_search {
-    width: 60%;
+    display: flex;
+    width: 100%;
     margin: auto;
-    padding: 50px 0;
+    font-size: 14px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+@media(min-width: 992px) {
+    .forum_search {
+        width: 90%;
+        flex-wrap: nowrap;
+    }   
 }
 
 .forum_search form {
     text-align: center;
-    margin-top: 50px;
 }
 
-.forum_search select, .forum_search input, .forum_search button {
-    background-color: #E9E4D4;
-    border: 2px solid black;
-    border-radius: 30px;
-    width: 150px;
-    height: 60px;
-    font-size: 20px;
+.forum_search select, .forum_search input {
+    color: #777777;
+    border: 1px solid #777777;
+    width: 30%;
+    height: 40px;
     text-align: center;
     margin: 5px;
 }
 
-.forum_search optgroup {
-    background-color: #E9E4D4;
+.forum_search select:focus, .forum_search input:focus {
+    outline: none;
+}
+
+@media(min-width: 768px) {
+    .forum_search select {
+        display: inline-block;
+        width: 31%;
+    }
+}
+
+@media(min-width: 992px) {
+    .forum_search select {
+        width: 15%;
+    }
 }
 
 .forum_search input {
-    width: 90%;
+    width: 100%;
     padding: 0 20px;
+    font-size: 14px;
 }
 
 @media(min-width: 992px) {
     .forum_search input {
-        width: 500px;
+        width: 90%;
     }   
-}
-
-.forum_search button {
-    width: 90px;
-    height: 55px;
-    font-weight: bold;
-    cursor: pointer;
 }
 
 .forum_cards {
@@ -64,13 +74,23 @@
     padding-bottom: 10vh;
 }
 
+.forum_cards > p {
+    width: 100%;
+    text-align: center;
+    margin: 50px auto 0px auto;
+}
+
 .forum_card {
     margin: 30px 16px;
-    background-color: #FFFCFC;
+    background-color: white;
     width: 400px;
     height: 500px;
-    border-radius: 10px;
-    box-shadow: 0 5px 5px rgba(80, 80, 80, 0.4);
+    box-shadow: 0px 10px 30px 0px rgba(60, 64, 143, 0.2);
+    transition: all 0.3s ease 0s;
+}
+
+.forum_card:hover {
+    box-shadow: 0px 10px 15px 0px rgba(60, 64, 143, 0.3);
 }
 
 .forum_card article {
@@ -85,26 +105,33 @@
 }
 
 .forum_card h2 {
+	display: -webkit-box;
     font-size: 26px;
     font-weight: bold;
-    margin: 20px 22px 12px 22px;
+    margin: 23px 25px 15px 25px;
+    -webkit-box-orient: vertical;	/* 垂直排列 */
+    -webkit-line-clamp: 1;			/* 限制最大行數*/
+    overflow: hidden;               /* 隱藏超出部分 */
+    text-overflow: ellipsis;		/* 使用省略號來表示溢出的內容 */
 }
 
-.forum_articleMore {
-    font-size: 16px;
+.forum_content {
+    display: -webkit-box;
+    /* font-size: 16px; */
     line-height: 26px;
     margin: 0 30px 0 30px;
+    -webkit-box-orient: vertical;	/* 垂直排列 */
+    -webkit-line-clamp: 4;			/* 限制最大行數*/
+    overflow: hidden;               /* 隱藏超出部分 */
+    text-overflow: ellipsis;		/* 使用省略號來表示溢出的內容 */
+    word-wrap: break-word;          /* 使長單詞在邊界時換行 */
+    white-space: normal;            /* 允許換行 */
 }
 
 .forum_articleImg {
-    border-radius: 10px 10px 0 0;
     width: 100%;
     height: 240px;
     object-fit: cover;
-}
-
-.forum_articleMore::after {
-    content: "…";
 }
 
 .forum_authorImg {
@@ -127,33 +154,45 @@
 }
 
 .forum_write {
-    /* background-color: blue; */
     position: fixed;
-    right: 10%;
+    right: 3%;
     bottom: 100px;
     text-align: center;
+    z-index: 1;
+}
+
+@media(min-width: 768px) {
+    .forum_write {
+        right: 10%;
+    }
 }
 
 .forum_writeImg {
-    width: 80px;
-    height: 80px;
+    width: 75px;
+    height: 75px;
     background-image: url("../img/icon/add_circle_FILL0.svg");
     background-repeat: no-repeat;
     background-size: contain;
+    border-radius: 50px;
+    transition: all 0.3s ease 0s;
 }
 
 .forum_writeImg_hover {
+    transform: scale(1.2) rotate(-90deg);
+    background-color: transparent;
     background-image: url("../img/icon/add_circle_FILL1.svg");
 }
 
 .forum_writeP {
-    color: #79470D;
+    color: #f8b600;
     font-weight: bold;
-    margin: 0;
+    font-size: 16px;
+    margin: 8px;
+    transition: all 0.3s ease 0s;
 }
 
 .forum_writeP_hover {
-    color: #3d1604;
+    color: #fdad00;
 }
 
 .forum_card a, .forum_card a:hover, .forum_card a:visited, .forum_card a:focus,

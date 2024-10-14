@@ -1,142 +1,107 @@
 <!DOCTYPE html>
-<html lang="zh-Hans-TW">
+<html lang="zh-Hans-TW" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>文章標題</title>
-    <link rel="stylesheet" href="./css/a_HeaderFooter.css">
-    <link rel="stylesheet" href="./css/forum_detail.css">
-    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/css/forum_detail.css">
+    <link rel="stylesheet" href="/css/linearicons.css">
+    <link rel="stylesheet" href="/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <link rel="stylesheet" href="/css/magnific-popup.css">
+    <link rel="stylesheet" href="/css/jquery-ui.css">
+    <link rel="stylesheet" href="/css/nice-select.css">
+    <link rel="stylesheet" href="/css/animate.min.css">
+    <link rel="stylesheet" href="/css/owl.carousel.css">
+    <link rel="stylesheet" href="/css/main.css">
 </head>
-<body class="forum_body">
-    <header>
-        <nav id="header">
-            <div class="header_logo"><a href=""><img src="../Yang/圖片/logo.png"></a></div>
-            <ul class="header_nav_links">
-                <li class="header_link"><a href="#"><img src="../Yang/圖片/icon_logIn.png"></a></li>
-                <li class="header_link"><a href="./forum.html"><img src="../Yang/圖片/icon_Forum.png"></a></li>
-            </ul>
-        </nav>
-    </header>
+<body>
     <main class="forum_main">
         <div class="forum_place">
             <p>
-                <a href="./forum.html">日本</a>
+                <a th:href="@{/forum(country=${post.post.country})}" th:text="${post.post.country}">日本</a>
                 <span></span>
-                <a href="./forum.html" class="forum_area">熊本</a>
+                <a th:href="@{/forum(country=${post.post.country}, city=${post.post.city})}" th:text="${post.post.city}" class="forum_area">熊本</a>
             </p>
         </div>
         <div>
             <div class="forum_view">
                 <button class="forum_btnLast" id="forum_lastImg"></button>
-                <!-- <div class="forum_photo"> -->
-                <img src="https://picsum.photos/1200/700?random=1" alt="photo1" class="forum_photoImg">
-                <img src="https://picsum.photos/1200/700?random=2" alt="photo2" class="forum_photoImg">
-                <img src="https://picsum.photos/1200/700?random=3" alt="photo3" class="forum_photoImg">
-                <img src="https://picsum.photos/1200/700?random=4" alt="photo4" class="forum_photoImg">
-                <!-- </div> -->
+                <div class="forum_photo">
+                	<img th:each="image : ${post.imageURL}" th:src="${image}" class="forum_photoImg">
+                </div>
                 <button class="forum_btnNext" id="forum_nextImg"></button>
             </div>
             <div class="forum_photos">
-                <img src="https://picsum.photos/1200/700?random=1" alt="photo1" class="forum_smallPhoto">
-                <img src="https://picsum.photos/1200/700?random=2" alt="photo2" class="forum_smallPhoto">
-                <img src="https://picsum.photos/1200/700?random=3" alt="photo3" class="forum_smallPhoto">
-                <img src="https://picsum.photos/1200/700?random=4" alt="photo4" class="forum_smallPhoto">
+                <img th:each="image : ${post.imageURL}" th:src="${image}" class="forum_smallPhoto">
             </div>
         </div>
         <article>
             <div class="forum_detail_stars">
                 <!-- 星星 -->
-                <span class="forum_d_star forum_d_starFill"></span>
-                <span class="forum_d_star forum_d_starFill"></span>
-                <span class="forum_d_star forum_d_starFill"></span>
-                <span class="forum_d_star forum_d_starFill"></span>
-                <span class="forum_d_star"></span>
+				<span 
+                	th:each="i : ${#numbers.sequence(0, 4)}" 
+          			th:class="${i < post.post.rate ? 'forum_d_star forum_d_starFill' : 'forum_d_star'}">
+          		</span>
             </div>
             <div class="forum_detail_info">
                 <div class="forum_detail_title">
-                    <h1>超級可愛的熊本熊!</h1>
+                    <h1 th:text="${post.post.mainTitle}"></h1>
                     <div>
-                        <h2>印象深刻的活火山之旅~</h2>
-                        <h3>2024-09-01 ~ 2024-09-05</h3>
+                        <h2 th:if="${post.post.subTitle != ''}" th:text="${post.post.subTitle}"></h2>
+                        <h3>
+                        	<span 
+                        		th:if="${(post.post.startDate != null) and (post.post.endDate != null)}"
+                        		th:text="${post.post.startDate} + ' ~ ' + ${post.post.endDate}">
+                        	</span>
+                        	<span 
+                        		th:if="${(post.post.startDate != null) and (post.post.endDate == null)}"
+                        		th:text="${post.post.startDate} + ' ~ '">
+                        	</span>
+                        	<span 
+                        		th:if="${(post.post.startDate == null) and (post.post.endDate != null)}"
+                        		th:text="' ~ ' + ${post.post.endDate}">
+                        	</span>
+                        </h3>
                     </div>
                 </div>
                 <div class="forum_authorInfo">
-                    <img src="https://picsum.photos/50?random=1" alt="author_icon">
-                    <p>奇異鳥真奇異啊</p>
+                    <img th:src="${post.userNameIconDTO.iconURL}" alt="author_icon">
+                    <p th:text="${post.userNameIconDTO.username}"></p>
                 </div>
             </div>
             <div class="forum_detail_body">
-                <p>
-                    終於看到心心念念的熊本熊!<br>
-                    現場拍真的是超~~~~大一隻😆😆🤣🤣<br>
-                    除此之外，沒想到熊本的食物都超級好吃！<br>
-                    除了拉麵以外，還有超級有名的赤牛丼都好吃到回國了還在想念👍👍<br>
-                    不過另一個名產生馬肉......抱歉我還是沒辦法<br>
-                    這超過我的生理界線了😜<br>
-                    <br>
-                    景點的重點活火山，光是路途中的山景就讓人覺得不虛此行，日本的山水風景真的都太好看了🤩<br>
-                    還有印象深刻的熊本城和水前寺成趣園<br>
-                    整個日式氣味迎面而來，走在裡面都像是看日本時代劇一樣！<br>
-                    <br>
-                    這趟旅程真的太開心了，到熊本的朋友一定要嘗嘗他們的赤牛丼🤤🤤🤤
-                </p>
-                <a href="">#熊本</a><a href="">#活火山</a><a href="">#拉麵</a>
-                <p class="forum_detail_date">發布於　2024-09-14 </p>
+                <p th:utext="${post.post.content}"></p>
+                <a th:each="tag : ${tags}" th:href="@{/forum(key=${tag})}" th:text="'#' + ${tag}"></a>
+                <p th:text="'發布於　' + ${post.createdDate}" class="forum_detail_date"></p>
             </div>
         </article>
         <div class="forum_detail_btns">
-            <button class="forum_detail_checkBtn forum_d_good_unchecked"></button>
-            <span class="forum_d_goodCount forum_d_btnsMargin">777</span>
-            <button class="forum_detail_checkBtn forum_d_bookmark_unchecked forum_d_btnsMargin"></button>
-            <a class="forum_detail_checkBtn forum_d_edit forum_d_showBtn forum_d_btnsMargin" href="./forum_edit.html"></a>
-            <button class="forum_detail_checkBtn forum_d_report"></button>
+            <button th:data-like="${like}" th:id="${login ? 'forum_detail_like' : 'forum_detail_login'}" th:class="${like ? 'forum_detail_checkBtn forum_d_like_checked' : 'forum_detail_checkBtn forum_d_like_unchecked'}"></button>
+            <span th:text="${post.countLikes}" id="forum_detail_countLike" class="forum_d_countLike forum_d_btnsMargin"></span>
+            <button th:data-bookmark="${bookmark}" id="forum_detail_bookmark" th:if=${login} th:class="${bookmark ? 'forum_detail_checkBtn forum_d_bookmark_checked forum_d_btnsMargin' : 'forum_detail_checkBtn forum_d_bookmark_unchecked forum_d_btnsMargin'}"></button>
+            <div th:if="${edit}" class="forum_detail_btnsForAuthor">
+	            <a th:href="@{/forum/edit(id=${post.post.id})}" class="forum_detail_checkBtn forum_d_edit forum_d_showBtn forum_d_btnsMargin"></a>
+	            <button id="forum_detail_delete" class="forum_detail_checkBtn forum_d_delete forum_d_btnsMargin"></button>
+            </div>
+            <button th:data-report="${report}" id="forum_detail_report" th:if=${login} class="forum_detail_checkBtn forum_d_report"></button>
         </div>
     </main>
-    <footer>
-        <div class="search_section_container search_footer_container">
-            <div class="search_footer_col">
-                <h4>追蹤我們</h4>
-                <hr style="width:50%">
-                <div class="search_footer_socials">
-                    <span>
-                        <a href="#"><i class="ri-twitter-fill"></i></a>
-                    </span>
-                    <span>
-                        <a href="#"><i class="ri-linkedin-fill"></i></a>
-                    </span>
-                    <span>
-                        <a href="#"><i class="ri-instagram-line"></i></a>
-                    </span>
-                    <span>
-                        <a href="#"><i class="ri-facebook-fill"></i></a>
-                    </span>
-                </div>
-            </div>
-            <div class="search_footer_col">
-                <h4>隱私</h4>
-                <hr style="width:80%">
-                <a href="#">隱私權政策</a>
-                <a href="#">隱私設定</a>
-            </div>
-            <div class="search_footer_col">
-                <h4>Cookie</h4>
-                <hr style="width:80%">
-                <a href="#">Cookie政策</a>
-                <a href="#">Cookie設定</a>
-            </div>
-            <div class="search_footer_col">
-                <h4>合作夥伴</h4>
-                <hr style="width:80%">
-                <a href="#">廣告投放</a>
-                <a href="#">旅遊宣傳合作</a>
-            </div>
-        </div>
-        <div class="search_footer_bar">
-            Copyright © 2024 Javel. All rights reserved.
-        </div>
-    </footer>
+    <script src="/js/vendor/jquery-2.2.4.min.js"></script>
+    <script src="/js/popper.min.js"></script>
+    <script src="/js/vendor/bootstrap.min.js"></script>
+    <script src="/js/jquery-ui.js"></script>
+    <script src="/js/easing.min.js"></script>
+    <script src="/js/hoverIntent.js"></script>
+    <script src="/js/superfish.min.js"></script>
+    <script src="/js/jquery.ajaxchimp.min.js"></script>
+    <script src="/js/jquery.magnific-popup.min.js"></script>
+    <script src="/js/jquery.nice-select.min.js"></script>
+    <script src="/js/owl.carousel.min.js"></script>
+    <script src="/js/mail-script.js"></script>
+    <script src="/js/main.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="./js/forum_carousel.js"></script>
+    <script src="/js/forum_carousel.js"></script>
+    <script src="/js/forum_detailFetch.js"></script>
 </body>
 </html>
