@@ -14,6 +14,4 @@ public interface OrdersRepository extends JpaRepository<Orders, Long>{
 		            "JOIN contact_information c ON o.contact_id = c.CId", 
             nativeQuery = true)
 	List<Object[]> findOrdersWithContactName();
-	
-	Orders findByOrderNumber(String orderNumber);
 }

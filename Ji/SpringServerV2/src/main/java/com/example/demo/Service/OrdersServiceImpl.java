@@ -1,14 +1,11 @@
 package com.example.demo.Service;
 
-import java.sql.Timestamp;
-import java.text.NumberFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import java.util.Optional;
 
@@ -17,8 +14,6 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.Model.Orders;
 import com.example.demo.Repository.OrdersRepository;
-
-import com.example.demo.Service.OrdersService;
 
 @Service
 public class OrdersServiceImpl implements OrdersService{
@@ -52,41 +47,13 @@ public class OrdersServiceImpl implements OrdersService{
 			 Map<String, Object> orderMap = new HashMap<>();
 			 orderMap.put("orderNumber", row[0]);
 			 orderMap.put("contactName", row[1]);
+			 orderMap.put("finalPrice", row[2]);
 			 
-			 Double finalPrice = (Double) row[2];
-			 String formattedPrice = formatCurrency(finalPrice);
-			 orderMap.put("finalPrice", formattedPrice);
-			 
-			 Timestamp timestamp = (Timestamp) row[3];
-			 LocalDateTime createDate = convertToLocalDateTime(timestamp);
-			 orderMap.put("createDate", createDate.format(formatter));
-			 
-			 
+			 LocalDateTime createDate = (LocalDateTime) row[3];
+			 String formattedDate = createDate.format(formatter);
+			 orderMap.put("createDate", row[3]);
 			 ordersWithContact.add(orderMap);
 		 }
-		 
-		return ordersWithContact;
-		
+		return ordersWithContact;	
 	}
-
-	private String formatCurrency(Double price) {
-		NumberFormat currencyFormat = NumberFormat.getNumberInstance(Locale.TAIWAN);
-		currencyFormat.setMaximumFractionDigits(0);
-		return currencyFormat.format(price);
-	}
-
-	private LocalDateTime convertToLocalDateTime(Timestamp timestamp) {
-		if(timestamp != null) {
-			return timestamp.toLocalDateTime();
-		}
-		return null;
-	}
-
-	@Override
-	public Orders getOrderByOrderNumber(String orderNumber) {
-		return ordersRepository.findByOrderNumber(orderNumber);
-	}
-
-	
-
 }

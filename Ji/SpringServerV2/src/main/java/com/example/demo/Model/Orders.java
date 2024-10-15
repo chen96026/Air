@@ -1,6 +1,5 @@
 package com.example.demo.Model;
 
-
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
@@ -11,8 +10,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -47,35 +44,7 @@ public class Orders {
 	@Column(name = "createDate")
 	private LocalDateTime createDate;
 	
-	public Contact getContactInformation() {
-		return contactInformation;
-	}
-
-	public void setContactInformation(Contact contactInformation) {
-		this.contactInformation = contactInformation;
-	}
-	
-	@Enumerated(EnumType.STRING)
-	@Column(name = "orderStatus", nullable = false)
-	private OrderStatus orderStatus;
-	
-	public OrderStatus getOrderStatus() {
-		return orderStatus;
-	}
-
-	public void setOrderStatus(OrderStatus orderStatus) {
-		this.orderStatus = orderStatus;
-	}
-
-	public enum OrderStatus {
-	    訂單已成立,
-	    逾期付款已取消,
-	    已付款完成
-	}
-
-
-
-	// 關聯到 ContactInformation
+    // 關聯到 ContactInformation
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "contact_id", referencedColumnName = "CId", insertable = false, updatable = false)
     private Contact contactInformation;  // 關聯的聯絡人資訊
