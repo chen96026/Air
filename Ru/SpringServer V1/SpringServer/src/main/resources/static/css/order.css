@@ -476,7 +476,6 @@ li {
 
 select {
     appearance: none; /* 去掉瀏覽器預設的樣式 */
-    background-color: #f8f9fa; /* 改變背景顏色 */
     border: 1px solid #ced4da; /* 改變邊框 */
     padding: 0.5rem 1rem; /* 調整內邊距 */
     border-radius: 0.25rem; /* 圓角 */
@@ -493,5 +492,12 @@ select {
     padding: 0 10px;
     line-height: 45px;
     border-radius: 4px;
+}
+
+.form-select{
+	width: 80px; /* 設置一致的欄高 */
+    padding: 0 10px;
+    border-radius: 4px;
+	
 }
 

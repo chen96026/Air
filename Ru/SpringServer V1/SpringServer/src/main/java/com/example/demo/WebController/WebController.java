@@ -52,6 +52,10 @@ public class WebController {
 		return "order";
 	}
 	
+	@GetMapping("/order_back")
+	public String order_back() {
+		return "/back/order_admin";
+	}
 	
 	
 }

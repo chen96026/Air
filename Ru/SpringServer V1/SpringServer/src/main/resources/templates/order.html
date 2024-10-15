@@ -90,37 +90,39 @@
     </div>
     <div class="container_bg row" style="margin:5% 3%;">
         <div class="col_left">
-            <div class="container_all" id="container_all" style="width: 80%; padding: 20px; font-size: 18px;">行程總覽
-                <br>
+            <div class="container_all" id="container_all" style="width: 80%; padding: 20px; font-size: 18px;">
+           		<h3>行程總覽</h3>
                 <hr style="border: none; border-top: 5px solid #132953;">
 
             </div>
 
 
             <!-- <h4 style="margin-left: 10%; font-size: larger; margin:5% 0 2% 10%;">您的機票</h4>  -->
-            <div class="container_notice" style="margin-top:5%;">
-                <div style="display: flex; width: 50%; justify-content:start;align-items: center; ">
-                    <div style="margin: 10%;"><span class="material-symbols-outlined"
-                            style="font-size: 68px;">campaign</span></div>
-                    <div>
-                        <h3>出票時間</h3>
-                        <p>付款成功後，<br>
-                            將於4天內出票。</p>
-                    </div>
-                </div>
-
-                <div style="display: flex; width: 50%; justify-content:start;align-items: center; ">
-                    <div style="margin: 10%;"><span class="material-symbols-outlined"
-                            style="font-size: 68px;">flight_takeoff</span></div>
-                    <div>
-                        <h3>行前須知</h3>
-                        <p>依序使用機票<br>
-                            <a href="#" id="view_details">查看詳情</a>
-                        </p>
-                    </div>
-                </div>
-
-            </div>
+            <div class="container_notice mt-3 align-items-center" style="min-height: 15vh;">
+			    <div class="row w-100 align-items-center " >
+			        <div class="col-md-6 d-flex align-items-center justify-content-center mt-3">
+			            <div class="mb-2" style="margin-right: 20px;">
+			                <span class="material-symbols-outlined" style="font-size: 68px;">campaign</span>
+			            </div>
+			            <div class="text-center">
+			                <h3>出票時間</h3>
+			                <p >付款成功後，<br>將於4天內出票。</p>
+			            </div>
+			        </div>
+			
+			        <div class="col-md-6 d-flex align-items-center justify-content-center mt-3">
+			            <div class="mb-2" style="margin-right: 20px;">
+			                <span class="material-symbols-outlined" style="font-size: 68px;">flight_takeoff</span>
+			            </div>
+			            <div class="text-center">
+			                <h3>行前須知</h3>
+			                <p>依序使用機票<br>
+			                    <a href="#" id="view_details">查看詳情</a>
+			                </p>
+			            </div>
+			        </div>
+			    </div>
+			</div>
 
             <div id="myModal" class="modal">
                 <div class="modal_content">
@@ -169,7 +171,7 @@
                 <h4>主要旅客資訊</h4>
                 <hr>
                 <div id="passenger_container">
-                    <div class="form_section">
+                    <div class="form_section" style="color:black; font-size:14px"> 
                         <div style="color:black; font-weight:bold; font-size:16px">旅客1(成人票)</div>
                         <div class="container_info">
                              <form class="mt-3">
@@ -189,7 +191,7 @@
 			                    <div class="row mb-3">
 			                        <div class="col-md-3">
 			                            <label for="gender" class="form-label">性別：</label>
-			                            <select id="gender" name="gender" class="form-select">
+			                            <select id="gender" name="gender" class="form-select w-100">
 			                                <option value="male">男性</option>
 			                                <option value="female">女性</option>
 			                            </select>
@@ -201,8 +203,6 @@
 			                        <div class="col-md-4">
 			                            <label for="idnumber" class="form-label">證件號碼：</label>
 			                            <input id="idnumber" name="idnumber" type="text" class="form-control">
-			                            <!-- 錯誤訊息顯示在下一行 -->
-			                            <span class="error-message text-danger" style="font-size: 12px;"></span>
 			                        </div>
 			                    </div>
 			
@@ -210,7 +210,7 @@
 			                    <div class="row mb-3">
 			                        <div class="col-md-3">
 			                            <label for="country" class="form-label">國籍：</label>
-			                            <select id="country" name="country" class="form-control">
+			                            <select id="country" name="country" class="form-control w-100">
 			                                <option value="tw">台灣</option>
 			                                <option value="us">美國</option>
 			                                <option value="cn">中國</option>
@@ -268,13 +268,13 @@
                         <div class="container_luggage">去程(已包含的行李)</div>
                         <div class="container_lg">
                             <div class="grid_luggage">
-                                <h6>個人物品<br>
+                                <h5>個人物品<br>
                                     <p style="font-size: 11px;">請聯繫航空公司了解詳細的行李尺寸規定</p>
-                                </h6>
-                                <h6>手提行李<br>(50*40*25公分)</h6>
-                                <h6>托運行李<br>
+                                </h5>
+                                <h5>手提行李<br>(50*40*25公分)</h5>
+                                <h5>托運行李<br>
                                     <p style="font-size: 11px;">請聯繫航空公司了解詳細的行李尺寸規定</p>
-                                </h6>
+                                </h5>
                             </div>
 
                            <div class="row align-items-center">
@@ -289,10 +289,10 @@
 			                        </div>
 			                </div>
 
-                            <div class="grid_luggage">
-                                <h6>1件</h6>
-                                <h6>1件，共7公斤</h6>
-                                <h6>1件，共23公斤</h6>
+                            <div class="row align-items-center mt-4 mb-2">
+                            	<div class="col-md-4 d-flex justify-content-center"><h5>1件</h5></div>
+                            	<div class="col-md-4 d-flex justify-content-center"><h5>1件，共7公斤</h5></div>
+                            	<div class="col-md-4 d-flex justify-content-center"><h5>1件，共23公斤</h5></div>
                             </div>
 
                             <label for="add_luggage_1" style="padding-top: 20px;">
@@ -312,16 +312,16 @@
                         <div class="container_luggage">回程(已包含的行李)</div>
                         <div class="container_lg" style="margin-bottom: 5%;">
                             <div class="grid_luggage">
-                                <h6>個人物品<br>
+                               <h5>個人物品<br>
                                     <p style="font-size: 11px;">請聯繫航空公司了解詳細的行李尺寸規定</p>
-                                </h6>
-                                <h6>手提行李<br>(50*40*25公分)</h6>
-                                <h6>托運行李<br>
+                                </h5>
+                                <h5>手提行李<br>(50*40*25公分)</h5>
+                                <h5>托運行李<br>
                                     <p style="font-size: 11px;">請聯繫航空公司了解詳細的行李尺寸規定</p>
-                                </h6>
+                                </h5>
                             </div>
-                            
-                            <div class="row align-items-center">
+
+                           <div class="row align-items-center">
 			                        <div class="col-md-4 d-flex justify-content-center">
 			                             <span class="material-symbols-outlined" style="font-size: 60px;">personal_bag</span>
 			                       	</div>
@@ -333,11 +333,12 @@
 			                        </div>
 			                </div>
 
-                            <div class="grid_luggage">
-                                <h6>1件</h6>
-                                <h6>1件，共7公斤</h6>
-                                <h6>1件，共23公斤</h6>
+                            <div class="row align-items-center mt-4 mb-3">
+                            	<div class="col-md-4 d-flex justify-content-center"><h5>1件</h5></div>
+                            	<div class="col-md-4 d-flex justify-content-center"><h5>1件，共7公斤</h5></div>
+                            	<div class="col-md-4 d-flex justify-content-center"><h5>1件，共23公斤</h5></div>
                             </div>
+
 
                             <label for="add_luggage_2">
                                 <select name="addLg_2" id="add_returnluggage_2" class="label_addluggage">
@@ -356,18 +357,18 @@
                 </div>
             </div>
             <div>
-                <h4 style="margin: 5% 0 2% 10%; font-size: 20px">聯繫方式</h4>
-                <div class="container_contact">
-                    <div><input type="text" placeholder="聯繫人姓名" class="container_contactinfo" id="contact_name"
-                            name="contactName"></div>
-                    <div><input type="tel" placeholder="0912456789" class="container_contactinfo" id="contact_phone"
-                            name="contactPhone">
-                    </div>
-                    <div><input type="email" placeholder="123@abc.com" class="container_contactinfo" id="contact_email"
-                            name="contactEmail">
-                    </div>
-
-                </div>
+                <h4 style="margin: 5% 0 0 10%; font-size: 20px">聯繫方式</h4>
+                <div class="row container_contact" style="margin: 2% 0 2% 10%;">
+			         <div class="col-md-4">
+			             <input type="text" id="contact_name" name="contactName" placeholder="聯繫人姓名" class="form-control">
+			         </div>
+			             <div class="col-md-4">
+			                   <input type="tel" id="contact_phone" name="contactPhone" placeholder="0912456789" class="form-control">
+			             </div>
+			             <div class="col-md-4">
+			                   <input type="email" id="contact_email" name="contactEmail" placeholder="123@abc.com" class="form-control">
+			             </div>
+			    </div>
             </div>
 
             <div class="container_all" style="width: 80%;padding: 20px; margin-top: 50px;  margin-bottom:50px;">

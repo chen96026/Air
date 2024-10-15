@@ -223,8 +223,10 @@ public class OrdersController {
 
 	@GetMapping("/order_admin")
 	public String showOrderAdminPage(Model model) {
-		return "back/order_admin"; // 返回 order_admin.html
+		return "/back/order_admin"; // 返回 order_admin.html
 	}
+	
+	
 	
 	@PostMapping("/ordercancel")
 	public ResponseEntity<String> OrderCancel(HttpSession session){
