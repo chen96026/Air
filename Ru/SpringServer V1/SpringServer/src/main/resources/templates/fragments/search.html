@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" th:href="@{/css/search.css}">
+<title>Search Page</title>
+</head>
+<body th:fragment="search">
+	<button class="overlay" id="overlay"></button>
+	<header class="search_header">
+		<div class="search_section_container search_header_container"
+			id="home">
+			<div class="search_header_form">
+				<div>
+					<button class="search_bar" id="search_bar_button"
+						th:utext="${openBtnValue}"></button>
+				</div>
+				<form id="search_form" th:action="@{/search_page}" method="get">
+					<div class="search_input_group">
+						<label for="search_country_start">出發地</label> <input type="text"
+							placeholder="國家" id="search_country" autocomplete="off" />
+					</div>
+					<div class="search_input_group">
+						<label for="search_country_end">目的地</label> <input type="text"
+							placeholder="國家" id="search_country" autocomplete="off" />
+					</div>
+					<div class="search_input_group">
+						<label for="departureDate">出發</label> <input type="text"
+							id="departureDate" placeholder="新增日期" readonly>
+					</div>
+					<div class="search_input_group">
+						<label for="returnDate">回程</label> <input type="text"
+							id="returnDate" placeholder="新增日期" readonly>
+					</div>
+					<div class="search_input_group">
+						<label for="quantityInput">旅客</label> <input type="text"
+							id="quantityInput" placeholder="選擇人數" readonly>
+					</div>
+					<button class="search_btn" id="search_btn">搜尋</button>
+				</form>
+				<div id="suggestions"></div>
+				<div class="quantity-container">
+					<div id="quantityBox" class="quantity-box">
+						<div class="quantity-item">
+							<span>客艙等級</span> <select id="quantityRoom">
+								<option selected>經濟艙</option>
+								<option>商務艙</option>
+							</select>
+						</div>
+						<div class="quantity-item">
+							<span>成人</span>
+							<button class="quantity-btn" data-type="adult"
+								data-action="decrease">-</button>
+							<span class="quantity-number" data-type="adult">0</span>
+							<button class="quantity-btn" data-type="adult"
+								data-action="increase">+</button>
+						</div>
+						<div
+							style="color: #8e8e8e; margin-left: 1vw; margin-bottom: 10px;">年滿18歲</div>
+						<div class="quantity-item">
+							<span>青年</span>
+							<button class="quantity-btn" data-type="teen"
+								data-action="decrease">-</button>
+							<span class="quantity-number" data-type="teen">0</span>
+							<button class="quantity-btn" data-type="teen"
+								data-action="increase">+</button>
+						</div>
+						<div
+							style="color: #8e8e8e; margin-left: 1vw; margin-bottom: 10px;">12
+							~ 18歲</div>
+						<div class="quantity-item">
+							<span>兒童</span>
+							<button class="quantity-btn" data-type="child"
+								data-action="decrease">-</button>
+							<span class="quantity-number" data-type="child">0</span>
+							<button class="quantity-btn" data-type="child"
+								data-action="increase">+</button>
+						</div>
+						<div
+							style="color: #8e8e8e; margin-left: 1vw; margin-bottom: 10px;">2
+							~ 12歲</div>
+						<div class="quantity-item">
+							<span>嬰兒</span>
+							<button class="quantity-btn" data-type="baby"
+								data-action="decrease">-</button>
+							<span class="quantity-number" data-type="baby">0</span>
+							<button class="quantity-btn" data-type="baby"
+								data-action="increase">+</button>
+						</div>
+						<div
+							style="color: #8e8e8e; margin-left: 1vw; margin-bottom: 10px;">2歲以下</div>
+						<div id="quantityWarning" style="color: red; margin-left: 1vw;"></div>
+						<button id="confirmBtn" class="confirm-btn">套用</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
+	<script src="/js/header.js"></script>
+</body>
+</html>
