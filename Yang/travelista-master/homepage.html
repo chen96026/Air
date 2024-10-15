@@ -682,32 +682,32 @@
 	<script src="js/main.js"></script>
 	<script>
 		// 點擊get Started後會聚焦在航班出發地輸入欄位
-													 document.getElementById("HpStardBtn").addEventListener("click", function () {
-														 // Focus the first input field without moving the page
-														 document.getElementById("HpFirstInput").focus();
+		document.getElementById("HpStardBtn").addEventListener("click", function () {
+			// Focus the first input field without moving the page
+			document.getElementById("HpFirstInput").focus();
 		});
 
-													 // 新聞的輪播
-													 let slideIndex = 1;
-													 let timer;
-													 showSlides(slideIndex);
+		// 新聞的輪播
+		let slideIndex = 1;
+		let timer;
+		showSlides(slideIndex);
 
-													 function posterPlusSlides(n) {
-														 showSlides(slideIndex += n);
-        }
+		function posterPlusSlides(n) {
+			showSlides(slideIndex += n);
+		}
 
-													 function showSlides(n) {
-														 let i;
-													 let slides = document.getElementsByClassName("container-fluid");
-            if (n > slides.length) {slideIndex = 1}
-													 if (n < 1) {slideIndex = slides.length}
-													 for (i = 0; i < slides.length; i++) {
-														 slides[i].style.display = "none";
-            }
-													 slides[slideIndex - 1].style.display = "flex";
-            // clearInterval(timer);
-            // timer = setInterval(() => {showSlides(++slideIndex); }, 3000);
-        } 
+		function showSlides(n) {
+			let i;
+			let slides = document.getElementsByClassName("container-fluid");
+			if (n > slides.length) { slideIndex = 1 }
+			if (n < 1) { slideIndex = slides.length }
+			for (i = 0; i < slides.length; i++) {
+				slides[i].style.display = "none";
+			}
+			slides[slideIndex - 1].style.display = "flex";
+			// clearInterval(timer);
+			// timer = setInterval(() => {showSlides(++slideIndex); }, 3000);
+		} 
 	</script>
 </body>
 
