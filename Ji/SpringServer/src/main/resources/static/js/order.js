@@ -219,11 +219,36 @@ async function validateField(input) {
 	const value = input.value.trim();
 	let errorMessage = '';
 
-
-	const requestData = {
-		[name.split('_')[0]]: value  // 只傳遞不帶索引的欄位名稱
-	};
-
+	let requestData = {};
+	if(name.startsWith('dob')){
+		const inputDate = new Date(value);
+		const today = new Date();
+		today.setHours(0,0,0,0);
+		
+		if(inputDate >= today) {
+			errorMessage= "出生日期必須是過去的日期";
+			showFieldError(name, errorMessage);
+			return false;
+		}
+		requestData = {
+			dob : value
+		}
+		clearFieldError(name); 
+	}
+	
+	
+	if(name.startsWith('dop')){
+		requestData = {
+			dop:value,
+			date_start : flight_start.plane.date_start
+		};
+	}else{
+		requestData = {
+			[name.split('_')[0]] : value
+		}
+	}
+	
+	
 	try {
 
 		let response;
@@ -235,7 +260,7 @@ async function validateField(input) {
 				headers: { 'Content-Type': 'application/json' },
 				body: JSON.stringify(requestData)
 			});
-		} else if (name.startsWith('lastname') || name.startsWith('firstname') || name.startsWith('idnumber')) {
+		} else if (name.startsWith('lastname') || name.startsWith('firstname') || name.startsWith('idnumber') || name.startsWith('dop')) {
 			response = await fetch('/validation/validatePassenger', {
 				method: 'POST',
 				headers: { 'Content-Type': 'application/json' },
@@ -289,7 +314,7 @@ async function validateContactFields() {
 }
 
 async function validatePassengerFields() {
-	const passengerFields = ['lastname', 'firstname', 'idnumber'];
+	const passengerFields = ['lastname', 'firstname', 'idnumber', 'dop'];
 	let allValid = true;
 	const sections = document.querySelectorAll('.form_section');
 	for (let i = 0; i < sections.length; i++) {
@@ -436,11 +461,11 @@ function clearFieldError(fieldName) {
 
 				await submitLuggageData(oid, savedPassengerIds);
 
-				alert('所有資料已提交');
+				alert('資料已提交完成');
 				window.location.href = `/orders/Complete/${oid}`;
 			} catch (error) {
 				console.error('資料提交過程中出現問題：', error);
-				alert('提交失敗：' + error.message);
+				alert('請檢查表單欄位並重試！');
 			}
 		});
 	} else {

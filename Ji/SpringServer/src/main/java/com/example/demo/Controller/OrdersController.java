@@ -245,7 +245,12 @@ public class OrdersController {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("訂單未找到");
 		}
 		
-		
 	}
+	
+	@GetMapping("/order_expired")
+    public String showOrderExpiredPage() {
+        
+        return "order_expired"; 
+    }
 	
 }

@@ -4,11 +4,11 @@ fetch('/orders/getoid')
         var oid = data.oid;
         console.log("訂單 ID: ", oid);
 
-        // 確保在獲取到 oid 後，再發送第二個請求獲取支付截止時間
+        
         fetch('/orders/payBeforeTime/' + oid)
             .then(response => response.json())
             .then(data => {
-                var payBeforeTime = data.payBeforeTimeISO;  // 從後端返回的支付截止時間
+                var payBeforeTime = data.payBeforeTimeISO;  
                 console.log("支付截止時間: ", payBeforeTime);
 
                 if (payBeforeTime) {
@@ -36,7 +36,9 @@ fetch('/orders/getoid')
                             .then(response => {
                                 if (response.ok) {
                                     console.log("訂單狀態更新成功");
-									window.location.href = "/order_expired";
+									setTimeout(function(){
+										window.location.href = "/orderExpired";
+									},1000);
                                 } else {
                                     console.error("訂單狀態更新失敗，狀態碼:" + response.status);
                                 }
@@ -45,7 +47,7 @@ fetch('/orders/getoid')
                                 console.error("發生錯誤", error);
                             });
                         }
-                    }, 1000);
+                    }, 100);
                 } else {
                     document.getElementById("countdown").innerHTML = "無法獲取倒數計時時間";
                 }
