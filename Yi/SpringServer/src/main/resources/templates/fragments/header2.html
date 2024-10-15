@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <title>header</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" th:href="@{/css/bootstrap.css}">
+  <link rel="stylesheet" th:href="@{/css/main.css}">
+</head>
+
+<body>
+  <header id="header">
+    <div class="header-top">
+    </div>
+    <div class="container main-menu">
+      <div class="row align-items-center justify-content-between d-flex">
+        <div id="logo">
+          <a href="index.html"><img src="img/logo.png" /></a>
+        </div>
+        <nav id="nav-menu-container">
+          <ul class="nav-menu">
+            <li><a href="index.html">首頁</a></li>
+            <li><a href="about.html">論壇</a></li>
+            <li class="menu-has-children"><a href="">會員專區</a></li>
+            <li><a href="contact.html">聯絡我們</a></li>
+            <li><a href="about.html">登入</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <section class="about-banner relative">
+    <div class="overlay overlay-bg"></div>
+    <div class="container">
+      <div class="row d-flex align-items-center justify-content-center">
+        <div class="about-content col-lg-12">
+          <h1 class="text-white">
+            會員專區
+          </h1>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/superfish/1.7.9/js/superfish.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+  <script th:src="@{/js/main.js}"></script>
+</body>
+
+</html>

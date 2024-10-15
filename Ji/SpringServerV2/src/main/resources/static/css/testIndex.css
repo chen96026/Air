@@ -1,0 +1,93 @@
+/* 
+    排名國家圖片：360*210
+    新聞圖片：960*640
+*/
+/* 航班搜尋表單 */
+.banner-right .form-wrap {
+    padding: 30px;
+}
+
+/* 航班搜尋表單欄位標題 */
+.Hp_formTitle {
+    text-align: start;
+    margin: 5px 0;
+}
+
+/* 航班搜尋表單輸入框 */
+.banner-right .form-wrap .form-control {
+    border-color: rgb(163, 163, 163);
+}
+
+/* 航班選擇艙等 */
+.choose_type {
+	margin-top:25px;
+	margin-bottom:15px;
+	margin-left:10px;
+	text-align:start;
+	gap:30px;
+}
+
+/* 區塊標題的副標題 */
+.text-center>p {
+    font-size: 16px;
+}
+
+/* 新聞區塊 */
+.home-about-area {
+    background-color: #f9f9ff;
+    display: flex;
+}
+
+/* 新聞選擇的左右箭頭 */
+.Hp_prev,
+.Hp_next {
+    color: black;
+    font-weight: bold;
+    font-size: 20px;
+    border-radius: 5px;
+    height: 26px;
+    width: 26px;
+    padding: 3px;
+    text-align: center;
+    margin: auto 5px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.Hp_prev:hover,
+.Hp_next:hover {
+    color: rgb(143, 143, 143);
+}
+
+/* 新聞個別文章 */
+.container-fluid {
+    display: none;
+}
+
+/* 新聞的標題和簡略文章 */
+.home-about-area .home-about-left h1 {
+    height: 90px;
+    display: flex;
+    align-items: center;
+}
+.home-about-area .home-about-left p {
+    white-space: pre-wrap;
+    font-size: 18px;
+    height: 230px;
+}
+
+/* 切換新聞的特效 */
+.Hp_fade {
+    animation-name: fadePoster;
+    animation-duration: 1.5s;
+}
+
+@keyframes fadePoster {
+    from {
+        opacity: .4
+    }
+
+    to {
+        opacity: 1
+    }
+}
