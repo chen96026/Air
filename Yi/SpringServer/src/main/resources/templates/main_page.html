@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Javel</title>
+<link th:replace="fragments/source :: head"></link>
+<link rel="stylesheet" th:href="@{/css/main_page.css}">
+<link th:replace="fragments/header :: head"></link>
+<link th:replace="fragments/footer :: head"></link>
+</head>
+
+<body>
+	<div th:replace="fragments/header :: header"></div>
+
+	<section class="section_container destination_container"
+		id="destination">
+		<div class="section_header">
+			<h2 class="section_title">熱門城市</h2>
+		</div>
+		<div class="destination_grid">
+
+			<div class="destination_card">
+				<img src="/assets/country/中國.jpg" alt="destination" />
+				<div class="badge">1</div>
+				<div class="destination_details">
+					<h4>馬丘比丘</h4>
+					<p>祕魯</p>
+				</div>
+			</div>
+			<div class="destination_card">
+				<img src="/assets/country/日本.jpg" alt="destination" />
+				<div class="badge">2</div>
+				<div class="destination_details">
+					<h4>倫敦</h4>
+					<p>英國</p>
+				</div>
+			</div>
+			<div class="destination_card">
+				<img src="/assets/country/台灣.jpg" alt="destination" />
+				<div class="badge">3</div>
+				<div class="destination_details">
+					<h4>東京</h4>
+					<p>日本</p>
+				</div>
+			</div>
+			<div class="destination_card">
+				<img src="/assets/country/泰國.jpg" alt="destination" />
+				<div class="badge">4</div>
+				<div class="destination_details">
+					<h4>雅典</h4>
+					<p>希臘</p>
+				</div>
+			</div>
+			<div class="destination_card">
+				<img src="/assets/country/越南.jpg" alt="destination" />
+				<div class="badge">5</div>
+				<div class="destination_details">
+					<h4>雪梨</h4>
+					<p>澳洲</p>
+				</div>
+			</div>
+			<div class="destination_card">
+				<img src="/assets/country/韓國.jpg" alt="destination" />
+				<div class="badge">6</div>
+				<div class="destination_details">
+					<h4>阿姆斯特丹</h4>
+					<p>荷蘭</p>
+				</div>
+			</div>
+		</div>
+	</section>
+	<section id="home_newsSection">
+		<div class="carousel_container">
+			<div class="carousel_inner" id="carousel-inner"></div>
+		</div>
+		<div class="carousel-dots-container">
+			<a class="prev" onclick="changeSlide(-1)">&#10094;</a>
+			<div class="carousel-dots" id="carousel-dots"></div>
+			<a class="next" onclick="changeSlide(1)">&#10095;</a>
+		</div>
+	</section>
+	<br>
+	<br>
+	<section class="section_container client_container" id="client">
+		<div class="section_header">
+			<h2 class="section_title">精選貼文</h2>
+		</div>
+		<div class="member_forum_card_group"></div>
+	</section>
+
+	<section id="HpQA">
+		<div>
+			<button class="Hp_accordion">如何找到低價航班?</button>
+			<i class="fa fa-solid fa-chevron-up"></i>
+			<div class="Hp_panel">
+				<p>1 . 平日出發，尤其是週四出發的航班更便宜。因為在這些日子出遊的人不多。</p>
+				<p>2 . 清晨/半夜的航班，比較少人願意搭清晨 6 點之前的航班，因此這個時間點的機票也會更便宜。</p>
+				<p>3 . 及早預定，剛剛釋出的機票是最便宜得時候 — 通常是起飛前的 1
+					年左右，隨著日期接近，價格會逐漸提高；熱門航班的機票漲幅更快，所以有預定的行程建議您提早購買機票。</p>
+				<p>4 . 使用信用卡優惠，某些銀行信用卡會對機票給予更高的折扣和回饋。</p>
+			</div>
+			<button class="Hp_accordion">我在這裡是跟航空公司訂票嗎?</button>
+			<i class="fa fa-solid fa-chevron-up"></i>
+			<div class="Hp_panel">
+				<p>Lorem ipsum...</p>
+			</div>
+			<button class="Hp_accordion">預定航班後我需要注意什麼?</button>
+			<i class="fa fa-solid fa-chevron-up"></i>
+			<div class="Hp_panel">
+				<p>Lorem ipsum...</p>
+			</div>
+		</div>
+		<div>
+			<button class="Hp_accordion">我如果有事能取消航班機票嗎?</button>
+			<i class="fa fa-solid fa-chevron-up"></i>
+			<div class="Hp_panel">
+				<p>Lorem ipsum...</p>
+			</div>
+			<button class="Hp_accordion">會員有什麼功能或好處?</button>
+			<i class="fa fa-solid fa-chevron-up"></i>
+			<div class="Hp_panel">
+				<p>Lorem ipsum...</p>
+			</div>
+			<button class="Hp_accordion">為什麼經濟艙又有分等級?</button>
+			<i class="fa fa-solid fa-chevron-up"></i>
+			<div class="Hp_panel">
+				<p>Lorem ipsum...</p>
+			</div>
+		</div>
+	</section>
+
+	<div th:replace="fragments/footer :: footer"></div>
+	<script src="/js/search.js"></script>
+	<script src="/js/main_page.js"></script>
+
+</body>
+
+</html>
