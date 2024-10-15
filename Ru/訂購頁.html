@@ -2,155 +2,55 @@
 <html lang="zh-tw">
 
 <head>
-    <!-- load stylesheets -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">  <!-- Google web font "Open Sans" -->
-    <link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.min.css">                <!-- Font Awesome -->
-    <link rel="stylesheet" href="css/bootstrap.min.css">                                      <!-- Bootstrap style -->
-    <link rel="stylesheet" type="text/css" href="css/datepicker.css"/>
-    <link rel="stylesheet" type="text/css" href="slick/slick.css"/>
-    <link rel="stylesheet" type="text/css" href="slick/slick-theme.css"/>
-    <link rel="stylesheet" href="css/templatemo-style.css">                                   <!-- Templatemo style -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>訂購頁</title>
 
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-            <!--[if lt IE 9]>
-              <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-              <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-          <![endif]-->
+    <link rel="stylesheet" th:href="@{/css/order.css}">
+    <link th:replace="fragments/header :: head"></link>
+	<link th:replace="fragments/footer :: head"></link>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <!-- 社群媒體的iconnnnnnnnnnnn -->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
 </head>
 
 <body>
-    <div class="tm-main-content" id="top">
-        <div class="tm-top-bar-bg"></div>    
-        <div class="tm-top-bar" id="tm-top-bar">
-            <div class="container">
-                <div class="row">
-                    <nav class="navbar navbar-expand-lg narbar-light">
-                        <a class="navbar-brand mr-auto" href="#">
-                            <img src="img/logo.png" alt="Site logo">
-                            Journey
-                        </a>
-                        <button type="button" id="nav-toggle" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#mainNav" aria-expanded="false" aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
-                        <div id="mainNav" class="collapse navbar-collapse tm-bg-white">
-                            <ul class="navbar-nav ml-auto">
-                              <li class="nav-item">
-                                <a class="nav-link active" href="#top">Home <span class="sr-only">(current)</span></a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#tm-section-2">Top Destinations</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#tm-section-3">Recommended Places</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#tm-section-4">Contact Us</a>
-                            </li>
-                        </ul>
-                    </div>                            
-                </nav>
-            </div> <!-- row -->
-        </div> <!-- container -->
-    </div> <!-- .tm-top-bar -->
+    <div th:replace="fragments/header :: header"></div>
 
-    <div style="margin: 2%  5% 0 5% ; text-align: center; font-size: 20px;">
-        <ul>
-            <li>
-                <div class="process_info_bg">填寫旅客資訊</div>
+    <div class="process-container" style="margin: 2% 5% 0 5%; text-align: center; font-size: 20px;">
+        <ul class="process-steps" style="list-style: none; padding: 0; display: flex; flex-wrap: wrap; justify-content: center; align-items: center;">
+            <li style="flex-grow:0.05; display: flex; align-items: center; margin: 10px;">
+                <div class="process_info_bg" style="padding: 10px; border-radius: 5px; background-color: #f8b600 ; color:rgba(34, 34, 34, 0.9)">填寫旅客資訊</div>
             </li>
-            <li><span class="material-symbols-outlined" style="vertical-align: middle;">arrow_forward_ios</span></li>
-
-            <li>
-                <div class="process_bg">會員登入/註冊</div>
+            <li><i class="fas fa-angle-double-right" style="font-size:36px" ></i></li>
+            
+            <li style="flex-grow:0.05;display: flex; align-items: center; margin: 10px;">
+                <div class="process_bg" style="padding: 10px; border-radius: 5px; background-color: #c7c4c4; ">訂單成立/信用卡付款</div>
             </li>
-            <li><span class="material-symbols-outlined" style="vertical-align: middle;">arrow_forward_ios</span></li>
-            <li>
-                <div class="process_bg">訂單成立</div>
+            <li><i class="fas fa-angle-double-right" style="font-size:36px" ></i></li>
+            <li style="flex-grow:0.05;display: flex; align-items: center; margin: 10px;">
+                <div class="process_bg" style="padding: 10px; border-radius: 5px; background-color: #c7c4c4;width:100px;">結帳</div>
             </li>
-            <li><span class="material-symbols-outlined" style="vertical-align: middle;">arrow_forward_ios</span></li>
-            <li>
-                <div class="process_bg">選擇付款方式</div>
-            </li>
-            <li><span class="material-symbols-outlined" style="vertical-align: middle;">arrow_forward_ios</span></li>
-            <li>
-                <div class="process_bg">結帳</div>
-            </li>
-            <li><span class="material-symbols-outlined" style="vertical-align: middle;">arrow_forward_ios</span></li>
-            <li>
-                <div class="process_bg">完成訂購</div>
+            <li><i class="fas fa-angle-double-right" style="font-size:36px" ></i></li>
+            <li style="flex-grow:0.05;display: flex; align-items: center; margin: 10px;">
+                <div class="process_bg" style="padding: 10px; border-radius: 5px; background-color: #c7c4c4;">完成訂購</div>
             </li>
         </ul>
     </div>
-    <div class="container_bg row">
+    <div class="container_bg row" style= "margin-top:5%;">
         <div class="col_left">
-            <h5 style="margin-left: 10%; font-size: 24px;">東京之旅</h5>
-            <div class="container" style="width: 80%; padding: 20px; font-size: 18px;">行程總覽
+            <div class="container" id="container" style="width: 80%; padding: 20px; font-size: 18px;">行程總覽
                 <br>
-                <hr style="border: none; border-top: 5px solid #1f0737;">
-                <div class="box">
-                    <div style="font-weight: bold;">
-                    <span id="departure_city">台北</span>-><span id="arrival_city">東京</span>
-                    </div>
-                    <div style="display: flex;padding:20px 0">
-                        <div
-                            style="background-color: #431274; color:white; margin: 0 5px; padding: 0 10px; border-radius: 5px;">
-                            去程</div>
-                        <div><span>9月21日</span> <span>週六</span>｜</div>
-                        <div>所需時間: 3小時25分</div>
-                    </div>
-                    <div style="display: flex; gap: 30px;">
-                        <div style="display:grid; justify-items: center;gap: 20px;">
-                            <div>15:30</div>
-                            <div>台灣虎航</div>
-                            <div>19:55</div>
-                        </div>
-                        <div style="display:grid; justify-content:center; gap: 20px;">
-                            <span class="material-symbols-outlined">more_vert</span>
-                            <span class="material-symbols-outlined">more_vert</span>
-                            <span class="material-symbols-outlined">more_vert</span>
-                        </div>
-                        <div style="display: grid; justify-content: center;gap: 20px;">
-                            <div>TPE台北 桃園機場T1</div>
-                            <div>IT700 經濟艙</div>
-                            <div>NRT東京 成田國際機場T2</div>
-                        </div>
-
-                    </div>
-                </div>
-                <hr style="border: none; border-top: 5px dashed #1f0737;">
-                <div class="box">
-                    <div style="font-weight: bold;">東京->台北</div>
-                    <div style="display: flex;padding:20px 0">
-                        <div
-                            style="background-color: #431274; color:white;margin: 0 5px; padding: 0 10px; border-radius: 5px;">
-                            回程</div>
-                        <div>9月26日 週四 ｜</div>
-                        <div>所需時間: 3小時40分</div>
-                    </div>
-                    <div style="display: flex; gap: 30px;">
-                        <div style="display:grid; justify-items: center;gap: 20px;">
-                            <div>20:45</div>
-                            <div>台灣虎航</div>
-                            <div>23:25</div>
-                        </div>
-                        <div style="display:grid; justify-content:center;gap: 20px;">
-                            <span class="material-symbols-outlined">more_vert</span>
-                            <span class="material-symbols-outlined">more_vert</span>
-                            <span class="material-symbols-outlined">more_vert</span>
-                        </div>
-                        <div style="display: grid; justify-content: center;gap: 20px;">
-                            <div>NRT東京 成田國際機場T2</div>
-                            <div>IT701 經濟艙</div>
-                            <div>TPE台北 桃園機場T1</div>
-                        </div>
-
-                    </div>
-                </div>
+                <hr style="border: none; border-top: 5px solid #132953;">
+                
             </div>
 
 
-            <h5 style="margin-left: 10%; font-size: larger;">您的機票</h5>
+            <h5 style="margin-left: 10%; font-size: larger; margin-top:5%;">您的機票</h5>
             <div class="container_notice">
                 <div style="display: flex; width: 50%; justify-content: start; ">
                     <div style="margin: 10%;"><span class="material-symbols-outlined"
@@ -216,52 +116,47 @@
 
 
 
-            <h5></h5>
-            <div class="container">
+            <div class="container" style="margin-top:5%;">
                 <div style="font-weight: bolder;">主要旅客資訊</div>
                 <hr>
                 <div id="passenger_container">
                     <div class="form_section">
                         <div>旅客1(成人票)</div>
                         <div class="container_info">
-
                             <form style="width: 100%; margin: 0 auto;">
-                                <div style="display: grid; grid-template-columns: 50% 50%; margin-bottom: 5px;">
+                                <div class="form_container form_name">
                                     <div>
                                         <label for="lastname">姓氏：</label>
-                                        <input type="text" id="lastname" name="lastname" placeholder="英文姓氏" style="width:70% ;">
-
+                                        <input type="text" id="lastname" name="lastname" placeholder="英文姓氏" style="width: 80%;">
                                     </div>
-
                                     <div>
                                         <label for="firstname">名字：</label>
-                                        <input type="text" id="firstname" name="firstname" placeholder="英文名字" style="width:70%;">
+                                        <input type="text" id="firstname" name="firstname" placeholder="英文名字" style="width: 80%;">
                                     </div>
-
                                 </div>
-
-                                <div style="display: grid; grid-template-columns: 22% 38% 40%;margin-bottom: 10px;">
+            
+                                <div class="form_row">
                                     <div>
                                         <label for="gender">性別：</label>
-                                        <select id="gender" name="gender" style="width: 45%;">
+                                        <select id="gender" name="gender">
                                             <option value="male">男性</option>
                                             <option value="female">女性</option>
                                         </select>
                                     </div>
                                     <div>
                                         <label for="dob">出生日期：</label>
-                                        <input type="date" id="dob" name="dob" style="width: 55%;">
+                                        <input type="date" id="dob" name="dob" style="width: 100%;">
                                     </div>
                                     <div>
-                                        證件號碼：<input id="idnumber" name="idnumber" type="text" style="width:52%;">
+                                        <label for="idnumber">證件號碼：</label>
+                                        <input id="idnumber" name="idnumber" type="text" style="width: 100%;">
                                     </div>
-
-
                                 </div>
-                                <div style="display: grid; grid-template-columns: 22% 30% 46%;">
+            
+                                <div class="form_row">
                                     <div>
-                                        <label for="">國籍：</label>
-                                        <select style="width: 50%;" id="country" name="country">
+                                        <label for="country">國籍：</label>
+                                        <select id="country" name="country">
                                             <option value="tw">台灣</option>
                                             <option value="us">美國</option>
                                             <option value="cn">中國</option>
@@ -285,28 +180,29 @@
                                             <option value="ch">瑞士</option>
                                             <option value="sg">新加坡</option>
                                         </select>
-
                                     </div>
                                     <div>
-                                        證件類型：
-                                        <select style="width: 40%;" id="idtype" name="idtype">
+                                        <label for="idtype">證件類型：</label>
+                                        <select id="idtype" name="idtype" style="width: 100%;">
                                             <option value="passport">護照</option>
                                             <option value="chinaId">台胞證（台灣居民來往大陸通行證）</option>
                                         </select>
                                     </div>
-
                                     <div>
-                                        證件有效日期至：<input type="date" id="dop" name="dop" style="width: 45%;">
+                                        <label for="dop">證件有效日期至：</label>
+                                        <input type="date" id="dop" name="dop" style="width: 100%;">
                                     </div>
                                 </div>
                             </form>
                         </div>
                         <hr style="border: 1px dashed;">
                         <button class="delete_btn">刪除</button>
-                    </div>
-
-                    <div>
-                        <p>一經確認即無法變更訂單。如果您的姓名不正確，您可能無法登機且將必須支付退票費用。</p>
+                        <div style="font-weight: bold; color: #19156df1;">
+                            <div>來自港澳台之乘客需要同時攜帶回鄉證／台胞證和護照。</div>
+                            <div>請確保您輸入的姓名與辦理登機時使用的證件上的姓名一致</div>
+                            <div>為確保您的旅程順利，請確保乘客的旅遊文件 <span style="color: red;">由旅程完結日起至少6個月內有效</span></div>
+                            <div>確認後，訂單將無法更改。如果您的姓名有誤，您可能無法登機並將被收取取消費用。</div>
+                        </div>
                     </div>
                     <div style="display: flex;justify-content: center; padding: 20px">
                         <button id="add_passenger"
@@ -345,8 +241,8 @@
                                 <div>1件，共23公斤</div>
                             </div>
 
-                            <label for="add_luggage_1">
-                                <select name="addLg_1" id="add_luggage_1" class="label_addluggage">
+                            <label for="add_luggage_1" style="padding-top: 20px;">
+                                <select name="addLg_1" id="add_luggage_1" class="label_addluggage" >
                                     <option value="add_lg">加購行李</option>
                                     <option value="non_lg">無額外行李</option>
                                     <option value="one_lg">1件，共20公斤&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;NT$1,224
@@ -411,11 +307,11 @@
                 </div>
             </div>
 
-            <div class="container" style="width: 80%;padding: 20px;margin-top: 50px; ">
-            <div style="display: flex; justify-content:space-between; align-items: center;">
-            	<div>總計:</div> 
-            	<div id="main_ticket_price" style="font-size:24px; color:red;">NT$ 9,999</div><br>
-            </div>
+            <div class="container" style="width: 80%;padding: 20px; margin-top: 50px;  margin-bottom:50px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; width: 80%; margin: 0 auto;">
+                    <div style="text-align: left; font-size: 20px; font-weight:bold">總計:</div>
+                    <div id="main_ticket_price" style="font-size:24px; color:red; text-align: right;">NT$ 9,999</div>
+                </div>
                 
                 <div style="display: flex;justify-content: center;">
                     <button class="style_nextstep" id="next_step">下一步</button>
@@ -423,15 +319,16 @@
             </div>
         </div>
 
-        <div class="col_right" style="min-height: 50vh;">
+        <div class="col_right" style="min-height: 40vh;">
             <div class="container_right">
                 <form id="booking_form">
                     <div style="font-size: 22px; margin-top: 10px">價格詳情</div>
                     <div style="margin: 5px 10px;">
-                        <div style="display:flex;justify-content: space-between;">
-                            <h3>機票 (2位成人)</h3>
-                            <h3 id="ticket_price" name="ticket_price">NT$ 9,999</h3>
+                         <div style="display:flex;justify-content: space-between;">
+                            <h3 id="ticket_people"></h3>
+                            <h3 id="ticket_price" name="ticket_price"></h3>
                         </div>
+
 
                         <h3 style="margin: 0; padding: 2px 0;">行李</h3>
                         <div style="display:flex;justify-content: space-between;">
@@ -462,50 +359,9 @@
         </div>
     </div>
 
-    <footer>
-        <div class="search_section_container search_footer_container">
-            <div class="search_footer_col">
-                <h4>追蹤我們</h4>
-                <hr style="width:50%">
-                <div class="search_footer_socials">
-                    <span>
-                        <a href="#"><i class="ri-twitter-fill"></i></a>
-                    </span>
-                    <span>
-                        <a href="#"><i class="ri-linkedin-fill"></i></a>
-                    </span>
-                    <span>
-                        <a href="#"><i class="ri-instagram-line"></i></a>
-                    </span>
-                    <span>
-                        <a href="#"><i class="ri-facebook-fill"></i></a>
-                    </span>
-                </div>
-            </div>
-            <div class="search_footer_col">
-                <h4>隱私</h4>
-                <hr style="width:80%">
-                <a href="#">隱私權政策</a>
-                <a href="#">隱私設定</a>
-            </div>
-            <div class="search_footer_col">
-                <h4>Cookie</h4>
-                <hr style="width:80%">
-                <a href="#">Cookie政策</a>
-                <a href="#">Cookie設定</a>
-            </div>
-            <div class="search_footer_col">
-                <h4>合作夥伴</h4>
-                <hr style="width:80%">
-                <a href="#">廣告投放</a>
-                <a href="#">旅遊宣傳合作</a>
-            </div>
-        </div>
-        <div class="search_footer_bar">
-            Copyright © 2024 Javel. All rights reserved.
-        </div>
-    </footer>
+
+    <div th:replace="fragments/footer :: footer"></div>
     
-    
-     <script src="FormFunction.js"></script>
+    <script src="/js/order.js"></script>
+    <script src="/js/header.js"></script>
 </body>

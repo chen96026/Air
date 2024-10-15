@@ -1,0 +1,162 @@
+/* 
+    排名國家圖片：360*210
+    新聞圖片：960*640
+*/
+/* 航班搜尋表單 */
+.banner-right .form-wrap {
+    padding: 30px;
+}
+
+/* 航班搜尋表單欄位標題 */
+.Hp_formTitle {
+    text-align: start;
+    margin: 5px 0;
+}
+
+/* 航班搜尋表單輸入框 */
+.banner-right .form-wrap .form-control {
+    border-color: rgb(163, 163, 163);
+}
+
+/* 航班選擇艙等 */
+.Hp_room {
+    flex: 1;
+}
+
+/* 區塊標題的副標題 */
+.text-center>p {
+    font-size: 16px;
+}
+
+/* 新聞區塊 */
+.home-about-area {
+    background-color: #f9f9ff;
+    display: flex;
+}
+
+/* 新聞選擇的左右箭頭 */
+.Hp_prev,
+.Hp_next {
+    color: black;
+    font-weight: bold;
+    font-size: 20px;
+    border-radius: 5px;
+    height: 26px;
+    width: 26px;
+    padding: 3px;
+    text-align: center;
+    margin: auto 5px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.Hp_prev:hover,
+.Hp_next:hover {
+    color: rgb(143, 143, 143);
+}
+
+/* 新聞個別文章 */
+.container-fluid {
+    display: none;
+}
+
+/* 新聞的標題和簡略文章 */
+.home-about-area .home-about-left h1 {
+    height: 90px;
+    display: flex;
+    align-items: center;
+}
+.home-about-area .home-about-left p {
+    white-space: pre-wrap;
+    font-size: 18px;
+    height: 230px;
+}
+
+/* 切換新聞的特效 */
+.Hp_fade {
+    animation-name: fadePoster;
+    animation-duration: 1.5s;
+}
+
+@keyframes fadePoster {
+    from {
+        opacity: .4
+    }
+
+    to {
+        opacity: 1
+    }
+}
+
+/* 頁尾 */
+footer {
+    background-color: #04091e;
+}
+
+.search_section_container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 3rem 1rem;
+}
+
+.search_footer_container {
+    display: grid;
+    grid-template-columns: 400px repeat(3, 1fr);
+    gap: 2rem;
+}
+
+.search_footer_col h4 {
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #fff;
+}
+
+.search_footer_col a {
+    display: block;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #777777;
+    transition: 0.3s;
+}
+
+.search_footer_col a:hover {
+    color: #f8b600;
+}
+
+.search_footer_socials {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.search_footer_socials span a {
+    padding: 5px 10px;
+    margin: 0;
+    font-size: 1.25rem;
+    color: white;
+    background-color: #930000;
+    border-radius: 100%;
+}
+
+.search_footer_socials span a:hover {
+    color: white;
+    background-color: #f8b600;
+}
+
+.search_footer_bar {
+    padding: 1rem;
+    font-size: 0.8rem;
+    color: black;
+    text-align: center;
+}
+
+hr {
+    margin: 1rem 0;
+    border: 0;
+    border-top: solid;
+    opacity: .25;
+}

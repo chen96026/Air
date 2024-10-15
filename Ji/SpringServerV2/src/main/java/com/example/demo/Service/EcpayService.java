@@ -18,6 +18,8 @@ public class EcpayService {
     private OrdersService ordersService;
 
     public String ecpayCheckout(Long oid) {
+    	
+    	 System.out.println("EcpayCheckout called with Order ID: " + oid);
         // 取得訂單編號和金額
         Orders order = ordersService.getOrderById(oid);
         if (order == null) {
@@ -42,7 +44,7 @@ public class EcpayService {
         obj.setTotalAmount(orderPrice); // 價格
         obj.setTradeDesc("test Description"); // 交易描述
         obj.setItemName("機票款"); // 交易商品
-        obj.setReturnURL("https://8ccf-111-246-131-219.ngrok-free.app/orders/order_admin"); // 成功後的回傳網址
+        obj.setReturnURL("https://a5dd-123-110-50-54.ngrok-free.app/orders/Toback");// 成功後的回傳網址
         obj.setClientBackURL("http://localhost:8890/main_page"); // 回到商店的網址
         obj.setNeedExtraPaidInfo("N"); // 是否需要額外交易資訊
         obj.setCustomField1("..."); // 設定自訂資訊

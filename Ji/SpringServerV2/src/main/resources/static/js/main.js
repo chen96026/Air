@@ -15,9 +15,13 @@ $(document).ready(function() {
     // ------- Datepicker  js --------//  
 
       $( function() {
+<<<<<<< HEAD:Ji/SpringServerV2/src/main/resources/static/js/main.js
         $( ".date-picker" ).datepicker({
 			dateFormat: "yy/mm/dd"	
 		});
+=======
+        $( ".date-picker" ).datepicker();
+>>>>>>> 9bf4b05cfe82f2ebb3803d1e0af578d131fea452:Ji/SpringServer/src/main/resources/static/js/main.js
       } );
 
 
