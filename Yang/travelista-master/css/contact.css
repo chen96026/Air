@@ -1,0 +1,24 @@
+/* 表單 */
+.list-wrap {
+    padding: 10px;
+}
+
+/* 表單每個欄位的標題 */
+#contact_form label>div {
+    font-size: 18px;
+    color: black;
+}
+
+/* 表單每個欄位的輸入框 */
+#contact_form>div>input, #contact_form>div>select, #contact_form>div>textarea {
+    width: 100%;
+    max-width: 500px;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ced4da;
+}
+
+/* 送出按鈕 */
+#contact_submit {
+    font-size: 20px;
+}

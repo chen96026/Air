@@ -352,7 +352,7 @@ hr {
 .Hp_mySlides {
     display: none;
 }
-.Hp_mySlides>div {
+.Hp_mySlides>div, .Hp_mySlides>section {
     margin: 0 1%;
 }
 .Hp_mySlides>div>img {
@@ -376,6 +376,10 @@ hr {
 .Hp_prev:hover, .Hp_next:hover {
   background-color: #ff89a5;
   color: black;
+}
+
+.Hp_mySlides>section>p {
+    white-space: pre-wrap;
 }
 
 .Hp_fade {
