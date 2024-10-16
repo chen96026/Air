@@ -217,13 +217,7 @@ public class OrdersController {
 
 	@GetMapping("/order")
 	public String order() {
-
 		return "order";
-	}
-
-	@GetMapping("/order_admin")
-	public String showOrderAdminPage(Model model) {
-		return "/back/order_admin"; // 返回 order_admin.html
 	}
 	
 	
