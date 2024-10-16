@@ -59,4 +59,14 @@ public interface PlaneRepository extends JpaRepository<Plane, Long> {
 	List<PlaneTimeZoneDTO> findFlightsWithTimezone(@Param("departureCountry") String departureCountry,
 			@Param("arrivalCity") String arrivalCity, @Param("departureDate") LocalDate departureDate,
 			@Param("requiredSeats") int requiredSeats);
+	
+	@Query("SELECT new com.example.demo.dto.PlaneTimeZoneDTO(p, arr.time_zone,arr.airport_name,arr.city) " + "FROM Plane p "
+			+ "JOIN Country dep ON (p.des_start = dep.airport OR p.des_start = dep.city) "
+			+ "JOIN Country arr ON (p.des_end = arr.airport OR p.des_end = arr.city) "
+			+ "WHERE (dep.country = :departureCountry OR dep.city = :departureCountry) "
+			+ "AND (arr.country = :arrivalCity OR arr.city = :arrivalCity) " + "AND p.date_start = :departureDate "
+			+ "AND p.bus_quantity >= :requiredSeats")
+	List<PlaneTimeZoneDTO> findFlightsWithTimezone2(@Param("departureCountry") String departureCountry,
+			@Param("arrivalCity") String arrivalCity, @Param("departureDate") LocalDate departureDate,
+			@Param("requiredSeats") int requiredSeats);
 }

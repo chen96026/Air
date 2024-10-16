@@ -55,8 +55,13 @@ btnLine.addEventListener("click", (e) => {
 						})
 							.then(response => response.json())
 							.then(data => {
-								localStorage.setItem('uid', data.member.uid);
-								window.location.href = '/homepage';
+								const now = new Date().getTime();
+								let uidData = {
+									date: now,
+									uid: data.member.uid
+								}
+								localStorage.setItem('uid', JSON.stringify(uidData));
+								window.location.href = localStorage.getItem('lastUrl');
 							})
 							.catch(error => {
 								console.error('Error:', error);

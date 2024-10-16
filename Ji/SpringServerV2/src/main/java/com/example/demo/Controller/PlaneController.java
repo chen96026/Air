@@ -74,8 +74,15 @@ public class PlaneController {
 			@RequestParam String arrivalCity, @RequestParam String departureDate, @RequestParam int requiredSeats) {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
 		LocalDate date = LocalDate.parse(departureDate,formatter);
-		System.out.println(departureCountry);
 		return planeService.findFlightsWithTimeZone(departureCountry, arrivalCity, date, requiredSeats);
+	}
+	
+	@GetMapping("/search2ByBusiness")
+	public List<PlaneTimeZoneDTO> searchFlights3(@RequestParam String departureCountry,
+			@RequestParam String arrivalCity, @RequestParam String departureDate, @RequestParam int requiredSeats) {
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+		LocalDate date = LocalDate.parse(departureDate,formatter);
+		return planeService.findFlightsWithTimeZone2(departureCountry, arrivalCity, date, requiredSeats);
 	}
 
 	@GetMapping("/inputSearch")

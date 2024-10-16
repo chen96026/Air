@@ -77,6 +77,12 @@ public class PlaneServiceImplement implements PlaneService{
 	}
 	
 	@Override
+	public List<PlaneTimeZoneDTO> findFlightsWithTimeZone2(String departureCountry, String arrivalCity,
+			LocalDate departureDate, int requiredSeats) {
+		return planeRepository.findFlightsWithTimezone2(departureCountry,arrivalCity,departureDate,requiredSeats);
+	}
+	
+	@Override
 	public List<Country> searchLocations(String query) {
         return countryRepository.findByCountryStartingWithIgnoreCaseOrCityStartingWithIgnoreCase(query, query);
     }

@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	const date_end = urlParams.get('date_end');
 	const adults = urlParams.get('adults');
 	const child = urlParams.get('child');
+	const type = urlParams.get('type');
 
 	document.getElementById('des_start').value = des_start;
 	document.getElementById('des_end').value = des_end;
@@ -14,10 +15,11 @@ document.addEventListener('DOMContentLoaded', () => {
 	document.getElementById('date_end').value = date_end;
 	document.getElementById('adults').value = adults;
 	document.getElementById('child').value = child;
+	document.querySelector(`input[name="type"][value="${type}"]`).checked = true;
 
 	let totalResults = [];
-
-	const apiUrl = `http://localhost:8890/plane/search2?departureCountry=${encodeURIComponent(des_start)}&arrivalCity=${encodeURIComponent(des_end)}&departureDate=${encodeURIComponent(date_start)}&requiredSeats=${Number(adults) + Number(child)}`;
+	let searchType = type=='經濟艙'?'search2':'search2ByBusiness';
+	const apiUrl = `http://localhost:8890/plane/${searchType}?departureCountry=${encodeURIComponent(des_start)}&arrivalCity=${encodeURIComponent(des_end)}&departureDate=${encodeURIComponent(date_start)}&requiredSeats=${Number(adults) + Number(child)}`;
 
 	fetch(apiUrl)
 		.then(response => response.json())
@@ -67,8 +69,8 @@ document.addEventListener('DOMContentLoaded', () => {
 					flight.duration = duration;
 					flight.des_start = des_start;
 					flight.des_end = des_end;
-					//flight.seat = urlParams.get('openBtnValue').slice(-3);
-					//flight.quantity = eco_quantity==0?bus_quantity:eco_quantity;
+					flight.seat = type;
+					flight.quantity = Number(adults)+Number(child);
 					localStorage.setItem('selectedFlights2', JSON.stringify(flight))
 					modalContent(flight);//模態窗口資訊
 					showModal(); // 顯示模態窗口
@@ -77,8 +79,8 @@ document.addEventListener('DOMContentLoaded', () => {
 					flight.des_start = des_start;
 					flight.des_end = des_end;
 					flight.duration = duration;
-					//flight.seat = urlParams.get('openBtnValue').slice(-3);
-					//flight.quantity = eco_quantity==0?bus_quantity:eco_quantity;
+					flight.seat = type;
+					flight.quantity = Number(adults)+Number(child);
 					saveSelection(flight);
 				}
 			});
@@ -88,7 +90,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	}
 
 	function swapDestinations(start, end) {
-		const newUrl = `${window.location.origin}${window.location.pathname}?des_start=${end}&des_end=${start}&date_start=${encodeURIComponent(date_start)}&date_end=${encodeURIComponent(date_end)}&adults=${encodeURIComponent(adults)}&child=${encodeURIComponent(child)}`;
+		const newUrl = `${window.location.origin}${window.location.pathname}?des_start=${end}&des_end=${start}&date_start=${encodeURIComponent(date_start)}&date_end=${encodeURIComponent(date_end)}&adults=${encodeURIComponent(adults)}&child=${encodeURIComponent(child)}&type=${type}`;
 		window.location.href = newUrl;
 	}
 
@@ -348,7 +350,11 @@ document.addEventListener('DOMContentLoaded', () => {
 	}
 
 	document.getElementById('confirmReturn').addEventListener('click', () => {
-		window.location.href = '/orders/order';
+		if(!localStorage.getItem('uid')) {
+			window.location.href = '/login';
+		}else{
+			window.location.href = '/order';
+		}
 	})
 
 	document.getElementById('search_btn').addEventListener('click', function(event) {
@@ -363,8 +369,9 @@ document.addEventListener('DOMContentLoaded', () => {
 		const dateEnd = document.getElementById('date_end').value;
 		const adults = document.getElementById('adults').value;
 		const child = document.getElementById('child').value;
+		const type = document.querySelector('input[name="type"]:checked').value;
 
-		const formData = `?des_start=${desStart}&des_end=${desEnd}&date_start=${dateStart}&date_end=${dateEnd}&adults=${adults}&child=${child}&type=經濟艙`;
+		const formData = `?des_start=${desStart}&des_end=${desEnd}&date_start=${dateStart}&date_end=${dateEnd}&adults=${adults}&child=${child}&type=${type}`;
 
 		// 检查是否有任何输入框为空
 
@@ -400,4 +407,5 @@ document.addEventListener('DOMContentLoaded', () => {
 	});
 
 	if (JSON.parse(localStorage.getItem('selectedFlights')).length == 1) document.getElementById('section_title').innerHTML = '選擇回程';
+	localStorage.setItem('lastUrl',window.location.href);
 });

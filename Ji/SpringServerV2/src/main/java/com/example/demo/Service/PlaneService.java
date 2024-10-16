@@ -19,5 +19,6 @@ public interface PlaneService {
 	public List<Object[]> getMinPricesByCountry();
 	public List<Plane> searchFlights(String departureCountry, String arrivalCity, LocalDate departureDate, int requiredSeats);
 	public List<PlaneTimeZoneDTO> findFlightsWithTimeZone(String departureCountry, String arrivalCity, LocalDate departureDate, int requiredSeats);
+	public List<PlaneTimeZoneDTO> findFlightsWithTimeZone2(String departureCountry, String arrivalCity, LocalDate departureDate, int requiredSeats);
 	public List<Country> searchLocations(String query);
 }

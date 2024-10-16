@@ -1,4 +1,14 @@
 document.addEventListener('DOMContentLoaded', function() {
+	const scrollRevealOption = {
+		distance: "50px",
+		origin: "bottom",
+		duration: 1000,
+	};
+
+	ScrollReveal().reveal(".banner-right", {
+		...scrollRevealOption,
+	});
+
 	const urlParams = new URLSearchParams(window.location.search);
 
 	const des_start = urlParams.get('des_start');
@@ -75,7 +85,6 @@ function displayCityCards(data, searchData) {
 	let isLoading = false;
 
 	function loadCards() {
-
 		if (isLoading || currentPage * perPage >= data.length) return;
 		isLoading = true;
 		loading.style.display = 'block';
@@ -109,13 +118,15 @@ function displayCityCards(data, searchData) {
                         </div>
                     </a>
                 `;
-
+				
 				// 檢查是否填寫所有欄位
 				card.querySelector('a').addEventListener('click', function(event) {
 					if (!searchData.des_start || !searchData.date_start || !searchData.date_end || !searchData.adults || !searchData.child) {
 						event.preventDefault();
 						alert('請填寫所有欄位');
 					}
+					localStorage.removeItem('selectedFlights');
+					localStorage.removeItem('selectedFlights2');
 				});
 
 				cardsContainer.appendChild(card);
@@ -124,6 +135,7 @@ function displayCityCards(data, searchData) {
 			currentPage++;
 			isLoading = false;
 			loading.style.display = 'none';
+			
 		}, 16);
 	}
 
@@ -201,10 +213,10 @@ function displayCountryCards(data) {
 }
 
 document.getElementById('search_btn').addEventListener('click', function(event) {
-	
+
 	localStorage.removeItem('selectedFlights');
 	localStorage.removeItem('selectedFlights2');
-	
+
 	event.preventDefault();
 	const desStart = document.getElementById('des_start').value;
 	const desEnd = document.getElementById('des_end').value;
@@ -247,3 +259,5 @@ document.getElementById('search_btn').addEventListener('click', function(event) 
 		}
 	}
 });
+
+localStorage.setItem('lastUrl',window.location.href);

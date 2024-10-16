@@ -198,7 +198,7 @@ function register(event) {
 					uid: data.member.uid
 				}
 				localStorage.setItem('uid',JSON.stringify(uidData));
-				window.location.href = "/homepage";
+				window.location.href = localStorage.getItem('lastUrl');
 			} else {
 				alert("信箱已被註冊，請輸入新的信箱");
 			}

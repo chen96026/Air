@@ -1,6 +1,6 @@
 document.getElementById('member_logout').addEventListener('click', () => {
 	localStorage.removeItem('uid');
-	window.location.href = '/homepage';
+	window.location.href = '/homepage';	
 });
 
 fetch('/member/info')
@@ -55,6 +55,9 @@ account.addEventListener('click', loadMemberInfoPage);
 password.addEventListener('click', loadPasswordPage);
 
 document.addEventListener('DOMContentLoaded', function() {
+
+	if (!localStorage.getItem('uid')) window.location.href = '/homepage';
+
 	if (account) {
 		toggleDropdown('accountDropdown')
 		account.click();

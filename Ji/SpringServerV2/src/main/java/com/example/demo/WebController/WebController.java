@@ -27,4 +27,14 @@ public class WebController {
 	public String searchpage2() {
 		return "new_searchpage2";
 	}
+	
+	@GetMapping("/order")
+	public String order() {
+		return "order";
+	}
+	
+	@GetMapping("/order_back")
+	public String order_back() {
+		return "/back/order_admin";
+	}
 }

@@ -122,7 +122,7 @@ function login() {
 					uid:data.member.uid
 				}
 				localStorage.setItem('uid',JSON.stringify(uidData));
-				window.location.href = "/homepage";
+				window.location.href = localStorage.getItem('lastUrl');
 			} else {
 				alert("登入失敗，請確認帳號或密碼是否正確");
 			}

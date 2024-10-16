@@ -59,7 +59,7 @@
         </div>
     </main>
     <div class="forum_write">
-        <a href="/forum_edit">
+        <a id="forum_writeP">
             <div class="forum_writeImg"></div>
             <p class="forum_writeP">撰寫心得</p>
         </a>
@@ -68,6 +68,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="/js/forum/forum_selectArea.js"></script>
     <script src="/js/forum/forum_loadingCards.js"></script>
+    <script>
+    	document.getElementById('forum_writeP').addEventListener('click',()=>{
+			if(!localStorage.getItem('uid')) window.location.href = '/login';
+			else window.location.href = '/forum_edit';
+		})
+    </script>
 </body>
 
 </html>

@@ -4228,7 +4228,7 @@ body.mobile-nav-active #mobile-nav-toggle {
 /* =================================== */
 .footer-area {
   background: #04091e;
-  padding-top: 100px;
+  padding-top: 10px;
 }
 
 .footer-area .footer-nav li {
@@ -4497,4 +4497,80 @@ body.mobile-nav-active #mobile-nav-toggle {
 
 #search_btn:hover {
 	background:#222;
+}
+
+/* 頁尾 */
+footer {
+  background-color: #04091e;
+}
+
+.search_section_container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 3rem 1rem;
+}
+
+.search_footer_container {
+  display: grid;
+  grid-template-columns: 12vw repeat(4, 1fr);
+  gap: 2rem;
+}
+
+.search_footer_col h4 {
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #fff;
+}
+
+.search_footer_col a {
+  display: block;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #777777;
+  transition: 0.3s;
+}
+
+.search_footer_col a:hover {
+  color: #f8b600;
+}
+
+.search_footer_socials {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  gap: 0.5vw;
+}
+
+.search_footer_socials span a {
+  padding: 5px 10px;
+  margin: 0;
+  font-size: 1.25rem;
+  width: 1.8vw;
+  height: 3.6vh;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+.search_footer_socials span a:hover {
+  color: white;
+  background-color: #f8b600;
+}
+
+.search_footer_bar {
+  padding: 1rem;
+  font-size: 0.8rem;
+  color: rgb(255, 255, 255);
+  text-align: center;
+}
+
+hr {
+  margin: 1rem 0;
+  border: 0;
+  border-top: solid;
+  opacity: .25;
 }

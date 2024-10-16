@@ -1,3 +1,25 @@
+const scrollRevealOption = {
+  distance: "50px",
+  origin: "bottom",
+  duration: 1000,
+};
+
+ScrollReveal().reveal(".banner-left", {
+  ...scrollRevealOption,
+});
+ScrollReveal().reveal(".banner-right", {
+  ...scrollRevealOption,
+});
+ScrollReveal().reveal(".popular-destination-area", {
+  ...scrollRevealOption,
+  delay: 500,
+});
+ScrollReveal().reveal(".img-fluid", {
+  ...scrollRevealOption,
+  delay: 500,
+  interval: 200,
+});
+
 // 點擊get Started後會聚焦在航班出發地輸入欄位
 document.getElementById("HpStardBtn").addEventListener("click", function() {
 	// Focus the first input field without moving the page
@@ -39,8 +61,9 @@ document.getElementById('search_btn').addEventListener('click', function(event) 
 	const dateEnd = document.getElementById('date_end').value;
 	const adults = document.getElementById('adults').value;
 	const child = document.getElementById('child').value;
+	const type = document.querySelector('input[name="type"]:checked').value;
 
-	const formData = `?des_start=${desStart}&des_end=${desEnd}&date_start=${dateStart}&date_end=${dateEnd}&adults=${adults}&child=${child}&type=經濟艙`;
+	const formData = `?des_start=${desStart}&des_end=${desEnd}&date_start=${dateStart}&date_end=${dateEnd}&adults=${adults}&child=${child}&type=${type}`;
 
 	// 检查是否有任何输入框为空
 
@@ -49,7 +72,6 @@ document.getElementById('search_btn').addEventListener('click', function(event) 
 		alert('請完整填寫所有欄位');
 	} else {
 		if (desEnd === '世界各地') {
-			console.log('123')
 			window.location.href = 'http://localhost:8890/searchpage?des_start=台灣&des_end=世界各地&date_start=2024%2F10%2F29&date_end=2024%2F10%2F30&adults=1&child=0&type=經濟艙';
 		} else {
 			fetch('http://localhost:8890/plane/check_country', {
@@ -61,11 +83,7 @@ document.getElementById('search_btn').addEventListener('click', function(event) 
 			})
 				.then(response => response.json())
 				.then(data => {
-					console.log(123)
-					console.log(data);
-
 					searchPage = data.length !== 0 ? 'http://localhost:8890/searchpage' : 'http://localhost:8890/searchpage2';
-
 					window.location.href = searchPage + formData;
 				})
 				.catch(error => {
