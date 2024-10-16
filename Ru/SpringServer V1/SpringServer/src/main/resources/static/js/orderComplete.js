@@ -15,7 +15,7 @@ fetch('/orders/getoid')
                     var deadline = new Date(payBeforeTime).getTime();
 
                     var countdownFunction = setInterval(function() {
-                        var now = new Date().getTime();
+                        var now = new Date().getTime()+(60*60*1000);
                         var timeLeft = deadline - now;
 
                         if (timeLeft > 0) {

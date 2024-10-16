@@ -1,104 +1,124 @@
 
 document.addEventListener('DOMContentLoaded', function(){
-	// 設定一個空的訂單列表
-	   let orders = [];
-
-	   // 從 API 獲取訂單數據
-	   fetch('/orders/order_admin')
-	       .then(response => response.json())
-		   .then(data => {
-		               console.log("Fetched data:", data); // 檢查從 API 返回的數據
-		               if (Array.isArray(data)) {
-		                   orders = data;  // 獲取數據後賦值給 orders
-		                   renderOrder(orders);  // 渲染訂單
-		               } else {
-		                   console.error("The fetched data is not an array", data);
-		               }
-		           })
-	       .catch(error => console.error('Error fetching orders:', error));
-		   
-		   
-
-	   function renderOrder(order_list) {
-	       const tbody = document.getElementById('order_tbody');
-	       tbody.innerHTML = '';
-
-	       order_list.forEach(order => {
-	           const orderNumber = order.orderNumber;
-	           const contactName = order.contactInformation.contactName;
-			   const finalPrice = order.finalPrice;
-	           const createDate = order.createDate;
-			   const orderStatus = order.orderStatus;
-			   
-
-	           const row = `<tr>
-	               <td>${orderNumber}</td>
-	               <td>${contactName}</td>
-	               <td>${finalPrice}</td>
-	               <td>${createDate}</td>
-				   <td>${orderStatus}</td>
-	           </tr>`;
-	           tbody.innerHTML += row;
-	       });
-	   }
-
-	   function sortOrders(criteriaArray) {
-	       let sortedOrders = [...orders];
-	       sortedOrders.sort((a, b) => {
-	           for (let criteria of criteriaArray) {
-	               if (a[criteria] < b[criteria]) return -1;
-	               if (a[criteria] > b[criteria]) return 1;
-	           }
-	           return 0;
-	       });
-	       renderOrder(sortedOrders);
-	   }
-
-	   document.getElementById('sort_button').addEventListener('click', (event) => {
-	       event.preventDefault();
-	       const checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
-	       const selectedCriteria = Array.from(checkboxes).map(checkbox => checkbox.value);
-	       sortOrders(selectedCriteria);
-	   });
-
-});
-
-
+	let ordersTable = document.querySelector('#orderTableBody');
+	let searchForm = document.querySelector('#orderSearchForm');
+	let orderNumberInput = document.querySelector('#orderNumberInput')
 	let orders = [];
+	
+	
+		 function fetchOrders(orderNumber = '') {
+		        let url = '/orders/order_admin_json';
+		        if (orderNumber) {
+		            url += `?orderNumber=${orderNumber}`; // 如果有訂單編號，加入查詢參數
+		        }
 
-    function renderOrders(order_list) {
-        const tbody = document.getElementById('order_tbody');
+		        fetch(url)
+		            .then(response => {
+						console.log('Response status:', response.status); 
+		                if (!response.ok) {
+		                    throw new Error('Network response was not ok ' + response.statusText);
+		                }
+		                return response.json();
+		            })
+		            .then(data => {
+						console.log('Fetched data:', data);
+		                orders = data; // 將訂單數據賦值給全局的 orders 變量
+		                renderOrders(orders); // 渲染訂單列表
+		            })
+		            .catch(error => console.error('Error fetching orders:', error));
+		    }
 
-        order_list.forEach(order => {
-            const row = `<tr>
-                        <td>${order.order_number}</td>
-                        <td>${order.contact_name}</td>
-                        <td>${order.finalpirce}</td>
-                        <td>${order.createDate}</td>
-                       </tr>`;
-            tbody.innerHTML += row;
-        })
+			
+			
+		    function renderOrders(orderList) {
+		        ordersTable.innerHTML = '';
+				console.log('Rendering orders:', orderList); 
 
-    }
+		        if (orderList.length === 0) {
+		            ordersTable.innerHTML = '<tr><td colspan="5">沒有找到符合條件的訂單</td></tr>';
+		            return;
+		        }
 
-    document.querySelectorAll('.tab').forEach(tab => {
-        tab.addEventListener('click', () => {
-            const target = tab.getAttribute('data-tab');
+		        orderList.forEach(order => {
+		            let row = `<tr>
+		                            <td>${order.orderNumber}</td>
+		                            <td>${order.contactName}</td>
+		                            <td>${order.finalPrice}</td>
+		                            <td>${order.createDate}</td>
+		                            <td>${order.orderStatus}</td>
+		                       </tr>`;
+							   
+		            ordersTable.innerHTML += row;
+		        });
+		    }
+			
 
-            document.querySelectorAll('.tab_content').forEach(content => {
-                content.style.display = 'none';
-            });
+			// 監聽搜尋表單的提交事件
+			   searchForm.addEventListener('submit', function(event) {
+			       event.preventDefault(); // 阻止表單的默認提交行為
+			       console.log('Form submitted'); // 調試日誌，確認表單已提交
+			       if (orderNumberInput) {
+			           let orderNumber = orderNumberInput.value.trim(); // 獲取輸入的訂單編號
+			           console.log('Searching for order number:', orderNumber); // 調試日誌，確認輸入的訂單編號
+			           fetchOrders(orderNumber); // 請求帶有訂單編號的數據
+			       } else {
+			           console.error('The order number input element was not found.');
+			       }
+			   });
 
-            document.getElementById(target).style.display = 'block';
+			   // 頁面加載時顯示所有訂單
+			   fetchOrders();
 
-            document.querySelectorAll('.tab').forEach(tab => {
-                tab.classList.remove('active');
-            });
-
-            tab.classList.add('active');
-        });
-    });
-
-    document.querySelector('.tab').click();
-
-    renderOrders(orders, 'order_tbody');
+		    // 排序邏輯
+		    function sortOrders() {
+				
+				let sortedOrders = [...orders];
+					       
+				const orderNumberSort = document.getElementById('orderNumberSort').value;
+				const orderDateSort = document.getElementById('orderDateSort').value;
+				
+				
+				
+				const selectedStatus = document.querySelector('input[name="orderStatus"]:checked').value;
+				if (selectedStatus){
+					sortedOrders = sortedOrders.filter(order => order.orderStatus === selectedStatus);
+				}
+				
+				
+				
+				sortedOrders.sort((a,b) =>{
+					if(orderNumberSort === 'asc') {
+						return a.orderNumber.localeCompare(b.orderNumber);
+					}else{
+						return b.orderNumber.localeCompare(a.orderNumber);
+					}
+				});
+				
+				
+				
+				sortedOrders.sort((a,b) => {
+					const dateA = new Date(a.createDate);
+					const dateB = new Date(b.createDate);
+					if(orderDateSort === 'newest'){
+						return dateB - dateA;
+					}else{
+						return dateA - dateB
+					}
+				});    
+				renderOrders(sortedOrders);
+			}
+			
+			
+			document.querySelectorAll('input[name="orderStatus"]').forEach(statusInput => {
+			    statusInput.addEventListener('change', function() {
+			    sortOrders();
+			     });
+			});
+			
+			document.getElementById('orderNumberSort').addEventListener('change', sortOrders);
+			document.getElementById('orderDateSort').addEventListener('change', sortOrders);
+			
+			
+		});   
+		
+		
