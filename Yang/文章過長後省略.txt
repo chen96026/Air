@@ -1,0 +1,11 @@
+/* blog text */
+		.HpBlogText {
+			max-height: 200px;
+			overflow: hidden; /* 超出內容隱藏 */
+    display: -webkit-box; /* 使用 flexbox 的變體 */
+    -webkit-box-orient: vertical; /* 設定為垂直方向排列 */
+    -webkit-line-clamp: 3; /* 限制最多顯示 4 行內容，根據需求調整 */
+    text-overflow: ellipsis; /* 超過限制行數後顯示省略號 */
+    white-space: normal; /* 允許內容換行 */
+    word-wrap: break-word; /* 長單詞或網址允許換行 */
+		}
