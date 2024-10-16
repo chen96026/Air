@@ -17,4 +17,7 @@ public interface OrdersService {
 	
 	public Orders getOrderByOrderNumber(String orderNumber);
 	
+	public List<Map<String, Object>> getOrderWithPartialOrderNumber(String orderNumber);
+	
+	
 }

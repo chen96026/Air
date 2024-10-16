@@ -74,7 +74,7 @@ public class OrdersController {
 		if (order.getCreateDate() == null) {
 			order.setCreateDate(LocalDateTime.now());
 		}
-		order.setOrderStatus(OrderStatus.訂單已成立);
+		order.setOrderStatus(OrderStatus.尚未付款);
 
 		Orders savedOrder = ordersService.saveOrder(order);
 
@@ -248,5 +248,13 @@ public class OrdersController {
         
         return "order_expired"; 
     }
+	
+	
+	@GetMapping("/order_admin")
+	public String showOrderAdminPage(Model model) {
+		List<Map<String, Object>> orders = ordersService.getOrdersWithContactName();
+		model.addAttribute("orders",orders);
+		return "back/order_admin"; 
+	}
 	
 }

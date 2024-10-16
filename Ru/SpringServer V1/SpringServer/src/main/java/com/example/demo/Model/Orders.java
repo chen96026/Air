@@ -68,7 +68,7 @@ public class Orders {
 	}
 
 	public enum OrderStatus {
-	    訂單已成立,
+	    尚未付款,
 	    逾期付款已取消,
 	    已付款完成
 	}

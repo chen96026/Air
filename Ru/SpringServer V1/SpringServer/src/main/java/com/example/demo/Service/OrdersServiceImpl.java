@@ -6,12 +6,14 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Optional;
 
+import org.apache.catalina.filters.AddDefaultCharsetFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -61,6 +63,8 @@ public class OrdersServiceImpl implements OrdersService{
 			 LocalDateTime createDate = convertToLocalDateTime(timestamp);
 			 orderMap.put("createDate", createDate.format(formatter));
 			 
+			 String orderStatus = (String) row[4];
+			 orderMap.put("orderStatus", orderStatus);
 			 
 			 ordersWithContact.add(orderMap);
 		 }
@@ -85,6 +89,27 @@ public class OrdersServiceImpl implements OrdersService{
 	@Override
 	public Orders getOrderByOrderNumber(String orderNumber) {
 		return ordersRepository.findByOrderNumber(orderNumber);
+	}
+	
+	
+
+	@Override
+	public List<Map<String, Object>> getOrderWithPartialOrderNumber(String orderNumber) {
+		List<Orders> ordersList = ordersRepository.findByOrderNumberContain(orderNumber);
+		List<Map<String, Object>> result = new ArrayList<>();
+		
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+				
+	for(Orders order : ordersList) {
+    		Map<String, Object> orderMap = new HashMap<>();
+    		orderMap.put("orderNumber", order.getOrderNumber());
+            orderMap.put("contactName", order.getContactInformation().getContactName());
+            orderMap.put("finalPrice", order.getFinalPrice());
+            orderMap.put("createDate", order.getCreateDate().toString());
+            orderMap.put("orderStatus", order.getOrderStatus());
+         	result.add(orderMap);		
+		}
+ 		return result;
 	}
 
 	
