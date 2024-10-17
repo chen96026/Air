@@ -80,7 +80,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		                    </div>
 		                    <div style="display: flex;padding:20px 0">
 		                        <div
-		                            style="background-color: #f8b600; color:white; margin: 0 30px 0 60px; padding: 5px 10px; border-radius: 5px; transform:translateY(-15%)">
+		                            style="background-color: #f8b600; color:white; margin: 0 35px 0 70px; padding: 5px 10px; border-radius: 5px; transform:translateY(-15%)">
 		                            去程</div>
 		                        <div><span >${flight_start.plane.date_start.slice(5, 7).replace(/^0/, '')}月${flight_start.plane.date_start.slice(8, 10).replace(/^0/, '')}日</span> <span>${weekday[getday(flight_start.plane.date_start)]}</span>｜</div>
 		                        <div>所需時間: ${Math.floor(flight_start.duration / 60)}小時${flight_start.duration % 60}分</div>
@@ -111,7 +111,7 @@ document.addEventListener('DOMContentLoaded', function() {
 							</div>
 		                    <div style="display: flex;padding:20px 0">
 		                        <div
-		                             style="background-color: #f8b600; color:white; margin: 0 30px 0 60px; padding: 5px 10px; border-radius: 5px; transform:translateY(-15%)">
+		                             style="background-color: #f8b600; color:white; margin: 0 30px 0 70px; padding: 5px 10px; border-radius: 5px; transform:translateY(-15%)">
 		                            回程</div>
 									<div><span >${flight_end.plane.date_start.slice(5, 7).replace(/^0/, '')}月${flight_end.plane.date_start.slice(8, 10).replace(/^0/, '')}日</span> <span>${weekday[getday(flight_end.plane.date_start)]}</span>｜</div>
 									<div>所需時間: ${Math.floor(flight_end.duration / 60)}小時${flight_end.duration % 60}分</div>

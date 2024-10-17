@@ -83,7 +83,7 @@ public class OrdersController {
 		if (order.getCreateDate() == null) {
 			order.setCreateDate(LocalDateTime.now());
 		}
-		order.setOrderStatus(OrderStatus.訂單已成立);
+		order.setOrderStatus(OrderStatus.尚未付款);
 
 		Orders savedOrder = ordersService.saveOrder(order);
 		
@@ -175,24 +175,7 @@ public class OrdersController {
 	    return ResponseEntity.ok(response);
 	}
 	
-	@GetMapping("/payBeforeTime/{oid}")
-    public ResponseEntity<Map<String, Object>> getPayBeforeTime(@PathVariable("oid") Long oid) {
-        Orders order = ordersService.getOrderById(oid);
-        if (order == null) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
-        }
-
-        LocalDateTime createDate = order.getCreateDate();
-        LocalDateTime adjustedTime = createDate.plusHours(1);
-
-        DateTimeFormatter formatterISO = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
-        String payBeforeTimeISO = adjustedTime.format(formatterISO);
-
-        Map<String, Object> response = new HashMap<>();
-        response.put("payBeforeTimeISO", payBeforeTimeISO);
-
-        return ResponseEntity.ok(response);
-    }
+	
 	
 	
 	@GetMapping("/checkout/{oid}")
@@ -246,7 +229,28 @@ public class OrdersController {
 	}
 	
 	
+	// 倒數計時截止時間
+		@GetMapping("/payBeforeTime/{oid}")
+	    public ResponseEntity<Map<String, Object>> getPayBeforeTime(@PathVariable("oid") Long oid) {
+	        Orders order = ordersService.getOrderById(oid);
+	        if (order == null) {
+	            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+	        }
+
+	        LocalDateTime createDate = order.getCreateDate();
+	        LocalDateTime adjustedTime = createDate.plusHours(1);
+
+	        DateTimeFormatter formatterISO = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
+	        String payBeforeTimeISO = adjustedTime.format(formatterISO);
+
+	        Map<String, Object> response = new HashMap<>();
+	        response.put("payBeforeTimeISO", payBeforeTimeISO);
+
+	        return ResponseEntity.ok(response);
+	    }
 	
+		
+	//訂單逾期取消	
 	@PostMapping("/ordercancel")
 	public ResponseEntity<String> OrderCancel(HttpSession session){
 		Long oid = (Long) session.getAttribute("currentOrderId");
@@ -267,6 +271,8 @@ public class OrdersController {
 		}
 		
 	}
+	
+	
 	
 	@GetMapping("/order_expired")
     public String showOrderExpiredPage() {

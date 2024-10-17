@@ -1,5 +1,6 @@
 package com.example.demo.Controller;
 
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -44,6 +45,31 @@ public class ValidationController {
 	            errors.put("idnumber", "請輸入有效的護照號碼");
 	        }
 	    }
+	    
+	    if (passengerData.containsKey("dop")&& passengerData.containsKey("date_start")) {
+	    	
+	    		LocalDate dopDate = LocalDate.parse(passengerData.get("dop"));
+	    		LocalDate flightDate = LocalDate.parse(passengerData.get("date_start"));
+	    		
+	    		LocalDate sixMonthsAfterFlight = flightDate.plusMonths(6);
+	    		if(dopDate.isBefore(sixMonthsAfterFlight)) {
+	    			errors.put("dop" , "護照有效日期必須再出發日期後至少六個月。");
+	    		}
+	    }
+	    
+	    if (passengerData.containsKey("dob")) {
+	    	String dobStr = passengerData.get("dob");
+	    	try {
+	    		LocalDate dob = LocalDate.parse(dobStr);
+	    		LocalDate today = LocalDate.now();
+	    		if (dob.isAfter(today)) {
+	    			errors.put("dob", "出生日期必須是過去的日期。");
+	    		}
+	    	}catch(Exception e) {
+	    		errors.put("dob", "請輸入有效的出生日期 (格式應為 YYYY-MM-DD)。");
+	    	}
+	    }
+	    
 	    if (errors.isEmpty()) {
 	        return ResponseEntity.ok().build();
 	    } else {
