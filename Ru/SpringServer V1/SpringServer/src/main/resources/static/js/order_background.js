@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		 function fetchOrders(orderNumber = '') {
 		        let url = '/orders/order_admin_json';
 		        if (orderNumber) {
-		            url += `?orderNumber=${orderNumber}`; // 如果有訂單編號，加入查詢參數
+		            url += `?orderNumber=${orderNumber}`; 
 		        }
 
 		        fetch(url)
@@ -22,8 +22,8 @@ document.addEventListener('DOMContentLoaded', function(){
 		            })
 		            .then(data => {
 						console.log('Fetched data:', data);
-		                orders = data; // 將訂單數據賦值給全局的 orders 變量
-		                renderOrders(orders); // 渲染訂單列表
+		                orders = data;
+		                renderOrders(orders); 
 		            })
 		            .catch(error => console.error('Error fetching orders:', error));
 		    }
@@ -53,23 +53,22 @@ document.addEventListener('DOMContentLoaded', function(){
 		    }
 			
 
-			// 監聽搜尋表單的提交事件
+		
 			   searchForm.addEventListener('submit', function(event) {
-			       event.preventDefault(); // 阻止表單的默認提交行為
-			       console.log('Form submitted'); // 調試日誌，確認表單已提交
+			       event.preventDefault(); 
+			       console.log('Form submitted');
 			       if (orderNumberInput) {
-			           let orderNumber = orderNumberInput.value.trim(); // 獲取輸入的訂單編號
-			           console.log('Searching for order number:', orderNumber); // 調試日誌，確認輸入的訂單編號
-			           fetchOrders(orderNumber); // 請求帶有訂單編號的數據
+			           let orderNumber = orderNumberInput.value.trim(); 
+			           console.log('Searching for order number:', orderNumber); 
 			       } else {
 			           console.error('The order number input element was not found.');
 			       }
 			   });
 
-			   // 頁面加載時顯示所有訂單
+			   
 			   fetchOrders();
 
-		    // 排序邏輯
+		    
 		    function sortOrders() {
 				
 				let sortedOrders = [...orders];

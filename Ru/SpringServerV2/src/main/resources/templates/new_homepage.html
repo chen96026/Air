@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="no-js">
+
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta charset="UTF-8">
+	<title>homepage</title>
+	<link th:replace="fragments/new_source :: head"></link>
+	<link rel="stylesheet" href="css/testIndex.css">
+</head>
+
+<body>
+	<div th:replace="fragments/new_header :: header"></div>
+
+	<!-- start banner Area -->
+	<section class="banner-area relative">
+		<div class="overlay overlay-bg"></div>
+		<div class="container">
+			<div class="row fullscreen align-items-center justify-content-between">
+				<div class="col-lg-6 col-md-6 banner-left">
+					<h4 class="text-white">探索異國風情</h4>
+					<h1 class="text-white">創造美妙回憶</h1>
+					<h4 class="text-white">
+						開始你夢想旅遊的第一步，挑選舒適快速且超值的航班!
+					</h4>
+					<br>
+					<button id="HpStardBtn" class="primary-btn text-uppercase">Get Started</button>
+				</div>
+				<div class="col-lg-4 col-md-6 banner-right">
+					<div class="tab-content" id="myTabContent">
+						<div class="tab-pane fade show active" id="flight" role="tabpanel" aria-labelledby="flight-tab">
+							<form class="form-wrap">
+								<h6 class="Hp_formTitle">出發地</h6>
+								<input type="text" id="des_start" class="form-control" name="des_start"
+									placeholder="From " onfocus="this.placeholder = ''"
+									onblur="this.placeholder = 'From '">
+								<h6 class="Hp_formTitle">目的地</h6>
+								<input type="text" id="des_end" class="form-control" name="des_end" placeholder="To "
+								onfocus="this.placeholder = ''" onblur="this.placeholder = 'To '">
+								<h6 class="Hp_formTitle">出發日期</h6>
+								<input type="text" id="date_start" class="form-control date-picker" name="date_start" placeholder="Start "
+								onfocus="this.placeholder = ''" onblur="this.placeholder = 'Start '">
+								<h6 class="Hp_formTitle">回程日期</h6>
+								<input type="text" id="date_end" class="form-control date-picker" name="date_end" placeholder="Return "
+								onfocus="this.placeholder = ''" onblur="this.placeholder = 'Return '">
+								<h6 class="Hp_formTitle">成年人數</h6>
+								<input type="number" id="adults" min="1" max="20" value="1" class="form-control" name="adults"
+								placeholder="Adults " onfocus="this.placeholder = ''"
+								onblur="this.placeholder = 'Adults '">
+								<h6 class="Hp_formTitle">未成年人數</h6>
+								<input type="number" id="child" min="0" max="20" value="0" class="form-control" name="child"
+									placeholder="Child " onfocus="this.placeholder = ''"
+									onblur="this.placeholder = 'Child '">
+								<div class="choose_type" style="display: flex;">
+									<label class="Hp_room"><input type="radio" name="type" value="經濟艙" checked>&nbsp;經濟艙</label>
+									<label class="Hp_room"><input type="radio" name="type" value="商務艙">&nbsp;商務艙</label>
+								</div>
+								<button class="primary-btn text-uppercase" id="search_btn" type="submit">搜尋航班</button>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- End banner Area -->
+
+	<!-- Start popular-destination Area -->
+	<section class="popular-destination-area section-gap">
+		<div class="container">
+			<div class="row d-flex justify-content-center">
+				<div class="menu-content pb-70 col-lg-8">
+					<div class="title text-center">
+						<h1 class="mb-10">熱門景點</h1>
+						<p>我們生活在一個幸運的時代，一個容易見識不同國家、了解不同文化的時代</p>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-4">
+					<div class="single-destination relative">
+						<div class="thumb relative">
+							<div class="overlay overlay-bg"></div>
+							<img class="img-fluid" src="img/r1.png" alt="">
+						</div>
+						<div class="desc">
+							<a href="/searchpage?des_start=台灣&des_end=日本&date_start=2024/10/29&date_end=2024/10/30&adults=1&child=0&type=經濟艙" class="price-btn">前往</a>
+							<h4>淺草雷門寺</h4>
+							<p>日本</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-4">
+					<div class="single-destination relative">
+						<div class="thumb relative">
+							<div class="overlay overlay-bg"></div>
+							<img class="img-fluid" src="img/r2.png" alt="">
+						</div>
+						<div class="desc">
+							<a href="/searchpage?des_start=台灣&des_end=中國&date_start=2024/10/29&date_end=2024/10/30&adults=1&child=0&type=經濟艙" class="price-btn">前往</a>
+							<h4>東方明珠電視塔</h4>
+							<p>中國</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-4">
+					<div class="single-destination relative">
+						<div class="thumb relative">
+							<div class="overlay overlay-bg"></div>
+							<img class="img-fluid" src="img/r3.png" alt="">
+						</div>
+						<div class="desc">
+							<a href="/searchpage?des_start=台灣&des_end=印尼&date_start=2024/10/29&date_end=2024/10/30&adults=1&child=0&type=經濟艙" class="price-btn">前往</a>
+							<h4>努沙杜爾海灘</h4>
+							<p>印度尼西亞</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<br>
+			<div class="row">
+				<div class="col-lg-4">
+					<div class="single-destination relative">
+						<div class="thumb relative">
+							<div class="overlay overlay-bg"></div>
+							<img class="img-fluid" src="img/r4.png" alt="">
+						</div>
+						<div class="desc">
+							<a href="/searchpage?des_start=台灣&des_end=紐西蘭&date_start=2024/10/29&date_end=2024/10/30&adults=1&child=0&type=經濟艙" class="price-btn">前往</a>
+							<h4>米爾福德峽灣</h4>
+							<p>紐西蘭</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-4">
+					<div class="single-destination relative">
+						<div class="thumb relative">
+							<div class="overlay overlay-bg"></div>
+							<img class="img-fluid" src="img/r5.png" alt="">
+						</div>
+						<div class="desc">
+							<a href="/searchpage?des_start=台灣&des_end=澳洲&date_start=2024/10/29&date_end=2024/10/30&adults=1&child=0&type=經濟艙" class="price-btn">前往</a>
+							<h4>烏魯魯巨石</h4>
+							<p>澳洲</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-4">
+					<div class="single-destination relative">
+						<div class="thumb relative">
+							<div class="overlay overlay-bg"></div>
+							<img class="img-fluid" src="img/r6.png" alt="">
+						</div>
+						<div class="desc">
+							<a href="/searchpage?des_start=台灣&des_end=加拿大&date_start=2024/10/29&date_end=2024/10/30&adults=1&child=0&type=經濟艙" class="price-btn">前往</a>
+							<h4>聖羅倫斯市場</h4>
+							<p>加拿大</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- End popular-destination Area -->
+
+	<!-- Start news Area -->
+	<section class="home-about-area">
+		<div class="Hp_prev" onclick="posterPlusSlides(-1)">&#10094;</div>
+		<div class="container-fluid">
+			<div class="row align-items-center justify-content-end">
+				<div class="col-lg-6 col-md-12 home-about-left">
+					<h1>
+						紐西蘭羅托魯瓦奇景宛如外星？
+					</h1>
+					<p>
+沸騰湖泊、冒泡泥池、水柱沖天間歇泉一次看遍地熱名景！
+
+因為擁有罕見的地熱和獨特的地貌，加上珍稀的動植物，位於紐西蘭北島中部的羅托魯瓦（Rotorua），猶如外星世界般引人注目。
+此外，當地一半居民為毛利人，豐富的原住民歷史與傳說更增添亮點，每年都吸引將近百萬名遊客造訪。
+					</p>
+					<a href="https://tw.news.yahoo.com/%E7%B4%90%E8%A5%BF%E8%98%AD%E7%BE%85%E6%89%98%E9%AD%AF%E7%93%A6%E5%A5%87%E6%99%AF%E5%AE%9B%E5%A6%82%E5%A4%96%E6%98%9F%E7%90%83%EF%BC%9F%EF%BC%81%E6%B2%B8%E9%A8%B0%E6%B9%96%E6%B3%8A%E3%80%81%E5%86%92%E6%B3%A1%E6%B3%A5%E6%B1%A0%E3%80%81%E6%B0%B4%E6%9F%B1%E6%B2%96%E5%A4%A9%E9%96%93%E6%AD%87%E6%B3%89%E4%B8%80%E6%AC%A1%E7%9C%8B%E9%81%8D%E5%9C%B0%E7%86%B1%E5%90%8D%E6%99%AF%EF%BC%81-022145048.html" target="_blank" class="primary-btn text-uppercase">閱讀更多. . .</a>
+				</div>
+				<div class="col-lg-6 col-md-12 home-about-right no-padding">
+					<img class="img-fluid" src="img/news1.png" alt="">
+				</div>
+			</div>
+		</div>
+		<div class="container-fluid">
+			<div class="row align-items-center justify-content-end">
+				<div class="col-lg-6 col-md-12 home-about-left">
+					<h1>
+						「One Bangkok」曼谷新地標月底開幕
+					</h1>
+					<p>
+曼谷新地標「One Bangkok」將於10月25日開幕！
+
+這座結合商辦、酒店、購物、美食的複合式設施，加上比鄰公園綠地，開幕後將成為到曼谷旅遊玩樂新亮點。
+ETtoday新聞雲》就整理出交通、設施與進駐酒店亮點，趁著現在台灣人到泰國玩免簽，趕快列入行程中。
+					</p>
+					<a href="https://travel.ettoday.net/article/2832804.htm" target="_blank" class="primary-btn text-uppercase">閱讀更多. . .</a>
+				</div>
+				<div class="col-lg-6 col-md-12 home-about-right no-padding">
+					<img class="img-fluid" src="img/news2.png" alt="">
+				</div>
+			</div>
+		</div>
+		<div class="container-fluid">
+			<div class="row align-items-center justify-content-end">
+				<div class="col-lg-6 col-md-12 home-about-left">
+					<h1>
+						東京池袋逛街懶人包
+					</h1>
+					<p>
+池袋是東京重要的交通樞鈕之一，多條電車路線匯集。
+東武、西武、PARCO百貨、BIC CAMERA、Animate、唐吉訶德等商家，造就了池袋便利的購物環境。
+但也因為可以逛街的地點太多了，煩惱不知從何逛起的人也不少。
+別擔心！有了這篇就不用再怕迷路了！
+					</p>
+					<a href="https://udn.com/news/story/9651/8261770?from=udn-catelistnews_ch2" target="_blank" class="primary-btn text-uppercase">閱讀更多. . .</a>
+				</div>
+				<div class="col-lg-6 col-md-12 home-about-right no-padding">
+					<img class="img-fluid" src="img/news3.png" alt="">
+				</div>
+			</div>
+		</div>
+		<div class="container-fluid">
+			<div class="row align-items-center justify-content-end">
+				<div class="col-lg-6 col-md-12 home-about-left">
+					<h1>
+						朝聖《黑白大廚》白種元餐廳
+					</h1>
+					<p>
+Netflix熱門實境秀《黑白大廚：料理階級大戰》
+（以下簡稱黑白大廚）近日已完結，討論熱度不斷；
+由於從評審到參賽主廚都擁有自己的餐廳，更掀起台灣旅客赴韓朝聖熱潮。
+有「國民廚神」之稱的白種元，就擁有多間餐飲品牌，共整理了3間到韓國必朝聖餐廳。
+					</p>
+					<a href="https://travel.ettoday.net/article/2832383.htm" target="_blank" class="primary-btn text-uppercase">閱讀更多. . .</a>
+				</div>
+				<div class="col-lg-6 col-md-12 home-about-right no-padding">
+					<img class="img-fluid" src="img/news4.png" alt="">
+				</div>
+			</div>
+		</div>
+		<div class="container-fluid">
+			<div class="row align-items-center justify-content-end">
+				<div class="col-lg-6 col-md-12 home-about-left">
+					<h1>
+						大阪世界博覽會17公尺鋼彈亮相
+					</h1>
+					<p>
+2025年大阪世界博覽會將於明年4月13日正式揭幕，主題為「閃耀生命光輝的未來社會設計」，展示各領域的技術與創新理念。
+將在大阪的人工島「夢洲」舉行，場內特別建設了全球最大的環狀木造建築，讓參觀者感受未來社會的創意與科技結合；
+更狂的是還有17公尺鋼彈，粉絲一定可以大飽眼福！
+					</p>
+					<a href="#" target="_blank" class="primary-btn text-uppercase">閱讀更多. . .</a>
+				</div>
+				<div class="col-lg-6 col-md-12 home-about-right no-padding">
+					<img class="img-fluid" src="img/news5.png" alt="">
+				</div>
+			</div>
+		</div>
+		<div class="Hp_next" onclick="posterPlusSlides(1)">&#10095;</div>
+	</section>
+	<!-- End news Area -->
+
+
+	<!-- Start blog Area -->
+	<section class="recent-blog-area section-gap">
+		<div class="container">
+			<div class="row d-flex justify-content-center">
+				<div class="menu-content pb-60 col-lg-9">
+					<div class="title text-center">
+						<h1 class="mb-10">最新貼文</h1>
+						<p>來看看其他人分享的美好回憶，是否能觸動你心底的悸動呢?</p>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="active-recent-blog-carusel">
+					<div class="single-recent-blog-post item">
+						<div class="thumb">
+							<img class="img-fluid" src="img/b1.jpg" alt="">
+						</div>
+						<div class="details">
+							<div class="tags">
+								<ul>
+									<li>
+										<a href="#">Travel</a>
+									</li>
+									<li>
+										<a href="#">Life Style</a>
+									</li>
+								</ul>
+							</div>
+							<a href="#">
+								<h4 class="title">Low Cost Advertising</h4>
+							</a>
+							<p>
+								Acres of Diamonds… you’ve read the famous story, or at least had it related to you. A
+								farmer.
+							</p>
+							<h6 class="date">31st January,2018</h6>
+						</div>
+					</div>
+					<div class="single-recent-blog-post item">
+						<div class="thumb">
+							<img class="img-fluid" src="img/b2.jpg" alt="">
+						</div>
+						<div class="details">
+							<div class="tags">
+								<ul>
+									<li>
+										<a href="#">Travel</a>
+									</li>
+									<li>
+										<a href="#">Life Style</a>
+									</li>
+								</ul>
+							</div>
+							<a href="#">
+								<h4 class="title">Creative Outdoor Ads</h4>
+							</a>
+							<p>
+								Acres of Diamonds… you’ve read the famous story, or at least had it related to you. A
+								farmer.
+							</p>
+							<h6 class="date">31st January,2018</h6>
+						</div>
+					</div>
+					<div class="single-recent-blog-post item">
+						<div class="thumb">
+							<img class="img-fluid" src="img/b3.jpg" alt="">
+						</div>
+						<div class="details">
+							<div class="tags">
+								<ul>
+									<li>
+										<a href="#">Travel</a>
+									</li>
+									<li>
+										<a href="#">Life Style</a>
+									</li>
+								</ul>
+							</div>
+							<a href="#">
+								<h4 class="title">It's Classified How To Utilize Free</h4>
+							</a>
+							<p>
+								Acres of Diamonds… you’ve read the famous story, or at least had it related to you. A
+								farmer.
+							</p>
+							<h6 class="date">31st January,2018</h6>
+						</div>
+					</div>
+					<div class="single-recent-blog-post item">
+						<div class="thumb">
+							<img class="img-fluid" src="img/b1.jpg" alt="">
+						</div>
+						<div class="details">
+							<div class="tags">
+								<ul>
+									<li>
+										<a href="#">Travel</a>
+									</li>
+									<li>
+										<a href="#">Life Style</a>
+									</li>
+								</ul>
+							</div>
+							<a href="#">
+								<h4 class="title">Low Cost Advertising</h4>
+							</a>
+							<p>
+								Acres of Diamonds… you’ve read the famous story, or at least had it related to you. A
+								farmer.
+							</p>
+							<h6 class="date">31st January,2018</h6>
+						</div>
+					</div>
+					<div class="single-recent-blog-post item">
+						<div class="thumb">
+							<img class="img-fluid" src="img/b2.jpg" alt="">
+						</div>
+						<div class="details">
+							<div class="tags">
+								<ul>
+									<li>
+										<a href="#">Travel</a>
+									</li>
+									<li>
+										<a href="#">Life Style</a>
+									</li>
+								</ul>
+							</div>
+							<a href="#">
+								<h4 class="title">Creative Outdoor Ads</h4>
+							</a>
+							<p>
+								Acres of Diamonds… you’ve read the famous story, or at least had it related to you. A
+								farmer.
+							</p>
+							<h6 class="date">31st January,2018</h6>
+						</div>
+					</div>
+					<div class="single-recent-blog-post item">
+						<div class="thumb">
+							<img class="img-fluid" src="img/b3.jpg" alt="">
+						</div>
+						<div class="details">
+							<div class="tags">
+								<ul>
+									<li>
+										<a href="#">Travel</a>
+									</li>
+									<li>
+										<a href="#">Life Style</a>
+									</li>
+								</ul>
+							</div>
+							<a href="#">
+								<h4 class="title">It's Classified How To Utilize Free</h4>
+							</a>
+							<p>
+								Acres of Diamonds… you’ve read the famous story, or at least had it related to you. A
+								farmer.
+							</p>
+							<h6 class="date">31st January,2018</h6>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- End recent-blog Area -->
+
+	<!-- start footer Area -->
+	<div th:replace="fragments/new_footer :: footer"></div>
+	<!-- End footer Area -->
+	<script src="/js/homepage.js"></script>
+</body>
+
+</html>

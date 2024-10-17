@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+
+    <link rel="stylesheet" href="./Order_background.css">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+
+</head>
+
+<body>
+    <header>
+        <div><a href=""><img src="./圖片/logo.png"></a></div>
+        <div>
+            <p>製作美好日旅回憶的第一步</p>
+            <a href=""><img src="./圖片/icon_Forum.png"></a>
+            <a href=""><img src="./圖片/icon_logIn.png"></a>
+            <div style="clear:both"></div>
+        </div>
+    </header>
+    <div class="container_bg">
+
+        <h1>訂單管理</h1>
+        <div class="container">
+            <div class="tabs">
+                <div data-tab="order_list" class="tab">訂單列表</div>
+                <div data-tab="cancel_refund" class="tab">已取消訂單</div>
+            </div>
+
+            <div id="order_list" class="tab_content">
+                <h2>訂單列表</h2>
+                <form id="order_search_form">
+                    <input type="text" placeholder="請輸入訂單編號..." />
+                    <button type="submit">搜尋</button>
+                </form>
+
+                <h3>排序依據</h3>
+                <div style="display: flex;">
+                    <div>
+                        <label><input type="checkbox" value="order_number">訂單編號</label>
+                        <label><input type="checkbox" value="order_status">訂單狀態</label>
+                    </div>
+                    <button id="sort_button"
+                        style="margin-left: 15px; background-color: brown; color:whites;">排序</button>
+                </div>
+
+
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>訂單編號</th>
+                            <th style="width: 20%;">聯絡人姓名</th>
+                            <th>訂單狀態</th>
+                            <th>訂單詳細資訊</th>
+                        </tr>
+                    </thead>
+                    <tbody id="order_tbody">
+
+                    </tbody>
+                </table>
+
+
+
+            </div>
+            <script>
+                let orders = [
+                    { order_number: '2024092201', contact_name: '張三', order_status: '已成立', order_detail: '訂單資訊' },
+                    { order_number: '2024092202', contact_name: '李四', order_status: '待付款', order_detail: '訂單資訊' },
+                    { order_number: '2024092203', contact_name: '王五', order_status: '已取消', order_detail: '訂單資訊' },
+                    { order_number: '2024092204', contact_name: '張三', order_status: '已成立', order_detail: '訂單資訊' },
+                    { order_number: '2024092205', contact_name: '李四', order_status: '待付款', order_detail: '訂單資訊' },
+                    { order_number: '2024092203', contact_name: '王五', order_status: '已取消', order_detail: '訂單資訊' },
+                    { order_number: '2024092207', contact_name: '張三', order_status: '已成立', order_detail: '訂單資訊' },
+                    { order_number: '2024092206', contact_name: '李四', order_status: '已取消', order_detail: '訂單資訊' },
+                    { order_number: '2024092208', contact_name: '王五', order_status: '已取消', order_detail: '訂單資訊' },
+                ];
+
+                function renderOrder(order_list) {
+                    const tbody = document.getElementById('order_tbody');
+
+                    order_list.forEach(order => {
+                        const row = `<tr>
+                            <td>${order.order_number}</td>
+                            <td>${order.contact_name}</td>
+                            <td>${order.order_status}</td>
+                            <td>${order.order_detail}</td>
+                           </tr>`;
+                        tbody.innerHTML += row;
+                    })
+
+                }
+
+                function sortOrders(criteriaArray) {
+                    let sortedOrders = [...orders];
+                    sortedOrders.sort((a, b) => {
+                        for (let criteria of criteriaArray) {
+                            if (a[criteria] < b[criteria]) return -1;
+                            if (a[criteria] > b[criteria]) return 1;
+                        }
+                        return 0;
+                    });
+                    renderOrders(sortedOrders);
+                }
+
+                renderOrder(orders);
+
+                document.getElementById('sort_button').addEventListener('click', (event) => {
+                    event.preventDefault();
+                    const checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
+                    const selectedCriteria = Array.from(checkboxes).map(checkbox => checkbox.value);
+                    sortOrders(selectedCriteria);
+                });
+
+            </script>
+
+
+
+            <div id="cancel_refund" class="tab_content">
+                <h2>已取消訂單</h2>
+                <form id="order_search_form">
+                    <input type="text" placeholder="請輸入訂單編號..." />
+                    <button type="submit">搜尋</button>
+                </form>
+                <h3>排序依據</h3>
+                <div style="display: flex;">
+                    <div>
+                        <label><input type="checkbox" value="order2_number">訂單編號</label>
+                        <label><input type="checkbox" value="order2_status">訂單狀態</label>
+                    </div>
+                    <button id="sort_button"
+                        style="margin-left: 15px; background-color: brown; color:whites;">排序</button>
+                </div>
+                <table>
+                    <tr>
+                        <th style="width: 25%;">訂單編號</th>
+                        <th>聯絡人姓名</th>
+                        <th>訂單狀態</th>
+                        <th>訂單詳細資訊</th>
+                    </tr>
+                </table>
+
+
+                <script>
+                    let orders_detail = [
+                        { order_number: '2024092202', contact_name: '李四', order_status: '待付款', order_detail: '訂單資訊' },
+                        { order_number: '2024092201', contact_name: '張三', order_status: '已成立', order_detail: '訂單資訊' },
+                        { order_number: '2024092203', contact_name: '王五', order_status: '已取消', order_detail: '訂單資訊' },
+                        { order_number: '2024092204', contact_name: '張三', order_status: '已成立', order_detail: '訂單資訊' },
+                        { order_number: '2024092205', contact_name: '李四', order_status: '待付款', order_detail: '訂單資訊' },
+                        { order_number: '2024092203', contact_name: '王五', order_status: '已取消', order_detail: '訂單資訊' },
+                        { order_number: '2024092207', contact_name: '張三', order_status: '已成立', order_detail: '訂單資訊' },
+                        { order_number: '2024092206', contact_name: '李四', order_status: '已取消', order_detail: '訂單資訊' },
+                        { order_number: '2024092208', contact_name: '王五', order_status: '已取消', order_detail: '訂單資訊' },
+                    ];
+
+                    function renderOrders(order_list) {
+                        const tbody = document.getElementById('order_tbody');
+
+                        order_list.forEach(order => {
+                            const row = `<tr>
+                                        <td>${order.order_number}</td>
+                                        <td>${order.contact_name}</td>
+                                        <td>${order.order_status}</td>
+                                        <td>${order.order_detail}</td>
+                                       </tr>`;
+                            tbody.innerHTML += row;
+                        })
+
+                    }
+
+                    document.querySelectorAll('.tab').forEach(tab => {
+                        tab.addEventListener('click', () => {
+                            const target = tab.getAttribute('data-tab');
+
+                            document.querySelectorAll('.tab_content').forEach(content => {
+                                content.style.display = 'none';
+                            });
+
+                            document.getElementById(target).style.display = 'block';
+
+                            document.querySelectorAll('.tab').forEach(tab => {
+                                tab.classList.remove('active');
+                            });
+
+                            tab.classList.add('active');
+                        });
+                    });
+
+                    document.querySelector('.tab').click();
+
+                    renderOrders(orders, 'order_tbody');
+
+                </script>
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+
+    <footer>
+        <div>
+            <section>
+                <h3>公司</h3>
+                <div class="footer_line"></div>
+                <div class="footer_list"><a href="">關於我們</a></div>
+                <div class="footer_list"><a href="">聯絡我們</a></div>
+            </section>
+            <section>
+                <h3>隱私</h3>
+                <div class="footer_line"></div>
+                <div class="footer_list"><a href="">隱私權政策</a></div>
+                <div class="footer_list"><a href="">隱私設定</a></div>
+            </section>
+            <section>
+                <h3>Cookie</h3>
+                <div class="footer_line"></div>
+                <div class="footer_list"><a href="">Cookie政策</a></div>
+                <div class="footer_list"><a href="">Cookie設定</a></div>
+            </section>
+            <section>
+                <h3>合作夥伴</h3>
+                <div class="footer_line"></div>
+                <div class="footer_list"><a href="">廣告投放</a></div>
+                <div class="footer_list"><a href="">旅遊宣傳合作</a></div>
+            </section>
+        </div>
+
+    </footer>
+
+
+</body>
+
+</html>

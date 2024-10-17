@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+
+    <link rel="stylesheet" href="./complete_order.css">
+    <link rel="stylesheet" href="./w3.css">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+</head>
+
+<body>
+    <header>
+        <div><a href=""><img src="./圖片/logo.png"></a></div>
+        <div>
+            <p>製作美好日旅回憶的第一步</p>
+            <a href=""><img src="./圖片/icon_Forum.png"></a>
+            <a href=""><img src="./圖片/icon_logIn.png"></a>
+            <div style="clear:both"></div>
+        </div>
+    </header>
+
+    <div style="margin: 2% 2% 0 2% ; font-size: 20px; display: flex; justify-content: center">
+        <ul>
+            <li>
+                <div class="process_bg">填寫旅客資訊</div>
+            </li>
+            <li><span class="material-symbols-outlined" style="vertical-align: middle;">arrow_forward_ios</span></li>
+            <li>
+                <div class="process_bg">會員登入/註冊</div>
+            </li>
+            <li><span class="material-symbols-outlined" style="vertical-align: middle;">arrow_forward_ios</span></li>
+            <li>
+                <div class="process_info_bg">訂單成立</div>
+            </li>
+            <li><span class="material-symbols-outlined" style="vertical-align: middle;">arrow_forward_ios</span></li>
+            <li>
+                <div class="process_bg">選擇付款方式</div>
+            </li>
+            <li><span class="material-symbols-outlined" style="vertical-align: middle;">arrow_forward_ios</span></li>
+            <li>
+                <div class="process_bg">結帳</div>
+            </li>
+            <li><span class="material-symbols-outlined" style="vertical-align: middle;">arrow_forward_ios</span></li>
+            <li>
+                <div class="process_bg">完成訂購</div>
+            </li>
+        </ul>
+    </div>
+
+    <div class="container_bg ">
+        <div class="container" style="width: 80%; padding: 20px; font-size: 20px;margin-top: 5%;">
+            <div class="box">
+                <div style="font-weight: bold;">顧客您好，</div>
+                <div style="font-weight: bold;">您的訂單已成立！</div>
+                <div style="display: flex;">
+                    請於 <div style="color: red;">2024-09-06 13:49前支付款項！</div>
+                </div>
+                <div>逾時您的預訂將會被取消</div>
+
+            </div>
+        </div>
+
+        <div class="container_order_title" style="margin-top: 5%;">
+            <div style="display:flex; justify-content: space-between; align-items: center;">
+                <div style="font-weight: bold; font-size:20px">訂單明細</div>
+                <div>
+                    <div style="display: flex; justify-content: space-between;">
+                        <div>訂單編號</div>
+                        <div id="order_number">00119656</div>
+
+                    </div>
+                    <div style="display:flex;justify-content: space-between;">
+                        <div>訂單成立時間&nbsp;</div>
+                        <div id="order_time">2024-09-06</div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+        <div class="container_order_detail" style="margin-bottom: 5%;">
+            <div>
+                <div style="font-size: 16px; font-weight:bold;">聯絡人資訊</div>
+                <div class="container" style="width: 100%; padding: 20px;">
+                    <div class="box_orderInfo">
+                        <div>
+                            <div>中文姓名</div>
+                            <div>XXXXX</div>
+                        </div>
+                        <div style="display: flex ; margin-top: 20px; width: 85%; justify-content: space-between;">
+                            <div>
+                                <div>E-MAIL</div>
+                                <div>asdf@gmail.com</div>
+                            </div>
+                            <div>
+                                <div>行動電話號碼</div>
+                                <div>0921-123456</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div style="font-size: 16px; font-weight:bold;">確認付款金額</div>
+                    <div class="container" style="width: 100%; padding: 20px;">
+                        <div class="box_orderInfo">
+                            <div style="display: flex; justify-content: space-between; width:82%;">
+                                <div>訂單編號</div>
+                                <div>00119656</div>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; width:82%;">
+                                <div>訂單成立時間</div>
+                                <div>2024-09-06</div>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; width:82%;">
+                                <div>聯絡人</div>
+                                <div>ＸＸＸ</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container" style="width: 100%; padding: 20px;">
+                        <div class="box">
+                            <div
+                                style="color:red; border:1px solid red; width:10%; text-align:center;border-radius: 5px;">
+                                處理中
+                            </div>
+                            <hr style="border: 1px solid gray; width: 100%;">
+                            <div style="display:flex; font-weight: bold;">
+                                <div>中華航空&nbsp;</div>
+                                <div>桃園國際機場</div>-<div>成田機場</div>
+                                <div>&nbsp;機票</div>
+                            </div>
+                            <div style="font-size: 12px; color:gray; margin: 0 20%;">人數：2</div>
+                            <div
+                                style="font-size: 12px; color:gray; display: flex; justify-content: space-between; margin: 0 10% 0 20%;">
+                                <div>出發日期</div>
+                                <div>2024-9-12</div>
+                            </div>
+                            <div style="display:flex;justify-content: flex-end; margin-right: 10%; color:red;">14,437元
+                            </div>
+
+
+                        </div>
+                        <div class="box">
+                            <div style="display: flex; justify-content: space-between; margin:0 10% 0 20%;">
+                                <div style="font-size: 16px; font-weight:bold;">待付金額</div>
+                                <div style="display: flex; color:red; font-weight:bold">
+                                    <div>NT$</div>
+                                    <div>14,347</div>
+                                    <div>元</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="box">
+                            <div style="font-weight:bold; width:100%;">
+                                <div style="display: flex; justify-content: space-between; margin:0 10% 0 20%;">
+                                    <div style="font-size: 16px; font-weight:bold;">付款方式</div>
+                                    <div style="display: flex; justify-items: center;">
+                                        <input type="checkbox" name="" id="">信用卡
+                                        <img src="./圖片/credit_card.png" alt="credit_card" style="width: 20px">
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <div>
+            <section>
+                <h3>公司</h3>
+                <div class="footer_line"></div>
+                <div class="footer_list"><a href="">關於我們</a></div>
+                <div class="footer_list"><a href="">聯絡我們</a></div>
+            </section>
+            <section>
+                <h3>隱私</h3>
+                <div class="footer_line"></div>
+                <div class="footer_list"><a href="">隱私權政策</a></div>
+                <div class="footer_list"><a href="">隱私設定</a></div>
+            </section>
+            <section>
+                <h3>Cookie</h3>
+                <div class="footer_line"></div>
+                <div class="footer_list"><a href="">Cookie政策</a></div>
+                <div class="footer_list"><a href="">Cookie設定</a></div>
+            </section>
+            <section>
+                <h3>合作夥伴</h3>
+                <div class="footer_line"></div>
+                <div class="footer_list"><a href="">廣告投放</a></div>
+                <div class="footer_list"><a href="">旅遊宣傳合作</a></div>
+            </section>
+        </div>
+
+    </footer>
+</body>
+
+</html>
