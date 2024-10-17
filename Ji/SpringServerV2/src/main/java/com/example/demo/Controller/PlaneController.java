@@ -25,9 +25,12 @@ import com.example.demo.dto.PlaneTimeZoneDTO;
 import jakarta.servlet.http.HttpSession;
 
 import com.example.demo.Model.Country;
+import com.example.demo.Model.Orders;
 import com.example.demo.Model.Plane;
 import com.example.demo.Repository.CountryRepository;
+import com.example.demo.Repository.OrdersRepository;
 import com.example.demo.Repository.PlaneRepository;
+import com.example.demo.Service.OrdersServiceImpl;
 import com.example.demo.Service.PlaneService;
 
 @RequestMapping("/plane")
@@ -42,6 +45,12 @@ public class PlaneController {
 
 	@Autowired
 	private PlaneService planeService;
+	
+	@Autowired
+	private OrdersServiceImpl ordersServiceImpl;
+
+	@Autowired
+	private OrdersRepository ordersRepository;
 
 	@PostMapping("/check_country")
 	public List<Country> searchCountries(@RequestBody Country country) {
@@ -73,15 +82,15 @@ public class PlaneController {
 	public List<PlaneTimeZoneDTO> searchFlights2(@RequestParam String departureCountry,
 			@RequestParam String arrivalCity, @RequestParam String departureDate, @RequestParam int requiredSeats) {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
-		LocalDate date = LocalDate.parse(departureDate,formatter);
+		LocalDate date = LocalDate.parse(departureDate, formatter);
 		return planeService.findFlightsWithTimeZone(departureCountry, arrivalCity, date, requiredSeats);
 	}
-	
+
 	@GetMapping("/search2ByBusiness")
 	public List<PlaneTimeZoneDTO> searchFlights3(@RequestParam String departureCountry,
 			@RequestParam String arrivalCity, @RequestParam String departureDate, @RequestParam int requiredSeats) {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
-		LocalDate date = LocalDate.parse(departureDate,formatter);
+		LocalDate date = LocalDate.parse(departureDate, formatter);
 		return planeService.findFlightsWithTimeZone2(departureCountry, arrivalCity, date, requiredSeats);
 	}
 
@@ -89,4 +98,14 @@ public class PlaneController {
 	public List<Country> searchLocations(@RequestParam("query") String query) {
 		return planeService.searchLocations(query);
 	}
+
+	
+	
+	@GetMapping("/orderForMember")
+	public Orders orderForMember2(@RequestParam String orderNumber) {
+	    Orders order = ordersRepository.findByOrderNumber(orderNumber);
+	    return order;
+	}
+
+
 }

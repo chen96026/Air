@@ -151,11 +151,4 @@ public class ForumController {
 		return "/back/forum_admin";
 		
 	}
-	
-	@GetMapping("forum_contact")
-	public String forum_contact() {
-		
-		return "forum_contact";
-		
-	}
 }

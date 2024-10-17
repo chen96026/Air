@@ -29,14 +29,23 @@
 				<div class="col-lg-4 col-md-6 banner-right">
 					<div class="tab-content" id="myTabContent">
 						<div class="tab-pane fade show active" id="flight" role="tabpanel" aria-labelledby="flight-tab">
-							<form class="form-wrap">
-								<h6 class="Hp_formTitle">出發地</h6>
-								<input type="text" id="des_start" class="form-control" name="des_start"
-									placeholder="From " onfocus="this.placeholder = ''"
-									onblur="this.placeholder = 'From '">
-								<h6 class="Hp_formTitle">目的地</h6>
-								<input type="text" id="des_end" class="form-control" name="des_end" placeholder="To "
-								onfocus="this.placeholder = ''" onblur="this.placeholder = 'To '">
+							<form class="form-wrap" id="search_form" autocomplete="off">
+								<div class="autocomplete">
+    								<h6 class="Hp_formTitle">出發地</h6>
+    								<input type="text" id="des_start" class="form-control" name="des_start"
+           									placeholder="From " onfocus="this.placeholder = ''"
+           									onblur="this.placeholder = 'From '">
+    								<div class="suggestions" id="suggestions_des_start" role="listbox"></div> <!-- 建議欄位 -->
+								</div>
+
+								<div class="autocomplete">
+    								<h6 class="Hp_formTitle">目的地</h6>
+    								<input type="text" id="des_end" class="form-control" name="des_end"
+           									placeholder="To " onfocus="this.placeholder = ''"
+           									onblur="this.placeholder = 'To '">
+    								<div class="suggestions" id="suggestions_des_end" role="listbox"></div> <!-- 建議欄位 -->
+								</div>
+								
 								<h6 class="Hp_formTitle">出發日期</h6>
 								<input type="text" id="date_start" class="form-control date-picker" name="date_start" placeholder="Start "
 								onfocus="this.placeholder = ''" onblur="this.placeholder = 'Start '">
@@ -280,152 +289,122 @@ Netflix熱門實境秀《黑白大廚：料理階級大戰》
 				<div class="active-recent-blog-carusel">
 					<div class="single-recent-blog-post item">
 						<div class="thumb">
-							<img class="img-fluid" src="img/b1.jpg" alt="">
+							<img class="HpBlogImg img-fluid" src="">
 						</div>
 						<div class="details">
 							<div class="tags">
 								<ul>
-									<li>
-										<a href="#">Travel</a>
-									</li>
-									<li>
-										<a href="#">Life Style</a>
-									</li>
+									<div class="HpBlogTags"></div>
 								</ul>
 							</div>
-							<a href="#">
-								<h4 class="title">Low Cost Advertising</h4>
-							</a>
-							<p>
-								Acres of Diamonds… you’ve read the famous story, or at least had it related to you. A
-								farmer.
-							</p>
-							<h6 class="date">31st January,2018</h6>
+							<h4 class="HpBlogTitle title"></h4>
+							<p class="HpBlogText"></p>
+							<div>
+								<img class="HpBlogIcon" src="">
+								<span class="HpBlogAuthor"></span>
+							</div>
+							<br>
+							<h6 class="HpBlogDate date"></h6>
 						</div>
 					</div>
 					<div class="single-recent-blog-post item">
 						<div class="thumb">
-							<img class="img-fluid" src="img/b2.jpg" alt="">
+							<img class="HpBlogImg img-fluid" src="">
 						</div>
 						<div class="details">
 							<div class="tags">
 								<ul>
-									<li>
-										<a href="#">Travel</a>
-									</li>
-									<li>
-										<a href="#">Life Style</a>
-									</li>
+									<div class="HpBlogTags"></div>
 								</ul>
 							</div>
-							<a href="#">
-								<h4 class="title">Creative Outdoor Ads</h4>
-							</a>
-							<p>
-								Acres of Diamonds… you’ve read the famous story, or at least had it related to you. A
-								farmer.
-							</p>
-							<h6 class="date">31st January,2018</h6>
+							<h4 class="HpBlogTitle title"></h4>
+							<p class="HpBlogText"></p>
+							<div>
+								<img class="HpBlogIcon" src="">
+								<span class="HpBlogAuthor"></span>
+							</div>
+							<br>
+							<h6 class="HpBlogDate date"></h6>
 						</div>
 					</div>
 					<div class="single-recent-blog-post item">
 						<div class="thumb">
-							<img class="img-fluid" src="img/b3.jpg" alt="">
+							<img class="HpBlogImg img-fluid" src="">
 						</div>
 						<div class="details">
 							<div class="tags">
 								<ul>
-									<li>
-										<a href="#">Travel</a>
-									</li>
-									<li>
-										<a href="#">Life Style</a>
-									</li>
+									<div class="HpBlogTags"></div>
 								</ul>
 							</div>
-							<a href="#">
-								<h4 class="title">It's Classified How To Utilize Free</h4>
-							</a>
-							<p>
-								Acres of Diamonds… you’ve read the famous story, or at least had it related to you. A
-								farmer.
-							</p>
-							<h6 class="date">31st January,2018</h6>
+							<h4 class="HpBlogTitle title"></h4>
+							<p class="HpBlogText"></p>
+							<div>
+								<img class="HpBlogIcon" src="">
+								<span class="HpBlogAuthor"></span>
+							</div>
+							<br>
+							<h6 class="HpBlogDate date"></h6>
 						</div>
 					</div>
 					<div class="single-recent-blog-post item">
 						<div class="thumb">
-							<img class="img-fluid" src="img/b1.jpg" alt="">
+							<img class="HpBlogImg img-fluid" src="">
 						</div>
 						<div class="details">
 							<div class="tags">
 								<ul>
-									<li>
-										<a href="#">Travel</a>
-									</li>
-									<li>
-										<a href="#">Life Style</a>
-									</li>
+									<div class="HpBlogTags"></div>
 								</ul>
 							</div>
-							<a href="#">
-								<h4 class="title">Low Cost Advertising</h4>
-							</a>
-							<p>
-								Acres of Diamonds… you’ve read the famous story, or at least had it related to you. A
-								farmer.
-							</p>
-							<h6 class="date">31st January,2018</h6>
+							<h4 class="HpBlogTitle title"></h4>
+							<p class="HpBlogText"></p>
+							<div>
+								<img class="HpBlogIcon" src="">
+								<span class="HpBlogAuthor"></span>
+							</div>
+							<br>
+							<h6 class="HpBlogDate date"></h6>
 						</div>
 					</div>
 					<div class="single-recent-blog-post item">
 						<div class="thumb">
-							<img class="img-fluid" src="img/b2.jpg" alt="">
+							<img class="HpBlogImg img-fluid" src="">
 						</div>
 						<div class="details">
 							<div class="tags">
 								<ul>
-									<li>
-										<a href="#">Travel</a>
-									</li>
-									<li>
-										<a href="#">Life Style</a>
-									</li>
+									<div class="HpBlogTags"></div>
 								</ul>
 							</div>
-							<a href="#">
-								<h4 class="title">Creative Outdoor Ads</h4>
-							</a>
-							<p>
-								Acres of Diamonds… you’ve read the famous story, or at least had it related to you. A
-								farmer.
-							</p>
-							<h6 class="date">31st January,2018</h6>
+							<h4 class="HpBlogTitle title"></h4>
+							<p class="HpBlogText"></p>
+							<div>
+								<img class="HpBlogIcon" src="">
+								<span class="HpBlogAuthor"></span>
+							</div>
+							<br>
+							<h6 class="HpBlogDate date"></h6>
 						</div>
 					</div>
 					<div class="single-recent-blog-post item">
 						<div class="thumb">
-							<img class="img-fluid" src="img/b3.jpg" alt="">
+							<img class="HpBlogImg img-fluid" src="">
 						</div>
 						<div class="details">
 							<div class="tags">
 								<ul>
-									<li>
-										<a href="#">Travel</a>
-									</li>
-									<li>
-										<a href="#">Life Style</a>
-									</li>
+									<div class="HpBlogTags"></div>
 								</ul>
 							</div>
-							<a href="#">
-								<h4 class="title">It's Classified How To Utilize Free</h4>
-							</a>
-							<p>
-								Acres of Diamonds… you’ve read the famous story, or at least had it related to you. A
-								farmer.
-							</p>
-							<h6 class="date">31st January,2018</h6>
+							<h4 class="HpBlogTitle title"></h4>
+							<p class="HpBlogText"></p>
+							<div>
+								<img class="HpBlogIcon" src="">
+								<span class="HpBlogAuthor"></span>
+							</div>
+							<br>
+							<h6 class="HpBlogDate date"></h6>
 						</div>
 					</div>
 

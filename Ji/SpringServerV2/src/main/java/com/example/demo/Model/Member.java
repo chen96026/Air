@@ -46,8 +46,8 @@ public class Member {
 	@Column(name="thirdpartyid")
 	private String thirdPartyId;
 	
-	@Column(name="order_information",columnDefinition = "json")
-	public String order_information;
+	@Column(name="orders")
+	public String orders;
 	
 	@Lob//標記BLOB類型
 	@Column(name = "icon")// 資料庫中的BLOB欄位
@@ -136,11 +136,11 @@ public class Member {
 		this.thirdPartyId = thirdPartyId;
 	}
 
-	public String getOrder_information() {
-		return order_information;
+	public String getOrders() {
+		return orders;
 	}
 
-	public void setOrder_information(String order_information) {
-		this.order_information = order_information;
+	public void setOrders(String orders) {
+		this.orders = orders;
 	}
 }

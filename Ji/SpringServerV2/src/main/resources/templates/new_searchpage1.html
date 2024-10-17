@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="zxx" class="no-js">
 <head>
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta charset="UTF-8">
-<title>Search</title>
-<link rel="stylesheet" th:href="@{/css/new_searchpage1.css}">
-<link th:replace="fragments/new_source :: source"></link>
-<link rel="stylesheet" href="css/testIndex.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta charset="UTF-8">
+	<title>Search</title>
+	<link rel="stylesheet" th:href="@{/css/new_searchpage1.css}">
+	<link th:replace="fragments/new_source :: source"></link>
+	<link rel="stylesheet" href="css/testIndex.css">
+	<div th:replace="fragments/search :: css"></div>
 <title>Search</title>
 
 </head>
@@ -32,6 +32,7 @@
 	</section>
 
 	<script src="/js/searchpage1.js"></script>
+	<div th:replace="fragments/search :: js"></div>
 	<div th:replace="fragments/new_footer :: footer"></div>
 
 </body>

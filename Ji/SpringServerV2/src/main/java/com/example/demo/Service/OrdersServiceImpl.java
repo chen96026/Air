@@ -86,7 +86,4 @@ public class OrdersServiceImpl implements OrdersService{
 	public Orders getOrderByOrderNumber(String orderNumber) {
 		return ordersRepository.findByOrderNumber(orderNumber);
 	}
-
-	
-
 }

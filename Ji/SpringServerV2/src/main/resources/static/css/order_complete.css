@@ -40,7 +40,6 @@ body {
     margin: 0 auto;
     padding: 20px;
     background-color: white;
-
 }
 
 ul {
@@ -107,14 +106,14 @@ li {
     background-color:white;
     margin: 10px;
     height: 80%;
-    padding:30px 8% 30px 35%;
+    padding:30px 8% 30px 10%;
     border: 5px solid #1f0737;
     border-radius: 10px;
     display: grid;
     align-content: center;
 	color:#222;
 	font-size: 20px;
-	font-weight: 700;
+	font-weight: 500;
 }
 
 .box_orderInfo div > div {
@@ -142,8 +141,3 @@ li {
 	background-color: #222;
 	color:#fff;
 }
-
-
-
-
-

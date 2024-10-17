@@ -33,8 +33,20 @@ public class WebController {
 		return "order";
 	}
 	
-	@GetMapping("/order_back")
+	@GetMapping("/order/back")
 	public String order_back() {
 		return "/back/order_admin";
+	}
+	
+	@GetMapping("/about")
+	public String about() {
+		return "about";
+	}
+	
+	@GetMapping("/contact")
+	public String contact() {
+		
+		return "contact";
+		
 	}
 }

@@ -26,11 +26,14 @@ import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.bind.annotation.RequestBody;
 import com.example.demo.Model.Contact;
 import com.example.demo.Model.Luggage;
+import com.example.demo.Model.Member;
 import com.example.demo.Model.Orders;
 import com.example.demo.Model.Orders.OrderStatus;
 import com.example.demo.Model.Passenger;
 import com.example.demo.Model.Plane;
 import com.example.demo.Repository.ContactRepository;
+import com.example.demo.Repository.MemberRepository;
+import com.example.demo.Repository.OrdersRepository;
 import com.example.demo.Service.ContactService;
 import com.example.demo.Service.EcpayService;
 import com.example.demo.Service.LuggagesService;
@@ -61,6 +64,12 @@ public class OrdersController {
 	
 	@Autowired
 	private EcpayService ecpayService;
+	
+	@Autowired
+	private MemberRepository memberRepository;
+	
+	@Autowired
+	private OrdersRepository ordersRepository;
 
 	@PostMapping("/createContact")
 	public ResponseEntity<Contact> createContact(@RequestBody Contact contact) {
@@ -69,7 +78,7 @@ public class OrdersController {
 	}
 
 	@PostMapping("/createOrder")
-	public ResponseEntity<Object> createOrder(@RequestBody Orders order) {
+	public ResponseEntity<Object> createOrder(@RequestBody Orders order,@RequestParam String uid) {
 
 		if (order.getCreateDate() == null) {
 			order.setCreateDate(LocalDateTime.now());
@@ -77,6 +86,16 @@ public class OrdersController {
 		order.setOrderStatus(OrderStatus.訂單已成立);
 
 		Orders savedOrder = ordersService.saveOrder(order);
+		
+		String orders;
+		Member member = memberRepository.findByUid(uid);
+		if (member.getOrders() != null && !member.getOrders().isEmpty()) {
+		    orders = member.getOrders() + "," + order.getOrderNumber();
+		} else {
+		    orders = order.getOrderNumber();
+		}
+		member.setOrders(orders);
+		memberRepository.save(member);
 
 		for (Passenger passenger : order.getPassengerList()) {
 			passenger.setOrders(savedOrder);
@@ -254,5 +273,4 @@ public class OrdersController {
         
         return "order_expired"; 
     }
-	
 }
