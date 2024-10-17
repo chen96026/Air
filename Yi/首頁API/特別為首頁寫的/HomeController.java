@@ -47,7 +47,7 @@ public class HomeController {
 		    postDto.setMainTitle(post.getMainTitle());
 		    postDto.setContent(post.getContent());
 		    postDto.setCreatedTime(post.getCreatedTime());
-
+		    
 		    // 設置圖片 URL
 		    List<String> imageUrls = post.getImages() != null && !post.getImages().isEmpty()
 		            ? post.getImages().stream().map(image -> "getImg/" + image.getId()) // 構造圖片 URL
