@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh-Hans-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>後台：論壇</title>
+    <link rel="stylesheet" href="/css/forum/forum_admin.css">
+    <link th:replace="fragments/new_source :: head"></link>
+    <style>
+    	#header {
+			background-color: rgba(34, 34, 34, 0.9);
+	
+		}
+		.main-menu {
+  			background: transparent;	
+		}
+    </style>
+</head>
+
+<body class="Forum_body">
+
+	<div th:replace="fragments/new_header :: header"></div>
+    
+    <main class="Forum_main">
+        <div id="Backstage_LeftSide">
+            <div id="Backstage_LeftMember">會員管理</div>
+            <div id="Backstage_LeftOrder">訂單管理</div>
+            <div id="Backstage_LeftFlight">航班管理</div>
+            <div id="Backstage_LeftForum">論壇管理</div>
+        </div>
+        <div class="Forum_adminPanel">
+            <h1>論壇管理</h1>
+            <button id="Forum_queryShare">待審核首頁文章</button>
+            <button id="Forum_queryReport">被檢舉文章</button>
+            <div>
+                <div class="Forum_divTable">
+                </div>
+                <div class="Forum_page">
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <div th:replace="fragments/new_footer :: footer"></div>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="/js/forum/forum_admin.js"></script>
+</body>
+
+</html>

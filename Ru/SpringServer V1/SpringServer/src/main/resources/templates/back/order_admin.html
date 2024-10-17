@@ -14,8 +14,9 @@
 <!-- 社群媒體的iconnnnnnnnnnnn -->
 <link
 	href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css"
+	
 	rel="stylesheet" />
-
+ <link rel="stylesheet" th:href="@{/css/bootstrap.css}">
 </head>
 
 
@@ -24,81 +25,70 @@
 
 	<div class="container_bg">
 
-		<h1>訂單管理</h1>
-		<div class="container">
-			<div class="tabs">
-				<div data-tab="order_list" class="tab">訂單列表</div>
-				<div data-tab="cancel_refund" class="tab">已取消訂單</div>
-			</div>
-
-			<div id="order_list" class="tab_content">
-				<h2>訂單列表</h2>
-				<form id="order_search_form">
-					<input type="text" placeholder="請輸入訂單編號..." />
-					<button type="submit">搜尋</button>
+		<h2>訂單管理</h2>
+		<div class="container_all">
+				<h3>訂單列表</h3>
+				<form id="orderSearchForm">
+					<input type="text" id="orderNumberInput" placeholder="請輸入訂單編號..." />
+					<button class="btn;" type="submit">搜尋</button>
 				</form>
-
-				<h3>排序依據</h3>
-				<div style="display: flex;">
-					<div>
-						<label><input type="checkbox" value="order_number">訂單編號</label>
-						<label><input type="checkbox" value="order_status">訂單狀態</label>
-					</div>
-					<button id="sort_button"
-						style="margin-left: 15px; background-color: brown; color: whites;">排序</button>
+				
+				<div class="d-flex mt-3">
+					<div class="form-check mb-3">
+				        <input type="radio" class="form-check-input" name="orderStatus" id="statusAll" value="" checked>
+				        <label class="form-check-label" for="statusAll">全部訂單</label>
+				    </div>
+				    <div class="form-check" style="margin-left:20px;">
+				        <input type="radio" class="form-check-input" name="orderStatus" id="statusCreated" value="訂單已成立">
+				        <label class="form-check-label" for="statusCreated">尚未付款</label>
+				    </div>
+				    <div class="form-check" style="margin-left:20px;">
+				        <input type="radio" class="form-check-input" name="orderStatus" id="statusPaid" value="已付款完成">
+				        <label class="form-check-label" for="statusPaid">已付款完成</label>
+				    </div>
+				    <div class="form-check" style="margin-left:20px;">
+				        <input type="radio" class="form-check-input" name="orderStatus" id="statusCancelled" value="逾期付款已取消">
+				        <label class="form-check-label" for="statusCancelled">逾期付款已取消</label>
+				    </div>
+				    
+	    
 				</div>
-
-
-
+				
+				
+				<div class="d-flex align-items-center mb-3">
+				    <div>
+				        <label for="orderNumberSort">訂單編號排序：</label>
+				        <select class="form-select" id="orderNumberSort">
+				            <option value="asc">由小到大</option>
+				            <option value="desc">由大到小</option>
+				        </select>
+				    </div>
+				    <div style="margin-left:20px">
+				        <label for="orderDateSort">訂單日期排序：</label>
+				        <select class="form-select" id="orderDateSort">
+				            <option value="newest">由近到遠</option>
+				            <option value="oldest">由遠到近</option>
+				        </select>
+				    </div>
+				</div>
+				
 				<table>
 					<thead>
 						<tr>
-							<th>訂單編號</th>
-							<th style="width: 20%;">聯絡人姓名</th>
+							<th >訂單編號</th>
+							<th>聯絡人姓名</th>
 							<th>訂單金額(NT$)</th>
 							<th>訂單成立時間</th>
 							<th>訂單狀態</th>
 						</tr>
 					</thead>
-					<tbody id="order_tbody">
-
-					</tbody>
+	                <tbody id="orderTableBody">
+				        <!-- JavaScript 會動態插入數據 -->
+				    </tbody>
 				</table>
-
-
-
+				
+				
 			</div>
-
-
-			<div id="cancel_refund" class="tab_content">
-				<h2>已取消訂單</h2>
-				<form id="order_search_form">
-					<input type="text" placeholder="請輸入訂單編號..." />
-					<button type="submit">搜尋</button>
-				</form>
-				<h3>排序依據</h3>
-				<div style="display: flex;">
-					<div>
-						<label><input type="checkbox" value="order2_number">訂單編號</label>
-						<label><input type="checkbox" value="order2_status">訂單狀態</label>
-					</div>
-					<button id="sort_button"
-						style="margin-left: 15px; background-color: brown; color: whites;">排序</button>
-				</div>
-				<table>
-					<tr>
-						<th style="width: 25%;">訂單編號</th>
-						<th>聯絡人姓名</th>
-						<th>訂單金額</th>
-						<th>訂單成立時間</th>
-						<th>訂單狀態</th>
-					</tr>
-				</table>
-
-
-			</div>
-
-		</div>
 
 	</div>
 

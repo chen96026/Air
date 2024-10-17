@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Search Page</title>
+</head>
+<body th:fragment="search">
+	
+	<div class="col-lg-12 banner-right">
+		<div class="tab-content" id="myTabContent">
+			<div class="tab-pane fade show active" id="flight" role="tabpanel"
+				aria-labelledby="flight-tab">
+				<form class="form-wrap" id="search_form">
+					<div class="row">
+						<div class="col-md-2">
+							<h5 style="text-align: start">出發</h5>
+							<input type="text" id="des_start" class="form-control"
+								name="des_start" placeholder="出發" onfocus="this.placeholder = ''"
+								onblur="this.placeholder = 'From'">
+						</div>
+						<div class="col-md-2">
+							<h5 style="text-align: start">抵達</h5>
+							<input type="text" id="des_end" class="form-control" name="des_end"
+								placeholder="抵達" onfocus="this.placeholder = ''"
+								onblur="this.placeholder = 'To'">
+						</div>
+						<div class="col-md-2">
+							<h5 style="text-align: start">出發日期</h5>
+							<input type="text" id="date_start"
+								class="form-control date-picker" name="date_start" placeholder="出發日期"
+								onfocus="this.placeholder = ''"
+								onblur="this.placeholder = 'Start'">
+						</div>
+						<div class="col-md-2">
+							<h5 style="text-align: start">回程日期</h5>
+							<input type="text" id="date_end" class="form-control date-picker"
+								name="date_end" placeholder="回程日期" onfocus="this.placeholder = ''"
+								onblur="this.placeholder = 'Return'">
+						</div>
+						<div class="col-md-2">
+							<h5 style="text-align: start">成年人數</h5>
+							<input type="number" id="adults" min="1" max="20" value="1"
+								class="form-control" name="adults" placeholder="成年人數"
+								onfocus="this.placeholder = ''"
+								onblur="this.placeholder = 'Adults'">
+						</div>
+						<div class="col-md-2">
+							<h5 style="text-align: start">未成年人數</h5>
+							<input type="number" id="child" min="0" max="20" value="0"
+								class="form-control" name="child" placeholder="未成年人數"
+								onfocus="this.placeholder = ''"
+								onblur="this.placeholder = 'Child'">
+						</div>
+					</div>
+					<div class="row mt-1">
+						<div class="col-md-8"></div>
+						<div class="col-md-4" style="text-align: right;">
+							<label><input type="radio" name="type" value="經濟艙" checked>
+								經濟艙&nbsp;</label> <label><input type="radio" name="type" value="商務艙">
+								商務艙&nbsp;</label> <button class="primary-btn text-uppercase" id="search_btn" type="submit">搜尋航班</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	
+</body>
+</html>
