@@ -5,24 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>論壇後台</title>
-    <link rel="stylesheet" href="/css/forum/forum_admin.css">
     <link rel="stylesheet" href="./back_admin.css">
-    <link th:replace="fragments/new_source :: head">
-    </link>
-    <!-- <style>
-        #header {
-            background-color: rgba(34, 34, 34, 0.9);
-
-        }
-        .main-menu {
-            background: transparent;
-        }
-    </style> -->
 </head>
 
 <body class="Forum_body">
-
-    <div th:replace="fragments/new_header :: header"></div>
 
     <main class="Backstage_main">
         <div id="Backstage_LeftSide"></div>
@@ -30,7 +16,7 @@
             <h1 class="Backstage_Title">論壇管理</h1>
             <div class="container_all">
                 <div>
-                    <button id="Forum_queryShare" class="Forum_button_group">待審核首頁文章</button>
+                    <button id="Forum_queryShare" class="Forum_button_group Forum_button_checked">待審核首頁文章</button>
                     <button id="Forum_queryReport" class="Forum_button_group">被檢舉文章</button>
                 </div>
                 <div class="Forum_divTable">
@@ -41,10 +27,7 @@
         </div>
     </main>
 
-    <div th:replace="fragments/new_footer :: footer"></div>
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="/js/forum/forum_admin.js"></script>
     <script src="./forum_admin.js"></script>
 </body>
 
