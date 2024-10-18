@@ -30,7 +30,7 @@
 	<link rel="stylesheet" href="css/main.css">
 	<!-- <link rel="stylesheet" href="css/testOld.css"> -->
 	<!-- 自己做的CSS -->
-	<link rel="stylesheet" href="css/testHomePage.css">
+	<link rel="stylesheet" href="css/testIndex.css">
 	<!-- 社群媒體的iconnnnnnnnnnnn -->
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" />
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -42,46 +42,98 @@
 			display: inline-block;
 			margin-right: 10px;
 		}
+
 		/* blog img */
 		.thumb>.HpBlogImg {
 			height: 100%;
 			width: 100%;
 			object-fit: cover;
 		}
+
 		/* blog img 容器 */
 		.single-recent-blog-post>.thumb {
 			max-width: 360px;
 			height: 360px;
 			background-color: #dddddd;
 		}
+
 		/* blog tags 容器 */
 		.tags {
-			height: 60px;     /* 設定容器的最大高度，超出部分會隱藏 */
-			overflow-y: auto;     /* 垂直方向出現滾動條 */
-			scrollbar-width: none; /* 對 Firefox 隱藏滾動條 */
+			height: 60px;
+			/* 設定容器的最大高度，超出部分會隱藏 */
+			overflow-y: auto;
+			/* 垂直方向出現滾動條 */
+			scrollbar-width: none;
+			/* 對 Firefox 隱藏滾動條 */
 		}
+
 		.tags::-webkit-scrollbar {
-    		display: none; /* 對 WebKit 瀏覽器（如 Chrome、Safari）隱藏滾動條 */
+			display: none;
+			/* 對 WebKit 瀏覽器（如 Chrome、Safari）隱藏滾動條 */
 		}
+
 		/* blog 個別的tag */
-		.recent-blog-area .single-recent-blog-post .tags li  {
-    		margin: 0 0 5px 5px;
-    		border: 1px solid #9c9c9c;
+		.recent-blog-area .single-recent-blog-post .tags li {
+			margin: 0 0 5px 5px;
+			border: 1px solid #9c9c9c;
 		}
+
 		/* blog text */
 		.HpBlogText {
 			max-height: 200px;
-			overflow: hidden; /* 超出內容隱藏 */
-    display: -webkit-box; /* 使用 flexbox 的變體 */
-    -webkit-box-orient: vertical; /* 設定為垂直方向排列 */
-    -webkit-line-clamp: 3; /* 限制最多顯示 4 行內容，根據需求調整 */
-    text-overflow: ellipsis; /* 超過限制行數後顯示省略號 */
-    white-space: normal; /* 允許內容換行 */
-    word-wrap: break-word; /* 長單詞或網址允許換行 */
+			/* 超出內容隱藏 */
+			overflow: hidden;
+			/* 使用 flexbox 的變體 */
+			display: -webkit-box;
+			/* 設定為垂直方向排列 */
+			-webkit-box-orient: vertical;
+			/* 限制最多顯示 4 行內容，根據需求調整 */
+			-webkit-line-clamp: 3;
+			/* 超過限制行數後顯示省略號 */
+			text-overflow: ellipsis;
+			/* 允許內容換行 */
+			white-space: normal;
+			/* 長單詞或網址允許換行 */
+			word-wrap: break-word;
 		}
-		
 	</style>
 </head>
+<!-- 1018 新聞改用fetch -->
+<script>
+	window.onload = function () {
+
+		fetch('/news/getAll')
+			.then(response => {
+				if (!response.ok) {
+					throw new Error('Error:get all News ->');
+				}
+				return response.json();
+			})
+			.then(data => {
+				console.log(data);
+				let news = document.getElementById("HpNews");
+				news.innerHTML += "<div class='Hp_prev' onclick='posterPlusSlides(-1)'>&#10094;</div>";
+				for (let i = 0; i < data.length; i++) {
+					news.innerHTML += "<div class='container-fluid'>"
+						+ "<div class='row align-items-center justify-content-end'>"
+						+ "<div class='col-lg-6 col-md-12 home-about-left'>"
+						+ "<h1>"+data[i].title+"</h1>"
+						+ "<p>"+data[i].text+"</p>"
+						+ "<a href='"+data[i].url+"' target='_blank' class='primary-btn text-uppercase'>閱讀更多. . .</a>"
+						+ "</div>"
+						+ "<div class='col-lg-6 col-md-12 home-about-right no-padding'>"
+						+ "<img class='img-fluid' src='data:image/png;base64,"+data[i].img+"'>"
+						+ "</div></div></div>";
+				}
+				news.innerHTML += "<div class='Hp_next' onclick='posterPlusSlides(1)'>&#10095;</div>";
+				let allNews = document.querySelectorAll('.container-fluid');
+				allNews[0].style.display = "flex";
+			})
+			.catch(error => {
+				console.error('add Mews err:', error);
+			});
+	}
+</script>
 
 <body>
 	<!-- start header Area -->
@@ -257,107 +309,7 @@
 	<!-- End popular-destination Area -->
 
 	<!-- Start news Area -->
-	<section class="home-about-area">
-		<div class="Hp_prev" onclick="posterPlusSlides(-1)">&#10094;</div>
-		<div class="container-fluid">
-			<div class="row align-items-center justify-content-end">
-				<div class="col-lg-6 col-md-12 home-about-left">
-					<h1>
-						紐西蘭羅托魯瓦奇景宛如外星？
-					</h1>
-					<p>
-						沸騰湖泊、冒泡泥池、水柱沖天間歇泉一次看遍地熱名景！
-
-						因為擁有罕見的地熱和獨特的地貌，加上珍稀的動植物，位於紐西蘭北島中部的羅托魯瓦（Rotorua），猶如外星世界般引人注目。
-						此外，當地一半居民為毛利人，豐富的原住民歷史與傳說更增添亮點，每年都吸引將近百萬名遊客造訪。
-					</p>
-					<a href="https://tw.news.yahoo.com/%E7%B4%90%E8%A5%BF%E8%98%AD%E7%BE%85%E6%89%98%E9%AD%AF%E7%93%A6%E5%A5%87%E6%99%AF%E5%AE%9B%E5%A6%82%E5%A4%96%E6%98%9F%E7%90%83%EF%BC%9F%EF%BC%81%E6%B2%B8%E9%A8%B0%E6%B9%96%E6%B3%8A%E3%80%81%E5%86%92%E6%B3%A1%E6%B3%A5%E6%B1%A0%E3%80%81%E6%B0%B4%E6%9F%B1%E6%B2%96%E5%A4%A9%E9%96%93%E6%AD%87%E6%B3%89%E4%B8%80%E6%AC%A1%E7%9C%8B%E9%81%8D%E5%9C%B0%E7%86%B1%E5%90%8D%E6%99%AF%EF%BC%81-022145048.html"
-						target="_blank" class="primary-btn text-uppercase">閱讀更多. . .</a>
-				</div>
-				<div class="col-lg-6 col-md-12 home-about-right no-padding">
-					<img class="img-fluid" src="img/news1.png" alt="">
-				</div>
-			</div>
-		</div>
-		<div class="container-fluid">
-			<div class="row align-items-center justify-content-end">
-				<div class="col-lg-6 col-md-12 home-about-left">
-					<h1>
-						「One Bangkok」曼谷新地標月底開幕
-					</h1>
-					<p>
-						曼谷新地標「One Bangkok」將於10月25日開幕！
-
-						這座結合商辦、酒店、購物、美食的複合式設施，加上比鄰公園綠地，開幕後將成為到曼谷旅遊玩樂新亮點。
-						ETtoday新聞雲就整理出交通、設施與進駐酒店亮點，趁著現在台灣人到泰國玩免簽，趕快列入行程中。
-					</p>
-					<a href="https://travel.ettoday.net/article/2832804.htm" target="_blank"
-						class="primary-btn text-uppercase">閱讀更多. . .</a>
-				</div>
-				<div class="col-lg-6 col-md-12 home-about-right no-padding">
-					<img class="img-fluid" src="img/news2.png" alt="">
-				</div>
-			</div>
-		</div>
-		<div class="container-fluid">
-			<div class="row align-items-center justify-content-end">
-				<div class="col-lg-6 col-md-12 home-about-left">
-					<h1>
-						東京池袋逛街懶人包
-					</h1>
-					<p>
-						池袋是東京重要的交通樞鈕之一，多條電車路線匯集。
-						東武、西武、PARCO百貨、BIC CAMERA、Animate、唐吉訶德等商家，造就了池袋便利的購物環境。
-						但也因為可以逛街的地點太多了，煩惱不知從何逛起的人也不少。
-						別擔心！有了這篇就不用再怕迷路了！
-					</p>
-					<a href="https://udn.com/news/story/9651/8261770?from=udn-catelistnews_ch2" target="_blank"
-						class="primary-btn text-uppercase">閱讀更多. . .</a>
-				</div>
-				<div class="col-lg-6 col-md-12 home-about-right no-padding">
-					<img class="img-fluid" src="img/news3.png" alt="">
-				</div>
-			</div>
-		</div>
-		<div class="container-fluid">
-			<div class="row align-items-center justify-content-end">
-				<div class="col-lg-6 col-md-12 home-about-left">
-					<h1>
-						朝聖《黑白大廚》白種元餐廳
-					</h1>
-					<p>
-						Netflix熱門實境秀《黑白大廚：料理階級大戰》
-						（以下簡稱黑白大廚）近日已完結，討論熱度不斷；
-						由於從評審到參賽主廚都擁有自己的餐廳，更掀起台灣旅客赴韓朝聖熱潮。
-						有「國民廚神」之稱的白種元，就擁有多間餐飲品牌，共整理了3間到韓國必朝聖餐廳。
-					</p>
-					<a href="https://travel.ettoday.net/article/2832383.htm" target="_blank"
-						class="primary-btn text-uppercase">閱讀更多. . .</a>
-				</div>
-				<div class="col-lg-6 col-md-12 home-about-right no-padding">
-					<img class="img-fluid" src="img/news4.png" alt="">
-				</div>
-			</div>
-		</div>
-		<div class="container-fluid">
-			<div class="row align-items-center justify-content-end">
-				<div class="col-lg-6 col-md-12 home-about-left">
-					<h1>
-						大阪世界博覽會17公尺鋼彈亮相
-					</h1>
-					<p>
-						2025年大阪世界博覽會將於明年4月13日正式揭幕，主題為「閃耀生命光輝的未來社會設計」，展示各領域的技術與創新理念。
-						將在大阪的人工島「夢洲」舉行，場內特別建設了全球最大的環狀木造建築，讓參觀者感受未來社會的創意與科技結合；
-						更狂的是還有17公尺鋼彈，粉絲一定可以大飽眼福！
-					</p>
-					<a href="#" target="_blank" class="primary-btn text-uppercase">閱讀更多. . .</a>
-				</div>
-				<div class="col-lg-6 col-md-12 home-about-right no-padding">
-					<img class="img-fluid" src="img/news5.png" alt="">
-				</div>
-			</div>
-		</div>
-		<div class="Hp_next" onclick="posterPlusSlides(1)">&#10095;</div>
+	<section class="home-about-area" id="HpNews">
 	</section>
 	<!-- End news Area -->
 
@@ -635,12 +587,12 @@
 			})
 			.then(data => {
 				// 0~5
-				console.log(data);
-				console.log("------------");
+				// console.log(data);
+				// console.log("------------");
 				// 0~11
-				let imgTemp = document.querySelectorAll('.HpBlogImg');
-				console.log(imgTemp);
-				console.log("------------");
+				// let imgTemp = document.querySelectorAll('.HpBlogImg');
+				// console.log(imgTemp);
+				// console.log("------------");
 				let img = document.querySelectorAll('.HpBlogImg');
 				let tags = document.querySelectorAll('.HpBlogTags');
 				let title = document.querySelectorAll('.HpBlogTitle');
@@ -649,27 +601,25 @@
 				let author = document.querySelectorAll('.HpBlogAuthor');
 				let date = document.querySelectorAll('.HpBlogDate');
 				for (let index = 0; index < 12; index++) {
-					img[index].src = data[(index+3)%6].coverImgURL;
-					let tagSplit = data[(index+3)%6].post.tags.split(",");
+					img[index].src = data[(index + 3) % 6].coverImgURL;
+					let tagSplit = data[(index + 3) % 6].post.tags.split(",");
 					let tagString = "";
 					tagSplit.forEach(tag => {
-						tagString += "<li><a href='/forum?key="+ tag +"'>" + tag + "</a></li>"
+						tagString += "<li><a href='/forum?key=" + tag + "'>" + tag + "</a></li>"
 					});
 					tags[index].innerHTML = tagString;
-					title[index].innerHTML = "<a href='/forum_detail/"+data[(index+3)%6].post.id+"'>"+data[(index+3)%6].post.mainTitle+"</a>";
-					text[index].innerHTML = data[(index+3)%6].post.content;
-					icon[index].src = data[(index+3)%6].userNameIconDTO.iconURL;
-					author[index].innerHTML = data[(index+3)%6].userNameIconDTO.username;
-					date[index].innerHTML = data[(index+3)%6].post.startDate;
+					title[index].innerHTML = "<a href='/forum_detail/" + data[(index + 3) % 6].post.id + "'>" + data[(index + 3) % 6].post.mainTitle + "</a>";
+					text[index].innerHTML = data[(index + 3) % 6].post.content;
+					icon[index].src = data[(index + 3) % 6].userNameIconDTO.iconURL;
+					author[index].innerHTML = data[(index + 3) % 6].userNameIconDTO.username;
+					date[index].innerHTML = data[(index + 3) % 6].post.startDate;
 				}
-				
+
 			})
 			.catch(error => {
 				console.error('blog err:', error);
 			});
 	</script>
-
-	
 
 </body>
 
