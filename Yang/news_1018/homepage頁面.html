@@ -98,42 +98,6 @@
 		}
 	</style>
 </head>
-<!-- 1018 新聞改用fetch -->
-<script>
-	window.onload = function () {
-
-		fetch('/news/getAll')
-			.then(response => {
-				if (!response.ok) {
-					throw new Error('Error:get all News ->');
-				}
-				return response.json();
-			})
-			.then(data => {
-				console.log(data);
-				let news = document.getElementById("HpNews");
-				news.innerHTML += "<div class='Hp_prev' onclick='posterPlusSlides(-1)'>&#10094;</div>";
-				for (let i = 0; i < data.length; i++) {
-					news.innerHTML += "<div class='container-fluid'>"
-						+ "<div class='row align-items-center justify-content-end'>"
-						+ "<div class='col-lg-6 col-md-12 home-about-left'>"
-						+ "<h1>"+data[i].title+"</h1>"
-						+ "<p>"+data[i].text+"</p>"
-						+ "<a href='"+data[i].url+"' target='_blank' class='primary-btn text-uppercase'>閱讀更多. . .</a>"
-						+ "</div>"
-						+ "<div class='col-lg-6 col-md-12 home-about-right no-padding'>"
-						+ "<img class='img-fluid' src='data:image/png;base64,"+data[i].img+"'>"
-						+ "</div></div></div>";
-				}
-				news.innerHTML += "<div class='Hp_next' onclick='posterPlusSlides(1)'>&#10095;</div>";
-				let allNews = document.querySelectorAll('.container-fluid');
-				allNews[0].style.display = "flex";
-			})
-			.catch(error => {
-				console.error('add Mews err:', error);
-			});
-	}
-</script>
 
 <body>
 	<!-- start header Area -->
@@ -620,7 +584,39 @@
 				console.error('blog err:', error);
 			});
 	</script>
-
+	<!-- 1018 新聞改用fetch -->
+	<script>
+		fetch('/news/getAll')
+			.then(response => {
+				if (!response.ok) {
+					throw new Error('Error:get all News ->');
+				}
+				return response.json();
+			})
+			.then(data => {
+				console.log(data);
+				let news = document.getElementById("HpNews");
+				news.innerHTML += "<div class='Hp_prev' onclick='posterPlusSlides(-1)'>&#10094;</div>";
+				for (let i = 0; i < data.length; i++) {
+					news.innerHTML += "<div class='container-fluid'>"
+						+ "<div class='row align-items-center justify-content-end'>"
+						+ "<div class='col-lg-6 col-md-12 home-about-left'>"
+						+ "<h1>" + data[i].title + "</h1>"
+						+ "<p>" + data[i].text + "</p>"
+						+ "<a href='" + data[i].url + "' target='_blank' class='primary-btn text-uppercase'>閱讀更多. . .</a>"
+						+ "</div>"
+						+ "<div class='col-lg-6 col-md-12 home-about-right no-padding'>"
+						+ "<img class='img-fluid' src='data:image/png;base64," + data[i].img + "'>"
+						+ "</div></div></div>";
+				}
+				news.innerHTML += "<div class='Hp_next' onclick='posterPlusSlides(1)'>&#10095;</div>";
+				let allNews = document.querySelectorAll('.container-fluid');
+				allNews[0].style.display = "flex";
+			})
+			.catch(error => {
+				console.error('add Mews err:', error);
+			});
+	</script>
 </body>
 
 </html>
