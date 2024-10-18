@@ -1,5 +1,6 @@
 package com.example.demo.Service;
 
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -229,5 +230,10 @@ public class MemberServiceImpl implements MemberService {
 		    ResponseMember registerResponse = registerMember(newMember);
 		    
 		    return registerResponse;  // 返回註冊結果
+	}
+	
+	@Override
+	public List<Member> findallmember() {
+		 return memberRepository.findAll();
 	}
 }

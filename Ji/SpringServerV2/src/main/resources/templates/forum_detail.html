@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>文章標題</title>
-    <link rel="stylesheet" href="/css/forum/forum_detail.css">
+    <link rel="stylesheet" href="/css/forum_detail.css">
     <link th:replace="fragments/new_source :: head"></link>
     <style>
     	#header {
@@ -16,14 +16,14 @@
 		}
     </style>
 </head>
-<body>
+<body class="forum_body">
 	<div th:replace="fragments/new_header :: header"></div>
     <main class="forum_main">
         <div class="forum_place">
             <p>
-                <a th:href="@{/forum(country=${post.post.country})}" th:text="${post.post.country}">日本</a>
+                <a th:href="@{/forum(country=${post.post.country})}" th:text="${post.post.country}"></a>
                 <span></span>
-                <a th:href="@{/forum(country=${post.post.country}, city=${post.post.city})}" th:text="${post.post.city}" class="forum_area">熊本</a>
+                <a th:href="@{/forum(country=${post.post.country}, city=${post.post.city})}" th:text="${post.post.city}" class="forum_area"></a>
             </p>
         </div>
         <div>

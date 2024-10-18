@@ -1,18 +1,30 @@
 document.addEventListener('DOMContentLoaded', function() {
-	var modal = document.getElementById("myModal");
+	var modal = document.getElementById("order_myModal");
 	var btn = document.getElementById("view_details");
-	var span = document.getElementsByClassName("close")[0];
+	var span = document.getElementsByClassName("order_close")[0];
+
 	btn.onclick = function() {
-		modal.style.display = "block";
-	}
+	    var rect = btn.getBoundingClientRect();
+	    modal.style.display = "block";
+
+	    var modalContent = document.querySelector(".order_modal_content");
+
+		//把top設為按鈕的底部位置
+	    modalContent.style.top = (rect.bottom + window.scrollY) + "px";
+
+	    modalContent.style.left = "50%";
+	    modalContent.style.transform = "translateX(-50%)";
+	};
+
 	span.onclick = function() {
-		modal.style.display = "none";
-	}
+	    modal.style.display = "none";
+	};
+
 	window.onclick = function(event) {
-		if (event.target == modal) {
-			modal.style.display = "none";
-		}
-	}
+	    if (event.target == modal) {
+	        modal.style.display = "none";
+	    }
+	};
 });
 
 //col_right動畫效果
@@ -52,28 +64,29 @@ document.addEventListener('DOMContentLoaded', function() {
 	// 顯示訂單
 	const weekday = ["週日", "週一", "週二", "週三", "週四", "週五", "週六"];
 	function getday(flight_date) {
+		console.log(flight_date)
 		let date = new Date(flight_date);
 		return date.getDay();
 	}
 
-	const flight_start = JSON.parse(localStorage.getItem('selectedFlights'))[0];
+	const flight_start = JSON.parse(localStorage.getItem('selectedFlights'));
 	const flight_end = JSON.parse(localStorage.getItem('selectedFlights2'));
 	const container = document.getElementById('container');
 	const order_details = document.createElement('div');
 	order_details.innerHTML = `
 					<div class="box">
-		                    <div style="font-weight: bold;">
-		                    	<span id="departure_city">${flight_end.city}</span>-><span id="arrival_city">${flight_start.city}</span>
+		                    <div style="font-weight: bold; width:10vw; display:flex; justify-content:center;">
+		                    	<span id="departure_city">${flight_end.city}</span>&nbsp;->&nbsp;<span id="arrival_city">${flight_start.city}</span>
 		                    </div>
 		                    <div style="display: flex;padding:20px 0">
 		                        <div
-		                            style="background-color: #f8b600; color:white; margin: 0 5px; padding: 0 10px; border-radius: 5px; transform:translateY(-10%)">
+		                            style="background-color: #f8b600; color:white; margin: 0 35px 0 70px; padding: 5px 10px; border-radius: 5px; transform:translateY(-15%)">
 		                            去程</div>
 		                        <div><span >${flight_start.plane.date_start.slice(5, 7).replace(/^0/, '')}月${flight_start.plane.date_start.slice(8, 10).replace(/^0/, '')}日</span> <span>${weekday[getday(flight_start.plane.date_start)]}</span>｜</div>
 		                        <div>所需時間: ${Math.floor(flight_start.duration / 60)}小時${flight_start.duration % 60}分</div>
 		                    </div>
 		                    <div style="display: flex; gap: 30px;">
-		                        <div style="display:grid; justify-items: center;gap: 20px;">
+		                        <div style="display:grid; justify-items: center;gap: 20px; width:10vw;">
 		                            <div>${flight_start.plane.time_start.slice(0, 5)}</div>
 		                            <div>${flight_start.plane.airline}</div>
 		                            <div>${flight_start.plane.time_end.slice(0, 5)}</div>
@@ -93,18 +106,18 @@ document.addEventListener('DOMContentLoaded', function() {
 		                </div>
 		                <hr style="border: none; border-top: 5px dashed rgba(34, 34, 34, 0.9);">
 		                <div class="box">
-		                    <div style="font-weight: bold;">
-								<span id="departure_city">${flight_start.city}</span>-><span id="arrival_city">${flight_end.city}</span>
+		                    <div style="font-weight: bold; width:10vw; display:flex; justify-content:center;">
+								<span id="departure_city">${flight_start.city}</span>&nbsp;->&nbsp;<span id="arrival_city">${flight_end.city}</span>
 							</div>
 		                    <div style="display: flex;padding:20px 0">
 		                        <div
-		                            style="background-color: #f8b600; color:white;margin: 0 5px; padding: 0 10px; border-radius: 5px; transform:translateY(-10%)">
+		                             style="background-color: #f8b600; color:white; margin: 0 30px 0 70px; padding: 5px 10px; border-radius: 5px; transform:translateY(-15%)">
 		                            回程</div>
 									<div><span >${flight_end.plane.date_start.slice(5, 7).replace(/^0/, '')}月${flight_end.plane.date_start.slice(8, 10).replace(/^0/, '')}日</span> <span>${weekday[getday(flight_end.plane.date_start)]}</span>｜</div>
 									<div>所需時間: ${Math.floor(flight_end.duration / 60)}小時${flight_end.duration % 60}分</div>
 		                    </div>
 		                    <div style="display: flex; gap: 30px;">
-		                        <div style="display:grid; justify-items: center;gap: 20px;">
+		                         <div style="display:grid; justify-items: center;gap: 20px; width:10vw;">
 									<div>${flight_end.plane.time_start.slice(0, 5)}</div>
 									<div>${flight_end.plane.airline}</div>
 									<div>${flight_end.plane.time_end.slice(0, 5)}</div>
@@ -138,12 +151,16 @@ document.addEventListener('DOMContentLoaded', function() {
 	const luggageForm = document.querySelector('.luggageform_section');
 
 	// 票價 
-	let human = flight_start.quantity;
-	ticketPeople.innerHTML = `機票 (${human}位成人)`
+	let human_adults = Number(flight_start.adults);
+	let human_child = Number(flight_start.child);
+	if(human_child>0) ticketPeople.innerHTML = `機票(${human_adults}位成人,${human_child}位小孩)`
+	else ticketPeople.innerHTML = `機票 (${human_adults}位成人)`
 	if (flight_start.seat === '經濟艙') {
-		ticketPriceElement.innerHTML = `NT$ ${Number(flight_start.plane.eco_price) * human + Number(flight_end.plane.eco_price) * human}`
+		price = `NT$${Math.round((Number(flight_start.plane.eco_price) + Number(flight_end.plane.eco_price)) * (human_adults + 0.75*human_child))}`
+		ticketPriceElement.innerHTML = price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 	} else {
-		ticketPriceElement.innerHTML = `NT$ ${Number(flight_start.plane.bus_price) * human + Number(flight_end.plane.bus_price) * human}`
+		price = `NT$${Math.round((Number(flight_start.plane.bus_price) + Number(flight_end.plane.bus_price)) * (human_adults + 0.75*human_child))}`
+		ticketPriceElement.innerHTML = price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 	}
 
 
@@ -207,7 +224,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		passengerContainer.innerHTML = '';
 		luggageContainer.innerHTML = '';
 
-		for (let i = 0; i < human; i++) {
+		for (let i = 0; i < (human_adults + human_child); i++) {
 			const newSection = passengerForm.cloneNode(true);
 			const newLuggageSection = luggageForm.cloneNode(true);
 
@@ -443,7 +460,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
 				// createOrderData 並獲取 orderId
 				const orderData = createOrderData(cid);
-				const orderResponse = await fetch('/orders/createOrder', {
+				const uid = JSON.parse(localStorage.getItem('uid'))
+				const orderResponse = await fetch(`/orders/createOrder?uid=${uid.uid}`, {
 					method: 'POST',
 					headers: { 'Content-Type': 'application/json' },
 					body: JSON.stringify(orderData)
@@ -461,7 +479,7 @@ document.addEventListener('DOMContentLoaded', function() {
 				};
 
 				try {
-					const contactResponse = await fetch('/orders/createContact', {
+					const contactResponse = await fetch(`/orders/createContact`, {
 						method: 'POST',
 						headers: { 'Content-Type': 'application/json' },
 						body: JSON.stringify(contactData)
@@ -545,10 +563,15 @@ document.addEventListener('DOMContentLoaded', function() {
 	function createOrderData(contactId) {
 		const finalPriceElement = document.getElementById('final_price');
 		const finalPrice = finalPriceElement ? parseFloat(finalPriceElement.value) || 0 : 0;
+		const start_data = localStorage.getItem('selectedFlights');
+		const end_data = localStorage.getItem('selectedFlights2');
+		
 		return {
 			orderNumber: 'OD' + new Date().getTime(),
 			contactId: contactId,
-			finalPrice: finalPrice
+			finalPrice: finalPrice,
+			start_data: start_data,
+			end_data: end_data
 		};
 
 	}

@@ -72,9 +72,9 @@ public class ReportsServiceImpl implements ReportsService{
 		Posts post = postsRepository.findById(postId).orElse(null);
 		
 		if (post.getReportsCount() >= 5) {
-			post.setStatus(false);
+			post.setStatus(0);
 		} else {
-			post.setStatus(true);
+			post.setStatus(1);
 		}
 		postsRepository.save(post);
 	}

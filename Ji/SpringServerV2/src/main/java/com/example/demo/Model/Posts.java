@@ -57,11 +57,11 @@ public class Posts {
 	private LocalDateTime createdTime;
 	
 	@ManyToOne
-	@JoinColumn(name = "authorId", referencedColumnName = "id" ,nullable = false)
+	@JoinColumn(name = "authorId", nullable = false)
 	private Member author;
 	
 	@Column(name = "status")
-	private Boolean status = true;
+	private int status = 1;
 	
 	
 	@OneToMany(mappedBy = "posts")
@@ -183,11 +183,11 @@ public class Posts {
 		this.author = author;
 	}
 	
-	public Boolean getStatus() {
+	public int getStatus() {
 		return status;
 	}
 
-	public void setStatus(Boolean status) {
+	public void setStatus(int status) {
 		this.status = status;
 	}
 

@@ -1,6 +1,6 @@
 document.getElementById('member_logout').addEventListener('click', () => {
 	localStorage.removeItem('uid');
-	window.location.href = '/homepage';	
+	window.location.href = '/homepage';
 });
 
 fetch('/member/info')
@@ -508,54 +508,139 @@ function loadPasswordPage() {
 		}
 	});
 }
-//修改如上
 
+//當前訂單
+const order_now = document.getElementById('order_now');
+order_now.addEventListener('click', () => {
+	const uid = JSON.parse(localStorage.getItem('uid'));
+	fetch(`/member/findOrders?uid=${uid.uid}`, {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json'
+		}
+	})
+		.then(response => response.json())
+		.then(data => {
+			let tickets = "";
+			const promises = data.map(orderNumber => {
+				return fetch(`/plane/orderForMember?orderNumber=${orderNumber}`, {
+					method: 'GET',
+					headers: {
+						'Content-Type': 'application/json'
+					}
+				})
+					.then(response => response.json())
+					.then(data => {
+						if (data.orderStatus == '尚未付款' || data.orderStatus == '已付款完成') tickets += ticket(data);
+					})
+					.catch(error => {
+						console.error('Error:', error);
+					});
+			});
 
-// 當前訂單
-const orderNumber = 'AE9268';
-const ticketCount = '2';
-const totalPrice = '8,829';
-const goCity = 'TPE';
-const backCity = 'KIX';
+			Promise.all(promises).then(() => {
+				mainContent.style.gap = "10px";
+				mainContent.innerHTML = tickets;
+			});
+		})
+		.catch(error => {
+			console.error('Error:', error);
+		});
+})
 
-const go_goTime = '2024年8月30日(週五)';
-const go_orderclass = '經濟艙';
-const go_plane = '長榮航空';
-const go_airline = 'BR700'
-const go_departSmallTime = '9:00';
-const go_departCity = 'KIX';
-const go_wholeTime = '2小時45分鐘';
-const go_landSmallTime = '11:45';
-const go_landCity = 'TPE';
+// 歷史訂單
+const order_before = document.getElementById('order_before');
+order_before.addEventListener('click', () => {
+	const uid = JSON.parse(localStorage.getItem('uid'));
+	fetch(`/member/findOrders?uid=${uid.uid}`, {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json'
+		}
+	})
+		.then(response => response.json())
+		.then(data => {
+			let tickets = "";
+			const promises = data.map(orderNumber => {
+				return fetch(`/plane/orderForMember?orderNumber=${orderNumber}`, {
+					method: 'GET',
+					headers: {
+						'Content-Type': 'application/json'
+					}
+				})
+					.then(response => response.json())
+					.then(data => {
+						if (data.orderStatus == '已完成飛行') tickets += ticket(data);
+					})
+					.catch(error => {
+						console.error('Error:', error);
+					});
+			});
 
-const back_goTime = '2024年8月30日(週五)';
-const back_orderclass = '經濟艙';
-const back_plane = '長榮航空';
-const back_airline = 'BR700'
-const back_departSmallTime = '9:00';
-const back_departCity = 'KIX';
-const back_wholeTime = '2小時45分鐘';
-const back_landSmallTime = '11:45';
-const back_landCity = 'TPE';
+			Promise.all(promises).then(() => {
+				// 等待所有 fetch 完成後再更新 DOM
+				mainContent.style.gap = "10px";
+				mainContent.innerHTML = tickets; // 在所有請求完成後更新內部 HTML
+			});
+		})
+		.catch(error => {
+			console.error('Error:', error);
+		});
+})
 
-const order_nowHTML = `    
+function date_transform(flight_date) {
+	const weekday = ["週日", "週一", "週二", "週三", "週四", "週五", "週六"];
+	let date = new Date(flight_date);
+	return flight_date.slice(0, 4) + '年' + flight_date.slice(5, 7) + '月' + flight_date.slice(8, 10) + '日(' + weekday[date.getDay()] + ')';
+}
+
+function duration(duration) {
+	return Math.floor(duration / 60) + '時' + (duration % 60) + '分';
+}
+
+function status(orderStatus) {
+	if (orderStatus == '尚未付款') return '待付款';
+	else if (orderStatus == '已付款完成') return '待出發';
+	else if (orderStatus == '已完成飛行') return '已完成';
+}
+
+function ticket(data) {
+	let start_date = date_transform(JSON.parse(data.start_data).plane.date_start);
+	let end_date = date_transform(JSON.parse(data.end_data).plane.date_start);
+	let status_color = '';
+	let pay = 'block';
+	let icon_color = '#008000';
+	if (data.orderStatus == '尚未付款') {
+		status_color = 'red';
+		icon_color = 'red';
+	}
+	else if (data.orderStatus == '已付款完成') {
+		status_color = '#008000';
+		pay = 'none';
+	} else {
+		status_color = 'gray';
+		icon_color = 'gray';
+		pay = 'none';
+	}
+
+	return `    
         <section id="member_Order_Ticket">
           <section id="member_Order_TopSchedule">
               <div id="member_Order_TotalSchedule">
-                <i class="fas fa-plane icon" id="member_Order_planeIcon"></i>
+                <i class="fas fa-plane icon" id="member_Order_planeIcon" style="color:${icon_color}"></i>
                 <span id="member_Order_Form">訂單編號</span>
                 <span style="font-size: 1vw">:&nbsp;</span>
-                <span id="member_Order_Number">${orderNumber}</span>
+                <span id="member_Order_Number">${data.orderNumber}</span>
                 <span style="font-size: 1vw">｜&nbsp;</span>
-                <span id="member_Order_GoCity">${goCity}</span>
-                <img style="width: 1.1vw" src="./icon/arrow-come_back.png" alt="" />
+                <span id="member_Order_GoCity">${JSON.parse(data.start_data).plane.des_start}</span>
+                <img style="width: 1.1vw" src="/assets/arrow-come_back.png" alt="" />
                 &nbsp;
-                <span id="member_Order_BackCity">${backCity}</span>
+                <span id="member_Order_BackCity">${JSON.parse(data.start_data).plane.des_end}</span>
               </div>
-              <div id="member_Order_State"> 
+              <div id="member_Order_State" style="color:${status_color};"> 
                   <div>狀態</div>
                   <span>&nbsp;:&nbsp;</span>
-                  <span>待出發</span>
+                  <span>${status(data.orderStatus)}</span>
                  </div>
             </section>
 
@@ -564,15 +649,15 @@ const order_nowHTML = `
                 <div id="member_Order_Go_side">
                   <span id="member_Order_Go">去程</span>
                   <span>&nbsp;:&nbsp;</span>
-                  <span id="member_Order_GoTime">${go_goTime}</span>
+                  <span id="member_Order_GoTime">${start_date}</span>
                 </div>
 
                 <div id="member_Order_Plane_side">
-                  <span id="member_Order_Plane">${go_plane}</span>
+                  <span id="member_Order_Plane">${JSON.parse(data.start_data).plane.airline}</span>
                   <span>&nbsp;&nbsp;</span>
-                  <span id="member_Order_airline">${go_airline}</span>
+                  <span id="member_Order_airline">${JSON.parse(data.start_data).plane.type}</span>
                   <span>&nbsp;:&nbsp;</span>
-                  <span id="member_Order_Class">${go_orderclass}</span>
+                  <span id="member_Order_Class">${JSON.parse(data.start_data).seat}</span>
                 </div>
 
               </div>
@@ -581,15 +666,15 @@ const order_nowHTML = `
                 <div id="member_Order_Schedule">
                   <div id="member_Order_DepartTime">
                     <div>
-                      <span id="member_Order_DepartSmallTime">${go_departSmallTime}</span>
+                      <span id="member_Order_DepartSmallTime">${JSON.parse(data.start_data).plane.time_start.slice(0, 5)}</span>
                     </div>
                     <div>
-                      <span id="member_Order_DepartCity">${go_departCity}</span>
+                      <span id="member_Order_DepartCity">${JSON.parse(data.start_data).plane.des_start}</span>
                     </div>
                   </div>
                   <div id="member_Order_WholeTime">
                       <div>
-                        ${go_wholeTime}
+                        ${duration(JSON.parse(data.start_data).duration)}
                       </div>
                       <div class="arrow-container"></div>
                       <div>
@@ -598,10 +683,10 @@ const order_nowHTML = `
                   </div>
                   <div id="member_Order_LandTime">
                     <div>
-                      <span id="member_Order_LandSmallTime">${go_landSmallTime}</span>
+                      <span id="member_Order_LandSmallTime">${JSON.parse(data.start_data).plane.time_end.slice(0, 5)}</span>
                     </div>
                     <div>
-                      <span id="member_Order_LandCity">${go_landCity}</span>
+                      <span id="member_Order_LandCity">${JSON.parse(data.start_data).plane.des_end}</span>
                     </div>
                   </div>
                 </div>
@@ -613,15 +698,15 @@ const order_nowHTML = `
                 <div id="member_Order_Go_side">
                   <span id="member_Order_Go">回程</span>
                   <div style="font-size: 1vw">&nbsp;:&nbsp;</div>
-                  <span id="member_Order_GoTime">${back_goTime}</span>
+                  <span id="member_Order_GoTime">${end_date}</span>
                 </div>
 
                 <div id="member_Order_Plane_side">
-                  <span id="member_Order_Plane">${back_plane}</span>
+                  <span id="member_Order_Plane">${JSON.parse(data.end_data).plane.airline}</span>
                    <span>&nbsp;&nbsp;</span>
-                  <span id="member_Order_airline">${back_airline}</span>
+                  <span id="member_Order_airline">${JSON.parse(data.end_data).plane.type}</span>
                   <span>&nbsp;:&nbsp;</span>
-                  <span id="member_Order_Class">${back_orderclass}</span>
+                  <span id="member_Order_Class">${JSON.parse(data.end_data).seat}</span>
                 </div>
 
               </div>
@@ -630,16 +715,16 @@ const order_nowHTML = `
                 <div id="member_Order_Schedule">
                   <div id="member_Order_DepartTime">
                     <div>
-                      <span id="member_Order_DepartSmallTime">${back_departSmallTime}</span>
+                      <span id="member_Order_DepartSmallTime">${JSON.parse(data.end_data).plane.time_start.slice(0, 5)}</span>
                     </div>
                     <div>
-                      <span id="member_Order_DepartCity">${back_departCity}</span>
+                      <span id="member_Order_DepartCity">${JSON.parse(data.end_data).plane.des_start}</span>
                     </div>
                   </div>
                   <div id="member_Order_WholeTime">
                    
                       <div>
-                        ${back_wholeTime}
+                        ${duration(JSON.parse(data.end_data).duration)}
                       </div>
                       <div class="arrow-container"></div>
                       <div>
@@ -649,10 +734,10 @@ const order_nowHTML = `
                   </div>
                   <div id="member_Order_LandTime">
                     <div>
-                      <span id="member_Order_LandSmallTime">${back_landSmallTime}</span>
+                      <span id="member_Order_LandSmallTime">${JSON.parse(data.end_data).plane.time_end.slice(0, 5)}</span>
                     </div>
                     <div>
-                      <span id="member_Order_LandCity">${back_landCity}</span>
+                      <span id="member_Order_LandCity">${JSON.parse(data.end_data).plane.des_end}</span>
                     </div>
                   </div>
                 </div>
@@ -663,23 +748,19 @@ const order_nowHTML = `
               <div id="member_Order_PeoplePrice">
                 <div id="member_Order_People">
                   <span>張數&nbsp;:&nbsp</span>
-                  <span>${ticketCount}</span>
+                  <span>${Number(JSON.parse(data.start_data).adults) + Number(JSON.parse(data.start_data).child)}</span>
                 </div>
                 <div id="member_Order_TotalPrice">
                   <span>總價&nbsp;:&nbspNT$</span>
-                  <span>${totalPrice}</span>
+                  <span>${data.finalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</span>
                 </div>
               </div>
               <div>
-                <button id="member_Order_Cancel">取消</button>
+                <button id="member_Order_Cancel" style="display:${pay}" onclick="window.location.href='/orders/Complete/${data.oid}'">付款</button>
               </div>
             </section>
       </section>`;
-
-const order_now = document.getElementById('order_now');
-order_now.addEventListener('click', () => {
-	mainContent.innerHTML = order_nowHTML;
-})
+}
 
 // 歷史評論
 function member_forum_generateHTML(member_forum_imageUrl, member_forum_title, member_forum_content, member_forum_authorImage, member_forum_author, member_forum_date) {

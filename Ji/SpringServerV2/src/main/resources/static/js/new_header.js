@@ -8,10 +8,16 @@ if (!localStorage.getItem('uid')) {
 
 const nowTime = new Date().getTime();
 const uidData = JSON.parse(localStorage.getItem('uid'));
-if (Number(uidData.date) + 900000 <= nowTime) localStorage.removeItem('uid');
-
-document.getElementById('logout').addEventListener('click', () => {
-	localStorage.removeItem('uid');
-})
+if(uidData) {
+	// 沒登出超過一定時間會自動登出
+	if (Number(uidData.date) + 9000000 <= nowTime) localStorage.removeItem('uid');
+	
+	// logout登出
+	document.getElementById('logout').addEventListener('click', () => {
+		localStorage.removeItem('uid');
+	})
+	
+	forum_write
+}
 
 localStorage.setItem('lastUrl',window.location.href);

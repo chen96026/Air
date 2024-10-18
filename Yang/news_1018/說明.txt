@@ -1,0 +1,7 @@
+news.sql 為新聞的資料表
+對應撰寫的model、repo、service和controller為
+News.java / NewsRepository.java / NewsService.java / NewsServiceImpl.java / NewsController.java
+為了可以上傳超過1M的檔案，需要兩項改動
+    1. 修改mamp關於mysql的conf
+    2. 修改spring的伺服器的傳輸限制，就是properties文件內的最後兩行
+首頁新增一個script區塊，位置在最下面，上面有註解「1018 新聞改用fetch」

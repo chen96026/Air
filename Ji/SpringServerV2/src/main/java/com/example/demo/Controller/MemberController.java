@@ -1,5 +1,9 @@
 package com.example.demo.Controller;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.example.demo.MemberStatus;
 import com.example.demo.ResponseMember;
 import com.example.demo.Model.Member;
+import com.example.demo.Repository.MemberRepository;
 import com.example.demo.Service.MemberService;
 import com.example.demo.dto.CheckPasswordDTO;
 import com.example.demo.dto.ThirdPartyDTO;
@@ -29,6 +34,9 @@ public class MemberController {
 
 	@Autowired
 	private MemberService memberService;
+
+	@Autowired
+	private MemberRepository memberRepository;
 
 	@GetMapping("/isexistEmail/{email}")
 	public ResponseMember isExistEmail(@PathVariable("email") String email) {
@@ -136,5 +144,24 @@ public class MemberController {
 
 		// 返回結果
 		return ResponseEntity.ok(responseMember);
+	}
+
+	// 後臺會員新增API
+	@GetMapping("/member_admin")
+	public ResponseEntity<List<Member>> getallmember() {
+		List<Member> members = memberService.findallmember();
+		if (members.isEmpty()) {
+			return ResponseEntity.noContent().build();
+		}
+		return ResponseEntity.ok(members);// 有資料就回傳200
+	}
+
+	@PostMapping("/findOrders")
+	public List<String> findOrders(@RequestParam String uid) {
+		Member member = memberRepository.findByUid(uid);
+		String[] items = member.getOrders().split(",");
+		List<String> list = new ArrayList<>(Arrays.asList(items));
+		System.out.println(list);
+		return list;
 	}
 }

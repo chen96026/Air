@@ -26,11 +26,14 @@ import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.bind.annotation.RequestBody;
 import com.example.demo.Model.Contact;
 import com.example.demo.Model.Luggage;
+import com.example.demo.Model.Member;
 import com.example.demo.Model.Orders;
 import com.example.demo.Model.Orders.OrderStatus;
 import com.example.demo.Model.Passenger;
 import com.example.demo.Model.Plane;
 import com.example.demo.Repository.ContactRepository;
+import com.example.demo.Repository.MemberRepository;
+import com.example.demo.Repository.OrdersRepository;
 import com.example.demo.Service.ContactService;
 import com.example.demo.Service.EcpayService;
 import com.example.demo.Service.LuggagesService;
@@ -61,6 +64,12 @@ public class OrdersController {
 	
 	@Autowired
 	private EcpayService ecpayService;
+	
+	@Autowired
+	private MemberRepository memberRepository;
+	
+	@Autowired
+	private OrdersRepository ordersRepository;
 
 	@PostMapping("/createContact")
 	public ResponseEntity<Contact> createContact(@RequestBody Contact contact) {
@@ -69,14 +78,24 @@ public class OrdersController {
 	}
 
 	@PostMapping("/createOrder")
-	public ResponseEntity<Object> createOrder(@RequestBody Orders order) {
+	public ResponseEntity<Object> createOrder(@RequestBody Orders order,@RequestParam String uid) {
 
 		if (order.getCreateDate() == null) {
 			order.setCreateDate(LocalDateTime.now());
 		}
-		order.setOrderStatus(OrderStatus.訂單已成立);
+		order.setOrderStatus(OrderStatus.尚未付款);
 
 		Orders savedOrder = ordersService.saveOrder(order);
+		
+		String orders;
+		Member member = memberRepository.findByUid(uid);
+		if (member.getOrders() != null && !member.getOrders().isEmpty()) {
+		    orders = member.getOrders() + "," + order.getOrderNumber();
+		} else {
+		    orders = order.getOrderNumber();
+		}
+		member.setOrders(orders);
+		memberRepository.save(member);
 
 		for (Passenger passenger : order.getPassengerList()) {
 			passenger.setOrders(savedOrder);
@@ -156,24 +175,7 @@ public class OrdersController {
 	    return ResponseEntity.ok(response);
 	}
 	
-	@GetMapping("/payBeforeTime/{oid}")
-    public ResponseEntity<Map<String, Object>> getPayBeforeTime(@PathVariable("oid") Long oid) {
-        Orders order = ordersService.getOrderById(oid);
-        if (order == null) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
-        }
-
-        LocalDateTime createDate = order.getCreateDate();
-        LocalDateTime adjustedTime = createDate.plusHours(1);
-
-        DateTimeFormatter formatterISO = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
-        String payBeforeTimeISO = adjustedTime.format(formatterISO);
-
-        Map<String, Object> response = new HashMap<>();
-        response.put("payBeforeTimeISO", payBeforeTimeISO);
-
-        return ResponseEntity.ok(response);
-    }
+	
 	
 	
 	@GetMapping("/checkout/{oid}")
@@ -227,7 +229,28 @@ public class OrdersController {
 	}
 	
 	
+	// 倒數計時截止時間
+		@GetMapping("/payBeforeTime/{oid}")
+	    public ResponseEntity<Map<String, Object>> getPayBeforeTime(@PathVariable("oid") Long oid) {
+	        Orders order = ordersService.getOrderById(oid);
+	        if (order == null) {
+	            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+	        }
+
+	        LocalDateTime createDate = order.getCreateDate();
+	        LocalDateTime adjustedTime = createDate.plusHours(1);
+
+	        DateTimeFormatter formatterISO = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
+	        String payBeforeTimeISO = adjustedTime.format(formatterISO);
+
+	        Map<String, Object> response = new HashMap<>();
+	        response.put("payBeforeTimeISO", payBeforeTimeISO);
+
+	        return ResponseEntity.ok(response);
+	    }
 	
+		
+	//訂單逾期取消	
 	@PostMapping("/ordercancel")
 	public ResponseEntity<String> OrderCancel(HttpSession session){
 		Long oid = (Long) session.getAttribute("currentOrderId");
@@ -249,10 +272,11 @@ public class OrdersController {
 		
 	}
 	
+	
+	
 	@GetMapping("/order_expired")
     public String showOrderExpiredPage() {
         
         return "order_expired"; 
     }
-	
 }
