@@ -78,8 +78,10 @@ hr {
 }
 
 .flight_logo_container{
-	max-width:150px;
-	min-width:150px;
+	max-width:180px;
+	min-width:180px;
+	text-align: center;
+	margin-left:-20px;
 }
 
 .flight_logo{
@@ -90,13 +92,13 @@ hr {
 	width: auto;
 	height:auto;
 	justify-content:center;
-	align-items: center;
 }
 
 #flight_plane {
+	margin-right:-50px;
 	display: flex;
-	justify-content: center;
-	width: 8vw;
+	justify-content: start;
+	width: 11vw;
 }
 
 .middle_group {
@@ -198,8 +200,9 @@ hr {
 	margin-bottom:20px;
 	border-top-left-radius:10px;
 	border-top-right-radius:10px;
-	background-color:#12BE68;
-	width:13vw;
+	background-color:black;
+	color:#fff;
+	width:12.98vw;
 	margin-left:-20px;
 	margin-top:-20px;
 	padding:15px 0;
@@ -221,9 +224,9 @@ hr {
 	margin-bottom:20px;
 }
 
-.choice-card2 {
+.choice-card2{
 	font-weight:600;
-	background-color: #fff;
+	background-color: #ddd;
 	color:#222;
 	padding:20px;
 	border-radius: 10px;
@@ -233,6 +236,19 @@ hr {
 	height:auto;
 	margin-left: 4vw;
 	margin-top: 2vh;
+	transition: transform 0.3s ease;
+}
+
+.choice-card3{
+	font-weight:600;
+	background-color: #ddd;
+	color:#222;
+	padding:20px;
+	border-radius: 10px;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+	text-align:center;
+	width: 13vw;
+	height:auto;
 	transition: transform 0.3s ease;
 }
 
@@ -260,41 +276,11 @@ hr {
 	background-color: #222;
 }
 
-.choice-card3 {
-	background-color: rgb(253, 226, 176);
-	border-radius: 10px;
-	padding: 20px;
-	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-	text-align: center;
-	width: 13vw;
-	height: 30vh;
-	margin-left: 5%;
-}
-
 .arrow-text-up,.arrow-text-down {
 	text-align: center;
 	align-items:center;
 	font-size: 1vw;
 	gap: 1vh;
-}
-
-.arrow-text-up2 {
-	font-size: 0.9vw;
-	margin-top: 1vh;
-}
-
-.arrow-text-down2 {
-	font-size: 0.9vw;
-	margin-top: 1vh;
-}
-
-#flight_takeoff {
-	width: 2vw;
-}
-
-.arrow-text-group {
-	font-size: 1vw;
-	font-weight: 400;
 }
 
 .arrow {
@@ -314,6 +300,18 @@ hr {
 	height: 2.8vh;
 	width: 10vw;
 	margin: 0px 0;
+}
+
+#flight_takeoff{
+	margin:1.5vh 0 1.5vh 0;
+	width:2vw;
+	height:4vh;
+}
+
+#flight_takeoff3{
+	margin:1vh 0 1vh 0;
+	width:2vw;
+	height:4vh;
 }
 
 /* Modal Background */
@@ -336,32 +334,41 @@ hr {
 	padding: 20px;
 	border: 1px solid #888;
 	width: 80%; /* Could be more or less, depending on screen size */
-	max-width: 600px;
+	max-width: 700px;
 	border-radius: 8px;
 	position: relative;
+	display:flex;
+	align-items: center;
 }
 
-.modal-title {
-	display: flex;
+.modal-title{
+	display:flex;
+	align-items: center;
+	margin-bottom:1vh;
 }
 
 .modal-title h2 {
-	flex: 10;
+	display: flex;
+	margin-top:1vh;
+	margin-bottom:0.5vh;
 }
 
-/* Close Button */
-.close {
-	flex: 1;
-	color: #aaa;
-	float: right;
-	font-size: 28px;
-	font-weight: bold;
+#confirmReturn{
+	width:8vw;
+	height:5vh;
 	cursor: pointer;
+	border:none;
+	padding:2.5px;
+	background-color: #f8b600;
+	border-radius:6px;
+	font-weight:600;
+	font-size:1vw;
+	transition: transform 0.3s ease; 
 }
 
-.close:hover, .close:focus {
-	color: black;
-	text-decoration: none;
+#confirmReturn:hover{
+	background-color: black;
+	color:#fff;
 }
 
 #goFlight, #returnFlight {
@@ -382,8 +389,10 @@ hr {
 }
 
 .modalFlightInfo {
-	display: grid;
-	grid-template-columns: repeat(2, 1fr);
+	display: flex;
+	align-items:center;
+	justify-content:center;
+	gap:2vw;
 }
 
 /* 滑塊容器 */

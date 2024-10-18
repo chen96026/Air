@@ -151,13 +151,16 @@ document.addEventListener('DOMContentLoaded', function() {
 	const luggageForm = document.querySelector('.luggageform_section');
 
 	// 票價 
-	let human = Number(flight_start.adults)+Number(flight_start.child);
-	if(Number(flight_start.child)>0) ticketPeople.innerHTML = `機票(${flight_start.adults}位成人,${flight_start.child}位小孩)`
-	else ticketPeople.innerHTML = `機票 (${flight_start.adults}位成人)`
+	let human_adults = Number(flight_start.adults);
+	let human_child = Number(flight_start.child);
+	if(human_child>0) ticketPeople.innerHTML = `機票(${human_adults}位成人,${human_child}位小孩)`
+	else ticketPeople.innerHTML = `機票 (${human_adults}位成人)`
 	if (flight_start.seat === '經濟艙') {
-		ticketPriceElement.innerHTML = `NT$${Number(flight_start.plane.eco_price) * human + Number(flight_end.plane.eco_price) * human}`
+		price = `NT$${Math.round((Number(flight_start.plane.eco_price) + Number(flight_end.plane.eco_price)) * (human_adults + 0.75*human_child))}`
+		ticketPriceElement.innerHTML = price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 	} else {
-		ticketPriceElement.innerHTML = `NT$${Number(flight_start.plane.bus_price) * human + Number(flight_end.plane.bus_price) * human}`
+		price = `NT$${Math.round((Number(flight_start.plane.bus_price) + Number(flight_end.plane.bus_price)) * (human_adults + 0.75*human_child))}`
+		ticketPriceElement.innerHTML = price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 	}
 
 
@@ -221,7 +224,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		passengerContainer.innerHTML = '';
 		luggageContainer.innerHTML = '';
 
-		for (let i = 0; i < human; i++) {
+		for (let i = 0; i < (human_adults + human_child); i++) {
 			const newSection = passengerForm.cloneNode(true);
 			const newLuggageSection = luggageForm.cloneNode(true);
 

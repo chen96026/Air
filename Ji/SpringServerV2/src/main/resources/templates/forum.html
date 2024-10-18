@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>旅遊論壇</title>
-    <link rel="stylesheet" href="/css/forum/forum.css">
+    <link rel="stylesheet" href="/css/forum.css">
     <link th:replace="fragments/new_source :: head"></link>
     <style>
     	#header {
@@ -59,7 +59,7 @@
         </div>
     </main>
     <div class="forum_write">
-        <a id="forum_writeP">
+        <a href="/forum/edit">
             <div class="forum_writeImg"></div>
             <p class="forum_writeP">撰寫心得</p>
         </a>
@@ -68,12 +68,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="/js/forum/forum_selectArea.js"></script>
     <script src="/js/forum/forum_loadingCards.js"></script>
-    <script>
-    	document.getElementById('forum_writeP').addEventListener('click',()=>{
-			if(!localStorage.getItem('uid')) window.location.href = '/login';
-			else window.location.href = '/forum_edit';
-		})
-    </script>
 </body>
 
 </html>

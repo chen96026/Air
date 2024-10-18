@@ -118,11 +118,7 @@ document.addEventListener('DOMContentLoaded', () => {
 				<div class="section_des_start">去程</div>
 				<div class="card2_airline">${flight.plane.airline}</div>
 				<div class="arrow-text-up">${flight.plane.des_start} - ${flight.plane.time_start.slice(0, 5)}</div>
-				<div>
-					<svg width="24" height="54" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 10">
-						<path d="M12 15l-10-10h6V0h8v5h6z" fill="black"/>
-					</svg>
-				</div>
+				<div><img id="flight_takeoff" src="/img/flight_takeoff.png"></div>
 				<div class="arrow-text-down">${flight.plane.des_end} - ${flight.plane.time_end.slice(0, 5)}</div>
 				<div class="card2_duration">飛行時間: ${Math.floor(duration / 60)}小時${duration % 60}分</div>
 				<div class="card2_price">價格: NT$${flight.plane.eco_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</div>
@@ -164,24 +160,26 @@ document.addEventListener('DOMContentLoaded', () => {
 		arr.push(selectedFlights);
 		arr.push(flight)
 
+		let check = true;
+		let text = '去程';
 		const modalFlightInfo = document.getElementById('modalFlightInfo');
 		modalFlightInfo.innerHTML = '';
 		arr.forEach(item => {
+			if(!check) text='回程';
 			let duration = calculateDuration(item.plane.time_start, item.plane.time_end, item.time_zone);
 			const flightCard = document.createElement('div');
 			flightCard.classList.add('choice-card3');
 			flightCard.innerHTML += `
-						<h3>${item.plane.airline}</h3>
-						<p class="arrow-text-up">${item.plane.des_start} - ${item.plane.time_start.slice(0, 5)}</p>
-						<div class="arrow">
-							<svg width="24" height="54" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-								<path d="M12 15l-10-10h6V0h8v5h6z" fill="black"/>
-							</svg>
-						</div>
-						<p class="arrow-text-down">${item.plane.des_end} - ${item.plane.time_end.slice(0, 5)}</p>
-						<p>飛行時間: ${Math.floor(duration / 60)}小時${duration % 60}分</p>
-						<p>價格: NT$${item.plane.eco_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</p>
-					`;
+					<div class="section_des_start">${text}</div>
+					<h4 class="card2_airline">${item.plane.airline}</h4>
+					<div class="arrow-text-up">${item.plane.des_start} - ${item.plane.time_start.slice(0, 5)}</div>
+					<div><img id="flight_takeoff" src="/img/flight_takeoff.png"></div>
+					<div class="arrow-text-down">${item.plane.des_end} - ${item.plane.time_end.slice(0, 5)}</div>
+						
+				<div class="card2_duration">飛行時間: ${Math.floor(duration / 60)}小時${duration % 60}分</span>
+				<div class="card2_price">價格: NT$${item.plane.eco_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</div>
+						`;
+			check = false;
 			modalFlightInfo.appendChild(flightCard);
 		});
 	}

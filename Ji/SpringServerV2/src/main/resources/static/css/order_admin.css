@@ -1,0 +1,174 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #f9f9ff !important;
+    border: 2px solid rgb(29, 223, 11);
+    margin: 0;
+    padding: 0;
+}
+
+.Backstage_main {
+    border: 2px solid red;
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+#Backstage_LeftSide {
+    /* border: 2px solid yellow; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 8vh;
+    flex-basis: 15%;
+}
+
+#Backstage_LeftMember,
+#Backstage_LeftOrder,
+#Backstage_LeftFlight,
+#Backstage_LeftForum {
+    border-bottom: 1px solid rgb(0, 0, 0);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 5vh;
+    width: 6vw;
+    font-size: 1vw;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.Backstage_MiddleSide {
+    border: 2px solid rgb(47, 0, 255);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 10vw;
+    min-height: 65vh;
+    background-color: #f9f9ff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    flex-basis: 80%;
+    margin: 0;
+    gap: 2vh;
+}
+
+.Backstage_Title {
+    /* border: 2px solid red; */
+    text-align: center;
+    color: #333;
+}
+
+.Backstage_Middleside>div {
+    background-color: white;
+    width: 90%;
+    margin: 0 auto 5% auto;
+}
+
+.container_all {
+    /* border: 2px solid greenyellow; */
+    min-height: 50vh;
+    width: 90%;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: white;
+}
+
+#order_list {
+    font-family: Arial, sans-serif;
+}
+
+#order_search_form {
+    margin-bottom: 20px;
+}
+
+#orderSearchForm input {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-right: 10px;
+}
+
+#orderSearchForm button {
+    padding: 8px 10px;
+    font-size: 14px;
+    background-color: #f8b600;
+    color: rgba(34, 34, 34, 0.9);
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#orderSearchForm button:hover {
+    background-color: #ddd;
+    color: #333
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+th,
+td {
+    padding: 8px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+th {
+    background-color: #f2f2f2;
+    color: #333;
+    height: 5vh;
+}
+
+
+
+tr:hover {
+    background-color: #f5f5f5;
+}
+
+#sort_button {
+    padding: 8px 10px;
+    font-size: 14px;
+    background-color: #f8b600;
+    color: rgba(34, 34, 34, 0.9);
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#sort_button:hover {
+    background-color: #ddd;
+}
+
+
+.order_number {
+    white-space: nowrap;
+}
+
+select {
+    appearance: none;
+    /* 去掉瀏覽器預設的樣式 */
+    border: 1px solid #ced4da;
+    /* 改變邊框 */
+    padding: 0.5rem 1rem;
+    /* 調整內邊距 */
+    border-radius: 0.25rem;
+    /* 圓角 */
+    font-size: 1rem;
+    width: 13vh;
+    height: 20%;
+    background-image: url('data:image/svg+xml;charset=UTF-8,%3Csvg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="feather feather-chevron-down" viewBox="0 0 24 24"%3E%3Cpath d="M6 9l6 6 6-6"/%3E%3C/svg%3E');
+    /* 自定義下拉箭頭圖標 */
+    background-position: right 0.75rem center;
+    /* 圖標位置 */
+    background-repeat: no-repeat;
+    /* 禁止圖標重複 */
+}

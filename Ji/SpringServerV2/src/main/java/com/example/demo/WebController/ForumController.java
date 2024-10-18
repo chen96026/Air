@@ -69,7 +69,7 @@ public class ForumController {
 	}
 	
 	
-	@GetMapping("/forum_detail/{id}")
+	@GetMapping("/forum/detail/{id}")
 	public String postDetail(@PathVariable Long id, Model model, HttpSession session) {
 		
 		Posts post = postsRepository.findById(id).orElse(null);
@@ -82,12 +82,12 @@ public class ForumController {
 			List<String> tagsList = new ArrayList<String>();
 			
 			if (!"".equals(tags)) {
-				
 				tagsList = Arrays.stream(tags.split(",")).collect(Collectors.toList());
 			}
 			
 			model.addAttribute("post", postViewDTO);
 			model.addAttribute("tags", tagsList);
+			
 			String getSessionUid = (String) session.getAttribute("userUid");
 
 			if (getSessionUid != null) {
@@ -99,7 +99,7 @@ public class ForumController {
 				model.addAttribute("like", likesRepository.findByMemberIdAndPostsId(member.getId(), id) != null);	
 				model.addAttribute("bookmark", bookmarkRepository.findByMemberIdAndPostsId(member.getId(), id) != null);		
 				model.addAttribute("report", reportsRepository.findByMemberIdAndPostsId(member.getId(), id) != null);
-				
+
 				return "forum_detail";
 
 			} else {
@@ -115,11 +115,15 @@ public class ForumController {
 	}
 
 	
-	@GetMapping("/forum_edit")
+	@GetMapping("/forum/edit")
 	public String editPost(@RequestParam(required = false) Long id, Model model, HttpSession session) {
 		
 		String getSessionUid = (String) session.getAttribute("userUid");
 		System.out.println(getSessionUid);
+		
+		if (getSessionUid == null) {
+			return "redirect:/login";
+		}
 		
 		UserNameIconDTO userNameIcon = new UserNameIconDTO(memberRepository.findByUid(getSessionUid));
 		model.addAttribute("user", userNameIcon);
@@ -145,10 +149,11 @@ public class ForumController {
 	}
 	
 	
-	@GetMapping("forum_admin")
+	@GetMapping("/admin/forum")
 	public String adminForum(Model model) {
 		
 		return "/back/forum_admin";
 		
 	}
+	
 }

@@ -74,19 +74,19 @@ public class PostsServiceImpl implements PostsService {
 				
 			return (key != null && !key.isEmpty())
 				? postsRepository.searchByCityAndKey(city, key, pageable)
-				: postsRepository.findByCityAndStatus(city, true, pageable);
+				: postsRepository.findByCityAndStatusGreaterThan(city, 0, pageable);
 				
 		} else if  (!"全世界".equals(country)) {
 				
 			return (key != null && !key.isEmpty())
 				? postsRepository.searchByCountryAndKey(country, key, pageable)
-				: postsRepository.findByCountryAndStatus(country, true, pageable);
+				: postsRepository.findByCountryAndStatusGreaterThan(country, 0, pageable);
 				
 		} else {
 				
 			return (key != null && !key.isEmpty())
 				? postsRepository.searchByKey(key, pageable)
-				: postsRepository.findByStatus(true, pageable);
+				: postsRepository.findByStatusGreaterThan(0, pageable);
 		}
 	}		
 		
@@ -100,20 +100,20 @@ public class PostsServiceImpl implements PostsService {
 		if (!"所有城市".equals(city) && !"全世界".equals(country)) {
 				
 			return (key != null && !key.isEmpty())
-				? postsRepository.searchByCityAndKeySortedBylikes(city, key, pageable)
-				: postsRepository.findByCitySortedBylikes(city, pageable);
+				? postsRepository.searchByCityAndKeySortedByLikes(city, key, pageable)
+				: postsRepository.findByCitySortedByLikes(city, pageable);
 				
 		} else if  (!"全世界".equals(country)) {
 				
 			return (key != null && !key.isEmpty())
-				? postsRepository.searchByCountryAndKeySortedBylikes(country, key, pageable)
-				: postsRepository.findByCountrySortedBylikes(country, pageable);
+				? postsRepository.searchByCountryAndKeySortedByLikes(country, key, pageable)
+				: postsRepository.findByCountrySortedByLikes(country, pageable);
 				
 		} else {
 				
 			return (key != null && !key.isEmpty())
-				? postsRepository.searchByKeySortedBylikes(key, pageable)
-				: postsRepository.findAllSortedBylikes(pageable);
+				? postsRepository.searchByKeySortedByLikes(key, pageable)
+				: postsRepository.findAllSortedByLikes(pageable);
 		}
 			
 	}
@@ -186,6 +186,10 @@ public class PostsServiceImpl implements PostsService {
 			postDB.setShare(post.getShare());
 			postDB.setContent(post.getContent());
 			
+			if (!post.getShare() && postDB.getStatus() == 2) {
+				postDB.setStatus(1);
+			}
+			
 			postsRepository.save(postDB);
 			
 			if (images != null && !images.isEmpty()) {
@@ -218,13 +222,35 @@ public class PostsServiceImpl implements PostsService {
 	}
 
 
-	// 後臺管理 暫時被下架的文章列表
+	// 後臺管理 
 	@Override
-	public Page<Posts> findReportedPosts(int page) {
-		
+	public Page<Posts> adminGetPosts (String query, int page) {
+
 		Pageable pageable = PageRequest.of(page, 10);
 		
-		return postsRepository.findByStatus(false, pageable);
+		if ("share".equals(query)) {
+
+			return postsRepository.findByShareTrueAndStatusEquals(pageable);	// 待審核刊登至首頁的文章列表
+		} else {
+			
+			return postsRepository.findByStatusEquals(0, pageable);	// 暫時被下架的文章列表
+		}
+		
 	}
 
+
+	// 更新文章刊登狀態
+	@Override
+	public Posts updatePostStatus(Long id, int status) {
+		
+		Posts post = postsRepository.findById(id).orElse(null);
+		post.setStatus(status);
+		
+		if (status == 0) {
+			post.setShare(false);
+		}
+		
+		return postsRepository.save(post);
+	}
+	
 }

@@ -60,7 +60,7 @@ $(() => {
 	                    data.forEach(post => {
 	                        const card = 
 						  		`<div class="forum_card">
-						        	<a href="/forum_detail/${post.post.id}">
+						        	<a href="/forum/detail/${post.post.id}">
 						        		<article>
 						        			<img class="forum_articleImg" src="${post.coverImgURL}" alt="photo">
 						                    <h2>${post.post.mainTitle}</h2>

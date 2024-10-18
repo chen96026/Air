@@ -49,8 +49,4 @@ $(() => {
         showSlides(slideIndex = index);
     });
 
-    // 依圖片總數更變小圖寬
-    if (smallPhotos.length > 1) {
-        smallPhotos.css('width', `${100 / smallPhotos.length}%`);
-    }
 });
