@@ -65,7 +65,7 @@ public class AioCheckOutALL {
 	 * ChoosePayment
 	 * 選擇預設付款方式
 	 */
-	private String ChoosePayment = "Credit";
+	private String ChoosePayment = "ALL";
 	
 	/**
 	 * ClientBackURL

@@ -523,7 +523,6 @@ order_now.addEventListener('click', () => {
 		.then(data => {
 			let tickets = "";
 			const promises = data.map(orderNumber => {
-				console.log(orderNumber);
 				return fetch(`/plane/orderForMember?orderNumber=${orderNumber}`, {
 					method: 'GET',
 					headers: {
@@ -532,7 +531,7 @@ order_now.addEventListener('click', () => {
 				})
 					.then(response => response.json())
 					.then(data => {
-						if (data.orderStatus == '訂單已成立' || data.orderStatus == '已付款完成') tickets += ticket(data);
+						if (data.orderStatus == '尚未付款' || data.orderStatus == '已付款完成') tickets += ticket(data);
 					})
 					.catch(error => {
 						console.error('Error:', error);
@@ -540,9 +539,8 @@ order_now.addEventListener('click', () => {
 			});
 
 			Promise.all(promises).then(() => {
-				// 等待所有 fetch 完成後再更新 DOM
 				mainContent.style.gap = "10px";
-				mainContent.innerHTML = tickets; // 在所有請求完成後更新內部 HTML
+				mainContent.innerHTML = tickets;
 			});
 		})
 		.catch(error => {
@@ -564,7 +562,6 @@ order_before.addEventListener('click', () => {
 		.then(data => {
 			let tickets = "";
 			const promises = data.map(orderNumber => {
-				console.log(orderNumber);
 				return fetch(`/plane/orderForMember?orderNumber=${orderNumber}`, {
 					method: 'GET',
 					headers: {
@@ -602,7 +599,7 @@ function duration(duration) {
 }
 
 function status(orderStatus) {
-	if (orderStatus == '訂單已成立') return '待付款';
+	if (orderStatus == '尚未付款') return '待付款';
 	else if (orderStatus == '已付款完成') return '待出發';
 	else if (orderStatus == '已完成飛行') return '已完成';
 }
@@ -612,14 +609,17 @@ function ticket(data) {
 	let end_date = date_transform(JSON.parse(data.end_data).plane.date_start);
 	let status_color = '';
 	let pay = 'block';
-	if (data.orderStatus == '訂單已成立') {
+	let icon_color = '#008000';
+	if (data.orderStatus == '尚未付款') {
 		status_color = 'red';
+		icon_color = 'red';
 	}
 	else if (data.orderStatus == '已付款完成') {
 		status_color = '#008000';
 		pay = 'none';
 	} else {
 		status_color = 'gray';
+		icon_color = 'gray';
 		pay = 'none';
 	}
 
@@ -627,7 +627,7 @@ function ticket(data) {
         <section id="member_Order_Ticket">
           <section id="member_Order_TopSchedule">
               <div id="member_Order_TotalSchedule">
-                <i class="fas fa-plane icon" id="member_Order_planeIcon"></i>
+                <i class="fas fa-plane icon" id="member_Order_planeIcon" style="color:${icon_color}"></i>
                 <span id="member_Order_Form">訂單編號</span>
                 <span style="font-size: 1vw">:&nbsp;</span>
                 <span id="member_Order_Number">${data.orderNumber}</span>
@@ -756,7 +756,7 @@ function ticket(data) {
                 </div>
               </div>
               <div>
-                <button id="member_Order_Cancel" style="display:${pay}">付款</button>
+                <button id="member_Order_Cancel" style="display:${pay}" onclick="window.location.href='/orders/Complete/${data.oid}'">付款</button>
               </div>
             </section>
       </section>`;

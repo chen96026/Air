@@ -34,7 +34,7 @@ public class MemberController {
 
 	@Autowired
 	private MemberService memberService;
-	
+
 	@Autowired
 	private MemberRepository memberRepository;
 
@@ -145,9 +145,19 @@ public class MemberController {
 		// 返回結果
 		return ResponseEntity.ok(responseMember);
 	}
-	
+
+	// 後臺會員新增API
+	@GetMapping("/member_admin")
+	public ResponseEntity<List<Member>> getallmember() {
+		List<Member> members = memberService.findallmember();
+		if (members.isEmpty()) {
+			return ResponseEntity.noContent().build();
+		}
+		return ResponseEntity.ok(members);// 有資料就回傳200
+	}
+
 	@PostMapping("/findOrders")
-	public List<String> findOrders(@RequestParam String uid){
+	public List<String> findOrders(@RequestParam String uid) {
 		Member member = memberRepository.findByUid(uid);
 		String[] items = member.getOrders().split(",");
 		List<String> list = new ArrayList<>(Arrays.asList(items));

@@ -223,7 +223,7 @@ public class OrdersController {
 		return "order";
 	}
 
-	@GetMapping("/order_admin")
+	@PostMapping("/order_admin")
 	public String showOrderAdminPage(Model model) {
 		return "/back/order_admin"; // 返回 order_admin.html
 	}

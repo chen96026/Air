@@ -49,4 +49,9 @@ public class WebController {
 		return "contact";
 		
 	}
+	
+	@GetMapping("/member_admin")
+	public String memberAdmin() {
+		return "back/member_admin";
+	}
 }

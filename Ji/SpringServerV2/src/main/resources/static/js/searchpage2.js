@@ -49,17 +49,25 @@ document.addEventListener('DOMContentLoaded', () => {
 			choice.href = '#';
 
 			choice.innerHTML += `
-					<h3>${flight.plane.airline}</h3>
-					<p class="arrow-text-up">${flight.plane.des_start} - ${flight.plane.time_start.slice(0, 5)}</p>
-					<div class="arrow">
-						<svg width="24" height="54" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-							<path d="M12 15l-10-10h6V0h8v5h6z" fill="black"/>
-						</svg>
-					</div>
-					<p class="arrow-text-down">${flight.plane.des_end} - ${flight.plane.time_end.slice(0, 5)}</p>
-					<p>飛行時間: ${Math.floor(duration / 60)}小時${duration % 60}分</p>
-					<p>價格: NT$${flight.plane.eco_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</p>
-				`;
+								<div class="flight_logo_container"><img class="flight_logo" src="/assets/airline_logo/${flight.plane.airline}.png"></div>
+								<h3 id="flight_plane">${flight.plane.airline}</h3>
+								<div class="middle_group">
+									<div class="arrow-text-up">
+										<span>${flight.plane.time_start.slice(0, 5)}</span>
+										<span>${flight.plane.des_start}</span>
+									</div>
+									<div class="arrow">
+										<span>${Math.floor(duration / 60)}小時${duration % 60}分</span>
+										<img src="/assets/airline_logo/plane_line.png">
+										<span>直飛</span>	
+									</div>
+									<div class="arrow-text-down">
+										<span>${flight.plane.time_end.slice(0, 5)}</span>
+										<span>${flight.plane.des_end}</span>
+									</div>
+								</div>
+								<div class="plane-price">NT$${flight.plane.eco_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</d>
+							`;
 
 			choice.addEventListener('click', (e) => {
 				e.preventDefault(); // Prevent default action
@@ -107,16 +115,17 @@ document.addEventListener('DOMContentLoaded', () => {
 		const flightCard = document.createElement('div');
 		flightCard.classList.add('choice-card2');
 		flightCard.innerHTML += `
-				<h3>${flight.plane.airline}</h3>
-				<p class="arrow-text-up">${flight.plane.des_start} - ${flight.plane.time_start.slice(0, 5)}</p>
-				<div class="arrow">
-					<svg width="24" height="54" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+				<div class="section_des_start">去程</div>
+				<div class="card2_airline">${flight.plane.airline}</div>
+				<div class="arrow-text-up">${flight.plane.des_start} - ${flight.plane.time_start.slice(0, 5)}</div>
+				<div>
+					<svg width="24" height="54" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 10">
 						<path d="M12 15l-10-10h6V0h8v5h6z" fill="black"/>
 					</svg>
 				</div>
-				<p class="arrow-text-down">${flight.plane.des_end} - ${flight.plane.time_end.slice(0, 5)}</p>
-				<p>飛行時間: ${Math.floor(duration / 60)}小時${duration % 60}分</p>
-				<p>價格: NT$${flight.plane.eco_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</p>
+				<div class="arrow-text-down">${flight.plane.des_end} - ${flight.plane.time_end.slice(0, 5)}</div>
+				<div class="card2_duration">飛行時間: ${Math.floor(duration / 60)}小時${duration % 60}分</div>
+				<div class="card2_price">價格: NT$${flight.plane.eco_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</div>
 				<button class="close-btn" id="close-btn">取消</button>
 			`;
 		search2Space.appendChild(flightCard);
@@ -177,7 +186,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		});
 	}
 
-	displaySelectedFlights();
+	if (localStorage.getItem('selectedFlights')) displaySelectedFlights();
 
 
 	// 計算飛行時間
@@ -392,6 +401,17 @@ document.addEventListener('DOMContentLoaded', () => {
 		}
 	});
 
-	if (localStorage.getItem('selectedFlights')!=null) document.getElementById('section_title').innerHTML = '選擇回程';
+	if (localStorage.getItem('selectedFlights') != null) document.getElementById('section_title').innerHTML = '選擇回程';
 	localStorage.setItem('lastUrl', window.location.href);
+
+	const card2 = document.querySelector('.choice-card2');
+	const close_btn = document.querySelector('.close-btn');
+
+	card2.addEventListener('mouseover', () => {
+		close_btn.classList.add('hovered');
+	});
+
+	card2.addEventListener('mouseout', () => {
+		close_btn.classList.remove('hovered');
+	});
 });
