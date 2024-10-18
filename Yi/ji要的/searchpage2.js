@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	document.querySelector(`input[name="type"][value="${type}"]`).checked = true;
 
 	let totalResults = [];
-	let searchType = type=='經濟艙'?'search2':'search2ByBusiness';
+	let searchType = type == '經濟艙' ? 'search2' : 'search2ByBusiness';
 	const apiUrl = `http://localhost:8890/plane/${searchType}?departureCountry=${encodeURIComponent(des_start)}&arrivalCity=${encodeURIComponent(des_end)}&departureDate=${encodeURIComponent(date_start)}&requiredSeats=${Number(adults) + Number(child)}`;
 
 	fetch(apiUrl)
@@ -49,25 +49,25 @@ document.addEventListener('DOMContentLoaded', () => {
 			choice.href = '#';
 
 			choice.innerHTML += `
-					<img class="flight_logo" src="/img/(馬)峇迪航空.png">
-					<h3 id="flight_plane">${flight.plane.airline}</h3>
-					<div class="middle_group">
-						<div class="arrow-text-up">
-							<span>${flight.plane.time_start.slice(0, 5)}</span>
-							<span>${flight.plane.des_start}</span>
-						</div>
-						<div class="arrow">
-							<span>${Math.floor(duration / 60)}小時${duration % 60}分</span>
-							<img src="/img/plane_line.png">
-							<span>直飛</span>	
-						</div>
-						<div class="arrow-text-down">
-							<span>${flight.plane.time_end.slice(0, 5)}</span>
-							<span>${flight.plane.des_end}</span>
-						</div>
-					</div>
-					<span class="plane-price">NT$${flight.plane.eco_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</span>
-				`;
+								<div class="flight_logo_container"><img class="flight_logo" src="/assets/airline_logo/${flight.plane.airline}.png"></div>
+								<h3 id="flight_plane">${flight.plane.airline}</h3>
+								<div class="middle_group">
+									<div class="arrow-text-up">
+										<span>${flight.plane.time_start.slice(0, 5)}</span>
+										<span>${flight.plane.des_start}</span>
+									</div>
+									<div class="arrow">
+										<span>${Math.floor(duration / 60)}小時${duration % 60}分</span>
+										<img src="/assets/airline_logo/plane_line.png">
+										<span>直飛</span>	
+									</div>
+									<div class="arrow-text-down">
+										<span>${flight.plane.time_end.slice(0, 5)}</span>
+										<span>${flight.plane.des_end}</span>
+									</div>
+								</div>
+								<div class="plane-price">NT$${flight.plane.eco_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</d>
+							`;
 
 			choice.addEventListener('click', (e) => {
 				e.preventDefault(); // Prevent default action
@@ -78,18 +78,20 @@ document.addEventListener('DOMContentLoaded', () => {
 					flight.des_start = des_start;
 					flight.des_end = des_end;
 					flight.seat = type;
-					flight.quantity = Number(adults)+Number(child);
+					flight.adults = Number(adults);
+					flight.child = Number(child);
 					localStorage.setItem('selectedFlights2', JSON.stringify(flight))
 					modalContent(flight);//模態窗口資訊
 					showModal(); // 顯示模態窗口
 				} else {
 					swapDestinations(des_start, des_end);
+					flight.duration = duration;
 					flight.des_start = des_start;
 					flight.des_end = des_end;
-					flight.duration = duration;
 					flight.seat = type;
-					flight.quantity = Number(adults)+Number(child);
-					saveSelection(flight);
+					flight.adults = Number(adults);
+					flight.child = Number(child);
+					localStorage.setItem('selectedFlights', JSON.stringify(flight))
 				}
 			});
 
@@ -102,44 +104,27 @@ document.addEventListener('DOMContentLoaded', () => {
 		window.location.href = newUrl;
 	}
 
-	// 儲存選擇到 localStorage
-	function saveSelection(flight) {
-		let selections = JSON.parse(localStorage.getItem('selectedFlights')) || [];
-
-		// 檢查是否已經選擇過這筆航班
-		if (!selections.some(selected => selected.plane.id === flight.plane.id)) {
-			selections.push(flight);
-			localStorage.setItem('selectedFlights', JSON.stringify(selections));
-			displaySelectedFlights();
-		}
-	}
-
 	// 顯示選擇的航班
 	function displaySelectedFlights() {
-		const selectedFlights = JSON.parse(localStorage.getItem('selectedFlights')) || [];
+		const flight = JSON.parse(localStorage.getItem('selectedFlights'));
 		const search2Space = document.querySelector('#search2_space');
 		search2Space.innerHTML = '';
 
-		// 限制最多只顯示兩筆
-		const flightsToDisplay = selectedFlights.slice(0, 1);
 
-		flightsToDisplay.forEach(flight => {
-			let duration = calculateDuration(flight.plane.time_start, flight.plane.time_end, flight.time_zone);
-			const flightCard = document.createElement('div');
-			flightCard.classList.add('choice-card2');
-			flightCard.innerHTML += `
-				<h3>${flight.plane.airline}</h3>
-				<p class="arrow-text-up2">${flight.plane.des_start} - ${flight.plane.time_start.slice(0, 5)}</p>
-				<div class="arrow2">
-					<img id="flight_takeoff" src="/img/flight_takeoff.png">
-				</div>
-				<p class="arrow-text-down2">${flight.plane.des_end} - ${flight.plane.time_end.slice(0, 5)}</p>
-				<p class="arrow-text-group">飛行時間: ${Math.floor(duration / 60)}小時${duration % 60}分</p>
-				<p class="arrow-text-group">價格: NT$${flight.plane.eco_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</p>
+		let duration = calculateDuration(flight.plane.time_start, flight.plane.time_end, flight.time_zone);
+		const flightCard = document.createElement('div');
+		flightCard.classList.add('choice-card2');
+		flightCard.innerHTML += `
+				<div class="section_des_start">去程</div>
+				<div class="card2_airline">${flight.plane.airline}</div>
+				<div class="arrow-text-up">${flight.plane.des_start} - ${flight.plane.time_start.slice(0, 5)}</div>
+				<div><img id="flight_takeoff" src="/img/flight_takeoff.png"></div>
+				<div class="arrow-text-down">${flight.plane.des_end} - ${flight.plane.time_end.slice(0, 5)}</div>
+				<div class="card2_duration">飛行時間: ${Math.floor(duration / 60)}小時${duration % 60}分</div>
+				<div class="card2_price">價格: NT$${flight.plane.eco_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</div>
 				<button class="close-btn" id="close-btn">取消</button>
 			`;
-			search2Space.appendChild(flightCard);
-		});
+		search2Space.appendChild(flightCard);
 
 		if (localStorage.getItem('selectedFlights')) {
 			const cancelled = document.getElementById('close-btn');
@@ -172,32 +157,34 @@ document.addEventListener('DOMContentLoaded', () => {
 	function modalContent(flight) {
 		let selectedFlights = JSON.parse(localStorage.getItem('selectedFlights'));
 		let arr = [];
-		arr.push(selectedFlights[0]);
+		arr.push(selectedFlights);
 		arr.push(flight)
 
+		let check = true;
+		let text = '去程';
 		const modalFlightInfo = document.getElementById('modalFlightInfo');
 		modalFlightInfo.innerHTML = '';
 		arr.forEach(item => {
+			if(!check) text='回程';
 			let duration = calculateDuration(item.plane.time_start, item.plane.time_end, item.time_zone);
 			const flightCard = document.createElement('div');
 			flightCard.classList.add('choice-card3');
 			flightCard.innerHTML += `
-						<h3>${item.plane.airline}</h3>
-						<p class="arrow-text-up">${item.plane.des_start} - ${item.plane.time_start.slice(0, 5)}</p>
-						<div class="arrow">
-							<svg width="24" height="54" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-								<path d="M12 15l-10-10h6V0h8v5h6z" fill="black"/>
-							</svg>
-						</div>
-						<p class="arrow-text-down">${item.plane.des_end} - ${item.plane.time_end.slice(0, 5)}</p>
-						<p>飛行時間: ${Math.floor(duration / 60)}小時${duration % 60}分</p>
-						<p>價格: NT$${item.plane.eco_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</p>
-					`;
+					<div class="section_des_start">${text}</div>
+					<h4 class="card2_airline">${item.plane.airline}</h4>
+					<div class="arrow-text-up">${item.plane.des_start} - ${item.plane.time_start.slice(0, 5)}</div>
+					<div><img id="flight_takeoff" src="/img/flight_takeoff.png"></div>
+					<div class="arrow-text-down">${item.plane.des_end} - ${item.plane.time_end.slice(0, 5)}</div>
+						
+				<div class="card2_duration">飛行時間: ${Math.floor(duration / 60)}小時${duration % 60}分</span>
+				<div class="card2_price">價格: NT$${item.plane.eco_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</div>
+						`;
+			check = false;
 			modalFlightInfo.appendChild(flightCard);
 		});
 	}
 
-	displaySelectedFlights();
+	if (localStorage.getItem('selectedFlights')) displaySelectedFlights();
 
 
 	// 計算飛行時間
@@ -356,9 +343,9 @@ document.addEventListener('DOMContentLoaded', () => {
 	}
 
 	document.getElementById('confirmReturn').addEventListener('click', () => {
-		if(!localStorage.getItem('uid')) {
+		if (!localStorage.getItem('uid')) {
 			window.location.href = '/login';
-		}else{
+		} else {
 			window.location.href = '/order';
 		}
 	})
@@ -412,6 +399,17 @@ document.addEventListener('DOMContentLoaded', () => {
 		}
 	});
 
-	if (JSON.parse(localStorage.getItem('selectedFlights')).length == 1) document.getElementById('section_title').innerHTML = '選擇回程';
-	localStorage.setItem('lastUrl',window.location.href);
+	if (localStorage.getItem('selectedFlights') != null) document.getElementById('section_title').innerHTML = '選擇回程';
+	localStorage.setItem('lastUrl', window.location.href);
+
+	const card2 = document.querySelector('.choice-card2');
+	const close_btn = document.querySelector('.close-btn');
+
+	card2.addEventListener('mouseover', () => {
+		close_btn.classList.add('hovered');
+	});
+
+	card2.addEventListener('mouseout', () => {
+		close_btn.classList.remove('hovered');
+	});
 });
