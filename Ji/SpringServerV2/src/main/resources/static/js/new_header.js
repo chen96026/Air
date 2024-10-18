@@ -8,7 +8,7 @@ if (!localStorage.getItem('uid')) {
 
 const nowTime = new Date().getTime();
 const uidData = JSON.parse(localStorage.getItem('uid'));
-if (Number(uidData.date) + 900000 <= nowTime) localStorage.removeItem('uid');
+if (Number(uidData.date) + 9000000 <= nowTime) localStorage.removeItem('uid');
 
 document.getElementById('logout').addEventListener('click', () => {
 	localStorage.removeItem('uid');

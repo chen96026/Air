@@ -47,6 +47,12 @@ public class Orders {
 	@Column(name = "createDate")
 	private LocalDateTime createDate;
 	
+	@Column(name= "start_data")
+    private String start_data;
+	
+	@Column(name= "end_data")
+	private String end_data;
+	
 	public Contact getContactInformation() {
 		return contactInformation;
 	}
@@ -68,15 +74,16 @@ public class Orders {
 	}
 
 	public enum OrderStatus {
-	    訂單已成立,
+	    尚未付款,
 	    逾期付款已取消,
-	    已付款完成
+	    已付款完成,
+	    已完成飛行
 	}
 
 
 
 	// 關聯到 ContactInformation
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "contact_id", referencedColumnName = "CId", insertable = false, updatable = false)
     private Contact contactInformation;  // 關聯的聯絡人資訊
 	
@@ -131,8 +138,25 @@ public class Orders {
 	public void setOrderNumber(String orderNumber) {
 		this.orderNumber = orderNumber;
 	}
-	
-	
+
+	public String getStart_data() {
+		return start_data;
+	}
+
+	public void setStart_data(String start_data) {
+		this.start_data = start_data;
+	}
+
+	public String getEnd_data() {
+		return end_data;
+	}
+
+	public void setEnd_data(String end_data) {
+		this.end_data = end_data;
+	}
+
+
+
 	public static class PassengerOrderRequest {
         private List<Passenger> passengers;
         private Long orderId;

@@ -60,12 +60,12 @@ $(() => {
             <table class="Forum_table">
                 <thead>
                     <tr class="Forum_thead_tr">
-                        <th>編號</th>
+                        <th class="Forum_table_id">編號</th>
                         <th class="Forum_th_textCenter">主標題</th>
                         <th class="Forum_table_content Forum_th_textCenter">內文</th>
                         <th class="Forum_table_reportCount">檢舉數</th>
                         <th class="Forum_table_keep">${setText(query)[0]}</th>
-                        <th>${setText(query)[1]}</th>
+                        <th class="Forum_table_delete">${setText(query)[1]}</th>
                     </tr>
                 </thead>
             </table>`)
@@ -162,7 +162,7 @@ $(() => {
                                 <p>投稿日期：${data.createdDate}</p>
                                 <p>作者：${data.userNameIconDTO.username}</p>
                             </div>
-                            <p class="Forum_detail_rateAndShare"><span>評分：${data.post.rate}</span><span>分享首頁：${share}</span></p>
+                            <div class="Forum_detail_rateAndShare"><span>評分：${data.post.rate}</span><span>分享首頁：${share}</span></div>
                             <p>主標題：${data.post.mainTitle}</p>
                             <p>副標題：${data.post.subTitle}</p>
                             <p>出發日：${data.post.startDate}</p>
@@ -263,12 +263,16 @@ $(() => {
 	getPosts(query, page);
 
 	$('#Forum_queryShare').click(() => {
+		$('#Forum_queryShare').addClass('Forum_button_checked');
+		$('#Forum_queryReport').removeClass('Forum_button_checked');
 		query = "share";
 		page = 0;
 		getPosts(query, page);
 	})
 
 	$('#Forum_queryReport').click(() => {
+		$('#Forum_queryReport').addClass('Forum_button_checked');
+		$('#Forum_queryShare').removeClass('Forum_button_checked');
 		query = "report";
 		page = 0;
 		getPosts(query, page);
@@ -294,7 +298,8 @@ $(() => {
                 <button id="Forum_closeWindow" class="forum_checkwindow_cancel">取消</button>
             </div>
         `)
-		$('.Forum_bg').fadeIn(100);
+		$('.Forum_bg').fadeIn(300);
+		$('.forum_detail_checkwindow').hide().fadeIn(100);
 	})
 
 	$('main').on('click', '.Forum_delete', function (e) {
@@ -311,13 +316,13 @@ $(() => {
                 <button id="Forum_closeWindow" class="forum_checkwindow_cancel">取消</button>
             </div>
         `)
-		$('.Forum_bg').fadeIn(100);
+		$('.Forum_bg').fadeIn(300);
+		$('.forum_detail_checkwindow').hide().fadeIn(100);
 	})
 
 	$('main').on('click', '#Forum_post_keep', () => {
 		$('.Forum_bg').hide();
 		$('.Forum_bg').addClass('Forum_bg_zIndex2');
-		$('.Forum_bg').fadeIn(300);
 		$('main').append(`
             <div class="forum_detail_checkwindow">
                 <p>確定要${setText(query)[0]}這篇文章嗎？</p>
@@ -325,12 +330,13 @@ $(() => {
                 <button id="Forum_post_closeWindow" class="forum_checkwindow_cancel">取消</button>
             </div>
         `)
+		$('.Forum_bg').fadeIn(300);
+		$('.forum_detail_checkwindow').hide().fadeIn(100);
 	})
 
 	$('main').on('click', '#Forum_post_delete', () => {
 		$('.Forum_bg').hide();
 		$('.Forum_bg').addClass('Forum_bg_zIndex2');
-		$('.Forum_bg').fadeIn(300);
 		$('main').append(`
             <div class="forum_detail_checkwindow">
                 <p>確定要${setText(query)[1]}這篇文章嗎？</p>
@@ -338,6 +344,8 @@ $(() => {
                 <button id="Forum_post_closeWindow" class="forum_checkwindow_cancel">取消</button>
             </div>
         `)
+		$('.Forum_bg').fadeIn(300);
+		$('.forum_detail_checkwindow').hide().fadeIn(100);
 	})
 
 	$('main').on('click', '#Forum_keepPost', () => {

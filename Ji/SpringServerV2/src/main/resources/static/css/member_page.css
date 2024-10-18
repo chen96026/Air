@@ -124,7 +124,7 @@ body {
 	padding-left: 5vw;
 	border-radius: 10px;
 	max-width: 1500px;
-	display: flex;
+	display: grid;
 	align-items: center;
 }
 
@@ -573,7 +573,6 @@ body {
 	justify-content: center;
 	margin-right: 3vw;
 	width: 8vw;
-	color: #008000;
 }
 
 #member_Order_State img {
@@ -606,7 +605,7 @@ body {
 }
 
 #member_Order_Plane_side {
-	width: 20vw;
+	width: 23vw;
 	display: flex;
 	justify-content: end;
 	align-items: end;

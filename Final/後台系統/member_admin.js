@@ -34,7 +34,6 @@ document.addEventListener("DOMContentLoaded", function () {
   Back_LeftSide();
 });
 
-$(() => {
   let Members = [];
   let Member_filtered = [];
   const Member_perPage = 10;
@@ -52,7 +51,7 @@ $(() => {
       .then(data => {
         console.log('取得的會員資料:', data);
         Members = data;
-        Member_filtered = [...Members];  // 拷貝陣列
+        Member_filtered = [...Members];  //複製陣列
         console.log('初始化的 Member_filtered:', Member_filtered);
         BackList();
       })
@@ -79,13 +78,11 @@ $(() => {
     Member_Slice_Page.forEach((Member_Each) => {
       const Member_row = document.createElement("tr");
       Member_row.innerHTML = `
-	<td><input type="checkbox" class="Member_Checkbox" data-id="${Member_Each.id}"></td>
 	           <td>${Member_Each.id}</td>
 	           <td>${Member_Each.name || '未提供'}</td>
 	           <td>${Member_Each.email}</td>
 	           <td>${Member_Each.phone || '未提供'}</td>
 	           <td>${Member_Each.birthday || '未提供'}</td>
-	           <td><button onclick="Member_Window_Details('${Member_Each.id}')">查看</button></td>
     `;
       Member_TableBody.appendChild(Member_row);
     });
@@ -157,58 +154,5 @@ $(() => {
       BackList();
     });
 
-  //全部勾選
-  document.getElementById("Member_CheckAll").addEventListener("change", function () {
-    const beChecked = this.checked;
-    const checkboxes = document.querySelectorAll(".Member_Checkbox");
-    checkboxes.forEach(checkbox => {
-      checkbox.checked = beChecked;
-    });
-  });
-
-  // 跳出通知
-  // function Member_notifyJump() {
-  //   //   const notificationDiv = document.getElementById("Member_notification");
-
-  //   //   if (notificationDiv) {
-  //   //     notificationDiv.style.display = 'flex';
-  //   //     setTimeout(() => {
-  //   //       notificationDiv.style.display = 'none';
-  //   //     }, 5000);
-  //   //   } else {
-  //   //     console.error("未找到");
-  //   //   }
-  // }
-  // document.getElementById("Member_Notify").addEventListener("click", Member_notifyJump);
-
-  // 顯示會員資料視窗
-  function Member_Window_Details(id) {
-    const member = Members.find(m => m.id === id);
-
-    if (member) {
-      document.getElementById('gender').textContent = member.gender;
-      document.getElementById('idNumber').textContent = member.idNumber;
-      document.getElementById('nationality').textContent = member.nationality;
-      document.getElementById('idType').textContent = member.idType;
-      document.getElementById('idExpiry').textContent = member.idExpiry;
-
-      document.getElementById('Member_Window').style.display = 'block';
-    }
-
-    document.getElementById('Member_CloseModal').addEventListener('click', function () {
-      document.getElementById('Member_Window').style.display = 'none';
-    });
-  }
-
-  // 點擊彈窗外部關閉彈窗
-  window.onclick = function (event) {
-    const modal = document.getElementById('Member_Window');
-    if (event.target === modal) {
-      modal.style.display = 'none';
-    }
-  };
-
   window.onload = fetchMembers;
-  // 初始載入會員清單
-  BackList();
-})
+

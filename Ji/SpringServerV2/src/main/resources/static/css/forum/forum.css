@@ -160,6 +160,7 @@
 	bottom: 100px;
 	text-align: center;
 	z-index: 1;
+	cursor: pointer;
 }
 
 @media ( min-width : 768px) {

@@ -2,21 +2,21 @@
 <html lang="zh-tw">
 
 <head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>訂購頁</title>
-	<link th:replace="fragments/new_source :: head"></link>
-	<link rel="stylesheet" th:href="@{/css/order.css}">
-	<link rel="stylesheet"
-		href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-	<link
-		href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css"
-		rel="stylesheet" />
-	<link rel="stylesheet"
-		href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-	<link rel="stylesheet"
-		href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>訂購頁</title>
+<link th:replace="fragments/new_source :: head"></link>
+<link rel="stylesheet" th:href="@{/css/order.css}">
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+<link
+	href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css"
+	rel="stylesheet" />
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <body>
@@ -68,76 +68,67 @@
 	</section>
 
 
-	<div class="container_bg row" style="margin-top:50px;">
-		<div class="col_left">
+	<div class="container_bg row">
+		<div class="col_left; border:4px solid yellow;">
 			<div class="container_all" id="container_all"
 				style="width: 80%; padding: 20px; font-size: 18px;">
 				<h3>行程總覽</h3>
 				<hr style="border: none; border-top: 5px solid #132953;">
-
 			</div>
 
 
 			<!-- <h4 style="margin-left: 10%; font-size: larger; margin:5% 0 2% 10%;">您的機票</h4>  -->
 			<div class="container_notice mt-3 align-items-center"
 				style="min-height: 15vh;">
-				<div class="row w-100 align-items-center ">
-					<div
-						class="col-md-6 d-flex align-items-center justify-content-center mt-3">
-						<div class="mb-2" style="margin-right: 20px;">
+				<div class="order_align-items-center">
+					<div class="order_notice_group" style="margin: 5px 0 0 10px;">
+						<div class="order_mb-2" style="margin: 5px 5px 0 0;">
 							<span class="material-symbols-outlined" style="font-size: 68px;">campaign</span>
 						</div>
-						<div class="text-center">
+						<div class="text-center" style="margin: 15px 5px 0 10px;">
 							<h3>出票時間</h3>
-							<p>
-								付款成功後，<br>將於4天內出票。
-							</p>
+							<p>付款成功後，將於4天內出票。</p>
 						</div>
 					</div>
-
-					<div
-						class="col-md-6 d-flex align-items-center justify-content-center mt-3">
-						<div class="mb-2" style="margin-right: 20px;">
+					<div class="order_notice_group" style="margin: 5px 0 0 10px;">
+						<div class="order_mb-2" style="margin: 5px 10px 0 0;">
 							<span class="material-symbols-outlined" style="font-size: 68px;">flight_takeoff</span>
 						</div>
-						<div class="text-center">
+						<div class="text-center" style="margin: 15px 20px 0 10px;">
 							<h3>行前須知</h3>
 							<p>
-								依序使用機票<br> <a href="#" id="view_details">查看詳情</a>
+								<a href="#" id="view_details">查看詳情</a>
 							</p>
 						</div>
 					</div>
 				</div>
 			</div>
 
-			<div id="myModal" class="modal">
-				<div class="modal_content">
-					<div style="padding-bottom: 10px;">
-						<span class="close">&times;</span>
+			<div id="order_myModal" class="order_modal">
+				<div class="order_modal_content">
+					<div>
+						<span class="order_close">&times;</span>
 					</div>
-					<div style="padding-bottom: 10px;">
+					<div>
 						<h3>行前須知</h3>
 					</div>
-
-					<div style="background-color: white; opacity: 80%; padding: 20px;">
+					<div>
 						<div>
 							<h4>出票時間</h4>
 							<p>付款成功後，將於4天內出票。</p>
 						</div>
-
 						<div>
 							<h4>依序使用機票</h4>
 							<p>根據航空公司規定，您訂的機票必須依照航程順序使用。若未能依序使用，
 								則機票、燃油附加費及政府稅項，均將依據實際航程重新計算。 如果重新計算的金額超過您已支付的機票金額，
 								您將須支付價差。此外，機票上任何未使用的航段均將失效且無法使用。最終結果取決於營運業者。</p>
 						</div>
-
 					</div>
-
 				</div>
 			</div>
 
-			<div class="row container_notice" style="padding: 20px 20px 20px 60px; margin: 5% 10%; gap:70px;">
+			<div class="row container_notice"
+				style="padding: 20px 20px 20px 60px; margin: 5% 10%; gap: 70px;">
 				<div class="col_ticket">
 					行李限額
 					<h5 style="padding-top: 5%;">
@@ -163,7 +154,7 @@
 				<hr>
 				<div id="passenger_container">
 					<div class="form_section" style="color: black; font-size: 14px">
-						<div style="color: black; font-weight: bold; font-size: 16px">旅客1(成人票)</div>
+						<div style="color: black; font-weight: bold; font-size: 16px">旅客1&times;(成人票)</div>
 						<div class="container_info">
 							<form class="mt-3">
 								<!-- 姓氏和名字 -->
@@ -244,7 +235,8 @@
 							</form>
 						</div>
 						<hr class="border border-1 border-dashed">
-						<div class="fw-bold text-dark mt-3">
+						<div class="fw-bold text-dark mt-3"
+							style="display: flex; flex-direction: column; gap: 0.4vh;">
 							<h5>來自港澳台之乘客需要同時攜帶回鄉證／台胞證和護照。</h5>
 							<h5>請確保您輸入的姓名與辦理登機時使用的證件上的姓名一致</h5>
 							<h5>
@@ -262,22 +254,24 @@
 				<div id="luggage_container">
 					<div class="luggageform_section">
 						<div
-							style="margin: 10px auto; width: 80%; font-weight: bold; font-size: 16px;">旅客1
+							style="margin: 10px auto; width: 80%; font-weight: bold; font-size: 16px; color: black">旅客1&times;
 							行李:</div>
 						<div class="container_luggage">去程(已包含的行李)</div>
 						<div class="container_lg">
 							<div class="grid_luggage">
-								<h5>
-									個人物品<br>
-									<p style="font-size: 11px;">請聯繫航空公司了解詳細的行李尺寸規定</p>
-								</h5>
-								<h5>
-									手提行李<br>(50*40*25公分)
-								</h5>
-								<h5>
-									托運行李<br>
-									<p style="font-size: 11px;">請聯繫航空公司了解詳細的行李尺寸規定</p>
-								</h5>
+								<div class="grid_luggage_text">
+									<h5>個人物品</h5>
+								</div>
+								<div class="grid_luggage_text">
+									<h5>
+										手提行李<br>(50*40*25公分)
+									</h5>
+								</div>
+								<div class="grid_luggage_text">
+									<h5>
+										托運行李<br>
+									</h5>
+								</div>
 							</div>
 
 							<div class="row align-items-center">
@@ -307,6 +301,8 @@
 								</div>
 							</div>
 
+							<div class="luggage_remind">請聯繫航空公司了解詳細的行李尺寸規定</div>
+
 							<label for="add_luggage_1" style="padding-top: 20px;"> <select
 								name="addLg_1" id="add_luggage_1" class="label_addluggage">
 									<option value="add_lg">加購行李</option>
@@ -316,7 +312,7 @@
 									<option value="two_lg">2件，共40公斤&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;NT$1,698
 									</option>
 									<option value="three_lg">3件，共60公斤&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;NT$2,171
-									</option>>
+									</option>
 							</select>
 							</label>
 						</div>
@@ -324,17 +320,21 @@
 						<div class="container_luggage">回程(已包含的行李)</div>
 						<div class="container_lg" style="margin-bottom: 5%;">
 							<div class="grid_luggage">
-								<h5>
-									個人物品<br>
-									<p style="font-size: 11px;">請聯繫航空公司了解詳細的行李尺寸規定</p>
-								</h5>
-								<h5>
-									手提行李<br>(50*40*25公分)
-								</h5>
-								<h5>
-									托運行李<br>
-									<p style="font-size: 11px;">請聯繫航空公司了解詳細的行李尺寸規定</p>
-								</h5>
+								<div class="grid_luggage_text">
+									<h5>
+										個人物品<br>
+									</h5>
+								</div>
+								<div class="grid_luggage_text">
+									<h5>
+										手提行李<br>(50*40*25公分)
+									</h5>
+								</div>
+								<div class="grid_luggage_text">
+									<h5>
+										托運行李<br>
+									</h5>
+								</div>
 							</div>
 
 							<div class="row align-items-center">
@@ -364,6 +364,7 @@
 								</div>
 							</div>
 
+							<div class="luggage_remind">請聯繫航空公司了解詳細的行李尺寸規定</div>
 
 							<label for="add_luggage_2"> <select name="addLg_2"
 								id="add_returnluggage_2" class="label_addluggage">
@@ -418,7 +419,8 @@
 		<div class="col_right" id="fixedblock" style="min-height: 30vh;">
 			<div class="container_right">
 				<form id="booking_form">
-					<div style="font-size: 22px; margin: 20px 0">價格詳情</div>
+					<div
+						style="font-size: 22px; margin: 20px 0 20px 10px; color: black; font-weight: bold;">價格詳情</div>
 					<div style="margin: 10px 10px;">
 						<div
 							style="display: flex; justify-content: space-between; margin: 10px 0">
@@ -428,17 +430,20 @@
 
 
 						<h4 style="margin: 20px 0 10px 0;">行李</h4>
-						<div style="display: flex; justify-content: space-between;">
+						<div class="container_right_small_text"
+							style="display: flex; justify-content: space-between;">
 							<p>個人物品</p>
 							<p>免費</p>
 						</div>
 
-						<div style="display: flex; justify-content: space-between;">
+						<div class="container_right_small_text"
+							style="display: flex; justify-content: space-between;">
 							<p>手提行李</p>
 							<p>免費</p>
 						</div>
 
-						<div style="display: flex; justify-content: space-between;">
+						<div class="container_right_small_text"
+							style="display: flex; justify-content: space-between;">
 							<p>托運行李</p>
 							<p id="price_luggage">免費</p>
 						</div>
@@ -466,9 +471,11 @@
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
 	<!-- GSAP -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js"></script>
 	<!-- ScrollTrigger 插件 -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/ScrollTrigger.min.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/ScrollTrigger.min.js"></script>
 	<script src="/js/order.js"></script>
 </body>
 

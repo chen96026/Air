@@ -1,5 +1,5 @@
 body {
-	color:#222;
+	color: #222;
 	font-weight: 500;
 }
 
@@ -7,9 +7,9 @@ body {
 	font-size: 2.5rem;
 	font-weight: 700;
 	color: black;
-	padding-left: 20vw;
-	padding-top: 1vh;
-	padding-bottom: 1vh;
+	padding-left: 25vw;
+	padding-top: 2vh;
+	padding-bottom: 0.5vh;
 }
 
 .search2_section_container {
@@ -36,7 +36,7 @@ hr {
 }
 
 #slider {
-	height:10px;
+	height: 10px;
 }
 
 .search_footer_col {
@@ -54,18 +54,64 @@ hr {
 	margin-left: 7%;
 }
 
-.search2_choice_container {
-	width: 60vw;
+.search2_choice {
 	display: flex;
+	flex-direction:column;
+	padding: 20px 0px 20px 6vw;
+	width: 60vw;
+	gap: 20px;
 }
 
-.search2_choice {
-	width: 60vw;
-	background-color: rgb(253, 226, 176);
-	display: grid;
-	grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-	gap: 20px;
-	padding: 20px;
+.choice-card {
+	background-color: #fff;
+	padding: 20px 20px 20px 40px;
+	border-radius: 10px;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+	display: flex;
+	align-items: center;
+	cursor: pointer;
+	width: 92%;
+	height: 10vh;
+	transition: transform 0.3s ease;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+	gap:40px;
+}
+
+.flight_logo_container{
+	max-width:150px;
+	min-width:150px;
+}
+
+.flight_logo{
+	min-width:100px;
+	min-height:30px;
+	max-width:160px;
+	max-height:50px;
+	width: auto;
+	height:auto;
+	justify-content:center;
+	align-items: center;
+}
+
+#flight_plane {
+	display: flex;
+	justify-content: center;
+	width: 8vw;
+}
+
+.middle_group {
+	width: 45%;
+	display: flex;
+	align-items: center;
+	gap: 1vw;
+}
+
+.plane-price {
+	height: 5vh;
+	display: flex;
+	align-items: center;
+	font-size: 1vw;
+	position: relative;
 }
 
 .search2_space {
@@ -75,7 +121,7 @@ hr {
 .search2_flight {
 	width: 60%;
 	height: 20vh;
-	background-color: #EEE9E9;
+	background-color: #fff;
 	border-radius: 20px;
 	margin-top: 5vh;
 	margin-left: 20%;
@@ -147,44 +193,61 @@ hr {
 	color: white;
 }
 
-.choice-card {
-	background-color: #EEE9E9;
-	border-radius: 10px;
-	padding: 20px;
-	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-	text-align: center;
-	display: grid;
-	align-items: center;
-	justify-items: center;
-	cursor: pointer;
-	width: 13vw;
-	height: 30vh;
-	transition: transform 0.3s ease;
+.section_des_start {
+	font-size:24px;
+	margin-bottom:20px;
+	border-top-left-radius:10px;
+	border-top-right-radius:10px;
+	background-color:#12BE68;
+	width:13vw;
+	margin-left:-20px;
+	margin-top:-20px;
+	padding:15px 0;
+}
+
+.card2_airline {
+	font-size:24px;
+	margin-bottom:20px;
+}
+
+.card2_duration {
+	margin-top:20px;
+	font-size:18px;
+}
+
+.card2_price {
+	margin-top:20px;
+	font-size:18px;
+	margin-bottom:20px;
 }
 
 .choice-card2 {
-	background-color: rgb(253, 226, 176);
+	font-weight:600;
+	background-color: #fff;
+	color:#222;
+	padding:20px;
 	border-radius: 10px;
-	padding: 20px;
 	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-	text-align: center;
+	text-align:center;
 	width: 13vw;
-	height: 35vh;
-	align-items: center;
-	justify-items: center;
+	height:auto;
 	margin-left: 4vw;
 	margin-top: 2vh;
-	border: 1px solid red;
 	transition: transform 0.3s ease;
 }
 
-.choice-card:hover,.choice-card2:hover{
-	transform: scale(1.05);
-	border:1px solid red;
+.choice-card:hover{
+	transform: scale(1.01);
+	background-color: #f8b600;
+}
+
+.choice-card2:hover{
+	transform: scale(1.01);
+	background-color:#f8b600;
 }
 
 .close-btn {
-	background-color: #222;
+	background-color: #f8b600;
 	color: white;
 	border: none;
 	padding: 8px 15px;
@@ -193,8 +256,8 @@ hr {
 	transition: all 0.3s ease 0s;
 }
 
-.close-btn:hover{
-	background-color: #f8b600;
+.close-btn.hovered {
+	background-color: #222;
 }
 
 .choice-card3 {
@@ -208,19 +271,48 @@ hr {
 	margin-left: 5%;
 }
 
-.arrow-text-up {
-	margin: 0;
-	padding: 0;
+.arrow-text-up,.arrow-text-down {
 	text-align: center;
+	align-items:center;
+	font-size: 1vw;
+	gap: 1vh;
 }
 
-.arrow-text-down {
-	margin: 0, 0, 20px, 0;
-	padding: 0;
-	text-align: center;
+.arrow-text-up2 {
+	font-size: 0.9vw;
+	margin-top: 1vh;
+}
+
+.arrow-text-down2 {
+	font-size: 0.9vw;
+	margin-top: 1vh;
+}
+
+#flight_takeoff {
+	width: 2vw;
+}
+
+.arrow-text-group {
+	font-size: 1vw;
+	font-weight: 400;
 }
 
 .arrow {
+	height: 8vh;
+	margin: 0px 0;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.arrow span {
+	padding-right: 1.5vw;
+	font-size: 1vw;
+}
+
+.arrow img {
+	height: 2.8vh;
+	width: 10vw;
 	margin: 0px 0;
 }
 
@@ -306,9 +398,9 @@ hr {
 }
 
 .noUi-base {
-    background: #ddd; /* 滑軌的背景顏色 */
-    height: 1px; /* 與 noUi-target 的高度一致 */
-    border-radius: 5px; /* 可選，為滑軌添加圓角 */
+	background: #ddd; /* 滑軌的背景顏色 */
+	height: 1px; /* 與 noUi-target 的高度一致 */
+	border-radius: 5px; /* 可選，為滑軌添加圓角 */
 }
 
 /* 已選部分的連接 */
@@ -328,7 +420,7 @@ hr {
 	top: 0px;
 	/* 把手定位到滑塊中心 */
 	cursor: pointer;
-	transform: translate(-60%,15%);
+	transform: translate(-60%, 15%);
 }
 
 /* 滑塊被聚焦時的效果 */
@@ -337,8 +429,9 @@ hr {
 	box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
 }
 
-.noUi-handle.noUi-handle-lower::before,.noUi-handle.noUi-handle-lower::after {
-    display: none; /* 完全隱藏這個元素 */
+.noUi-handle.noUi-handle-lower::before, .noUi-handle.noUi-handle-lower::after
+	{
+	display: none; /* 完全隱藏這個元素 */
 }
 
 /* 顯示滑塊的當前值 */
