@@ -195,7 +195,7 @@ sup {
 }
 
 a {
-  color: #222;
+  color: #007bff;
   text-decoration: none;
   background-color: transparent;
   -webkit-text-decoration-skip: objects;
@@ -3976,12 +3976,7 @@ tbody.collapse.show {
   background-color: #fff;
   background-clip: border-box;
   border: 1px solid rgba(0, 0, 0, 0.125);
-  border-radius: 1rem;
-  transition: transform 0.3s ease !important;
-}
-
-.card:hover {
-	transform: scale(1.05) !important;
+  border-radius: 0.25rem;
 }
 
 .card > hr {
@@ -4078,8 +4073,8 @@ tbody.collapse.show {
 
 .card-img-top {
   width: 100%;
-  border-top-left-radius: 1rem;
-  border-top-right-radius: 1rem;
+  border-top-left-radius: calc(0.25rem - 1px);
+  border-top-right-radius: calc(0.25rem - 1px);
 }
 
 .card-img-bottom {

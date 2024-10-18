@@ -115,7 +115,7 @@ $(() => {
         // 更新文字顯示目前上傳圖片數量
         let count = selectedFiles.length > 0
             ? `目前已上傳 ${selectedFiles.length} 張相片`
-            : `至少上傳一張相片，目前未選取相片`;
+            : `* 至少上傳一張相片，目前未選取相片`;
 
         uploadImg.append(`
         	<div class="forum_chooseImg">
@@ -212,7 +212,7 @@ $(() => {
 
     $('#submit').click(() => {
         check = true;
-        checkValue('#forum_select_country', $('#forum_select_country').value === `all`);
+        checkValue('#forum_select_country', $('#forum_select_country').val() === `全世界`);
         checkValue('#forum_select_city', $('#forum_select_city').val() === `所有城市`);
         checkValue('#forum_edit_title1', !$('#forum_edit_title1')[0].checkValidity());
         checkValue('#forum_stars', !$('.forum_e_star').first()[0].checkValidity());

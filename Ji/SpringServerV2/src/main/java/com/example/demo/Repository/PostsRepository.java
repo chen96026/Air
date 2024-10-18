@@ -12,51 +12,59 @@ import org.springframework.data.repository.query.Param;
 import com.example.demo.Model.Posts;
 
 public interface PostsRepository extends JpaRepository<Posts, Long> {
-	// 根據狀態查詢所有有效的文章
-	public Page<Posts> findByStatus(Boolean status, Pageable pageable);
+	// 根據狀態查詢所有公開中文章
+	public Page<Posts> findByStatusGreaterThan(int status, Pageable pageable);
+	
+	// 根據狀態查詢所有下架（status == 0）、可以展示在首頁（status == 2）的文章
+	public Page<Posts> findByStatusEquals(int status, Pageable pageable);
+
 	// 城市篩選
-	public Page<Posts> findByCityAndStatus(String city, Boolean status, Pageable pageable);
+	public Page<Posts> findByCityAndStatusGreaterThan(String city, int status, Pageable pageable);
+
 	// 國家篩選
-	public Page<Posts> findByCountryAndStatus(String country, Boolean status, Pageable pageable);
-	
+	public Page<Posts> findByCountryAndStatusGreaterThan(String country, int status, Pageable pageable);
+
 	// 關鍵字篩選
-	@Query("SELECT p FROM Posts p WHERE (p.mainTitle LIKE %:key% OR p.tags LIKE %:key%) AND p.status = true")
+	@Query("SELECT p FROM Posts p WHERE (p.mainTitle LIKE %:key% OR p.tags LIKE %:key%) AND p.status > 0")
 	public Page<Posts> searchByKey(@Param("key") String key, Pageable pageable);
-	
+
 	// 城市+關鍵字篩選
-	@Query("SELECT p FROM Posts p WHERE p.city = :city AND (p.mainTitle LIKE %:key% OR p.tags LIKE %:key%) AND p.status = true")
+	@Query("SELECT p FROM Posts p WHERE p.city = :city AND (p.mainTitle LIKE %:key% OR p.tags LIKE %:key%) AND p.status > 0")
 	public Page<Posts> searchByCityAndKey(@Param("city") String city, @Param("key") String key, Pageable pageable);
 
 	// 國家+關鍵字篩選
-	@Query("SELECT p FROM Posts p WHERE p.country = :country AND (p.mainTitle LIKE %:key% OR p.tags LIKE %:key%) AND p.status = true")
+	@Query("SELECT p FROM Posts p WHERE p.country = :country AND (p.mainTitle LIKE %:key% OR p.tags LIKE %:key%) AND p.status > 0")
 	public Page<Posts> searchByCountryAndKey(@Param("country") String country, @Param("key") String key, Pageable pageable);
-	
-	
+
 	// 照讚數排序
-	@Query("SELECT p FROM Posts p LEFT JOIN p.likes l WHERE p.status = true GROUP BY p ORDER BY COUNT(l) DESC, p.createdTime DESC")
-	public Page<Posts> findAllSortedBylikes(Pageable pageable);
-	
+	@Query("SELECT p FROM Posts p LEFT JOIN p.likes l WHERE p.status > 0 GROUP BY p ORDER BY COUNT(l) DESC, p.createdTime DESC")
+	public Page<Posts> findAllSortedByLikes(Pageable pageable);
+
 	// 照讚數排序+城市篩選
-	@Query("SELECT p FROM Posts p LEFT JOIN p.likes l WHERE p.city = :city AND p.status = true GROUP BY p ORDER BY COUNT(l) DESC, p.createdTime DESC")
-	public Page<Posts> findByCitySortedBylikes(@Param("city") String city, Pageable pageable);
-	
+	@Query("SELECT p FROM Posts p LEFT JOIN p.likes l WHERE p.city = :city AND p.status > 0 GROUP BY p ORDER BY COUNT(l) DESC, p.createdTime DESC")
+	public Page<Posts> findByCitySortedByLikes(@Param("city") String city, Pageable pageable);
+
 	// 照讚數排序+國家篩選
-	@Query("SELECT p FROM Posts p LEFT JOIN p.likes l WHERE p.country = :country AND p.status = true GROUP BY p ORDER BY COUNT(l) DESC, p.createdTime DESC")
-	public Page<Posts> findByCountrySortedBylikes(@Param("country") String country, Pageable pageable);
-	
+	@Query("SELECT p FROM Posts p LEFT JOIN p.likes l WHERE p.country = :country AND p.status > 0 GROUP BY p ORDER BY COUNT(l) DESC, p.createdTime DESC")
+	public Page<Posts> findByCountrySortedByLikes(@Param("country") String country, Pageable pageable);
+
 	// 照讚數排序+關鍵字篩選
-	@Query("SELECT p FROM Posts p LEFT JOIN p.likes l WHERE (p.mainTitle LIKE %:key% OR p.tags LIKE %:key%) AND p.status = true GROUP BY p ORDER BY COUNT(l) DESC, p.createdTime DESC")
-	public Page<Posts> searchByKeySortedBylikes(@Param("key") String key, Pageable pageable);
-	
+	@Query("SELECT p FROM Posts p LEFT JOIN p.likes l WHERE (p.mainTitle LIKE %:key% OR p.tags LIKE %:key%) AND p.status > 0 GROUP BY p ORDER BY COUNT(l) DESC, p.createdTime DESC")
+	public Page<Posts> searchByKeySortedByLikes(@Param("key") String key, Pageable pageable);
+
 	// 照讚數排序+城市+關鍵字篩選
-	@Query("SELECT p FROM Posts p LEFT JOIN p.likes l WHERE p.city = :city AND (p.mainTitle LIKE %:key% OR p.tags LIKE %:key%) AND p.status = true GROUP BY p ORDER BY COUNT(l) DESC, p.createdTime DESC")
-	public Page<Posts> searchByCityAndKeySortedBylikes(@Param("city") String city, @Param("key") String key, Pageable pageable);
-	
+	@Query("SELECT p FROM Posts p LEFT JOIN p.likes l WHERE p.city = :city AND (p.mainTitle LIKE %:key% OR p.tags LIKE %:key%) AND p.status > 0 GROUP BY p ORDER BY COUNT(l) DESC, p.createdTime DESC")
+	public Page<Posts> searchByCityAndKeySortedByLikes(@Param("city") String city, @Param("key") String key, Pageable pageable);
+
 	// 照讚數排序+國家+關鍵字篩選
-	@Query("SELECT p FROM Posts p LEFT JOIN p.likes l WHERE p.country = :country AND (p.mainTitle LIKE %:key% OR p.tags LIKE %:key%) AND p.status = true GROUP BY p ORDER BY COUNT(l) DESC, p.createdTime DESC")
-	public Page<Posts> searchByCountryAndKeySortedBylikes(@Param("country") String country, @Param("key") String key, Pageable pageable);
+	@Query("SELECT p FROM Posts p LEFT JOIN p.likes l WHERE p.country = :country AND (p.mainTitle LIKE %:key% OR p.tags LIKE %:key%) AND p.status > 0 GROUP BY p ORDER BY COUNT(l) DESC, p.createdTime DESC")
+	public Page<Posts> searchByCountryAndKeySortedByLikes(@Param("country") String country, @Param("key") String key, Pageable pageable);
 	
 	
 	public List<Posts> findByAuthor(Member author);
+	
+	// 願意刊登在首頁但未審核通過文章
+	@Query("SELECT p FROM Posts p WHERE p.share = true AND p.status = 1")
+	public Page<Posts> findByShareTrueAndStatusEquals(Pageable pageable);
 	
 }

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title th:text="${isEdit ? 'TEST編輯文章' : 'TEST新增文章'}"></title>
-    <link rel="stylesheet" href="/css/forum/forum_edit.css">
+    <link rel="stylesheet" href="/css/forum_edit.css">
     <link th:replace="fragments/new_source :: head"></link>
     <style>
     	#header {
@@ -23,7 +23,7 @@
 	</script>
 </head>
 
-<body>
+<body class="forum_body">
 	<div th:replace="fragments/new_header :: header"></div>
     <main class="forum_main">
         <div class="forum_edit">
@@ -34,7 +34,7 @@
             <form id="forum_form" enctype="multipart/form-data">
                 <div class="forum_where">
                     <div>
-                        <label for="forum_select_country">國家：</label>
+                        <label for="forum_select_country">* 國家：</label>
                         <select name="country" id="forum_select_country">
                             <optgroup label="不分國家">
                                 <option value="全世界">全世界</option>
@@ -42,7 +42,7 @@
                         </select>
                     </div>
                     <div>
-                        <label for="forum_select_city">地區：</label>
+                        <label for="forum_select_city">* 地區：</label>
                         <select id="forum_select_city" name="city">
                             <optgroup label="全世界">
                                 <option value="所有城市">所有城市</option>
@@ -61,9 +61,9 @@
                     </div>
                 </div>
                 <div class="forum_edit_body">
-                    <input type="text" placeholder="主要標題…" id="forum_edit_title1" class="forum_edit_input" name="mainTitle" minlength="1" th:value="${isEdit ? post.post.mainTitle : ''}" required>
+                    <input type="text" placeholder="* 主要標題…" id="forum_edit_title1" class="forum_edit_input" name="mainTitle" minlength="1" th:value="${isEdit ? post.post.mainTitle : ''}" required>
                     <input type="text" placeholder="次要標題…" id="forum_edit_title2" class="forum_edit_input" name="subTitle" th:value="${isEdit ? post.post.subTitle : ''}">
-                    <input type="text" placeholder="HashTag… ( #九州, #活火山, #拉麵… )" id="forum_edit_tags" class="forum_edit_input" name="tags" th:value="${isEdit ? post.post.tags : ''}">
+                    <input type="text" placeholder="HashTag… ( 九州,活火山,拉麵… )" id="forum_edit_tags" class="forum_edit_input" name="tags" th:value="${isEdit ? post.post.tags : ''}">
                     <div>
                         <div class="forum_e_share">
                             <span id="forum_stars">
@@ -78,7 +78,7 @@
                             <label for="forum_onHomePage_id">願意分享文章在網站首頁</label>
                         </div>
                         <div class="forum_e_textarea">
-                            <textarea placeholder="撰寫這趟旅程的回憶" id="forum_edit_textarea" name="content" th:text="${isEdit ? post.post.content : ''}" required minlength="1"></textarea>
+                            <textarea placeholder="* 撰寫這趟旅程的回憶" id="forum_edit_textarea" name="content" th:text="${isEdit ? post.post.content : ''}" required minlength="1"></textarea>
                             <div>
                                 <p>發布於　<span th:text="${date}"><span></p>
                                 <button id="submit"></button>
@@ -87,7 +87,7 @@
                         <div id="forum_uploadImg">
                             <div class="forum_noImg"></div>
                             <div class="forum_chooseImg">
-                                <p>至少上傳一張相片，目前未選取相片</p>
+                                <p>* 至少上傳一張相片，目前未選取相片</p>
                                 <label for="forum_chooseImg_id" id="forum_chooseImg_label">
                                     <div class="forum_chooseImg_icon"></div>
                                     <span  class="forum_chooseImg_text">上傳相片…</span>

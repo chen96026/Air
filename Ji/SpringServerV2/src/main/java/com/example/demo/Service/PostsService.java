@@ -21,5 +21,8 @@ public interface PostsService {
 	
 	public void deletePost (Long id);
 	
-	public Page<Posts> findReportedPosts (int page);
+	public Page<Posts> adminGetPosts (String query, int page);
+	
+	public Posts updatePostStatus (Long id, int status);
+	
 }

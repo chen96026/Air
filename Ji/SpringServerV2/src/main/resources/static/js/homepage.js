@@ -88,7 +88,7 @@ document.getElementById('search_btn').addEventListener('click', function(event) 
 	}
 });
 
-fetch('/forum/api/loadCards?country=全世界&city=所有城市&key=&sortBy=postDate&page=0')
+fetch('/forum/api/getHomePagePosts')
 	.then(response => {
 		if (!response.ok) {
 			throw new Error('blog Error: no response');

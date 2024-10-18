@@ -7,9 +7,10 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -69,14 +70,27 @@ public class ForumAPIController {
 	private MemberRepository memberRepository;
 
 	
+	@GetMapping("/getHomePagePosts")
+	public List<PostViewDTO> getHomePagePosts() {
+		
+		List<Posts> postlist = new ArrayList<Posts>();
+		
+		Sort sort = postsService.setSort("postDate");
+		Pageable pageable = PageRequest.of(0, 6, sort);
+		postlist = postsRepository.findByStatusEquals(2, pageable).getContent();	// 經審核完成可刊登於首頁的文章(依PO文日最新的6則)
+		
+		List<PostViewDTO> posts = postsService.getPosts(postlist);
+		
+		return posts;
+	}
+	
 	@GetMapping("/loadCards")
 	public List<PostViewDTO> loadCards(
 			@RequestParam(required = false) String country,
 			@RequestParam(required = false) String city,
 			@RequestParam(required = false) String key,
 			@RequestParam(defaultValue = "postDate") String sortBy,
-			@RequestParam(defaultValue = "0") int page,
-			Model model) {
+			@RequestParam(defaultValue = "0") int page) {
 		
 		List<Posts> postlist = new ArrayList<Posts>();
 		
@@ -88,8 +102,6 @@ public class ForumAPIController {
 		}
 		
 		List<PostViewDTO> posts = postsService.getPosts(postlist);
-		
-//		model.addAttribute("posts", posts);
 		
 		return posts;
 	}
@@ -133,7 +145,6 @@ public class ForumAPIController {
 		post.setAuthor(author);
 		
 		try {
-//			Posts newPost = postsService.newPost(post, images);		
 			return postsService.newPost(post, images);
 		} catch (Exception e) {
 			return null;
@@ -180,7 +191,6 @@ public class ForumAPIController {
 			System.out.println("updateOK");
 			return updatePosts;
 		} catch (Exception e) {
-			System.err.println("updateXXX");
 			System.err.println(e);
 			return null;
 		}			
@@ -211,8 +221,8 @@ public class ForumAPIController {
 		return ResponseEntity.noContent().build();
 	}
 
-	@PostMapping("/like")
-	public Likes addLike(@RequestParam Long id, HttpSession session) {
+	@PostMapping("/like/{id}")
+	public Likes addLike(@PathVariable Long id, HttpSession session) {
 		
 		String getSessionUid = (String) session.getAttribute("userUid");
 		Member member = memberRepository.findByUid(getSessionUid);
@@ -220,8 +230,8 @@ public class ForumAPIController {
 		return likesService.addLike(member.getId(), id);
 	}
 	
-	@DeleteMapping("/like")
-	public ResponseEntity<Void> deleteLike(@RequestParam Long id, HttpSession session) {
+	@DeleteMapping("/like/{id}")
+	public ResponseEntity<Void> deleteLike(@PathVariable Long id, HttpSession session) {
 		
 		String getSessionUid = (String) session.getAttribute("userUid");
 		Member member = memberRepository.findByUid(getSessionUid);
@@ -230,8 +240,8 @@ public class ForumAPIController {
 		return ResponseEntity.noContent().build();
 	}
 	
-	@GetMapping("/countLikes")
-	public Long countLikes(@RequestParam Long id) {
+	@GetMapping("/countLikes/{id}")
+	public Long countLikes(@PathVariable Long id) {
 		
 		System.out.println("count");
 		Posts post = postsRepository.findById(id).orElse(null);
@@ -239,8 +249,8 @@ public class ForumAPIController {
 		return post.getLikesCount();
 	}
 	
-	@PostMapping("/bookmark")
-	public Bookmark addBookmark(@RequestParam Long id, HttpSession session) {
+	@PostMapping("/bookmark/{id}")
+	public Bookmark addBookmark(@PathVariable Long id, HttpSession session) {
 		
 		String getSessionUid = (String) session.getAttribute("userUid");
 		Member member = memberRepository.findByUid(getSessionUid);
@@ -248,8 +258,8 @@ public class ForumAPIController {
 		return bookmarkService.addBookmark(member.getId(), id);
 	}
 	
-	@DeleteMapping("/bookmark")
-	public ResponseEntity<Void> deleteBookmark(@RequestParam Long id, HttpSession session) {
+	@DeleteMapping("/bookmark/{id}")
+	public ResponseEntity<Void> deleteBookmark(@PathVariable Long id, HttpSession session) {
 		
 		String getSessionUid = (String) session.getAttribute("userUid");
 		Member member = memberRepository.findByUid(getSessionUid);
@@ -258,8 +268,8 @@ public class ForumAPIController {
 		return ResponseEntity.noContent().build();
 	}
 	
-	@PostMapping("/report")
-	public Reports addReport(@RequestParam Long id, HttpSession session) {
+	@PostMapping("/report/{id}")
+	public Reports addReport(@PathVariable Long id, HttpSession session) {
 		
 		String getSessionUid = (String) session.getAttribute("userUid");
 		Member member = memberRepository.findByUid(getSessionUid);
@@ -267,18 +277,18 @@ public class ForumAPIController {
 		return reportsService.addReport(member.getId(), id);
 	}
 	
-	@DeleteMapping("/deletePost")
-	public ResponseEntity<Void> deletePost(@RequestParam Long id) {
+	@DeleteMapping("/deletePost/{id}")
+	public ResponseEntity<Void> deletePost(@PathVariable Long id) {
 		
 		postsService.deletePost(id);
 		
 		return ResponseEntity.noContent().build();
 	}
 	
-	@GetMapping("/adminGetReportedPosts")
-	public PostsViewGetPagesDTO getReportedPosts(@RequestParam(defaultValue = "0") int page) {
+	@GetMapping("/adminGetPosts")
+	public PostsViewGetPagesDTO adminGetPosts(@RequestParam(defaultValue = "report") String query, @RequestParam(defaultValue = "0") int page) {
 		
-		Page<Posts> posts = postsService.findReportedPosts(page);
+		Page<Posts> posts = postsService.adminGetPosts(query, page);
 		
 		List<Posts> postlist = posts.getContent();
 		List<PostViewDTO> postViesDTO = postsService.getPosts(postlist);
@@ -286,8 +296,8 @@ public class ForumAPIController {
 		return new PostsViewGetPagesDTO(postViesDTO, posts.getTotalPages());
 	}
 	
-	@GetMapping("/adminGetReportedPostDetail")
-	public PostViewDTO getReportedPostDetail(@RequestParam Long id) {
+	@GetMapping("/adminGetPostDetail/{id}")
+	public PostViewDTO adminGetPostDetail(@PathVariable Long id) {
 		
 		Posts post = postsRepository.findById(id).orElse(null);
 		
@@ -301,12 +311,19 @@ public class ForumAPIController {
 			
 	} 
 	
-	@DeleteMapping("/adminClearReports")
-	public ResponseEntity<Void> clearReports(@RequestParam Long id) {
+	@DeleteMapping("/adminClearReports/{id}")
+	public ResponseEntity<Void> clearReports(@PathVariable Long id) {
 		
 		reportsService.deleteAllReports(id);
 		
 		return ResponseEntity.noContent().build();
+	}
+	
+	@PutMapping("/adminUpdatePostStatus/{id}")
+	public Posts adminUpdatePostStatus(@PathVariable Long id, @RequestParam(defaultValue = "1") int status) {
+		
+		return postsService.updatePostStatus(id, status);
+		
 	}
 	
 }

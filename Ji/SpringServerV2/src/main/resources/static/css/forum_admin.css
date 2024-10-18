@@ -163,23 +163,23 @@
 }
 
 .Forum_keep {
-    background-image: url("../img/icon/check_circle_FILL0.svg");
+    background-image: url("/assets/forum/check_circle_FILL0.svg");
     cursor: pointer;
     transition: all 0.3s ease 0s;
 }
 
 .Forum_keep:hover {
-    background-image: url("../img/icon/check_circle_FILL1.svg");
+    background-image: url("/assets/forum/check_circle_FILL1.svg");
 }
 
 .Forum_delete {
-    background-image: url("../img/icon/cancel_FILL0.svg");
+    background-image: url("/assets/forum/cancel_FILL0.svg");
     cursor: pointer;
     transition: all 0.3s ease 0s;
 }
 
 .Forum_delete:hover {
-    background-image: url("../img/icon/cancel_FILL1.svg");
+    background-image: url("/assets/forum/cancel_FILL1.svg");
 }
 
 .Forum_keep:focus, .Forum_delete:focus {
@@ -272,7 +272,7 @@
     right: 15px;
     width: 50px;
     height: 50px;
-    background-image: url("../img/icon/close_deletImage.svg");
+    background-image: url("/assets/forum/close_deletImage.svg");
     background-repeat: no-repeat;
     background-size: contain;
     opacity: 0.4;

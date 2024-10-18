@@ -1,9 +1,22 @@
 $(() => {
 	let id;
+	let query = "share";
 	let page = 0;
 	let postListLength;
 
-	function getPosts(page) {
+	function setText(query) {
+
+		let setText = [];
+		if (query === "report") {
+			setText = ["保留", "刪除"];
+		} else {
+			setText = ["刊登", "下架"];
+		}
+
+		return setText;
+	}
+
+	function getPosts(query, page) {
 		$('.Forum_page').empty();
 		$('.Forum_divTable').empty();
 
@@ -15,13 +28,12 @@ $(() => {
                         <th class="Forum_th_textCenter">主標題</th>
                         <th class="Forum_table_content Forum_th_textCenter">內文</th>
                         <th class="Forum_table_reportCount">檢舉數</th>
-                        <th class="Forum_table_keep">保留</th>
-                        <th>刪除</th>
+                        <th class="Forum_table_keep">${setText(query)[0]}</th>
+                        <th>${setText(query)[1]}</th>
                     </tr>
                 </thead>
             </table>`)
-
-		fetch(`/forum/api/adminGetReportedPosts?page=${page}`)
+		fetch(`/forum/api/adminGetPosts?query=${query}&page=${page}`)
 			.then(response => response.json())
 			.then(data => {
 				postListLength = data.postViewDTOList.length;
@@ -62,12 +74,20 @@ $(() => {
 					$('.Forum_pageBtn').eq(page).addClass('Forum_thisPage');
 
 				} else {
+
+					let noReportsText;
+					if (query === "report") {
+						noReportsText = "檢舉數 ≥ 5 或刊登首頁審核未通過的文章會暫時被下架並顯示在此"
+					} else {
+						noReportsText = "尚未經過審核的新文章會顯示在此，經過審核後才顯示在首頁上"
+					}
+
 					$('.Forum_divTable').append(`
-                        <p class="Forum_noReports">
-                            <span>目前沒有待處理的文章</span><br>
-                            <span>檢舉數 ≥ 5 的文章會暫時被下架並顯示在此</span>
-                        </p>
-                    `)
+						<p class="Forum_noReports">
+							<span>目前沒有待處理的文章</span><br>
+							<span>${noReportsText}</span>
+						</p>
+					`)
 				}
 			})
 			.catch(error => {
@@ -82,7 +102,7 @@ $(() => {
 	}
 
 	function getPostDetail(id) {
-		fetch(`/forum/api/adminGetReportedPostDetail/${id}`)
+		fetch(`/forum/api/adminGetPostDetail/${id}`)
 			.then(response => response.json())
 			.then(data => {
 				console.log(data);
@@ -122,8 +142,8 @@ $(() => {
                             </div>
                         </div>
                         <div class="Forum_post_btns">
-                            <button id="Forum_post_keep" class="Forum_post_btn">保留</button>
-                            <button id="Forum_post_delete" class="Forum_post_btn">刪除</button>
+                            <button id="Forum_post_keep" class="Forum_post_btn">${setText(query)[0]}</button>
+                            <button id="Forum_post_delete" class="Forum_post_btn">${setText(query)[1]}</button>
                         </div>
                     </div>`
 				$('main').append(post);
@@ -143,7 +163,7 @@ $(() => {
 				if (response.ok) {
 					console.log('Success: ', response);
 					changeLastPage();
-					getPosts(page);
+					getPosts(query, page)
 					removeWidows();
 				} else {
 					console.error('Failed to delete the reports');
@@ -152,7 +172,6 @@ $(() => {
 			.catch(error => {
 				console.error('err', error);
 			})
-
 	}
 
 	function deletePost(id) {
@@ -163,10 +182,29 @@ $(() => {
 				if (response.ok) {
 					console.log('Success: ', response);
 					changeLastPage();
-					getPosts(page);
+					getPosts(query, page)
 					removeWidows();
 				} else {
 					console.error('Failed to delete the post');
+				}
+			})
+			.catch(error => {
+				console.error('err', error);
+			})
+	}
+
+	function changePostStatus(id, status) {
+		fetch(`/forum/api/adminUpdatePostStatus/${id}?status=${status}`, {
+			method: 'PUT'
+		})
+			.then(response => {
+				if (response.ok) {
+					console.log('Success: ', response);
+					changeLastPage();
+					getPosts(query, page)
+					removeWidows();
+				} else {
+					console.error('Failed to change the status of the post');
 				}
 			})
 			.catch(error => {
@@ -186,7 +224,19 @@ $(() => {
 	}
 
 
-	getPosts(page);
+	getPosts(query, page);
+	
+	$('#Forum_queryShare').click(() => {
+		query = "share";
+		page = 0;
+		getPosts(query, page);
+	})
+	
+	$('#Forum_queryReport').click(() => {
+		query = "report";
+		page = 0;
+		getPosts(query, page);
+	})
 
 	$('main').on('click', '.Forum_tbody_tr', function () {
 		id = $(this).find('.Forum_table_id').text();
@@ -199,10 +249,11 @@ $(() => {
 		id = tr.find('.Forum_table_id').text();
 
 		e.stopPropagation();
+
 		$('main').append(`
             <div class="Forum_bg"></div> 
             <div class="forum_detail_checkwindow">
-                <p>確定要保留這篇文章嗎？</p>
+                <p>確定要${setText(query)[0]}這篇文章嗎？</p>
                 <button id="Forum_keepPost" class="forum_checkwindow_OK">確定</button>
                 <button id="Forum_closeWindow" class="forum_checkwindow_cancel">取消</button>
             </div>
@@ -215,10 +266,11 @@ $(() => {
 		id = tr.find('.Forum_table_id').text();
 
 		e.stopPropagation();
+
 		$('main').append(`
             <div class="Forum_bg"></div> 
             <div class="forum_detail_checkwindow">
-                <p>確定要刪除這篇文章嗎？</p>
+                <p>確定要${setText(query)[1]}這篇文章嗎？</p>
                 <button id="Forum_deletePost" class="forum_checkwindow_OK">確定</button>
                 <button id="Forum_closeWindow" class="forum_checkwindow_cancel">取消</button>
             </div>
@@ -232,7 +284,7 @@ $(() => {
 		$('.Forum_bg').fadeIn(300);
 		$('main').append(`
             <div class="forum_detail_checkwindow">
-                <p>確定要保留這篇文章嗎？</p>
+                <p>確定要${setText(query)[0]}這篇文章嗎？</p>
                 <button id="Forum_keepPost" class="forum_checkwindow_OK">確定</button>
                 <button id="Forum_post_closeWindow" class="forum_checkwindow_cancel">取消</button>
             </div>
@@ -245,7 +297,7 @@ $(() => {
 		$('.Forum_bg').fadeIn(300);
 		$('main').append(`
             <div class="forum_detail_checkwindow">
-                <p>確定要刪除這篇文章嗎？</p>
+                <p>確定要${setText(query)[1]}這篇文章嗎？</p>
                 <button id="Forum_deletePost" class="forum_checkwindow_OK">確定</button>
                 <button id="Forum_post_closeWindow" class="forum_checkwindow_cancel">取消</button>
             </div>
@@ -253,11 +305,19 @@ $(() => {
 	})
 
 	$('main').on('click', '#Forum_keepPost', () => {
-		keepPost(id);
+		if (query === "report") {
+			keepPost(id);
+		} else {
+			changePostStatus(id, 2);
+		}
 	})
 
 	$('main').on('click', '#Forum_deletePost', () => {
-		deletePost(id);
+		if (query === "report") {
+			deletePost(id);
+		} else {
+			changePostStatus(id, 0);
+		}
 	})
 
 	$('main').on('click', '#Forum_closeWindow', () => {

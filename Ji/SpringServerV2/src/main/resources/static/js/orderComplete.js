@@ -13,12 +13,12 @@ document.addEventListener('DOMContentLoaded', function() {
 	
 	const order_details = document.createElement('div');
 	order_details.innerHTML = `
-		 	<div>${flight_start.plane.airline}</div>
+		 	<div style="margin-bottom:1vh;">${flight_start.plane.airline}</div>
 		 	<div style="display: flex;">
 		 		<div style="font-weight: bold;">${flight_start.des_start} 到 ${flight_start.des_end}&nbsp;&nbsp;&nbsp;&nbsp;</div>
 		 		<p>${flight_start.plane.date_start}</p>
 		 	</div>
-		 	<div style="display: flex; align-items: center; margin: 0 10%">
+		 	<div style="display: flex; align-items: center; margin: 0 14%">
 		 		<div style="display: flex; flex-direction: column; align-items: center;">
 		 			<div>${flight_start.plane.time_start.slice(0,5)}</div>
 		 			<div>${flight_start.plane.des_start}</div>
@@ -28,20 +28,20 @@ document.addEventListener('DOMContentLoaded', function() {
 		 			<div>${flight_start.plane.time_end.slice(0,5)}</div>
 		 			<div>${flight_start.plane.des_end}</div>
 		 		</div>
-		 		<div style="display: flex; flex-direction: column; align-items: center; margin: 0 30px;">
+		 		<div style="display: flex; flex-direction: column; align-items: start; margin: 0 30px; width:15vw;">
 		 			<div>飛行時間: ${Math.floor(flight_start.duration / 60)}小時 ${flight_start.duration % 60}分</div>
 		 			<div>${flight_start.plane.type}</div>
 		 		</div>
-		 		<div>${flight_start.seat}</div>
+		 		<div style="width:5vw;">${flight_start.seat}</div>
 		 	</div>	
 		 	<hr style="border: 1px solid gray; width: 100%;">
 		 	
-		 	<div>${flight_end.plane.airline}</div>
-		 	<div style="display: flex;">
+		 	<div style="margin-bottom:1vh;">${flight_end.plane.airline}</div>
+		 	<div style="display: flex; ">
 		 		<div style="font-weight: bold;">${flight_end.des_start} 到 ${flight_end.des_end}&nbsp;&nbsp;&nbsp;&nbsp;</div>
 		 		<p>${flight_end.plane.date_start}</p>
 		 	</div>
-		 	<div style="display: flex; align-items: center; margin: 0 10% 5% 10%">
+		 	<div style="display: flex; justify-content:space-around; align-items: center; margin: 0 14% 5% 14%;">
 		 		<div style="display: flex; flex-direction: column; align-items: center;">
 		 			<div>${flight_end.plane.time_start.slice(0,5)}</div>
 		 			<div>${flight_end.plane.des_start}</div>
@@ -51,50 +51,16 @@ document.addEventListener('DOMContentLoaded', function() {
 		 			<div>${flight_end.plane.time_end.slice(0,5)}</div>
 		 			<div>${flight_end.plane.des_end}</div>
 		 		</div>
-		 		<div style="display: flex; flex-direction: column; align-items: center; margin: 0 30px;">
+		 		<div style="display: flex; flex-direction: column; align-items: start; margin: 0 30px; width:15vw;">
 		 			<div>飛行時間: ${Math.floor(flight_end.duration / 60)}小時 ${flight_end.duration % 60}分</div>
 		 			<div>${flight_end.plane.type}</div>
 		 		</div>
-		 		<div>${flight_end.seat}</div>
+		 		<div style="width:5vw;">${flight_end.seat}</div>
 		 	</div>
 		`;							
 
 	const container_all = document.getElementById('container_all');
 	container_all.appendChild(order_details);
-	
-	var modal = document.getElementById("confirmModal");
-	var payButton = document.getElementById("payButton");
-	var closeButton = document.getElementsByClassName("close");
-	var latterButton = document.getElementsByClassName("paylatter");
-	var confirmPaymentButton = document.getElementById("confirmPayment");
-	
-	payButton.onclick = function() {
-		modal.style.display = "block";
-	}
-	
-	for(var i=0 ; i <closeButton.length;i++){
-		closeButton[i].onclick = function(){
-			modal.style.display = "none";
-		}
-	}
-	
-	for(var i=0 ; i <latterButton.length;i++){
-		latterButton[i].onclick = function(){
-			window.location.href = "/homepage";
-		}
-	}
-	
-	confirmPaymentButton.onclick = function() {
-		document.getElementById('paymentForm').submit();
-	}
-	
-	window.onclick = function(event) {
-		if (event.target == modal){
-			modal.style.display = "none";
-		}
-	}
-	
-	
 });
 		
 	 
@@ -133,14 +99,13 @@ fetch('/orders/getoid')
                                 method: 'POST',
                                 headers: {
                                     'Content-Type': 'application/json',
-                                },
-								credentials: 'include'
+                                }
                             })
                             .then(response => {
                                 if (response.ok) {
                                     console.log("訂單狀態更新成功");
 									setTimeout(function(){
-										window.location.href = "/order_expired";
+										window.location.href = "/orderExpired";
 									},1000);
                                 } else {
                                     console.error("訂單狀態更新失敗，狀態碼:" + response.status);
@@ -161,7 +126,4 @@ fetch('/orders/getoid')
     })
     .catch(error => {
         console.error("無法獲取訂單 ID", error);
-});
-
-
-
+    });
