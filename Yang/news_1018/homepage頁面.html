@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="zxx" class="no-js">
+
+<head>
+	<!-- Mobile Specific Meta -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<!-- Favicon-->
+	<link rel="shortcut icon" href="空：網站圖案">
+	<!-- Author Meta -->
+	<meta name="author" content="空：網站作者">
+	<!-- Meta Description -->
+	<meta name="description" content="空：網站描述">
+	<!-- Meta Keyword -->
+	<meta name="keywords" content="空：網站關鍵字">
+	<!-- meta character set -->
+	<meta charset="UTF-8">
+	<!-- Site Title -->
+	<title>空：網站標題</title>
+
+	<link href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700" rel="stylesheet">
+	<!-- CSS -->
+	<link rel="stylesheet" href="css/linearicons.css">
+	<link rel="stylesheet" href="css/font-awesome.min.css">
+	<link rel="stylesheet" href="css/bootstrap.css">
+	<link rel="stylesheet" href="css/magnific-popup.css">
+	<link rel="stylesheet" href="css/jquery-ui.css">
+	<link rel="stylesheet" href="css/nice-select.css">
+	<link rel="stylesheet" href="css/animate.min.css">
+	<link rel="stylesheet" href="css/owl.carousel.css">
+	<link rel="stylesheet" href="css/main.css">
+	<!-- <link rel="stylesheet" href="css/testOld.css"> -->
+	<!-- 自己做的CSS -->
+	<link rel="stylesheet" href="css/testIndex.css">
+	<!-- 社群媒體的iconnnnnnnnnnnn -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<style>
+		/* blog icon */
+		.owl-carousel .owl-item .HpBlogIcon {
+			width: 50px;
+			border-radius: 25px;
+			display: inline-block;
+			margin-right: 10px;
+		}
+
+		/* blog img */
+		.thumb>.HpBlogImg {
+			height: 100%;
+			width: 100%;
+			object-fit: cover;
+		}
+
+		/* blog img 容器 */
+		.single-recent-blog-post>.thumb {
+			max-width: 360px;
+			height: 360px;
+			background-color: #dddddd;
+		}
+
+		/* blog tags 容器 */
+		.tags {
+			height: 60px;
+			/* 設定容器的最大高度，超出部分會隱藏 */
+			overflow-y: auto;
+			/* 垂直方向出現滾動條 */
+			scrollbar-width: none;
+			/* 對 Firefox 隱藏滾動條 */
+		}
+
+		.tags::-webkit-scrollbar {
+			display: none;
+			/* 對 WebKit 瀏覽器（如 Chrome、Safari）隱藏滾動條 */
+		}
+
+		/* blog 個別的tag */
+		.recent-blog-area .single-recent-blog-post .tags li {
+			margin: 0 0 5px 5px;
+			border: 1px solid #9c9c9c;
+		}
+
+		/* blog text */
+		.HpBlogText {
+			max-height: 200px;
+			/* 超出內容隱藏 */
+			overflow: hidden;
+			/* 使用 flexbox 的變體 */
+			display: -webkit-box;
+			/* 設定為垂直方向排列 */
+			-webkit-box-orient: vertical;
+			/* 限制最多顯示 4 行內容，根據需求調整 */
+			-webkit-line-clamp: 3;
+			/* 超過限制行數後顯示省略號 */
+			text-overflow: ellipsis;
+			/* 允許內容換行 */
+			white-space: normal;
+			/* 長單詞或網址允許換行 */
+			word-wrap: break-word;
+		}
+	</style>
+</head>
+<!-- 1018 新聞改用fetch -->
+<script>
+	window.onload = function () {
+
+		fetch('/news/getAll')
+			.then(response => {
+				if (!response.ok) {
+					throw new Error('Error:get all News ->');
+				}
+				return response.json();
+			})
+			.then(data => {
+				console.log(data);
+				let news = document.getElementById("HpNews");
+				news.innerHTML += "<div class='Hp_prev' onclick='posterPlusSlides(-1)'>&#10094;</div>";
+				for (let i = 0; i < data.length; i++) {
+					news.innerHTML += "<div class='container-fluid'>"
+						+ "<div class='row align-items-center justify-content-end'>"
+						+ "<div class='col-lg-6 col-md-12 home-about-left'>"
+						+ "<h1>"+data[i].title+"</h1>"
+						+ "<p>"+data[i].text+"</p>"
+						+ "<a href='"+data[i].url+"' target='_blank' class='primary-btn text-uppercase'>閱讀更多. . .</a>"
+						+ "</div>"
+						+ "<div class='col-lg-6 col-md-12 home-about-right no-padding'>"
+						+ "<img class='img-fluid' src='data:image/png;base64,"+data[i].img+"'>"
+						+ "</div></div></div>";
+				}
+				news.innerHTML += "<div class='Hp_next' onclick='posterPlusSlides(1)'>&#10095;</div>";
+				let allNews = document.querySelectorAll('.container-fluid');
+				allNews[0].style.display = "flex";
+			})
+			.catch(error => {
+				console.error('add Mews err:', error);
+			});
+	}
+</script>
+
+<body>
+	<!-- start header Area -->
+	<header id="header">
+		<div class="container main-menu">
+			<div class="row align-items-center justify-content-between d-flex">
+				<div id="logo">
+					<a href="index.html"><img src="img/logo.png" /></a>
+				</div>
+				<nav id="nav-menu-container">
+					<ul class="nav-menu">
+						<li><a href="index.html">首頁</a></li>
+						<li><a href="about.html">論壇</a></li>
+						<li class="menu-has-children"><a href="">會員專區</a></li>
+						<li><a href="contact.html">聯絡我們</a></li>
+						<li><a href="about.html">登入</a></li>
+					</ul>
+				</nav>
+			</div>
+		</div>
+	</header>
+	<!-- end header Area -->
+
+	<!-- start banner Area -->
+	<section class="banner-area relative">
+		<div class="overlay overlay-bg"></div>
+		<div class="container">
+			<div class="row fullscreen align-items-center justify-content-between">
+				<div class="col-lg-6 col-md-6 banner-left">
+					<h4 class="text-white">探索異國風情</h4>
+					<h1 class="text-white">創造美妙回憶</h1>
+					<h4 class="text-white">
+						開始你夢想旅遊的第一步，挑選舒適快速且超值的航班!
+					</h4>
+					<br>
+					<button id="HpStardBtn" class="primary-btn text-uppercase">Get Started</button>
+				</div>
+				<div class="col-lg-4 col-md-6 banner-right">
+					<div class="tab-content" id="myTabContent">
+						<div class="tab-pane fade show active" id="flight" role="tabpanel" aria-labelledby="flight-tab">
+							<form class="form-wrap">
+								<h6 class="Hp_formTitle">出發地</h6>
+								<input type="text" id="HpFirstInput" class="form-control" name="name"
+									placeholder="From " onfocus="this.placeholder = ''"
+									onblur="this.placeholder = 'From '">
+								<h6 class="Hp_formTitle">目的地</h6>
+								<input type="text" class="form-control" name="to" placeholder="To "
+									onfocus="this.placeholder = ''" onblur="this.placeholder = 'To '">
+								<h6 class="Hp_formTitle">出發日期</h6>
+								<input type="text" class="form-control date-picker" name="start" placeholder="Start "
+									onfocus="this.placeholder = ''" onblur="this.placeholder = 'Start '">
+								<h6 class="Hp_formTitle">回程日期</h6>
+								<input type="text" class="form-control date-picker" name="return" placeholder="Return "
+									onfocus="this.placeholder = ''" onblur="this.placeholder = 'Return '">
+								<h6 class="Hp_formTitle">成年人數</h6>
+								<input type="number" min="1" max="20" class="form-control" name="adults"
+									placeholder="Adults " onfocus="this.placeholder = ''"
+									onblur="this.placeholder = 'Adults '">
+								<h6 class="Hp_formTitle">未成年人數</h6>
+								<input type="number" min="1" max="20" class="form-control" name="child"
+									placeholder="Child " onfocus="this.placeholder = ''"
+									onblur="this.placeholder = 'Child '">
+								<div style="display: flex;">
+									<label class="Hp_room"><input type="radio" name="ticketRoom" checked>經濟艙</label>
+									<label class="Hp_room"><input type="radio" name="ticketRoom">商務艙</label>
+								</div>
+								<a href="#" class="primary-btn text-uppercase">搜尋航班</a>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- End banner Area -->
+
+	<!-- Start popular-destination Area -->
+	<section class="popular-destination-area section-gap">
+		<div class="container">
+			<div class="row d-flex justify-content-center">
+				<div class="menu-content pb-70 col-lg-8">
+					<div class="title text-center">
+						<h1 class="mb-10">熱門景點</h1>
+						<p>我們生活在一個幸運的時代，一個容易見識不同國家、了解不同文化的時代</p>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-4">
+					<div class="single-destination relative">
+						<div class="thumb relative">
+							<div class="overlay overlay-bg"></div>
+							<img class="img-fluid" src="img/r1.png" alt="">
+						</div>
+						<div class="desc">
+							<a href="#" class="price-btn">$150</a>
+							<h4>淺草雷門寺</h4>
+							<p>日本</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-4">
+					<div class="single-destination relative">
+						<div class="thumb relative">
+							<div class="overlay overlay-bg"></div>
+							<img class="img-fluid" src="img/r2.png" alt="">
+						</div>
+						<div class="desc">
+							<a href="#" class="price-btn">$250</a>
+							<h4>東方明珠電視塔</h4>
+							<p>中國</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-4">
+					<div class="single-destination relative">
+						<div class="thumb relative">
+							<div class="overlay overlay-bg"></div>
+							<img class="img-fluid" src="img/r3.png" alt="">
+						</div>
+						<div class="desc">
+							<a href="#" class="price-btn">$350</a>
+							<h4>努沙杜爾海灘</h4>
+							<p>印度尼西亞</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<br>
+			<div class="row">
+				<div class="col-lg-4">
+					<div class="single-destination relative">
+						<div class="thumb relative">
+							<div class="overlay overlay-bg"></div>
+							<img class="img-fluid" src="img/r4.png" alt="">
+						</div>
+						<div class="desc">
+							<a href="#" class="price-btn">$150</a>
+							<h4>米爾福德峽灣</h4>
+							<p>紐西蘭</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-4">
+					<div class="single-destination relative">
+						<div class="thumb relative">
+							<div class="overlay overlay-bg"></div>
+							<img class="img-fluid" src="img/r5.png" alt="">
+						</div>
+						<div class="desc">
+							<a href="#" class="price-btn">$250</a>
+							<h4>烏魯魯巨石</h4>
+							<p>澳洲</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-4">
+					<div class="single-destination relative">
+						<div class="thumb relative">
+							<div class="overlay overlay-bg"></div>
+							<img class="img-fluid" src="img/r6.png" alt="">
+						</div>
+						<div class="desc">
+							<a href="#" class="price-btn">$350</a>
+							<h4>聖羅倫斯市場</h4>
+							<p>加拿大</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- End popular-destination Area -->
+
+	<!-- Start news Area -->
+	<section class="home-about-area" id="HpNews">
+	</section>
+	<!-- End news Area -->
+
+
+	<!-- Start blog Area -->
+	<section class="recent-blog-area section-gap">
+		<div class="container">
+			<div class="row d-flex justify-content-center">
+				<div class="menu-content pb-60 col-lg-9">
+					<div class="title text-center">
+						<h1 class="mb-10">最新貼文</h1>
+						<p>來看看其他人分享的美好回憶，是否能觸動你心底的悸動呢?</p>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="active-recent-blog-carusel">
+					<!-- <div class="single-recent-blog-post item">
+						<div class="thumb">
+							<img id="HpBlogImg" class="img-fluid" src="">
+						</div>
+						<div class="details">
+							<div class="tags">
+								<ul>
+									<div id="HpBlogTags"></div>
+								</ul>
+							</div>
+							<h4 id="HpBlogTitle" class="title"></h4>
+							<p id="HpBlogText"></p>
+							<div>
+								<img id="HpBlogIcon" src="">
+								<span id="HpBlogAuthor"></span>
+							</div>
+							<br>
+							<h6 id="HpBlogDate" class="date"></h6>
+						</div>
+					</div> -->
+					<div class="single-recent-blog-post item">
+						<div class="thumb">
+							<img class="HpBlogImg img-fluid" src="">
+						</div>
+						<div class="details">
+							<div class="tags">
+								<ul>
+									<div class="HpBlogTags"></div>
+								</ul>
+							</div>
+							<h4 class="HpBlogTitle title"></h4>
+							<p class="HpBlogText"></p>
+							<div>
+								<img class="HpBlogIcon" src="">
+								<span class="HpBlogAuthor"></span>
+							</div>
+							<br>
+							<h6 class="HpBlogDate date"></h6>
+						</div>
+					</div>
+					<div class="single-recent-blog-post item">
+						<div class="thumb">
+							<img class="HpBlogImg img-fluid" src="">
+						</div>
+						<div class="details">
+							<div class="tags">
+								<ul>
+									<div class="HpBlogTags"></div>
+								</ul>
+							</div>
+							<h4 class="HpBlogTitle title"></h4>
+							<p class="HpBlogText"></p>
+							<div>
+								<img class="HpBlogIcon" src="">
+								<span class="HpBlogAuthor"></span>
+							</div>
+							<br>
+							<h6 class="HpBlogDate date"></h6>
+						</div>
+					</div>
+					<div class="single-recent-blog-post item">
+						<div class="thumb">
+							<img class="HpBlogImg img-fluid" src="">
+						</div>
+						<div class="details">
+							<div class="tags">
+								<ul>
+									<div class="HpBlogTags"></div>
+								</ul>
+							</div>
+							<h4 class="HpBlogTitle title"></h4>
+							<p class="HpBlogText"></p>
+							<div>
+								<img class="HpBlogIcon" src="">
+								<span class="HpBlogAuthor"></span>
+							</div>
+							<br>
+							<h6 class="HpBlogDate date"></h6>
+						</div>
+					</div>
+					<div class="single-recent-blog-post item">
+						<div class="thumb">
+							<img class="HpBlogImg img-fluid" src="">
+						</div>
+						<div class="details">
+							<div class="tags">
+								<ul>
+									<div class="HpBlogTags"></div>
+								</ul>
+							</div>
+							<h4 class="HpBlogTitle title"></h4>
+							<p class="HpBlogText"></p>
+							<div>
+								<img class="HpBlogIcon" src="">
+								<span class="HpBlogAuthor"></span>
+							</div>
+							<br>
+							<h6 class="HpBlogDate date"></h6>
+						</div>
+					</div>
+					<div class="single-recent-blog-post item">
+						<div class="thumb">
+							<img class="HpBlogImg img-fluid" src="">
+						</div>
+						<div class="details">
+							<div class="tags">
+								<ul>
+									<div class="HpBlogTags"></div>
+								</ul>
+							</div>
+							<h4 class="HpBlogTitle title"></h4>
+							<p class="HpBlogText"></p>
+							<div>
+								<img class="HpBlogIcon" src="">
+								<span class="HpBlogAuthor"></span>
+							</div>
+							<br>
+							<h6 class="HpBlogDate date"></h6>
+						</div>
+					</div>
+					<div class="single-recent-blog-post item">
+						<div class="thumb">
+							<img class="HpBlogImg img-fluid" src="">
+						</div>
+						<div class="details">
+							<div class="tags">
+								<ul>
+									<div class="HpBlogTags"></div>
+								</ul>
+							</div>
+							<h4 class="HpBlogTitle title"></h4>
+							<p class="HpBlogText"></p>
+							<div>
+								<img class="HpBlogIcon" src="">
+								<span class="HpBlogAuthor"></span>
+							</div>
+							<br>
+							<h6 class="HpBlogDate date"></h6>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- End recent-blog Area -->
+
+	<!-- start footer Area -->
+	<footer>
+		<div class="search_section_container search_footer_container">
+			<div class="search_footer_col">
+				<h4>追蹤我們</h4>
+				<hr>
+				<div class="search_footer_socials">
+					<span>
+						<a href="#"><i class="ri-twitter-fill"></i></a>
+					</span>
+					<span>
+						<a href="#"><i class="ri-line-fill"></i></a>
+					</span>
+					<span>
+						<a href="#"><i class="ri-instagram-line"></i></a>
+					</span>
+					<span>
+						<a href="#"><i class="ri-facebook-fill"></i></a>
+					</span>
+				</div>
+			</div>
+			<div class="search_footer_col">
+				<h4>隱私</h4>
+				<hr>
+				<a href="#">隱私權政策</a>
+				<a href="#">隱私設定</a>
+			</div>
+			<div class="search_footer_col">
+				<h4>Cookie</h4>
+				<hr>
+				<a href="#">Cookie政策</a>
+				<a href="#">Cookie設定</a>
+			</div>
+			<div class="search_footer_col">
+				<h4>合作夥伴</h4>
+				<hr>
+				<a href="#">廣告投放</a>
+				<a href="#">旅遊宣傳合作</a>
+			</div>
+			<div class="search_footer_col">
+				<h4>InstaFeed</h4>
+				<hr>
+				<ul class="instafeed d-flex flex-wrap">
+					<li><img src="img/i1.jpg" alt=""></li>
+					<li><img src="img/i2.jpg" alt=""></li>
+					<li><img src="img/i3.jpg" alt=""></li>
+					<li><img src="img/i4.jpg" alt=""></li>
+					<li><img src="img/i5.jpg" alt=""></li>
+					<li><img src="img/i6.jpg" alt=""></li>
+					<li><img src="img/i7.jpg" alt=""></li>
+					<li><img src="img/i8.jpg" alt=""></li>
+				</ul>
+			</div>
+		</div>
+		<div class="search_footer_bar">
+			Copyright © 2024 Javel. All rights reserved.
+		</div>
+	</footer>
+	<!-- End footer Area -->
+
+	<script src="js/vendor/jquery-2.2.4.min.js"></script>
+	<script src="js/popper.min.js"></script>
+	<script src="js/vendor/bootstrap.min.js"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhOdIF3Y9382fqJYt5I_sswSrEw5eihAA"></script>
+	<script src="js/jquery-ui.js"></script>
+	<script src="js/easing.min.js"></script>
+	<script src="js/hoverIntent.js"></script>
+	<script src="js/superfish.min.js"></script>
+	<script src="js/jquery.ajaxchimp.min.js"></script>
+	<script src="js/jquery.magnific-popup.min.js"></script>
+	<script src="js/jquery.nice-select.min.js"></script>
+	<script src="js/owl.carousel.min.js"></script>
+	<script src="js/mail-script.js"></script>
+	<script src="js/main.js"></script>
+	<script>
+		// 點擊get Started後會聚焦在航班出發地輸入欄位
+		document.getElementById("HpStardBtn").addEventListener("click", function () {
+			// Focus the first input field without moving the page
+			document.getElementById("HpFirstInput").focus();
+		});
+
+		// 新聞的輪播
+		let slideIndex = 1;
+		let timer;
+		showSlides(slideIndex);
+
+		function posterPlusSlides(n) {
+			showSlides(slideIndex += n);
+		}
+
+		function showSlides(n) {
+			let i;
+			let slides = document.getElementsByClassName("container-fluid");
+			if (n > slides.length) { slideIndex = 1 }
+			if (n < 1) { slideIndex = slides.length }
+			for (i = 0; i < slides.length; i++) {
+				slides[i].style.display = "none";
+			}
+			slides[slideIndex - 1].style.display = "flex";
+			// clearInterval(timer);
+			// timer = setInterval(() => {showSlides(++slideIndex); }, 3000);
+		} 
+	</script>
+	<script>
+		fetch('/forum/api/loadCards?country=全世界&city=所有城市&key=&sortBy=postDate&page=0')
+			.then(response => {
+				if (!response.ok) {
+					throw new Error('blog Error: no response');
+				}
+				return response.json();
+			})
+			.then(data => {
+				// 0~5
+				// console.log(data);
+				// console.log("------------");
+				// 0~11
+				// let imgTemp = document.querySelectorAll('.HpBlogImg');
+				// console.log(imgTemp);
+				// console.log("------------");
+				let img = document.querySelectorAll('.HpBlogImg');
+				let tags = document.querySelectorAll('.HpBlogTags');
+				let title = document.querySelectorAll('.HpBlogTitle');
+				let text = document.querySelectorAll('.HpBlogText');
+				let icon = document.querySelectorAll('.HpBlogIcon');
+				let author = document.querySelectorAll('.HpBlogAuthor');
+				let date = document.querySelectorAll('.HpBlogDate');
+				for (let index = 0; index < 12; index++) {
+					img[index].src = data[(index + 3) % 6].coverImgURL;
+					let tagSplit = data[(index + 3) % 6].post.tags.split(",");
+					let tagString = "";
+					tagSplit.forEach(tag => {
+						tagString += "<li><a href='/forum?key=" + tag + "'>" + tag + "</a></li>"
+					});
+					tags[index].innerHTML = tagString;
+					title[index].innerHTML = "<a href='/forum_detail/" + data[(index + 3) % 6].post.id + "'>" + data[(index + 3) % 6].post.mainTitle + "</a>";
+					text[index].innerHTML = data[(index + 3) % 6].post.content;
+					icon[index].src = data[(index + 3) % 6].userNameIconDTO.iconURL;
+					author[index].innerHTML = data[(index + 3) % 6].userNameIconDTO.username;
+					date[index].innerHTML = data[(index + 3) % 6].post.startDate;
+				}
+
+			})
+			.catch(error => {
+				console.error('blog err:', error);
+			});
+	</script>
+
+</body>
+
+</html>
