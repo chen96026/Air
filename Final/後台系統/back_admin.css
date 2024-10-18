@@ -40,7 +40,8 @@ body {
 #Backstage_LeftMember,
 #Backstage_LeftOrder,
 #Backstage_LeftFlight,
-#Backstage_LeftForum {
+#Backstage_LeftForum,
+#Backstage_LeftNews {
   border-bottom: 1px solid rgb(0, 0, 0);
   display: flex;
   align-items: center;
@@ -80,12 +81,6 @@ body {
   margin: 0 auto;
   padding: 20px;
   background-color: white;
-}
-
-.Backstage_Middleside>div {
-  background-color: white;
-  width: 90%;
-  margin: 0 auto 5% auto;
 }
 
 /*以上共用*/
@@ -806,4 +801,74 @@ select {
   max-height: 90%;
   object-fit: contain;
   cursor: pointer;
+}
+
+/* 新聞區塊 */
+.container_all {
+	width: 75vw;
+}
+
+#newsFind>table {
+    table-layout: fixed; /* 固定佈局 */
+}
+
+#newsFind th:nth-child(1), #newsFind td:nth-child(1) {
+	width: 5%;
+	text-align: center;
+}
+
+#newsFind th:nth-child(2), #newsFind td:nth-child(2) {
+	width: 20%;
+}
+
+#newsFind th:nth-child(3), #newsFind td:nth-child(3) {
+	width: 48%;
+}
+
+#newsFind th:nth-child(4), #newsFind td:nth-child(4) {
+	width: 20%;
+}
+
+#newsFind th:nth-child(5), #newsFind td:nth-child(5) {
+	width: 7%;
+}
+
+.newsClip {
+	overflow: hidden;
+	white-space: nowrap; /* 不換行 */
+	text-overflow: ellipsis; /* 超出部分顯示省略號 */
+}
+
+#newsFind td>img {
+	width: 80%; /* 使圖片寬度占容器的 80% */
+    height: auto; /* 根據寬度自動調整高度 */
+    object-fit: contain; /* 保持圖片比例 */
+    display: block; /* 避免下方空隙 */
+    margin: 0 auto; /* 使圖片居中 */
+}
+
+.newsContent {
+	display: none;
+}
+
+.newsTab {
+    display: flex; /* 使用彈性佈局 */
+    margin-bottom: 1rem; /* 按鈕與內容之間的間距 */
+}
+
+.newsTabBtn {
+    background-color: #f0f0f0; /* 按鈕背景顏色 */
+    border: 1px solid #ccc; /* 按鈕邊框 */
+    padding: 10px 15px; /* 按鈕內部間距 */
+    cursor: pointer; /* 鼠標指針樣式 */
+    margin-right: 5px; /* 按鈕間距 */
+    transition: background-color 0.3s; /* 動畫效果 */
+}
+
+.newsTabBtn:hover {
+    background-color: #e0e0e0; /* 懸停效果 */
+}
+
+.newsTabBtn.newsTabActive {
+    background-color: #f8b600; /* 激活狀態背景顏色 */
 }

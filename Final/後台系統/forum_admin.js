@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", function () {
       <div id="Backstage_LeftMember">會員管理</div>
       <div id="Backstage_LeftOrder">訂單管理</div>
       <div id="Backstage_LeftForum">論壇管理</div>
+	  <div id="Backstage_LeftNews">新聞管理</div>
         `;
 		document.getElementById("Backstage_LeftSide").innerHTML = '';
 		document.getElementById("Backstage_LeftSide").appendChild(back_leftside);
@@ -29,6 +30,12 @@ document.addEventListener("DOMContentLoaded", function () {
 			.getElementById("Backstage_LeftForum")
 			.addEventListener("click", function () {
 				window.location = "./forum_admin.html"
+			});
+
+		document
+			.getElementById("Backstage_LeftNews")
+			.addEventListener("click", function () {
+				window.location = "./mainNews_admin.html"
 			});
 	}
 	Back_LeftSide();

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>新聞後台</title>
+	<link rel="stylesheet" href="./back_admin.css">
+</head>
+
+<body>
+	<main class="Backstage_main">
+		<div id="Backstage_LeftSide"></div>
+		<div class="Backstage_MiddleSide">
+			<h1 class="Backstage_Title">首頁新聞管理</h1>
+			<div class="container_all">
+				<div class="newsTab">
+					<button class="newsTabBtn newsTabActive" onclick="newsDB(event, 'newsFind')">所有新聞</button>
+					<button class="newsTabBtn" onclick="newsDB(event, 'newsAdd')">新增新聞</button>
+					<button class="newsTabBtn" onclick="newsDB(event, 'newsUpdate')">修改/刪除新聞</button>
+				</div>
+				<div id="newsFind" class="newsContent">
+					<table>
+						<thead>
+							<tr>
+								<th>編號</th>
+								<th>標題</th>
+								<th>內文</th>
+								<th>連結</th>
+								<th>圖片</th>
+							</tr>
+						</thead>
+						<tbody id="newsTable">
+
+						</tbody>
+					</table>
+				</div>
+				<div id="newsAdd" class="newsContent">
+					<form id="addForm">
+						新增新聞標題: <input id="addTitle"> <br> <br> 新增新聞內文: <input
+							id="addText"> <br> <br> 新增新聞連結: <input
+							id="addNewsURL"> <br> <br> 新增新聞圖片: <input
+							type="file" accept="image/*" id="addFile" name="addFile">
+						<br> <br>
+						<button>新增</button>
+					</form>
+				</div>
+				<div id="newsUpdate" class="newsContent">
+
+					<form id="updateForm">
+						更新新聞編號: <input id="updateNewsId" type="number"> <br> <br>
+						更新新聞標題: <input id="updateTitle"> <br> <br> 更新新聞內文: <input
+							id="updateText"> <br> <br> 更新新聞連結: <input
+							id="updateNewsURL"> <br> <br> 更新新聞圖片: <input
+							type="file" accept="image/*" id="updateFile" name="updateFile">
+						<br> <br>
+						<button>更新</button>
+					</form>
+					<br>
+					<hr>
+					<br>
+					<form id="deleteForm">
+						刪除新聞編號: <input id="deleteNewsId" type="number"> <br> <br>
+						<button>刪除</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</main>
+	<script src="./mainNews_admin.js"></script>
+	<script src="./forum_admin.js"></script>
+</body>
+
+</html>
