@@ -520,6 +520,8 @@ document.addEventListener("DOMContentLoaded", function () {
 	//論壇管理
 	function ForumManagement() {
 
+		$(document).off('.Forum');
+
 		let id;
 		let query = "share";
 		let page = 0;
@@ -626,12 +628,9 @@ document.addEventListener("DOMContentLoaded", function () {
 			fetch(`/forum/api/adminGetPostDetail/${id}`)
 				.then(response => response.json())
 				.then(data => {
-					console.log(data);
 					let images = `<div>`;
-					console.log(images);
 					data.imageURL.forEach(imgURL => {
 						const setImg = `<img src="${imgURL}" class="Forum_detail_img">`;
-						console.log(setImg);
 						images += setImg;
 					})
 					images += `</div>`;
@@ -747,7 +746,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 		getPosts(query, page);
 
-		$('#Forum_queryShare').click(() => {
+		$(document).on('click.Forum', '#Forum_queryShare', () => {
 			$('#Forum_queryShare').addClass('Forum_button_checked');
 			$('#Forum_queryReport').removeClass('Forum_button_checked');
 			query = "share";
@@ -755,7 +754,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			getPosts(query, page);
 		})
 
-		$('#Forum_queryReport').click(() => {
+		$(document).on('click.Forum', '#Forum_queryReport', () => {
 			$('#Forum_queryReport').addClass('Forum_button_checked');
 			$('#Forum_queryShare').removeClass('Forum_button_checked');
 			query = "report";
@@ -763,13 +762,13 @@ document.addEventListener("DOMContentLoaded", function () {
 			getPosts(query, page);
 		})
 
-		$('main').on('click', '.Forum_tbody_tr', function () {
+		$(document).on('click.Forum', '.Forum_tbody_tr', function () {
 			id = $(this).find('.Forum_table_id').text();
 
 			getPostDetail(id);
 		})
 
-		$('main').on('click', '.Forum_keep', function (e) {
+		$(document).on('click.Forum', '.Forum_keep', function (e) {
 			const tr = $(this).closest('.Forum_tbody_tr');
 			id = tr.find('.Forum_table_id').text();
 
@@ -787,7 +786,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			$('.forum_detail_checkwindow').hide().fadeIn(100);
 		})
 
-		$('main').on('click', '.Forum_delete', function (e) {
+		$(document).on('click.Forum', '.Forum_delete', function (e) {
 			const tr = $(this).closest('.Forum_tbody_tr');
 			id = tr.find('.Forum_table_id').text();
 
@@ -805,7 +804,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			$('.forum_detail_checkwindow').hide().fadeIn(100);
 		})
 
-		$('main').on('click', '#Forum_post_keep', () => {
+		$(document).on('click.Forum', '#Forum_post_keep', () => {
 			$('.Forum_bg').hide();
 			$('.Forum_bg').addClass('Forum_bg_zIndex2');
 			$('main').append(`
@@ -819,7 +818,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			$('.forum_detail_checkwindow').hide().fadeIn(100);
 		})
 
-		$('main').on('click', '#Forum_post_delete', () => {
+		$(document).on('click.Forum', '#Forum_post_delete', () => {
 			$('.Forum_bg').hide();
 			$('.Forum_bg').addClass('Forum_bg_zIndex2');
 			$('main').append(`
@@ -833,7 +832,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			$('.forum_detail_checkwindow').hide().fadeIn(100);
 		})
 
-		$('main').on('click', '#Forum_keepPost', () => {
+		$(document).on('click.Forum', '#Forum_keepPost', () => {
 			if (query === "report") {
 				keepPost(id);
 			} else {
@@ -841,7 +840,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			}
 		})
 
-		$('main').on('click', '#Forum_deletePost', () => {
+		$(document).on('click.Forum', '#Forum_deletePost', () => {
 			if (query === "report") {
 				deletePost(id);
 			} else {
@@ -849,7 +848,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			}
 		})
 
-		$('main').on('click', '#Forum_closeWindow', () => {
+		$(document).on('click.Forum', '#Forum_closeWindow', () => {
 			$('.Forum_bg').fadeOut(300);
 			$('.forum_detail_checkwindow').fadeOut(300);
 			setTimeout(() => {
@@ -858,7 +857,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			}, 300);
 		})
 
-		$('main').on('click', '#Forum_closePost', () => {
+		$(document).on('click.Forum', '#Forum_closePost', () => {
 			$('.Forum_bg').fadeOut(300);
 			$('.Forum_post').fadeOut(300);
 			setTimeout(() => {
@@ -867,7 +866,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			}, 300);
 		})
 
-		$('main').on('click', '#Forum_post_closeWindow', () => {
+		$(document).on('click.Forum', '#Forum_post_closeWindow', () => {
 			$('.Forum_bg').hide();
 			$('.Forum_bg').removeClass('Forum_bg_zIndex2');
 			$('.Forum_bg').fadeIn(300);
@@ -877,15 +876,15 @@ document.addEventListener("DOMContentLoaded", function () {
 			}, 300);
 		})
 
-		$('main').on('click', '.Forum_pageBtn', function () {
+		$(document).on('click.Forum', '.Forum_pageBtn', function () {
 			$('.Forum_pageBtn').removeClass('Forum_thisPage');
 			$(this).addClass('Forum_thisPage');
 
 			page = $(this).index();
-			getPosts(page);
+			getPosts(query, page);
 		})
 
-		$('main').on('click', '.Forum_detail_img', function (e) {
+		$(document).on('click.Forum', '.Forum_detail_img', function (e) {
 			e.stopPropagation();
 			$(this).toggleClass('Froum_Img');
 		})

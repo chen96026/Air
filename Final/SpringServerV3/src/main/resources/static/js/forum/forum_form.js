@@ -309,7 +309,7 @@ $(() => {
 					
 					setTimeout(() => {
 						window.location.href = toURL;						
-					}, 10000);
+					}, 1000);
 					
 	            })
 	            .catch(error => {

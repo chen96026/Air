@@ -23,6 +23,37 @@ document.getElementById("HpStardBtn").addEventListener("click", function() {
 });
 
 // 新聞的輪播
+fetch('/news/getAll')
+	.then(response => {
+		if (!response.ok) {
+			throw new Error('Error:get all News ->');
+		}
+		return response.json();
+	})
+	.then(data => {
+		console.log(data);
+		let news = document.getElementById("HpNews");
+		news.innerHTML += "<div class='Hp_prev' onclick='posterPlusSlides(-1)'>&#10094;</div>";
+		for (let i = 0; i < data.length; i++) {
+			news.innerHTML += "<div class='container-fluid'>"
+				+ "<div class='row align-items-center justify-content-end'>"
+				+ "<div class='col-lg-6 col-md-12 home-about-left'>"
+				+ "<h1>" + data[i].title + "</h1>"
+				+ "<p>" + data[i].text + "</p>"
+				+ "<a href='" + data[i].url + "' target='_blank' class='primary-btn text-uppercase'>閱讀更多. . .</a>"
+				+ "</div>"
+				+ "<div class='col-lg-6 col-md-12 home-about-right no-padding'>"
+				+ "<img class='img-fluid' src='data:image/png;base64," + data[i].img + "'>"
+				+ "</div></div></div>";
+		}
+		news.innerHTML += "<div class='Hp_next' onclick='posterPlusSlides(1)'>&#10095;</div>";
+		let allNews = document.querySelectorAll('.container-fluid');
+		allNews[0].style.display = "flex";
+	})
+	.catch(error => {
+		console.error('add Mews err:', error);
+	});
+	
 let slideIndex = 1;
 let timer;
 showSlides(slideIndex);
@@ -34,6 +65,7 @@ function posterPlusSlides(n) {
 function showSlides(n) {
 	let i;
 	let slides = document.getElementsByClassName("container-fluid");
+	console.log(slides.length)
 	if (n > slides.length) { slideIndex = 1 }
 	if (n < 1) { slideIndex = slides.length }
 	for (i = 0; i < slides.length; i++) {
@@ -41,9 +73,10 @@ function showSlides(n) {
 	}
 	slides[slideIndex - 1].style.display = "flex";
 	// clearInterval(timer);
-	// timer = setInterval(() => { showSlides(++slideIndex); }, 3000);
+	// timer = setInterval(() => {showSlides(++slideIndex); }, 3000);
 }
 
+// 搜尋
 document.getElementById('search_btn').addEventListener('click', function(event) {
 
 	localStorage.removeItem('selectedFlights');
@@ -59,8 +92,6 @@ document.getElementById('search_btn').addEventListener('click', function(event) 
 	const type = document.querySelector('input[name="type"]:checked').value;
 
 	const formData = `?des_start=${desStart}&des_end=${desEnd}&date_start=${dateStart}&date_end=${dateEnd}&adults=${adults}&child=${child}&type=${type}`;
-
-	// 检查是否有任何输入框为空
 
 	if (!desStart || !desEnd || !dateStart || !dateEnd || !adults || !child) {
 		event.preventDefault();

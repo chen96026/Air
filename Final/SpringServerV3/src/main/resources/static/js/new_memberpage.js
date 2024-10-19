@@ -799,6 +799,7 @@ forumByMe.addEventListener('click', () => {
 
 			myposts.forEach(postViewDTO => {
 			    forumContent += member_forum_generateHTML(
+					postViewDTO.post.id || "",
 			        postViewDTO.coverImgURL || "",             
 			        postViewDTO.post.mainTitle || "未命名標題",   
 			        postViewDTO.post.content || "無內容",         
@@ -818,12 +819,12 @@ forumByMe.addEventListener('click', () => {
         });
 });
 
-function member_forum_generateHTML(member_forum_imageUrl, member_forum_title, member_forum_content, member_forum_authorImage, member_forum_author, member_forum_date) {
+function member_forum_generateHTML(member_forum_postId,member_forum_imageUrl, member_forum_title, member_forum_content, member_forum_authorImage, member_forum_author, member_forum_date) {
 	    const dateOnly = member_forum_date.split('T')[0]; //分割日期部分
 	
 	return `
 		<div class="member_forum_card">
-     	 <a href="/forum_detail">
+     	 <a href="/forum/detail/${member_forum_postId}">
        	 <article>
           	<img class="member_forum_articleImg" src="${member_forum_imageUrl}" alt="${member_forum_title}">
           	<h3>${member_forum_title}</h3>
@@ -855,6 +856,7 @@ favoritePostsBtn.addEventListener('click', () => {
 
             favorites.forEach(postViewDTO => {
                 forumContent += member_forum_generateHTML(
+					postViewDTO.post.id || "",
                     postViewDTO.coverImgURL || "",             
                     postViewDTO.post.mainTitle || "未命名標題",   
                     postViewDTO.post.content || "無內容",         
@@ -874,12 +876,12 @@ favoritePostsBtn.addEventListener('click', () => {
         });
 });
 
-function favorite_post_generateHTML(favorite_post_imageUrl, favorite_post_title, favorite_post_content, favorite_post_authorImage, favorite_post_author, favorite_post_date) {
+function favorite_post_generateHTML(favorite_forum_postId,favorite_post_imageUrl, favorite_post_title, favorite_post_content, favorite_post_authorImage, favorite_post_author, favorite_post_date) {
     const dateOnly = favorite_post_date.split('T')[0];
     
     return `
         <div class="favorite_post_card">
-            <a href="/forum_detail">
+            <a href="/forum/detail/${favorite_forum_postId}">
                 <article>
                     <img class="favorite_post_articleImg" src="${favorite_post_imageUrl}" alt="${favorite_post_title}">
                     <h3>${favorite_post_title}</h3>
