@@ -1,8 +1,3 @@
-document.getElementById('member_logout').addEventListener('click', () => {
-	localStorage.removeItem('uid');
-	window.location.href = '/homepage';
-});
-
 fetch('/member/info')
 	.then(response => { return response.json(); })
 	.then(member => {
@@ -56,7 +51,21 @@ password.addEventListener('click', loadPasswordPage);
 
 document.addEventListener('DOMContentLoaded', function() {
 
-	if (!localStorage.getItem('uid')) window.location.href = '/homepage';
+	document.getElementById('member_logout').addEventListener('click', () => {
+		localStorage.removeItem('uid');
+
+		fetch('/member/logout', {
+			method: 'GET',
+			headers: {
+				'Content-Type': 'application/json'
+			}
+		}).then(response => {
+		}).catch(error => {
+			console.error('Logout failed:', error);
+		});
+
+		window.location.href = '/homepage';
+	});
 
 	if (account) {
 		toggleDropdown('accountDropdown')
@@ -763,9 +772,26 @@ function ticket(data) {
 }
 
 // 歷史評論
+let member_forum_imageUrl = "https://picsum.photos/400/240?random=0";
+let member_forum_title = "超級可愛的熊本熊!";
+let member_forum_content = "終於看到心心念念的熊本熊! 現場拍真的是超~~~~大一隻😆😆🤣🤣 ...";
+let member_forum_authorImage = 'https://picsum.photos/50?random=0';
+let member_forum_author = "奇異鳥真奇異啊";
+let member_forum_date = "2024-01-15";
+const forumByMe = document.getElementById('forumByMe');
+
+forumByMe.addEventListener('click', () => {
+	mainContent.innerHTML = member_forum_generateHTML(member_forum_imageUrl, member_forum_title, member_forum_content, member_forum_authorImage, member_forum_author, member_forum_date);
+})
+
 function member_forum_generateHTML(member_forum_imageUrl, member_forum_title, member_forum_content, member_forum_authorImage, member_forum_author, member_forum_date) {
+	// div作為container
+	let member_forum_card = document.createElement('div');
+	member_forum_card.classList('member_forum_card');
+	
+	
+	
 	return `
-    <div class="member_forum_card">
       <a href="./forum_detail.html">
         <article>
           <img class="member_forum_articleImg" src="${member_forum_imageUrl}" alt="${member_forum_title}">
@@ -778,17 +804,5 @@ function member_forum_generateHTML(member_forum_imageUrl, member_forum_title, me
           <p class="member_forum_postDate">${member_forum_date}</p>
         </div>
       </a>
-    </div>
-  `;
+  	`;
 }
-
-let member_forum_imageUrl = "https://picsum.photos/400/240?random=0";
-let member_forum_title = "超級可愛的熊本熊!";
-let member_forum_content = "終於看到心心念念的熊本熊! 現場拍真的是超~~~~大一隻😆😆🤣🤣 ...";
-let member_forum_authorImage = 'https://picsum.photos/50?random=0';
-let member_forum_author = "奇異鳥真奇異啊";
-let member_forum_date = "2024-01-15";
-const forumByMe = document.getElementById('forumByMe');
-forumByMe.addEventListener('click', () => {
-	mainContent.innerHTML = member_forum_generateHTML(member_forum_imageUrl, member_forum_title, member_forum_content, member_forum_authorImage, member_forum_author, member_forum_date);
-})

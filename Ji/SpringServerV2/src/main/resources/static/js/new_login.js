@@ -52,8 +52,16 @@ function showNextImageSlide() {
 
 // 頁面加載時顯示第一張圖片（無過渡）
 window.onload = () => {
+
+	const params = new URLSearchParams(window.location.search);
+	const redirectURL = params.get('redirectURL');
+
+	if (redirectURL) {
+		localStorage.setItem('lastUrl', redirectURL);
+	}
+
 	const savedUsername = JSON.parse(localStorage.getItem('rememberedUsername'));
-	if(savedUsername){
+	if (savedUsername) {
 		const now = new Date().getTime();
 		if (Number(savedUsername.date) + 10000 >= Number(now)) {
 			document.getElementById('member_login_Email').value = savedUsername.username;
@@ -89,10 +97,10 @@ function login() {
 	const username = document.getElementById('member_login_Email').value;
 	const date = new Date();
 	let userData = {
-		username:username,
-		date:date.getTime().toString()
+		username: username,
+		date: date.getTime().toString()
 	}
-	if(rememberMe) localStorage.setItem('rememberedUsername', JSON.stringify(userData));
+	if (rememberMe) localStorage.setItem('rememberedUsername', JSON.stringify(userData));
 
 
 	let data = {
@@ -118,10 +126,10 @@ function login() {
 			if (data.memberStatus === 'LOGIN_SUCCESS') {
 				const now = new Date().getTime();
 				let uidData = {
-					date:now,
-					uid:data.member.uid
+					date: now,
+					uid: data.member.uid
 				}
-				localStorage.setItem('uid',JSON.stringify(uidData));
+				localStorage.setItem('uid', JSON.stringify(uidData));
 				window.location.href = localStorage.getItem('lastUrl');
 			} else {
 				alert("登入失敗，請確認帳號或密碼是否正確");

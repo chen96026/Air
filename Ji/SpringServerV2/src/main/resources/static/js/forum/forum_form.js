@@ -11,6 +11,7 @@ $(() => {
 	let fetchMethod;
 	let fetchMessge;
 	let toURL;
+	let totalImgSize;
 	
 	// 檢查是否為編輯舊文章，若為「是」則將資料庫中的圖片放入暫存陣列
 	if (typeof isEdit !== 'undefined') {
@@ -138,14 +139,35 @@ $(() => {
 
         uploadImg.show();  // 顯示調整完 CSS 的預覽圖
     }
+	
+	
+	// 計算檔案大小
+	function checkImgSize(fileArray) {
+		
+		totalImgSize = 0;
+		for (let i = 0; i < fileArray.length; i++) {
+			totalImgSize += fileArray[i].size; // 累加每個檔案的大小
+		}
+		
+		console.log('totalImgSize: ' + totalImgSize);
+		
+		if(totalImgSize < 1000 * 1024 * 1024) {	// 總和上限1000MB
+			return true;
+		} else {
+			addFailMessge("uploadImg");
+			return false;	
+		}
+	}
 
 
     // 讀取新上傳的圖片資料
     uploadImg.on('change', '#forum_chooseImg_id', function (e) {
-        selectedFiles.push(...e.target.files);
+		
+		if(checkImgSize(e.target.files)) {
+	        selectedFiles.push(...e.target.files);
+	        updatePreview();						
+		}
         e.target.value = "";    // 清空 input 讓同張圖片能重複上傳
-
-        updatePreview();
     });
 
 
@@ -229,83 +251,102 @@ $(() => {
             const data = new FormData(this);
 
 			selectedFiles.splice(0, imageDB.length);	// 從暫存陣列中去除原先已在資料庫中的圖片
-            // 將目前讀到的所有新照片也加入表單中
-			if(selectedFiles.length > 0) {
-				selectedFiles.forEach((file) => {
-				    data.append('images', file);
-				})
-			}
-
-            data.forEach((value, key) => {
-                console.log(key, value);
-            });
-
-            fetch(fetchURL, {
-                method: fetchMethod,
-                body: data
-            })
-            .then(data => {
-            	console.log('Success: ', data)
-				$('main').append(`
-					<div class="forum_bg"></div>
-					<div class="forum_edit_OKwindow">
-						<p>
-							${fetchMessge}成功<br>
-							畫面將自動跳轉回文章頁
-						</p>
-						<div class="spinner-box">
-							<div class="three-quarter-spinner"></div>
-						</div>
-					</div>
-				`);
-				$('.forum_bg').fadeIn(300);
-				$('.forum_edit_failwindow').hide().fadeIn(100);
+			
+			if(checkImgSize(selectedFiles)) {
 				
-				if(deleteImg.length > 0) {
-					fetch(`/forum/api/deleteImg?id=${postId}`, {
-						method: 'DELETE',
-						headers: {
-							'Content-Type': 'application/json'
-						},
-						body: JSON.stringify(deleteImg)
-					})
-					.then(response => {
-						if (response.ok) {
-							console.log('Success: ', response);
-														
-						} else {
-							console.error('Failed to delete the images');
-						}
-					})
-					.catch(error => {
-						console.error('err', error);
+	            // 將目前讀到的所有新照片也加入表單中
+				if(selectedFiles.length > 0) {
+					selectedFiles.forEach((file) => {
+					    data.append('images', file);
 					})
 				}
-				
-				setTimeout(() => {
-					window.location.href = toURL;						
-				}, 1000);
-				
-            })
-            .catch(error => {
-            	console.error('err', error);
-				addFetchFailMessge();
-        	})
+	
+	            data.forEach((value, key) => {
+	                console.log(key, value);
+	            });
+	
+	            fetch(fetchURL, {
+	                method: fetchMethod,
+	                body: data
+	            })
+	            .then(data => {
+	            	console.log('Success: ', data)
+					$('main').append(`
+						<div class="forum_bg"></div>
+						<div class="forum_edit_OKwindow">
+							<p>
+								${fetchMessge}成功<br>
+								畫面將自動跳轉回文章頁
+							</p>
+							<div class="spinner-box">
+								<div class="three-quarter-spinner"></div>
+							</div>
+						</div>
+					`);
+					$('.forum_bg').fadeIn(300);
+					$('.forum_edit_failwindow').hide().fadeIn(100);
+					
+					if(deleteImg.length > 0) {
+						fetch(`/forum/api/deleteImg?id=${postId}`, {
+							method: 'DELETE',
+							headers: {
+								'Content-Type': 'application/json'
+							},
+							body: JSON.stringify(deleteImg)
+						})
+						.then(response => {
+							if (response.ok) {
+								console.log('Success: ', response);
+															
+							} else {
+								console.error('Failed to delete the images');
+							}
+						})
+						.catch(error => {
+							console.error('err', error);
+						})
+					}
+					
+					setTimeout(() => {
+						window.location.href = toURL;						
+					}, 10000);
+					
+	            })
+	            .catch(error => {
+	            	console.error('err', error);
+					addFailMessge("fetch");
+	        	})
+			
+			} 
 			
         } else {
 			console.log("fail")
-			addFetchFailMessge();
+			addFailMessge("fetch");
 		}
 
     })
 	
-	function addFetchFailMessge() {
+	function addFailMessge(type) {
+		
+		let failText;
+		
+		if(type === "fetch") {
+			failText = `
+				${fetchMessge}失敗<br>
+				請重新送出或檢查是否有遺漏必填項目
+			`;
+		} else {
+			failText = `
+				上傳失敗<br>
+				檔案總和超過1000MB，請刪減張數或選擇更小的相片
+			`;
+		}
+		
 		$('main').append(`
 			<div class="forum_bg"></div>
 			<div class="forum_edit_failwindow">
 				<p>
-					${fetchMessge}失敗<br>
-					請重新送出或檢查是否有遺漏必填項目
+					${failText}
 				</p>
 				<button id="forum_closeWindow">繼續</button>
 			</div>

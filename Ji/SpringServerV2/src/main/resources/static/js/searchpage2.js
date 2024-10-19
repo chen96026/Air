@@ -139,13 +139,8 @@ document.addEventListener('DOMContentLoaded', () => {
 	// 顯示模態窗口
 	function showModal() {
 		const modal = document.getElementById('myModal');
-		const span = document.getElementsByClassName('close')[0];
 
 		modal.style.display = 'block';
-
-		span.onclick = function() {
-			modal.style.display = 'none';
-		}
 
 		window.onclick = function(event) {
 			if (event.target == modal) {
@@ -165,7 +160,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		const modalFlightInfo = document.getElementById('modalFlightInfo');
 		modalFlightInfo.innerHTML = '';
 		arr.forEach(item => {
-			if(!check) text='回程';
+			if (!check) text = '回程';
 			let duration = calculateDuration(item.plane.time_start, item.plane.time_end, item.time_zone);
 			const flightCard = document.createElement('div');
 			flightCard.classList.add('choice-card3');
@@ -186,22 +181,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	if (localStorage.getItem('selectedFlights')) displaySelectedFlights();
 
-
 	// 計算飛行時間
 	function calculateDuration(time_start, time_end, time_zone) {
-		let hour_start = time_start.slice(0, 2);
-		let minute_start = time_start.slice(3, 5);
-		let hour_end = time_end.slice(0, 2);
-		let minute_end = time_end.slice(3, 5);
+		let hour_start = Number(time_start.slice(0, 2));
+		let minute_start = Number(time_start.slice(3, 5));
+		let hour_end = Number(time_end.slice(0, 2));
+		let minute_end = Number(time_end.slice(3, 5));
 
-		let total_time_start = Number(hour_start * 60) + Number(minute_start);
-		let total_time_end = Number(hour_end * 60) + Number(minute_end);
+		let total_time_start = hour_start * 60 + minute_start;
+		let total_time_end = hour_end * 60 + minute_end;
+
+		total_time_end -= time_zone * 60;
+
 		let total_time = total_time_end - total_time_start;
+
 		if (total_time < 0) {
-			total_time = total_time_start - total_time_end;
-			total_time = 1440 - total_time;
+			total_time += 1440;
 		}
-		total_time = total_time - Number(time_zone * 60);
+
 		return total_time;
 	}
 
@@ -344,9 +341,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	document.getElementById('confirmReturn').addEventListener('click', () => {
 		if (!localStorage.getItem('uid')) {
+			localStorage.setItem('lastUrl', '/orders/order');
 			window.location.href = '/login';
 		} else {
-			window.location.href = '/order';
+			window.location.href = '/orders/order';
 		}
 	})
 

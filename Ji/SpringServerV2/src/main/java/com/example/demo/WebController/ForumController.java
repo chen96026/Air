@@ -121,10 +121,6 @@ public class ForumController {
 		String getSessionUid = (String) session.getAttribute("userUid");
 		System.out.println(getSessionUid);
 		
-		if (getSessionUid == null) {
-			return "redirect:/login";
-		}
-		
 		UserNameIconDTO userNameIcon = new UserNameIconDTO(memberRepository.findByUid(getSessionUid));
 		model.addAttribute("user", userNameIcon);
 		model.addAttribute("date", LocalDate.now());

@@ -28,11 +28,6 @@ public class WebController {
 		return "new_searchpage2";
 	}
 	
-	@GetMapping("/order")
-	public String order() {
-		return "order";
-	}
-	
 	@GetMapping("/order/back")
 	public String order_back() {
 		return "/back/order_admin";
@@ -50,8 +45,8 @@ public class WebController {
 		
 	}
 	
-	@GetMapping("/member_admin")
+	@GetMapping("/admin")
 	public String memberAdmin() {
-		return "back/member_admin";
+		return "back/admin_system";
 	}
 }

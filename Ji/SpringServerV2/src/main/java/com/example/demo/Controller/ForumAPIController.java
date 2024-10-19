@@ -132,6 +132,7 @@ public class ForumAPIController {
 		post.setRate(rate);
 		post.setContent(content);
 		post.setCreatedTime(LocalDateTime.now());
+		System.out.println("post1");
 		
 		if (share != null) {
 			post.setShare(share);			

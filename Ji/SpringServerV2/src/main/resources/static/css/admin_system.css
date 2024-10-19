@@ -15,12 +15,14 @@ body {
 .Backstage_main {
   /* border: 2px solid red; */
   display: flex;
-  margin: 0;
+  margin-top:10vh;
   padding: 0;
 }
 
 #Backstage_LeftSide {
   /* border: 2px solid red; */
+  position: sticky;
+  max-height: 70vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -29,6 +31,8 @@ body {
 
 #Backstage_LeftInSide {
   /* border: 2px solid rgb(21, 18, 173); */
+  position: sticky;
+  max-height: 50vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -40,7 +44,8 @@ body {
 #Backstage_LeftMember,
 #Backstage_LeftOrder,
 #Backstage_LeftFlight,
-#Backstage_LeftForum {
+#Backstage_LeftForum,
+#Backstage_LeftNews {
   border-bottom: 1px solid rgb(0, 0, 0);
   display: flex;
   align-items: center;
@@ -66,6 +71,8 @@ body {
   flex-basis: 80%;
   margin: 0;
   gap: 2vh;
+  padding-top: 5vh;
+  padding-bottom: 5vh;
 }
 
 .Backstage_Title {
@@ -80,12 +87,6 @@ body {
   margin: 0 auto;
   padding: 20px;
   background-color: white;
-}
-
-.Backstage_Middleside>div {
-  background-color: white;
-  width: 90%;
-  margin: 0 auto 5% auto;
 }
 
 /*以上共用*/
@@ -117,6 +118,7 @@ body {
 #Member_pagination {
   background-color: #fff;
   display: flex;
+  align-items:center;
   gap: 1vw;
   border-radius: 4px;
 }
@@ -135,9 +137,11 @@ body {
 #Member_pageSelector {
   border: none;
   font-size: 1vw;
-  width: 5vw;
-  height: 3vh;
+  width: 6vw;
+  height: 3.9vh;
   cursor: pointer;
+  display:flex;
+  align-items: flex-start;
 }
 
 #Member_Table {
@@ -438,11 +442,12 @@ select {
 }
 
 @media(min-width: 768px) {
-    .Forum_table_id,
-	.Forum_table_keep,
-	.Forum_table_delete {
-  		width: 6%;
-    }
+
+  .Forum_table_id,
+  .Forum_table_keep,
+  .Forum_table_delete {
+    width: 6%;
+  }
 }
 
 .Forum_table_keep>div,
@@ -460,9 +465,9 @@ select {
 }
 
 @media(min-width: 768px) {
-	.Forum_table_reportCount {
-		display: table-cell;
-	}
+  .Forum_table_reportCount {
+    display: table-cell;
+  }
 }
 
 .Forum_th_textCenter {
@@ -479,9 +484,9 @@ select {
 }
 
 @media(min-width: 768px) {
-    .Forum_table_content {
-        display: table-cell;
-    }
+  .Forum_table_content {
+    display: table-cell;
+  }
 }
 
 .Forum_table_title>span,
@@ -617,9 +622,9 @@ select {
 }
 
 @media(min-width: 768px) {
-    .Forum_post {
-        width: 60%;
-    }
+  .Forum_post {
+    width: 60%;
+  }
 }
 
 .Forum_closeDetail {
@@ -647,7 +652,8 @@ select {
   padding-top: 1px;
 }
 
-.Forum_post_detail p, .Forum_post_detail span {
+.Forum_post_detail p,
+.Forum_post_detail span {
   padding: 10px 5px;
 }
 
@@ -664,8 +670,10 @@ select {
   flex: 1;
   background-color: #FFF;
   box-shadow: 0 0 0 1px #777;
-  word-wrap: break-word;        /* 使長單詞在邊界時換行 */
-  white-space: normal;          /* 允許換行 */
+  word-wrap: break-word;
+  /* 使長單詞在邊界時換行 */
+  white-space: normal;
+  /* 允許換行 */
   margin: 0;
 }
 
@@ -806,4 +814,150 @@ select {
   max-height: 90%;
   object-fit: contain;
   cursor: pointer;
+}
+
+/* 新聞區塊 */
+.container_all {
+  width: 75vw;
+}
+
+#newsFind>table {
+  table-layout: fixed;
+  /* 固定佈局 */
+}
+
+#newsFind th:nth-child(1),
+#newsFind td:nth-child(1) {
+  width: 5%;
+  text-align: center;
+}
+
+#newsFind th:nth-child(2),
+#newsFind td:nth-child(2) {
+  width: 20%;
+}
+
+#newsFind th:nth-child(3),
+#newsFind td:nth-child(3) {
+  width: 48%;
+}
+
+#newsFind th:nth-child(4),
+#newsFind td:nth-child(4) {
+  width: 20%;
+}
+
+#newsFind th:nth-child(5),
+#newsFind td:nth-child(5) {
+  width: 7%;
+}
+
+.newsClip {
+  overflow: hidden;
+  white-space: nowrap;
+  /* 不換行 */
+  text-overflow: ellipsis;
+  /* 超出部分顯示省略號 */
+}
+
+.newsTooltip {
+	display: none; /* 初始隱藏 */
+    position: absolute; /* 絕對定位 */
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 5px;
+    border-radius: 5px;
+    max-width:500px;
+    z-index: 1;
+    white-space: normal; /* 允許換行 */
+    word-wrap: break-word; /* 在必要時換行 */
+}
+
+.newsClip:hover .newsTooltip {
+    display: block;
+}
+
+#newsImgModal {
+    display: none; /* 初始隱藏 */
+    position: fixed; /* 固定位置 */
+    z-index: 1000; /* 在最上面 */
+    left: 0;
+    top: 0;
+    width: 100%; /* 全寬 */
+    height: 100%; /* 全高 */
+    overflow: auto; /* 需要時顯示滾動條 */
+    background-color: rgba(0, 0, 0, 0.8); /* 半透明背景 */
+    
+    justify-content: center; /* 水平居中 */
+    align-items: center; /* 垂直居中 */
+}
+
+#newsImg {
+    margin: auto;
+    display: block;
+    max-width: 80%; /* 大圖最大寬度 */
+    max-height: 80%; /* 大圖最大高度 */
+}
+
+#newsImgCloseBtn {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    color: white;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer; /* 指針 */
+}
+
+.newsTinyImg {
+	cursor: pointer;
+}
+
+#newsFind td>img {
+  width: 80%;
+  /* 使圖片寬度占容器的 80% */
+  height: auto;
+  /* 根據寬度自動調整高度 */
+  object-fit: contain;
+  /* 保持圖片比例 */
+  display: block;
+  /* 避免下方空隙 */
+  margin: 0 auto;
+  /* 使圖片居中 */
+}
+
+.newsContent {
+  display: none;
+}
+
+.newsTab {
+  display: flex;
+  /* 使用彈性佈局 */
+  margin-bottom: 1rem;
+  /* 按鈕與內容之間的間距 */
+}
+
+.newsTabBtn {
+  background-color: #f0f0f0;
+  /* 按鈕背景顏色 */
+  border: 1px solid #ccc;
+  /* 按鈕邊框 */
+  padding: 10px 15px;
+  /* 按鈕內部間距 */
+  cursor: pointer;
+  /* 鼠標指針樣式 */
+  margin-right: 5px;
+  /* 按鈕間距 */
+  transition: background-color 0.3s;
+  /* 動畫效果 */
+}
+
+.newsTabBtn:hover {
+  background-color: #e0e0e0;
+  /* 懸停效果 */
+}
+
+.newsTabBtn.newsTabActive {
+  background-color: #f8b600;
+  /* 激活狀態背景顏色 */
 }

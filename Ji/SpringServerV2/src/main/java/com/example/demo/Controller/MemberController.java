@@ -145,6 +145,14 @@ public class MemberController {
 		// 返回結果
 		return ResponseEntity.ok(responseMember);
 	}
+	
+	// 登出
+	@GetMapping("/logout")
+    public String logout(HttpSession session) {
+		System.out.println(session);
+        session.invalidate();    
+        return null;
+    }
 
 	// 後臺會員新增API
 	@GetMapping("/member_admin")
