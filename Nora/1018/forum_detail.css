@@ -104,6 +104,8 @@
     margin: auto 20px;
     padding: 0;
     box-shadow: 0px 10px 30px 0px rgba(60, 64, 143, 0.2);
+    /* 背景新增深色漸層*/
+    background: radial-gradient(circle, rgba(240, 240, 240, 0) 60%, rgba(0, 0, 0, 0.5) 100%);
 }
 
 @media(min-width: 768px) {
@@ -125,7 +127,7 @@
 }
 
 .forum_photoImg {
-	display: none;
+    display: none;
 	width: 100%;
 	height: 100%;
     object-fit: contain;
@@ -167,7 +169,9 @@
 }
 
 .forum_photos img {
-    width: auto;
+    /* width: auto; */
+    /* 改100%，單張能占滿整列，多張時靠forum_photos的display flex來均分 */
+    width: 100%;
     height: 100%;
     margin: 0 auto;
     object-fit: cover;
