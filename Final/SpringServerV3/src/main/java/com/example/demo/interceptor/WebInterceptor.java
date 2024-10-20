@@ -21,7 +21,7 @@ public class WebInterceptor implements HandlerInterceptor {
 
 		if (getSessionUid == null) {
 			String requestURI = request.getRequestURI();
-			if (requestURI.startsWith("/forum/edit") || requestURI.startsWith("/orders") || requestURI.startsWith("/memberpage")) {
+			if (requestURI.startsWith("/forum/edit") || requestURI.equals("/orders/order") || requestURI.startsWith("/orders/Complete") || requestURI.startsWith("/memberpage")) {
 				System.out.println("攔截路徑: " + requestURI);
 				response.sendRedirect("/login?redirectURL=" + requestURI);
 				return false;

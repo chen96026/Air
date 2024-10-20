@@ -17,7 +17,7 @@ public class InterceptorConfig implements WebMvcConfigurer {
 	public void addInterceptors(InterceptorRegistry registry) {
 		
 		registry.addInterceptor(webInterceptor)
-				.addPathPatterns("/forum/edit/**","/orders/**","/memberpage");	// 要被攔截的路徑 ("/forum/edit/**", "其他路徑")
+				.addPathPatterns("/forum/edit/**","/orders/order","/orders/Complete/**","/memberpage");	// 要被攔截的路徑 ("/forum/edit/**", "其他路徑")
 //				.excludePathPatterns("");	// 指定不被攔截的路徑，可以有需要再設
 		
 	}
