@@ -134,7 +134,7 @@ function login() {
 				localStorage.setItem('uid', JSON.stringify(uidData));
 				window.location.href = localStorage.getItem('lastUrl');
 			} else {
-				alert("登入失敗，請確認帳號或密碼是否正確");
+				swal("登入失敗", "請確認帳號或密碼是否正確", "error", { button: "確定" });
 			}
 		})
 		.catch(error => {

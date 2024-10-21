@@ -4,26 +4,26 @@ document.addEventListener('DOMContentLoaded', function() {
 	var span = document.getElementsByClassName("order_close")[0];
 
 	btn.onclick = function() {
-	    var rect = btn.getBoundingClientRect();
-	    modal.style.display = "block";
+		var rect = btn.getBoundingClientRect();
+		modal.style.display = "block";
 
-	    var modalContent = document.querySelector(".order_modal_content");
+		var modalContent = document.querySelector(".order_modal_content");
 
 		//把top設為按鈕的底部位置
-	    modalContent.style.top = (rect.bottom + window.scrollY) + "px";
+		modalContent.style.top = (rect.bottom + window.scrollY) + "px";
 
-	    modalContent.style.left = "50%";
-	    modalContent.style.transform = "translateX(-50%)";
+		modalContent.style.left = "50%";
+		modalContent.style.transform = "translateX(-50%)";
 	};
 
 	span.onclick = function() {
-	    modal.style.display = "none";
+		modal.style.display = "none";
 	};
 
 	window.onclick = function(event) {
-	    if (event.target == modal) {
-	        modal.style.display = "none";
-	    }
+		if (event.target == modal) {
+			modal.style.display = "none";
+		}
 	};
 });
 
@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			window.clearTimeout(isScrolling);
 			isScrolling = setTimeout(() => {
 				targetY = 0;
-			},50);
+			}, 50);
 		}
 	});
 
@@ -153,13 +153,13 @@ document.addEventListener('DOMContentLoaded', function() {
 	// 票價 
 	let human_adults = Number(flight_start.adults);
 	let human_child = Number(flight_start.child);
-	if(human_child>0) ticketPeople.innerHTML = `機票(${human_adults}位成人,${human_child}位小孩)`
+	if (human_child > 0) ticketPeople.innerHTML = `機票(${human_adults}位成人,${human_child}位小孩)`
 	else ticketPeople.innerHTML = `機票 (${human_adults}位成人)`
 	if (flight_start.seat === '經濟艙') {
-		price = `NT$${Math.round((Number(flight_start.plane.eco_price) + Number(flight_end.plane.eco_price)) * (human_adults + 0.75*human_child))}`
+		price = `NT$${Math.round((Number(flight_start.plane.eco_price) + Number(flight_end.plane.eco_price)) * (human_adults + 0.75 * human_child))}`
 		ticketPriceElement.innerHTML = price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 	} else {
-		price = `NT$${Math.round((Number(flight_start.plane.bus_price) + Number(flight_end.plane.bus_price)) * (human_adults + 0.75*human_child))}`
+		price = `NT$${Math.round((Number(flight_start.plane.bus_price) + Number(flight_end.plane.bus_price)) * (human_adults + 0.75 * human_child))}`
 		ticketPriceElement.innerHTML = price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 	}
 
@@ -439,7 +439,7 @@ document.addEventListener('DOMContentLoaded', function() {
 				const isPassengerValid = await validatePassengerFields();
 
 				if (!isContactValid || !isPassengerValid) {
-					alert('請修正表單中的錯誤再提交。');
+					swal("資料不完整或有誤", "請修正表單中的錯誤再提交。", "error", { button: "確定" });
 					return;
 				}
 
@@ -489,7 +489,7 @@ document.addEventListener('DOMContentLoaded', function() {
 					console.log('獲取的 contactId:', cid);
 				} catch (error) {
 					console.error('聯絡人資料提交失敗：', error);
-					alert('聯絡人資料提交失敗：' + error.message);
+					swal('聯絡人資料提交失敗：' + error.message, "請修正表單中的錯誤再提交。", "error", { button: "確定" });
 					return;  // 阻止後續操作
 				}
 
@@ -510,11 +510,36 @@ document.addEventListener('DOMContentLoaded', function() {
 
 				await submitLuggageData(oid, savedPassengerIds);
 
-				alert('資料已提交完成');
-				window.location.href = `/orders/Complete/${oid}`;
+				swal({
+					title: "確定送出?",
+					icon: "warning",
+					buttons: {
+						cancel: {
+							text: "取消",
+							value: null,
+							visible: true,
+							className: "btn-cancel",
+							closeModal: true,
+						},
+						confirm: {
+							text: "確定",
+							value: true,
+							visible: true,
+							className: "btn-confirm",
+							closeModal: true 
+						}
+					},
+					dangerMode: false
+				}).then((value) => {
+					if (value) {
+						swal("資料已提交完成!", "即將前往訂單確認頁面!", "success").then(() => {
+							window.location.href = `/orders/Complete/${oid}`;
+						});
+					}
+				});
 			} catch (error) {
 				console.error('資料提交過程中出現問題：', error);
-				alert('請檢查表單欄位並重試！');
+				swal('請檢查表單欄位並重試！', "請修正表單中的錯誤再提交。", "error", { button: "確定" });
 			}
 		});
 	} else {
@@ -565,7 +590,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		const finalPrice = finalPriceElement ? parseFloat(finalPriceElement.value) || 0 : 0;
 		const start_data = localStorage.getItem('selectedFlights');
 		const end_data = localStorage.getItem('selectedFlights2');
-		
+
 		return {
 			orderNumber: 'OD' + new Date().getTime(),
 			contactId: contactId,

@@ -348,8 +348,10 @@ document.addEventListener('DOMContentLoaded', () => {
 		}
 	})
 
-	document.getElementById('search_btn').addEventListener('click', function(event) {
-
+	// 搜尋
+	const searchBtn = document.getElementById('search_btn');
+	const inputFields = document.querySelectorAll('input');
+	searchBtn.addEventListener('click', function(event) {
 		localStorage.removeItem('selectedFlights');
 		localStorage.removeItem('selectedFlights2');
 
@@ -364,37 +366,64 @@ document.addEventListener('DOMContentLoaded', () => {
 
 		const formData = `?des_start=${desStart}&des_end=${desEnd}&date_start=${dateStart}&date_end=${dateEnd}&adults=${adults}&child=${child}&type=${type}`;
 
-		// 检查是否有任何输入框为空
-
 		if (!desStart || !desEnd || !dateStart || !dateEnd || !adults || !child) {
-			event.preventDefault();
-			alert('請完整填寫所有欄位');
+			swal("請完整填寫所有欄位", "", "error", { button: "確認" });
 		} else {
-			if (desEnd === '世界各地') {
-				console.log('123')
-				window.location.href = 'http://localhost:8890/searchpage?des_start=台灣&des_end=世界各地&date_start=2024%2F10%2F29&date_end=2024%2F10%2F30&adults=1&child=0&type=經濟艙';
-			} else {
-				fetch('http://localhost:8890/plane/check_country', {
-					method: 'POST',
-					headers: {
-						'Content-Type': 'application/json'
-					},
-					body: JSON.stringify({ country: desEnd })
-				})
-					.then(response => response.json())
-					.then(data => {
-						console.log(123)
-						console.log(data);
-
-						searchPage = data.length !== 0 ? 'http://localhost:8890/searchpage' : 'http://localhost:8890/searchpage2';
-
-						window.location.href = searchPage + formData;
-					})
-					.catch(error => {
-						console.error('Error:', error);
-					});
-			}
+			checkLocation([desStart, desEnd]).then(isValid => {
+				if (!isValid) {
+					swal("無至此國家或城市的航班", "", "error", { button: "確認" });
+				} else {
+					if (desEnd === '世界各地') {
+						window.location.href = 'http://localhost:8890/searchpage?des_start=台灣&des_end=世界各地&date_start=2024%2F10%2F29&date_end=2024%2F10%2F30&adults=1&child=0&type=經濟艙';
+					} else {
+						fetch('http://localhost:8890/plane/check_country', {
+							method: 'POST',
+							headers: {
+								'Content-Type': 'application/json'
+							},
+							body: JSON.stringify({ country: desEnd })
+						})
+							.then(response => response.json())
+							.then(data => {
+								const searchPage = data.length !== 0 ? 'http://localhost:8890/searchpage' : 'http://localhost:8890/searchpage2';
+								window.location.href = searchPage + formData;
+							})
+							.catch(error => {
+								console.error('Error:', error);
+							});
+					}
+				}
+			});
 		}
+	});
+
+	// 檢查出發地與目的地是否存在資料表
+	function checkLocation(locations) {
+		const promises = locations.map(item => {
+			return fetch(`/plane/checkLocation?value=${item}`)
+				.then(response => {
+					if (!response.ok) {
+						throw new Error('Error: 無法檢查地點');
+					}
+					return response.json();
+				})
+				.then(data => data.exists)
+				.catch(error => {
+					console.error('檢查錯誤:', error);
+					return false;
+				});
+		});
+
+		return Promise.all(promises).then(results => results.every(exists => exists));
+	}
+
+	inputFields.forEach(input => {
+		input.addEventListener('keydown', function(event) {
+			if (event.key === 'Enter') {
+				event.preventDefault();
+				searchBtn.click();
+			}
+		});
 	});
 
 	if (localStorage.getItem('selectedFlights') != null) document.getElementById('section_title').innerHTML = '選擇回程';

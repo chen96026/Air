@@ -11,4 +11,6 @@ public interface CountryRepository extends JpaRepository<Country,Long>{
 
 	List<Country> findByCountry(@Param("country") String country);
 	List<Country> findByCountryStartingWithIgnoreCaseOrCityStartingWithIgnoreCase(String country, String city);
+	boolean existsByCountry(String country);
+    boolean existsByCity(String city);
 }

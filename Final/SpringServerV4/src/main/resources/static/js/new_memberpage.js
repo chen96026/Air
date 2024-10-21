@@ -339,7 +339,7 @@ function loadMemberInfoPage() {
 				}
 			})
 			.then(updatedData => {
-				alert("會員資料更新成功");
+				swal("更新成功!", "會員資料已更新!", "success", { button: "確認" });
 			})
 			.catch(error => {
 				console.error('Error:', error);
@@ -373,69 +373,66 @@ function loadMemberInfoPage() {
 				})
 				.then(data => {
 					console.log("後端響應：", data);
-					alert('頭像上傳成功！');
+					swal("上傳成功!", "頭像已上傳！", "success", { button: "確認" });
 				})
 				.catch(error => {
 					console.error('Error:', error);
 				});
 		} else {
-			alert('請選擇一張大小小於 1MB 的圖片');
+			swal("上傳失敗!", "檔案大小需小於1MB!", "error", { button: "確認" });
 		}
 	});
 
 	//刪除帳號
 	const deleteBtn = document.getElementById("member_Info_deletebtn");
-	const modal = document.getElementById("member_deleteAccountModal");
-	const closeModal = document.getElementById("member_info_close");
-	const cancelDeleteBtn = document.getElementById("member_cancelDeleteBtn");
-	const confirmDeleteBtn = document.getElementById("member_confirmDeleteBtn");
-	const confirmEmailInput = document.getElementById("member_confirmEmail");
-	const registeredEmail = document.getElementById("member_info_email").value;
-
 
 	deleteBtn.addEventListener("click", function() {
-		modal.style.display = "block";
-	});
-
-	closeModal.addEventListener("click", function() {
-		modal.style.display = "none";
-	});
-
-	cancelDeleteBtn.addEventListener("click", function() {
-		modal.style.display = "none";
-	});
-
-	window.addEventListener("click", function(event) {
-		if (event.target == modal) {
-			modal.style.display = "none";
-		}
-	});
-
-	confirmDeleteBtn.addEventListener("click", function() {
-		const enteredPassword = confirmEmailInput.value;
-		const registeredEmail = document.getElementById("member_info_email").value;
-		const data = { email: registeredEmail, password: enteredPassword };
-
-		fetch(`/member/delete`, {
-			method: 'DELETE',
-			headers: {
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify(data)
-		})
-			.then(response => {
-				if (response.ok) {
-					alert("帳號刪除成功");
-					window.location.href = '/register';
-				} else {
-					alert("刪除帳號失敗，請再試一次");
+		swal({
+			title: "確定刪除帳號?",
+			icon: "warning",
+			buttons: {
+				cancel: {
+					text: "取消",
+					value: null,
+					visible: true,
+					className: "btn-cancel",
+					closeModal: true,
+				},
+				confirm: {
+					text: "確定",
+					value: true,
+					visible: true,
+					className: "btn-confirm",
+					closeModal: true
 				}
-			})
-			.catch(error => {
-				console.error('Error:', error);
-			});
+			},
+			dangerMode: false
+		}).then((value) => {
+			if (value) {
+				const data = { uid: JSON.parse(localStorage.getItem('uid')).uid };
+				fetch(`/member/delete`, {
+					method: 'DELETE',
+					headers: {
+						'Content-Type': 'application/json'
+					},
+					body: JSON.stringify(data)
+				})
+					.then(response => {
+						if (response.ok) {
+							swal("帳號刪除成功!", "即將跳轉至首頁!", "success").then(() => {
+								localStorage.removeItem('uid');
+								window.location.href = '/homepage';
+							});
+						} else {
+							swal("刪除帳號失敗!", "請再試一次!", "error")
+						}
+					})
+					.catch(error => {
+						console.error('Error:', error);
+					});
+			}
+		});
 
-		modal.style.display = "none";
 	});
 
 	document.getElementById('member_customUploadButton').addEventListener('click', function() {
@@ -454,7 +451,7 @@ function loadMemberInfoPage() {
 			}
 			reader.readAsDataURL(file);
 		} else {
-			alert('請選擇 JPEG 或 PNG 格式的檔案。');
+			swal("頭像顯示失敗!", "請選擇 JPEG 或 PNG 格式的檔案!", "error", { button: "確定" });
 		}
 	});
 }
@@ -472,11 +469,6 @@ function loadPasswordPage() {
 		const new_password = document.getElementById("member_info_password").value;
 		const confirm_password = document.getElementById("member_info_confirm_password").value;
 
-		if (new_password !== confirm_password) {
-			alert("請確認新密碼是否相符")
-			return
-		}
-		
 		// 獲取localStorage中的uid
 		let storedData = localStorage.getItem("uid");
 
@@ -487,7 +479,7 @@ function loadPasswordPage() {
 		let uid = parsedData.uid;
 
 		let checkPassword = {
-			uid:uid,
+			uid: uid,
 			old_password: old_password,
 			password: confirm_password
 		};
@@ -503,10 +495,12 @@ function loadPasswordPage() {
 		}).then(response => {
 			return response.text();
 		}).then(data => {
-			if (data == "") {
-				alert("密碼已更改")
-			}else if(data==="舊密碼不符"){
-				alert("舊密碼不符，請重新輸入");
+			if (new_password !== confirm_password) {
+				swal("新密碼與確認新密碼不符!", "請重新填寫!", "error", { button: "確定" });
+			} else if (data == "") {
+				swal("密碼更新成功!", "密碼已更新!", "success", { button: "確定" });
+			} else if (data === "舊密碼不符") {
+				swal("舊密碼不符!", "請重新填寫!", "error", { button: "確定" });
 			}
 		})
 			.catch(error => {
@@ -786,42 +780,42 @@ function ticket(data) {
 const forumByMe = document.getElementById('forumByMe');
 
 forumByMe.addEventListener('click', () => {
-    // 從localStorage中拿到uid，解析為js
-    let storedData = localStorage.getItem('uid');
-    let parsedData = JSON.parse(storedData);
-    let uid = parsedData.uid;
+	// 從localStorage中拿到uid，解析為js
+	let storedData = localStorage.getItem('uid');
+	let parsedData = JSON.parse(storedData);
+	let uid = parsedData.uid;
 
-    fetch(`/member/myposts?uid=${uid}`)
-        .then(response => response.json())
-        .then(myposts => {
+	fetch(`/member/myposts?uid=${uid}`)
+		.then(response => response.json())
+		.then(myposts => {
 			console.log("Received posts:", myposts);
-            let forumContent = "<div id='member_Forum_MiddleSide'>";
+			let forumContent = "<div id='member_Forum_MiddleSide'>";
 
 			myposts.forEach(postViewDTO => {
-			    forumContent += member_forum_generateHTML(
+				forumContent += member_forum_generateHTML(
 					postViewDTO.post.id || "",
-			        postViewDTO.coverImgURL || "",             
-			        postViewDTO.post.mainTitle || "未命名標題",   
-			        postViewDTO.post.content || "無內容",         
-			        postViewDTO.userNameIconDTO.iconURL || '',    
-			        postViewDTO.userNameIconDTO.username || "匿名",
-			        postViewDTO.createdDate || "未知日期"
-			    );
+					postViewDTO.coverImgURL || "",
+					postViewDTO.post.mainTitle || "未命名標題",
+					postViewDTO.post.content || "無內容",
+					postViewDTO.userNameIconDTO.iconURL || '',
+					postViewDTO.userNameIconDTO.username || "匿名",
+					postViewDTO.createdDate || "未知日期"
+				);
 			});
-			
+
 			forumContent += "</div>";
 
-            mainContent.innerHTML = forumContent;
-        })
-        .catch(error => {
-            console.error('Error fetching posts:', error);
-            mainContent.innerHTML = "<p>無法加載貼文，請稍後再試。</p>";
-        });
+			mainContent.innerHTML = forumContent;
+		})
+		.catch(error => {
+			console.error('Error fetching posts:', error);
+			mainContent.innerHTML = "<p>無法加載貼文，請稍後再試。</p>";
+		});
 });
 
-function member_forum_generateHTML(member_forum_postId,member_forum_imageUrl, member_forum_title, member_forum_content, member_forum_authorImage, member_forum_author, member_forum_date) {
-	    const dateOnly = member_forum_date.split('T')[0]; //分割日期部分
-	
+function member_forum_generateHTML(member_forum_postId, member_forum_imageUrl, member_forum_title, member_forum_content, member_forum_authorImage, member_forum_author, member_forum_date) {
+	const dateOnly = member_forum_date.split('T')[0]; //分割日期部分
+
 	return `
 		<div class="member_forum_card">
      	 <a href="/forum/detail/${member_forum_postId}">
@@ -845,41 +839,41 @@ function member_forum_generateHTML(member_forum_postId,member_forum_imageUrl, me
 const favoritePostsBtn = document.getElementById('favoritePosts');
 
 favoritePostsBtn.addEventListener('click', () => {
-    let storedData = localStorage.getItem('uid');
-    let parsedData = JSON.parse(storedData);
-    let uid = parsedData.uid;
+	let storedData = localStorage.getItem('uid');
+	let parsedData = JSON.parse(storedData);
+	let uid = parsedData.uid;
 
-    fetch(`/member/myfavorites?uid=${uid}`)
-        .then(response => response.json())
-        .then(favorites => {
+	fetch(`/member/myfavorites?uid=${uid}`)
+		.then(response => response.json())
+		.then(favorites => {
 			let forumContent = "<div id='member_Forum_MiddleSide'>";
 
-            favorites.forEach(postViewDTO => {
-                forumContent += member_forum_generateHTML(
+			favorites.forEach(postViewDTO => {
+				forumContent += member_forum_generateHTML(
 					postViewDTO.post.id || "",
-                    postViewDTO.coverImgURL || "",             
-                    postViewDTO.post.mainTitle || "未命名標題",   
-                    postViewDTO.post.content || "無內容",         
-                    postViewDTO.userNameIconDTO.iconURL || '',    
-                    postViewDTO.userNameIconDTO.username || "匿名",
-                    postViewDTO.createdDate || "未知日期"
-                );
-            });
-			
+					postViewDTO.coverImgURL || "",
+					postViewDTO.post.mainTitle || "未命名標題",
+					postViewDTO.post.content || "無內容",
+					postViewDTO.userNameIconDTO.iconURL || '',
+					postViewDTO.userNameIconDTO.username || "匿名",
+					postViewDTO.createdDate || "未知日期"
+				);
+			});
+
 			forumContent += "</div>";
 
-            mainContent.innerHTML = forumContent;
-        })
-        .catch(error => {
-            console.error('Error fetching favorites:', error);
-            mainContent.innerHTML = "<p>無法加載收藏的文章，請稍後再試。</p>";
-        });
+			mainContent.innerHTML = forumContent;
+		})
+		.catch(error => {
+			console.error('Error fetching favorites:', error);
+			mainContent.innerHTML = "<p>無法加載收藏的文章，請稍後再試。</p>";
+		});
 });
 
-function favorite_post_generateHTML(favorite_forum_postId,favorite_post_imageUrl, favorite_post_title, favorite_post_content, favorite_post_authorImage, favorite_post_author, favorite_post_date) {
-    const dateOnly = favorite_post_date.split('T')[0];
-    
-    return `
+function favorite_post_generateHTML(favorite_forum_postId, favorite_post_imageUrl, favorite_post_title, favorite_post_content, favorite_post_authorImage, favorite_post_author, favorite_post_date) {
+	const dateOnly = favorite_post_date.split('T')[0];
+
+	return `
         <div class="favorite_post_card">
             <a href="/forum/detail/${favorite_forum_postId}">
                 <article>

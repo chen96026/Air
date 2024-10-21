@@ -115,12 +115,8 @@ public class MemberController {
 
 	@DeleteMapping("/delete")
 	public String delete(@RequestBody Member member) {
-		boolean isDeleted = memberService.deleteAccount(member.getEmail(), member.getPassword());
-		if (isDeleted) {
-			return "已刪除";
-		} else {
-			return "未找到會員，無法刪除";
-		}
+		memberService.deleteAccount(member.getUid());
+		return null;
 	}
 
 	@PostMapping("/thirdparty/login")

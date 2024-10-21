@@ -206,14 +206,10 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public boolean deleteAccount(String email, String password) {
-		Member member = memberRepository.findByEmail(email);
-		if (BCrypt.checkpw(password, member.getPassword()) && member.getUid() != null) {
-			memberRepository.delete(member);
-			return true;
-		} else {
-			return false;
-		}
+	public boolean deleteAccount(String uid) {
+		Member member = memberRepository.findByUid(uid);
+		memberRepository.delete(member);
+		return true;
 	}
 	
 	@Override

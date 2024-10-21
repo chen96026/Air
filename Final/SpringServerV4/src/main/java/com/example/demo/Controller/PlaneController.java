@@ -45,7 +45,7 @@ public class PlaneController {
 
 	@Autowired
 	private PlaneService planeService;
-	
+
 	@Autowired
 	private OrdersServiceImpl ordersServiceImpl;
 
@@ -99,13 +99,18 @@ public class PlaneController {
 		return planeService.searchLocations(query);
 	}
 
-	
-	
 	@GetMapping("/orderForMember")
 	public Orders orderForMember2(@RequestParam String orderNumber) {
-	    Orders order = ordersRepository.findByOrderNumber(orderNumber);
-	    return order;
+		Orders order = ordersRepository.findByOrderNumber(orderNumber);
+		return order;
 	}
 
+	@GetMapping("/checkLocation")
+	public ResponseEntity<Map<String, Boolean>> checkLocation(@RequestParam String value) {
+		boolean exists = planeService.checkLocation(value);
+		Map<String, Boolean> response = new HashMap<>();
+		response.put("exists", exists);
+		return ResponseEntity.ok(response);
+	}
 
 }

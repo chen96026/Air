@@ -214,16 +214,26 @@
 
 	// 當點擊建議框外部時隱藏建議框
 	document.addEventListener('click', function(e) {
-	inputs.forEach(inputId => {
-		const suggestionsDiv = document.getElementById(`suggestions_${inputId}`);
-		const input = document.getElementById(inputId);
-		if (e.target === input || e.target.closest(`#suggestions_${inputId}`)) {
-			// 點擊在輸入框內或建議框內，不做任何操作
-			return;
-		}
-		// 隱藏所有建議框
-		suggestionsDiv.style.display = 'none';
+		inputs.forEach(inputId => {
+			const suggestionsDiv = document.getElementById(`suggestions_${inputId}`);
+			const input = document.getElementById(inputId);
+			if (e.target === input || e.target.closest(`#suggestions_${inputId}`)) {
+				// 點擊在輸入框內或建議框內，不做任何操作
+				return;
+			}
+			// 隱藏所有建議框
+			suggestionsDiv.style.display = 'none';
+		});
 	});
+	
+	document.addEventListener('keydown', function(e) {
+	    if (e.keyCode === 9) { // Tab 鍵
+	        inputs.forEach(inputId => {
+	            const suggestionsDiv = document.getElementById(`suggestions_${inputId}`);
+	            // 隱藏所有建議框
+	            suggestionsDiv.style.display = 'none';
+	        });
+	    }
 	});
 </script>
 </html>

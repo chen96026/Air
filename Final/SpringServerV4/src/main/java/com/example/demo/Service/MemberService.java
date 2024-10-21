@@ -35,7 +35,7 @@ public interface MemberService {
 	public void uploadMembericon(String uid, MultipartFile file) throws Exception;
 
 	// 刪除
-	public boolean deleteAccount(String email, String password);
+	public boolean deleteAccount(String uid);
 
 	// 第三方平台提供的uid查詢member
 	public Member findByThirdPartyId(String thirdPartyId);

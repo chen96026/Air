@@ -86,4 +86,9 @@ public class PlaneServiceImplement implements PlaneService{
 	public List<Country> searchLocations(String query) {
         return countryRepository.findByCountryStartingWithIgnoreCaseOrCityStartingWithIgnoreCase(query, query);
     }
+	
+	@Override
+	public boolean checkLocation(String value) {
+        return countryRepository.existsByCountry(value) || countryRepository.existsByCity(value);
+    }
 }

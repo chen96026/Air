@@ -33,6 +33,12 @@ fetch('/news/getAll')
 	.then(data => {
 		console.log(data);
 		let news = document.getElementById("HpNews");
+
+		if (data.length === 0) {
+			news.innerHTML = "<p>No news available</p>";
+			return;
+		}
+
 		news.innerHTML += "<div class='Hp_prev' onclick='posterPlusSlides(-1)'>&#10094;</div>";
 		for (let i = 0; i < data.length; i++) {
 			news.innerHTML += "<div class='container-fluid'>"
@@ -40,23 +46,25 @@ fetch('/news/getAll')
 				+ "<div class='col-lg-6 col-md-12 home-about-left'>"
 				+ "<h1>" + data[i].title + "</h1>"
 				+ "<p>" + data[i].text + "</p>"
-				+ "<a href='" + data[i].url + "' target='_blank' class='primary-btn text-uppercase'>閱讀更多. . .</a>"
+				+ "<div onclick=\"out('" + data[i].url + "')\" class='primary-btn text-uppercase'>閱讀更多. . .</div>"
 				+ "</div>"
 				+ "<div class='col-lg-6 col-md-12 home-about-right no-padding'>"
 				+ "<img class='img-fluid' src='data:image/png;base64," + data[i].img + "'>"
 				+ "</div></div></div>";
 		}
 		news.innerHTML += "<div class='Hp_next' onclick='posterPlusSlides(1)'>&#10095;</div>";
+
 		let allNews = document.querySelectorAll('.container-fluid');
-		allNews[0].style.display = "flex";
+		if (allNews.length > 0) {
+			allNews[0].style.display = "flex";
+		}
 	})
 	.catch(error => {
-		console.error('add Mews err:', error);
+		console.error('add News err:', error);
 	});
-	
+
 let slideIndex = 1;
 let timer;
-showSlides(slideIndex);
 
 function posterPlusSlides(n) {
 	showSlides(slideIndex += n);
@@ -65,20 +73,66 @@ function posterPlusSlides(n) {
 function showSlides(n) {
 	let i;
 	let slides = document.getElementsByClassName("container-fluid");
-	console.log(slides.length)
-	if (n > slides.length) { slideIndex = 1 }
-	if (n < 1) { slideIndex = slides.length }
+
+	if (slides.length === 0) {
+		console.log("No slides available");
+		return;
+	}
+
+	if (n > slides.length) { slideIndex = 1; }
+	if (n < 1) { slideIndex = slides.length; }
+
 	for (i = 0; i < slides.length; i++) {
 		slides[i].style.display = "none";
 	}
-	slides[slideIndex - 1].style.display = "flex";
-	// clearInterval(timer);
-	// timer = setInterval(() => {showSlides(++slideIndex); }, 3000);
+
+	if (slides[slideIndex - 1]) {
+		slides[slideIndex - 1].style.display = "flex";
+	}
+
+	clearInterval(timer);
+	timer = setInterval(() => {
+		showSlides(++slideIndex);
+	}, 3000);
 }
 
-// 搜尋
-document.getElementById('search_btn').addEventListener('click', function(event) {
+timer = setInterval(() => {
+	showSlides(++slideIndex);
+}, 3000);
 
+function out(source) {
+	swal({
+		title: "確定後前往此新聞連結",
+		icon: "warning",
+		buttons: {
+			cancel: {
+				text: "取消",
+				value: null,
+				visible: true,
+				className: "btn-cancel",
+				closeModal: true,
+			},
+			confirm: {
+				text: "確定",
+				value: true,
+				visible: true,
+				className: "btn-confirm",
+				closeModal: true
+			}
+		},
+		dangerMode: false
+	}).then((value) => {
+		if (value) {
+			window.open(source, '_blank');
+		}
+	});
+}
+
+
+// 搜尋
+const searchBtn = document.getElementById('search_btn');
+const inputFields = document.querySelectorAll('input');
+searchBtn.addEventListener('click', function(event) {
 	localStorage.removeItem('selectedFlights');
 	localStorage.removeItem('selectedFlights2');
 
@@ -94,30 +148,65 @@ document.getElementById('search_btn').addEventListener('click', function(event) 
 	const formData = `?des_start=${desStart}&des_end=${desEnd}&date_start=${dateStart}&date_end=${dateEnd}&adults=${adults}&child=${child}&type=${type}`;
 
 	if (!desStart || !desEnd || !dateStart || !dateEnd || !adults || !child) {
-		event.preventDefault();
-		alert('請完整填寫所有欄位');
+		swal("請完整填寫所有欄位", "", "error", { button: "確認" });
 	} else {
-		if (desEnd === '世界各地') {
-			window.location.href = 'http://localhost:8890/searchpage?des_start=台灣&des_end=世界各地&date_start=2024%2F10%2F29&date_end=2024%2F10%2F30&adults=1&child=0&type=經濟艙';
-		} else {
-			fetch('http://localhost:8890/plane/check_country', {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json'
-				},
-				body: JSON.stringify({ country: desEnd })
-			})
-				.then(response => response.json())
-				.then(data => {
-					searchPage = data.length !== 0 ? 'http://localhost:8890/searchpage' : 'http://localhost:8890/searchpage2';
-					window.location.href = searchPage + formData;
-				})
-				.catch(error => {
-					console.error('Error:', error);
-				});
-		}
+		checkLocation([desStart, desEnd]).then(isValid => {
+			if (!isValid) {
+				swal("無至此國家或城市的航班", "", "error", { button: "確認" });
+			} else {
+				if (desEnd === '世界各地') {
+					window.location.href = 'http://localhost:8890/searchpage?des_start=台灣&des_end=世界各地&date_start=2024%2F10%2F29&date_end=2024%2F10%2F30&adults=1&child=0&type=經濟艙';
+				} else {
+					fetch('http://localhost:8890/plane/check_country', {
+						method: 'POST',
+						headers: {
+							'Content-Type': 'application/json'
+						},
+						body: JSON.stringify({ country: desEnd })
+					})
+						.then(response => response.json())
+						.then(data => {
+							const searchPage = data.length !== 0 ? 'http://localhost:8890/searchpage' : 'http://localhost:8890/searchpage2';
+							window.location.href = searchPage + formData;
+						})
+						.catch(error => {
+							console.error('Error:', error);
+						});
+				}
+			}
+		});
 	}
 });
+
+// 檢查出發地與目的地是否存在資料表
+function checkLocation(locations) {
+	const promises = locations.map(item => {
+		return fetch(`/plane/checkLocation?value=${item}`)
+			.then(response => {
+				if (!response.ok) {
+					throw new Error('Error: 無法檢查地點');
+				}
+				return response.json();
+			})
+			.then(data => data.exists)
+			.catch(error => {
+				console.error('檢查錯誤:', error);
+				return false;
+			});
+	});
+
+	return Promise.all(promises).then(results => results.every(exists => exists));
+}
+
+inputFields.forEach(input => {
+	input.addEventListener('keydown', function(event) {
+		if (event.key === 'Enter') {
+			event.preventDefault();
+			searchBtn.click();
+		}
+	});
+});
+
 
 fetch('/forum/api/getHomePagePosts')
 	.then(response => {
@@ -149,7 +238,7 @@ fetch('/forum/api/getHomePagePosts')
 				tagString += "<li><a href='/forum?key=" + tag + "'>" + tag + "</a></li>"
 			});
 			tags[index].innerHTML = tagString;
-			title[index].innerHTML = "<a href='/forum_detail/" + data[(index + 3) % 6].post.id + "'>" + data[(index + 3) % 6].post.mainTitle + "</a>";
+			title[index].innerHTML = "<a href='/forum/detail/" + data[(index + 3) % 6].post.id + "'>" + data[(index + 3) % 6].post.mainTitle + "</a>";
 			text[index].innerHTML = data[(index + 3) % 6].post.content;
 			icon[index].src = data[(index + 3) % 6].userNameIconDTO.iconURL;
 			author[index].innerHTML = data[(index + 3) % 6].userNameIconDTO.username;
@@ -282,4 +371,14 @@ document.addEventListener('click', function(e) {
 		// 隱藏所有建議框
 		suggestionsDiv.style.display = 'none';
 	});
+});
+
+document.addEventListener('keydown', function(e) {
+	if (e.keyCode === 9) { // Tab 鍵
+		inputs.forEach(inputId => {
+			const suggestionsDiv = document.getElementById(`suggestions_${inputId}`);
+			// 隱藏所有建議框
+			suggestionsDiv.style.display = 'none';
+		});
+	}
 });
