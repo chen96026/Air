@@ -78,7 +78,7 @@
                             <label for="forum_onHomePage_id">願意分享文章在網站首頁</label>
                         </div>
                         <div class="forum_e_textarea">
-                            <textarea maxlength="1000" placeholder="* 分享您的旅遊經驗，包括班機體驗、當地機場的便利性、交通建議或住宿、景點推薦等等 ( 上限1000字 )" id="forum_edit_textarea" name="content" th:text="${isEdit ? post.post.content : ''}" required minlength="1"></textarea>
+                            <textarea maxlength="1000" placeholder="* 分享您的旅遊經驗，包括班機體驗、當地機場的便利性、交通建議或住宿、景點推薦等等 ( 上限1000字 )" id="forum_edit_textarea" name="content"  th:text="${isEdit ? content : ''}" required minlength="1"></textarea>
                             <div>
                                 <p>發布於　<span th:text="${date}"><span></p>
                                 <button id="submit"></button>

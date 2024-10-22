@@ -143,14 +143,14 @@ public class MemberController {
 		// 返回結果
 		return ResponseEntity.ok(responseMember);
 	}
-	
+
 	// 登出
 	@GetMapping("/logout")
-    public String logout(HttpSession session) {
+	public String logout(HttpSession session) {
 		System.out.println(session);
-        session.invalidate();    
-        return null;
-    }
+		session.invalidate();
+		return null;
+	}
 
 	// 後臺會員新增API
 	@GetMapping("/member_admin")
@@ -165,20 +165,24 @@ public class MemberController {
 	@PostMapping("/findOrders")
 	public List<String> findOrders(@RequestParam String uid) {
 		Member member = memberRepository.findByUid(uid);
+
+		if (member == null || member.getOrders() == null) {
+			return new ArrayList<>(); // 返回空列表
+		}
+
 		String[] items = member.getOrders().split(",");
 		List<String> list = new ArrayList<>(Arrays.asList(items));
 		System.out.println(list);
 		return list;
 	}
-	
+
 	@GetMapping("/myposts")
-	public List<PostViewDTO> getMemberPosts (@RequestParam String uid){
+	public List<PostViewDTO> getMemberPosts(@RequestParam String uid) {
 		return memberService.getMemberPosts(uid);
 	}
-	
-	
-    @GetMapping("/myfavorites")
-    public List<PostViewDTO> getMemberFavorites(@RequestParam String uid) {
-        return memberService.getMemberFavorites(uid);
-    }
+
+	@GetMapping("/myfavorites")
+	public List<PostViewDTO> getMemberFavorites(@RequestParam String uid) {
+		return memberService.getMemberFavorites(uid);
+	}
 }

@@ -31,11 +31,11 @@ public class MailServiceImpl implements MailService {
 		MimeMessageHelper helper = new MimeMessageHelper(mimeMailMessage, false);
 		
 		// 設定寄件人名稱
-		helper.setFrom("Wings Search 通知信<wingssearch20@gmail.com>");
+		helper.setFrom("Travel Nest 通知信<wingssearch20@gmail.com>");
 		// 設定收件人信箱
 		helper.setTo(support.getEmail());
 		// 設定信件標題
-		helper.setSubject("【Wings Search】（自動回信）我們已收到您的來信");
+		helper.setSubject("【Travel Nest】（自動回信）我們已收到您的來信");
 		
 		// 設定 thymeleaf 變數
 		Context context = new Context();

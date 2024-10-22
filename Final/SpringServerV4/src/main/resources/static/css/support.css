@@ -7,6 +7,7 @@
 #contact_form label>div {
     font-size: 18px;
     color: black;
+    font-weight: 600;
 }
 
 /* 表單每個欄位的輸入框 */
@@ -99,6 +100,7 @@
     padding: 15px 0;
     margin: 30px auto 0 auto;
 	transition: all 0.3s ease 0s;
+	cursor: pointer;
 }
 
 .contact_btnClose:hover {

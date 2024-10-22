@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", function() {
 	const contentMap = {
 		member: `
         <h1 class="Backstage_Title">會員管理</h1>
@@ -174,16 +174,16 @@ document.addEventListener("DOMContentLoaded", function () {
 		document.getElementById("Backstage_LeftSide").innerHTML = '';
 		document.getElementById("Backstage_LeftSide").appendChild(backLeftSide);
 
-		document.getElementById("Backstage_LeftMember").addEventListener("click", function () {
+		document.getElementById("Backstage_LeftMember").addEventListener("click", function() {
 			switchContent('member');
 		});
-		document.getElementById("Backstage_LeftOrder").addEventListener("click", function () {
+		document.getElementById("Backstage_LeftOrder").addEventListener("click", function() {
 			switchContent('order');
 		});
-		document.getElementById("Backstage_LeftForum").addEventListener("click", function () {
+		document.getElementById("Backstage_LeftForum").addEventListener("click", function() {
 			switchContent('forum');
 		});
-		document.getElementById("Backstage_LeftNews").addEventListener("click", function () {
+		document.getElementById("Backstage_LeftNews").addEventListener("click", function() {
 			switchContent('news');
 		});
 	}
@@ -312,7 +312,7 @@ document.addEventListener("DOMContentLoaded", function () {
 		//搜尋
 		document
 			.getElementById("Member_searchBar")
-			.addEventListener("input", function () {
+			.addEventListener("input", function() {
 				const searchValue = this.value.toLowerCase();
 
 				Member_filtered = Members.filter((Member_Each) => {
@@ -381,7 +381,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			});
 		}
 
-		searchForm.addEventListener('submit', function (event) {
+		searchForm.addEventListener('submit', function(event) {
 			event.preventDefault();
 			console.log('Form submitted');
 
@@ -402,7 +402,7 @@ document.addEventListener("DOMContentLoaded", function () {
 		});
 
 		document.querySelectorAll('input[name="orderStatus"]').forEach(statusInput => {
-			statusInput.addEventListener('change', function () {
+			statusInput.addEventListener('change', function() {
 
 				filterOrdersByStatus();
 			});
@@ -509,7 +509,7 @@ document.addEventListener("DOMContentLoaded", function () {
 		}
 
 		document.querySelectorAll('input[name="orderStatus"]').forEach(statusInput => {
-			statusInput.addEventListener('change', function () {
+			statusInput.addEventListener('change', function() {
 				sortOrders();
 			});
 		});
@@ -762,13 +762,13 @@ document.addEventListener("DOMContentLoaded", function () {
 			getPosts(query, page);
 		})
 
-		$(document).on('click.Forum', '.Forum_tbody_tr', function () {
+		$(document).on('click.Forum', '.Forum_tbody_tr', function() {
 			id = $(this).find('.Forum_table_id').text();
 
 			getPostDetail(id);
 		})
 
-		$(document).on('click.Forum', '.Forum_keep', function (e) {
+		$(document).on('click.Forum', '.Forum_keep', function(e) {
 			const tr = $(this).closest('.Forum_tbody_tr');
 			id = tr.find('.Forum_table_id').text();
 
@@ -786,7 +786,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			$('.forum_detail_checkwindow').hide().fadeIn(100);
 		})
 
-		$(document).on('click.Forum', '.Forum_delete', function (e) {
+		$(document).on('click.Forum', '.Forum_delete', function(e) {
 			const tr = $(this).closest('.Forum_tbody_tr');
 			id = tr.find('.Forum_table_id').text();
 
@@ -876,7 +876,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			}, 300);
 		})
 
-		$(document).on('click.Forum', '.Forum_pageBtn', function () {
+		$(document).on('click.Forum', '.Forum_pageBtn', function() {
 			$('.Forum_pageBtn').removeClass('Forum_thisPage');
 			$(this).addClass('Forum_thisPage');
 
@@ -884,7 +884,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			getPosts(query, page);
 		})
 
-		$(document).on('click.Forum', '.Forum_detail_img', function (e) {
+		$(document).on('click.Forum', '.Forum_detail_img', function(e) {
 			e.stopPropagation();
 			$(this).toggleClass('Froum_Img');
 		})
@@ -912,8 +912,6 @@ document.addEventListener("DOMContentLoaded", function () {
 						+ "<td>" + "<img class='newsTinyImg' src='data:image/png;base64," + data[i].img + "'>" + "</td>"
 						+ "</tr>";
 				}
-
-
 
 				// 控制tooltip位置
 				const newsCells = document.querySelectorAll('.newsClip');
@@ -981,7 +979,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			});
 
 		// 加入新聞
-		document.getElementById('addForm').addEventListener('submit', function (e) {
+		document.getElementById('addForm').addEventListener('submit', function(e) {
 			// e.preventDefault(); // 阻止表單的默認提交行為
 			let title = document.getElementById('addTitle').value;
 			let text = document.getElementById('addText').value;
@@ -1012,7 +1010,7 @@ document.addEventListener("DOMContentLoaded", function () {
 		});
 
 		// 更改新聞
-		document.getElementById('updateForm').addEventListener('submit', function (e) {
+		document.getElementById('updateForm').addEventListener('submit', function(e) {
 			// e.preventDefault(); // 阻止表單的默認提交行為
 			let newsId = document.getElementById('updateNewsId').value;
 			let title = document.getElementById('updateTitle').value;
@@ -1045,7 +1043,7 @@ document.addEventListener("DOMContentLoaded", function () {
 		});
 
 		// 刪除新聞
-		document.getElementById('deleteForm').addEventListener('submit', function (e) {
+		document.getElementById('deleteForm').addEventListener('submit', function(e) {
 			// e.preventDefault(); // 阻止表單的默認提交行為
 			let newsId = document.getElementById('deleteNewsId').value;
 			fetch('/news/delete/' + newsId, {
@@ -1066,7 +1064,7 @@ document.addEventListener("DOMContentLoaded", function () {
 		// 全部新聞/增加新聞/刪除修改新聞，三個頁面的tab切換
 		document.getElementById("newsFind").style.display = "block";
 		window.newsDB = function(e, dbMove) {
-			var i, newsContent, newsTab;
+			var i, newsContent;
 			newsContent = document.getElementsByClassName("newsContent");
 			newsTabBtn = document.getElementsByClassName("newsTabBtn");
 			for (i = 0; i < newsContent.length; i++) {

@@ -44,7 +44,7 @@ $(() => {
 				<div class="contact_bg"></div>
 				<div class="contact_waiting">
 					<p>
-						正在將表單內容寄送給 Wings Search<br>
+						正在將表單內容寄送給 Travel Nest<br>
 						請稍後片刻
 					</p>
 					<div class="spinner-box">

@@ -26,24 +26,8 @@ $(() => {
 				console.log(data); 
 				if (data.length > 0) {
 					data.forEach(img => {
-						console.log(typeof img.base64URL);
-						const fileName = img.postId + '_' + img.imageId;
-						
-						// 分割從後端取得的 Base64 字串，提取純數據部分
-						const base64Data = img.base64URL.split(',')[1];
-
-						// 將 Base64 字串轉換為二進制陣列
-						const byteCharacters = atob(base64Data);
-						const byteNumbers = new Uint8Array(byteCharacters.length);
-							    
-						for (let i = 0; i < byteCharacters.length; i++) {
-							byteNumbers[i] = byteCharacters.charCodeAt(i);
-						}
-		        		const blob = new Blob([byteNumbers], { type: `${img.mimeType}` });
-						const file = new File([blob], fileName, { type: `${img.mimeType}` });
-							
-						// 將轉換完的圖片放回暫存陣列
-						selectedFiles.push(file);
+						// 將圖片放回暫存陣列
+						selectedFiles.push(img.base64URL);
 						imageDB.push(img.imageId);
 					})
 					updatePreview();
@@ -89,8 +73,15 @@ $(() => {
                 const previewImg = $(`<img>`);
 
                 const file = selectedFiles[i]
+				
                 try {
-                    const result = await readURL(file); // selectedFiles[i] 的資料讀取完成才繼續往下執行
+					let result;
+					
+					if (file instanceof File) {
+	                    result = await readURL(file); // selectedFiles[i] 的資料讀取完成才繼續往下執行										
+					} else {
+						result = file;
+					}
                     previewImg.attr('src', result);
 
                     if (i === 0) {
@@ -182,7 +173,6 @@ $(() => {
 			imageDB.splice(index, 1);
 		}
 
-		console.log("selectedFiles:" + selectedFiles);
 		console.log("imageDB:" + imageDB);
 		console.log("deleteImg:" + deleteImg);
 		
