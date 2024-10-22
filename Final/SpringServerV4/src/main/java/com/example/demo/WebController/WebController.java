@@ -47,4 +47,9 @@ public class WebController {
 	public String memberAdmin() {
 		return "back/admin_system";
 	}
+	
+	@GetMapping("/order_expired")
+	public String order_expired() {
+		return "order_expired";
+	}
 }

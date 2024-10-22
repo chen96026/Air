@@ -252,24 +252,28 @@ public class OrdersController {
 		
 	//訂單逾期取消	
 	@PostMapping("/ordercancel")
-	public ResponseEntity<String> OrderCancel(HttpSession session){
-		Long oid = (Long) session.getAttribute("currentOrderId");
-		if (oid == null) {
-	        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("無效的訂單ID");
+	public String OrderCancel(HttpSession session, Model model) {
+	    Long oid = (Long) session.getAttribute("currentOrderId");
+	    if (oid == null) {
+	        model.addAttribute("message", "無效的訂單ID");
+	        return "order_expired"; // 跳轉到訂單逾期頁面
 	    }
-		Orders order = ordersService.getOrderById(oid);
-		if(order != null) {
-			if(order.getOrderStatus() != OrderStatus.已付款完成) {
-				order.setOrderStatus(OrderStatus.逾期付款已取消);
-				ordersService.saveOrder(order);
-				return ResponseEntity.ok("訂單狀態已更新為:逾期付款已取消");
-			}else {
-				return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("訂單已付款，無法更新狀態");
-			}
-		}else {
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("訂單未找到");
-		}
-		
+
+	    Orders order = ordersService.getOrderById(oid);
+	    if (order != null) {
+	        if (order.getOrderStatus() != OrderStatus.已付款完成) {
+	            order.setOrderStatus(OrderStatus.逾期付款已取消);
+	            ordersService.saveOrder(order);
+	            model.addAttribute("message", "訂單已逾期，請重新下單");
+	            return "order_expired";
+	        } else {
+	            model.addAttribute("message", "訂單已付款，無法更新狀態");
+	            return "memberpage";
+	        }
+	    } else {
+	        model.addAttribute("message", "訂單未找到");
+	        return "order_expired";
+	    }
 	}
 	
 	
