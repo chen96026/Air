@@ -1065,7 +1065,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 		// 全部新聞/增加新聞/刪除修改新聞，三個頁面的tab切換
 		document.getElementById("newsFind").style.display = "block";
-		function newsDB(e, dbMove) {
+		window.newsDB = function(e, dbMove) {
 			var i, newsContent, newsTab;
 			newsContent = document.getElementsByClassName("newsContent");
 			newsTabBtn = document.getElementsByClassName("newsTabBtn");
