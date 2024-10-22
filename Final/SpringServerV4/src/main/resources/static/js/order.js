@@ -224,7 +224,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		passengerContainer.innerHTML = '';
 		luggageContainer.innerHTML = '';
 
-		for (let i = 0; i < (human_adults + human_child); i++) {
+		for (let i = 0; i < human_adults; i++) {
 			const newSection = passengerForm.cloneNode(true);
 			const newLuggageSection = luggageForm.cloneNode(true);
 
@@ -248,6 +248,34 @@ document.addEventListener('DOMContentLoaded', function() {
 			luggageContainer.appendChild(newLuggageSection);
 
 			console.log(`Generating form for passenger ${i + 1}`);
+		}
+
+		if (human_child != 0) {
+			for (let i = 0; i < human_child; i++) {
+				const newSection = passengerForm.cloneNode(true);
+				const newLuggageSection = luggageForm.cloneNode(true);
+
+				newSection.removeAttribute('id');
+				newLuggageSection.removeAttribute('id');
+
+				newSection.querySelector('div').textContent = `旅客${i + 1} 兒童票`;
+				newSection.querySelectorAll('input, select').forEach(input => {
+					const name = input.getAttribute('name');
+					if (name) {
+						input.setAttribute('name', `${name.split('_')[0]}_${i}`);
+					}
+				});
+
+				newLuggageSection.querySelector('div').textContent = `旅客${i + 1} 行李:`;
+				newLuggageSection.querySelectorAll('.label_addluggage').forEach(selectElement => {
+					selectElement.addEventListener('change', updatePrice);
+				});
+
+				passengerContainer.appendChild(newSection);
+				luggageContainer.appendChild(newLuggageSection);
+
+				console.log(`Generating form for passenger ${i + 1}`);
+			}
 		}
 	}
 	updatePrice();
@@ -526,7 +554,7 @@ document.addEventListener('DOMContentLoaded', function() {
 							value: true,
 							visible: true,
 							className: "btn-confirm",
-							closeModal: true 
+							closeModal: true
 						}
 					},
 					dangerMode: false

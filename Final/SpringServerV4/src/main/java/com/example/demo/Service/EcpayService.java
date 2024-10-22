@@ -42,7 +42,7 @@ public class EcpayService {
         obj.setTotalAmount(orderPrice); // 價格
         obj.setTradeDesc("test Description"); // 交易描述
         obj.setItemName("機票款"); // 交易商品
-        obj.setReturnURL("https://1421-118-163-218-100.ngrok-free.app/orders/Toback"); // 成功後的回傳網址
+        obj.setReturnURL(" https://6e60-114-46-220-21.ngrok-free.app/orders/Toback"); // 成功後的回傳網址
         obj.setClientBackURL("http://localhost:8890/homepage"); // 回到商店的網址
         obj.setNeedExtraPaidInfo("N"); // 是否需要額外交易資訊
         obj.setCustomField1("..."); // 設定自訂資訊

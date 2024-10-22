@@ -1,3 +1,6 @@
+const account = document.getElementById('account');
+const password = document.getElementById('password');
+
 fetch('/member/info')
 	.then(response => { return response.json(); })
 	.then(member => {
@@ -8,6 +11,7 @@ fetch('/member/info')
 			}
 			document.getElementById('member_info_icon2').src = base64Image;
 		}
+		if (member.thirdPartyId) password.style.display = 'none';
 	})
 	.catch(error => {
 		console.error('Error:', error);
@@ -43,8 +47,6 @@ function toggleDropdown(dropdownId) {
 const mainContent = document.getElementById('main-content');
 //以下有修改
 // 個人資料
-const account = document.getElementById('account');
-const password = document.getElementById('password');
 
 account.addEventListener('click', loadMemberInfoPage);
 password.addEventListener('click', loadPasswordPage);
@@ -340,6 +342,21 @@ function loadMemberInfoPage() {
 			})
 			.then(updatedData => {
 				swal("更新成功!", "會員資料已更新!", "success", { button: "確認" });
+				fetch('/member/info')
+					.then(response => { return response.json(); })
+					.then(member => {
+						if (member.icon != null) {
+							let base64Image = member.icon;
+							if (!base64Image.startsWith('data:image/')) {
+								base64Image = 'data:image/jpeg;base64,' + base64Image;
+							}
+							document.getElementById('member_info_icon').src = base64Image;
+							document.getElementById('member_info_icon2').src = base64Image;
+						}
+					})
+					.catch(error => {
+						console.error('Error:', error);
+					});
 			})
 			.catch(error => {
 				console.error('Error:', error);
@@ -374,6 +391,21 @@ function loadMemberInfoPage() {
 				.then(data => {
 					console.log("後端響應：", data);
 					swal("上傳成功!", "頭像已上傳！", "success", { button: "確認" });
+					fetch('/member/info')
+						.then(response => { return response.json(); })
+						.then(member => {
+							if (member.icon != null) {
+								let base64Image = member.icon;
+								if (!base64Image.startsWith('data:image/')) {
+									base64Image = 'data:image/jpeg;base64,' + base64Image;
+								}
+								document.getElementById('member_info_icon').src = base64Image;
+								document.getElementById('member_info_icon2').src = base64Image;
+							}
+						})
+						.catch(error => {
+							console.error('Error:', error);
+						});
 				})
 				.catch(error => {
 					console.error('Error:', error);
@@ -533,7 +565,7 @@ order_now.addEventListener('click', () => {
 			'Content-Type': 'application/json'
 		}
 	})
-		.then(response => response.json())
+		.then(response => { return response.json(); })
 		.then(data => {
 			let tickets = "";
 			const promises = data.map(orderNumber => {
@@ -556,6 +588,7 @@ order_now.addEventListener('click', () => {
 				mainContent.style.gap = "10px";
 				mainContent.innerHTML = tickets;
 			});
+
 		})
 		.catch(error => {
 			console.error('Error:', error);

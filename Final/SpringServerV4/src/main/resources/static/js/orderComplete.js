@@ -140,7 +140,7 @@ fetch('/orders/getoid')
                                 if (response.ok) {
                                     console.log("訂單狀態更新成功");
 									setTimeout(function(){
-										window.location.href = "/order_expired";
+										window.location.href = "/orders/order_expired";
 									},1000);
                                 } else {
                                     console.error("訂單狀態更新失敗，狀態碼:" + response.status);
