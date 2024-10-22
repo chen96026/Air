@@ -925,11 +925,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
 					cell.addEventListener('mousemove', (e) => {
 						const tooltipWidth = tooltip.offsetWidth;
-						const tooltipHeight = tooltip.offsetHeight;
 
 						// 計算顯示位置
 						let left = e.pageX;
-						let top = e.pageY + 10; // 向下偏移
+						let top = e.pageY - document.getElementById("header").offsetHeight; // 向下偏移
 
 						// 檢查 tooltip 是否會超出視窗
 						if (left + tooltipWidth > window.innerWidth) {
