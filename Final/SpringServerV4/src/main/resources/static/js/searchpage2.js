@@ -196,7 +196,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 		let total_time_start = hour_start * 60 + minute_start;
 		let total_time_end = hour_end * 60 + minute_end;
-
+		
+		if(document.getElementById('section_title').textContent === '選擇回程') time_zone = (JSON.parse(localStorage.getItem('selectedFlights')).time_zone)*(-1);
 		total_time_end -= time_zone * 60;
 
 		let total_time = total_time_end - total_time_start;

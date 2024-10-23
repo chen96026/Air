@@ -234,7 +234,7 @@ searchBtn.addEventListener('click', function(event) {
 		swal("請完整填寫所有欄位", "", "error", { button: "確認" });
 	} else {
 		checkLocation([desStart, desEnd]).then(isValid => {
-			if (!isValid) {
+			if (!isValid && desEnd!='世界各地') {
 				swal("無至此國家或城市的航班", "", "error", { button: "確認" });
 			} else {
 				if (desEnd === '世界各地') {
@@ -289,25 +289,5 @@ inputFields.forEach(input => {
 		}
 	});
 });
-
-// 檢查出發地與目的地是否存在資料表
-function checkLocation(locations) {
-	const promises = locations.map(item => {
-		return fetch(`/plane/checkLocation?value=${item}`)
-			.then(response => {
-				if (!response.ok) {
-					throw new Error('Error: 無法檢查地點');
-				}
-				return response.json();
-			})
-			.then(data => data.exists)
-			.catch(error => {
-				console.error('檢查錯誤:', error);
-				return false;
-			});
-	});
-
-	return Promise.all(promises).then(results => results.every(exists => exists));
-}
 
 localStorage.setItem('lastUrl', window.location.href);
