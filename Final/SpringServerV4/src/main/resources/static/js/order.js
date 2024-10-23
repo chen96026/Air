@@ -221,65 +221,74 @@ document.addEventListener('DOMContentLoaded', function() {
 
 	function refreshPassengerAndLuggage() {
 
-		passengerContainer.innerHTML = '';
-		luggageContainer.innerHTML = '';
+	    passengerContainer.innerHTML = '';
+	    luggageContainer.innerHTML = '';
 
-		let k = 0;
-		for (let i = 0; i < human_adults; i++) {
-			const newSection = passengerForm.cloneNode(true);
-			const newLuggageSection = luggageForm.cloneNode(true);
+	    // 生成成人的表單
+	    for (let i = 0; i < human_adults; i++) {
+	        const newSection = passengerForm.cloneNode(true);
+	        const newLuggageSection = luggageForm.cloneNode(true);
 
-			newSection.removeAttribute('id');
-			newLuggageSection.removeAttribute('id');
+	        newSection.removeAttribute('id');
+	        newLuggageSection.removeAttribute('id');
 
-			newSection.querySelector('div').textContent = `旅客${k + 1} 成人票`;
-			newSection.querySelectorAll('input, select').forEach(input => {
-				const name = input.getAttribute('name');
-				if (name) {
-					input.setAttribute('name', `${name.split('_')[0]}_${i}`);
-				}
-			});
+	        // 設置成人乘客的標題
+	        newSection.querySelector('div').textContent = `旅客${i + 1} 成人票`;
+	        
+	        // 修改乘客的輸入欄位名稱，確保每個欄位是唯一的
+	        newSection.querySelectorAll('input, select').forEach(input => {
+	            const name = input.getAttribute('name');
+	            if (name) {
+	                input.setAttribute('name', `${name.split('_')[0]}_${i}`);
+	            }
+	        });
 
-			newLuggageSection.querySelector('div').textContent = `旅客${k + 1} 行李:`;
-			newLuggageSection.querySelectorAll('.label_addluggage').forEach(selectElement => {
-				selectElement.addEventListener('change', updatePrice);
-			});
+	        // 設置行李部分
+	        newLuggageSection.querySelector('div').textContent = `旅客${i + 1} 行李:`;
+	        newLuggageSection.querySelectorAll('.label_addluggage').forEach(selectElement => {
+	            selectElement.addEventListener('change', updatePrice);
+	        });
 
-			passengerContainer.appendChild(newSection);
-			luggageContainer.appendChild(newLuggageSection);
+	        // 將成人乘客和行李表單加入到容器
+	        passengerContainer.appendChild(newSection);
+	        luggageContainer.appendChild(newLuggageSection);
 
-			console.log(`Generating form for passenger ${i + 1}`);
-			k++;
-		}
+	        console.log(`Generating form for adult passenger ${i + 1}`);
+	    }
 
-		if (human_child != 0) {
-			for (let j = 0; j < human_child; j++) {
-				const newSection = passengerForm.cloneNode(true);
-				const newLuggageSection = luggageForm.cloneNode(true);
+	    // 生成兒童的表單
+	    for (let i = 0; i < human_child; i++) {
+	        const childIndex = human_adults + i; // 確保兒童的索引在成人之後
+	        const newSection = passengerForm.cloneNode(true);
+	        const newLuggageSection = luggageForm.cloneNode(true);
 
-				newSection.removeAttribute('id');
-				newLuggageSection.removeAttribute('id');
+	        newSection.removeAttribute('id');
+	        newLuggageSection.removeAttribute('id');
 
-				newSection.querySelector('div').textContent = `旅客${k + 1} 兒童票`;
-				newSection.querySelectorAll('input, select').forEach(input => {
-					const name = input.getAttribute('name');
-					if (name) {
-						input.setAttribute('name', `${name.split('_')[0]}_${j}`);
-					}
-				});
+	        // 設置兒童乘客的標題
+	        newSection.querySelector('div').textContent = `旅客${childIndex + 1} 兒童票`;
+	        
+	        // 修改兒童乘客的輸入欄位名稱
+	        newSection.querySelectorAll('input, select').forEach(input => {
+	            const name = input.getAttribute('name');
+	            if (name) {
+	                input.setAttribute('name', `${name.split('_')[0]}_${childIndex}`);
+	            }
+	        });
 
-				newLuggageSection.querySelector('div').textContent = `旅客${k + 1} 行李:`;
-				newLuggageSection.querySelectorAll('.label_addluggage').forEach(selectElement => {
-					selectElement.addEventListener('change', updatePrice);
-				});
+	        // 設置兒童行李部分
+	        newLuggageSection.querySelector('div').textContent = `旅客${childIndex + 1} 行李:`;
+	        newLuggageSection.querySelectorAll('.label_addluggage').forEach(selectElement => {
+	            selectElement.addEventListener('change', updatePrice);
+	        });
 
-				passengerContainer.appendChild(newSection);
-				luggageContainer.appendChild(newLuggageSection);
+	        // 將兒童乘客和行李表單加入到容器
+	        passengerContainer.appendChild(newSection);
+	        luggageContainer.appendChild(newLuggageSection);
 
-				console.log(`Generating form for passenger ${j + 1}`);
-				k++;
-			}
-		}
+	        console.log(`Generating form for child passenger ${i + 1}`);
+	    }
+	
 	}
 	updatePrice();
 	bindBlurEvents();
