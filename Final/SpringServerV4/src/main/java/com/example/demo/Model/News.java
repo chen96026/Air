@@ -30,7 +30,7 @@ public class News {
 	
 	@Lob
 	@Column(name = "img")
-	private byte[] img;
+	private String img;
 
 	public Long getId() {
 		return id;
@@ -64,11 +64,12 @@ public class News {
 		this.url = url;
 	}
 
-	public byte[] getImg() {
+	public String getImg() {
 		return img;
 	}
 
-	public void setImg(byte[] img) {
+	public void setImg(String img) {
 		this.img = img;
 	}
+
 }

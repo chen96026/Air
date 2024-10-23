@@ -35,20 +35,14 @@ public class NewsController {
 			@RequestParam String title,
 			@RequestParam String text,
 			@RequestParam String newsURL,
-			@RequestParam("addFile") MultipartFile addFile
+			@RequestParam String img
 			) {
 		System.out.println("後台 add 新聞");
 		News news = new News();
 		news.setTitle(title);
 		news.setText(text);
 		news.setUrl(newsURL);
-		try {
-			System.out.println(addFile.getBytes().length);
-			news.setImg(addFile.getBytes());
-		} catch (IOException e) {
-			news.setImg(null);
-			System.out.println("no New's image");
-		}
+		news.setImg(img);
 		return newsService.addNews(news);
 	}
 	
@@ -58,7 +52,7 @@ public class NewsController {
 			@RequestParam String title,
 			@RequestParam String text,
 			@RequestParam String newsURL,
-			@RequestParam(value = "updateFile", required = false) MultipartFile updateFile
+			@RequestParam String img
 			) {
 		System.out.println("後台 update 新聞");
 		News news = new News();
@@ -66,18 +60,7 @@ public class NewsController {
 		news.setTitle(title);
 		news.setText(text);
 		news.setUrl(newsURL);
-		try {
-			if (updateFile != null && !updateFile.isEmpty()) {
-				System.out.println(updateFile.getBytes().length);
-			    news.setImg(updateFile.getBytes());
-			} else {
-			    news.setImg(null);
-			    System.out.println("No file uploaded for update");
-			}
-		} catch (IOException e) {
-			System.out.println("no New's image");
-			news.setImg(null);
-		}
+		news.setImg(img);
 		return newsService.updateNews(news);
 	}
 	

@@ -37,7 +37,7 @@ public class NewsServiceImpl implements NewsService{
 			if ( news.getUrl() != null && !news.getUrl().isEmpty() ) {
 				newsDB.setUrl(news.getUrl());;
 			}
-			if ( news.getImg() != null ) {
+			if ( news.getImg() != null && !news.getUrl().isEmpty() ) {
 				newsDB.setImg(news.getImg());;
 			}
 			return newsRepo.save(newsDB);

@@ -49,7 +49,7 @@ fetch('/news/getAll')
 				+ "<div onclick=\"out('" + data[i].url + "')\" class='primary-btn text-uppercase'>閱讀更多. . .</div>"
 				+ "</div>"
 				+ "<div class='col-lg-6 col-md-12 home-about-right no-padding'>"
-				+ "<img class='img-fluid' src='data:image/png;base64," + data[i].img + "'>"
+				+ "<img class='img-fluid' src='" + data[i].img + "'>"
 				+ "</div></div></div>";
 		}
 		news.innerHTML += "<div class='Hp_next' onclick='posterPlusSlides(1)'>&#10095;</div>";
