@@ -1,13 +1,13 @@
 document.addEventListener('DOMContentLoaded', () => {
 	const urlParams = new URLSearchParams(window.location.search);
 
-	const des_start = urlParams.get('des_start');
-	const des_end = urlParams.get('des_end');
-	const date_start = urlParams.get('date_start');
-	const date_end = urlParams.get('date_end');
-	const adults = urlParams.get('adults');
-	const child = urlParams.get('child');
-	const type = urlParams.get('type');
+	let des_start = urlParams.get('des_start');
+	let des_end = urlParams.get('des_end');
+	let date_start = urlParams.get('date_start');
+	let date_end = urlParams.get('date_end');
+	let adults = urlParams.get('adults');
+	let child = urlParams.get('child');
+	let type = urlParams.get('type');
 
 	document.getElementById('des_start').value = des_start;
 	document.getElementById('des_end').value = des_end;
@@ -19,6 +19,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	let totalResults = [];
 	let searchType = type == '經濟艙' ? 'search2' : 'search2ByBusiness';
+	
+	if(localStorage.getItem('selectedFlights')) {
+		let temp = date_start;
+		date_start = date_end;
+		date_end = temp;
+	}
 	const apiUrl = `http://localhost:8890/plane/${searchType}?departureCountry=${encodeURIComponent(des_start)}&arrivalCity=${encodeURIComponent(des_end)}&departureDate=${encodeURIComponent(date_start)}&requiredSeats=${Number(adults) + Number(child)}`;
 
 	fetch(apiUrl)

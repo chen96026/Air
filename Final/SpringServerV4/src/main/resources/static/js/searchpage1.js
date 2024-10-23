@@ -111,7 +111,7 @@ function displayCityCards(data, searchData) {
                                 <div class="search_details">
                                     <div class="search_text">
                                         <div class="card-text">直飛</div><br>
-                                    	<div class="card-text">航班最低只要 NT$${data[i].minPrice}</div>
+                                    	<div class="card-text">航班最低只要 NT$${data[i].minPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</div>
                                     </div>
                                 </div>
                             </div>
@@ -185,7 +185,7 @@ function displayCountryCards(data) {
                                 <div class="search_details">
                                     <div class="search_text">
                                         <div class="card-text">直飛</div><br>
-                                    	<div class="card-text">最低只要 NT$${data[i][1]}</div>
+                                    	<div class="card-text">最低只要 NT$${data[i][1].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</div>
                                     </div>
                                 </div>
                             </div>
