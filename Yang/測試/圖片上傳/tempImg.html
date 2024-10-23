@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+</head>
+<body>
+	<form id="addForm">
+		檔案：<input type="file" accept="image/*" id="addFile" name="addFile"><br>
+		<br>
+		<button>新增</button>
+	</form>
+	<script>
+		document.getElementById('addForm').addEventListener('submit', (e) => {
+			console.log('fetch')
+			e.preventDefault(); // 阻止表單的默認提交行為
+			const files = document.getElementById('addFile').files;
+			let formData = new FormData(); // 創建 FormData 物件
+			formData.append('file', files[0]);
+			fetch('/temp/img', {
+				method: 'Post',
+				body: formData
+			})
+				.then(response => {
+					console.log('回應')
+					console.log(response)
+					if (!response.ok) {
+						throw new Error('Error:add News ->');
+					}
+				})
+				.catch(error => {
+					console.error('add News err:', error);
+				});
+
+		})
+	</script>
+</body>
+</html>
