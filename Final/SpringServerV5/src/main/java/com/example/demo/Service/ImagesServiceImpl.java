@@ -10,7 +10,6 @@ import com.example.demo.Model.Images;
 import com.example.demo.Model.Posts;
 import com.example.demo.Repository.ImagesRepository;
 import com.example.demo.Repository.PostsRepository;
-import com.example.demo.dto.ImageDTO;
 
 @Service
 public class ImagesServiceImpl implements ImagesService{
@@ -26,9 +25,8 @@ public class ImagesServiceImpl implements ImagesService{
 	public String getCoverImgURL(Posts post) {
 		
 		Images firstImg = imagesRepository.findFirstByPosts(post);
-		ImageDTO imageDTO = new ImageDTO(firstImg);
 		
-		return imageDTO.getBase64URL();
+		return firstImg.getImage();
 	}
 	
 	
@@ -38,8 +36,7 @@ public class ImagesServiceImpl implements ImagesService{
 		List<String> imageURLlist = new ArrayList<String>();
 		
 		for (Images image : imagesRepository.findByPosts(post)) {
-			ImageDTO imageDTO = new ImageDTO(image);
-			imageURLlist.add(imageDTO.getBase64URL());
+			imageURLlist.add(image.getImage());
 		}
 		
 		return imageURLlist;

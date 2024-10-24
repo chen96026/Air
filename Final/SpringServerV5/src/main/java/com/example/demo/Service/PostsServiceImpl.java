@@ -11,7 +11,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.example.demo.Model.Images;
 import com.example.demo.Model.Posts;
@@ -35,16 +34,15 @@ public class PostsServiceImpl implements PostsService {
 	// 創建新文章
 	@Override
 	@Transactional
-	public Posts newPost(Posts post, List<MultipartFile> images) throws Exception {
+	public Posts newPost(Posts post, List<String> images) throws Exception {
 
 		Posts newPost = postsRepository.save(post);
 		
-		for (MultipartFile image : images) {
+		for (String image : images) {
 			Images img = new Images();
 			
 			img.setPosts(newPost);
-			img.setImage(image.getBytes());
-			img.setMimeType(image.getContentType());
+			img.setImage(image);
 			
 			imagesRepository.save(img);
 		}
@@ -170,7 +168,7 @@ public class PostsServiceImpl implements PostsService {
 	// 更新文章
 	@Override
 	@Transactional
-	public Posts updatePost(Posts post, List<MultipartFile> images) throws Exception {
+	public Posts updatePost(Posts post, List<String> images) throws Exception {
 		
 		Posts postDB = postsRepository.findById(post.getId()).orElse(null);
 		
@@ -194,12 +192,11 @@ public class PostsServiceImpl implements PostsService {
 			
 			if (images != null && !images.isEmpty()) {
 
-				for (MultipartFile image : images) {
+				for (String image : images) {
 					Images img = new Images();
 					
 					img.setPosts(postDB);
-					img.setImage(image.getBytes());
-					img.setMimeType(image.getContentType());
+					img.setImage(image);
 					
 					imagesRepository.save(img);
 				}

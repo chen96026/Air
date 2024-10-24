@@ -20,11 +20,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
 
 import jakarta.servlet.http.HttpSession;
 import com.example.demo.Model.Bookmark;
-import com.example.demo.dto.ImageDTO;
 import com.example.demo.Model.Images;
 import com.example.demo.Model.Likes;
 import com.example.demo.Model.Member;
@@ -118,7 +116,7 @@ public class ForumAPIController {
 			@RequestParam Integer rate,
 			@RequestParam(required = false) Boolean share,
 			@RequestParam String content,
-			@RequestParam List<MultipartFile> images,
+			@RequestParam List<String> images,
 			HttpSession session) {
 		
 		Posts post = new Posts();
@@ -165,7 +163,7 @@ public class ForumAPIController {
 			@RequestParam Integer rate,
 			@RequestParam(required = false) Boolean share,
 			@RequestParam String content,
-			@RequestParam(required = false) List<MultipartFile> images) {
+			@RequestParam(required = false) List<String> images) {
 		System.out.println("Update1");
 		Posts post = new Posts();
 		post.setId(id);
@@ -198,19 +196,13 @@ public class ForumAPIController {
 	}
 
 	@GetMapping("/getImg")
-	public List<ImageDTO> getImg(@RequestParam Long id) {
+	public List<Images> getImg(@RequestParam Long id) {
 		
 		Posts post = postsRepository.findById(id).orElse(null);
 		
 		List<Images> imageList = imagesRepository.findByPosts(post);
-		List<ImageDTO> imageDTOlist = new ArrayList<ImageDTO>();
 		
-		for (Images image : imageList) {
-			ImageDTO imageDTO = new ImageDTO(image);
-			imageDTOlist.add(imageDTO);
-		}
-		
-		return imageDTOlist;
+		return imageList;
 	}
 	
 	@DeleteMapping("/deleteImg")

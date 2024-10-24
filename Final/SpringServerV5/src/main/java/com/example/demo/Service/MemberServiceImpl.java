@@ -1,7 +1,6 @@
 package com.example.demo.Service;
 
 import java.util.ArrayList;
-import java.util.Base64;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -22,7 +21,6 @@ import com.example.demo.Repository.MemberRepository;
 import com.example.demo.Repository.PostsRepository;
 import com.example.demo.bcrypt.BCrypt;
 import com.example.demo.dto.CheckPasswordDTO;
-import com.example.demo.dto.ImageDTO;
 import com.example.demo.dto.PostViewDTO;
 import com.example.demo.dto.UserNameIconDTO;
 
@@ -264,13 +262,13 @@ public class MemberServiceImpl implements MemberService {
         for (Posts post : posts) {
             // 查詢該貼文的封面圖片，假設每個貼文只有一個主要圖片
             Images coverImage = imagesRepository.findFirstByPosts(post);
-            String coverImgURL = coverImage != null ? new ImageDTO(coverImage).getBase64URL() : null;
+            String coverImgURL = coverImage != null ? coverImage.getImage() : null;
 
             //查詢所有貼文圖片
             List<Images> images = imagesRepository.findByPosts(post);
             List<String> imageURLs = new ArrayList<>();
             for (Images image : images) {
-                imageURLs.add(new ImageDTO(image).getBase64URL());
+                imageURLs.add(image.getImage());
             }
 
             // 使用UserNameIconDTO來封裝會員的名稱和頭像
@@ -311,14 +309,7 @@ public class MemberServiceImpl implements MemberService {
 	                
 	                // 查找封面圖片
 	                Images coverImage = imagesRepository.findFirstByPosts(post);
-	                String coverImgURL = "";
-	                
-	                if (coverImage != null && coverImage.getImage() != null) {
-	                    // 將 byte[] 轉換為 Base64 字符串
-	                    String base64Image = Base64.getEncoder().encodeToString(coverImage.getImage());
-	                    // 構造 data URI，這裡假設圖片是 JPEG 格式
-	                    coverImgURL = "data:" + coverImage.getMimeType() + ";base64," + base64Image;
-	                }
+	                String coverImgURL = coverImage.getImage();
 
 	                // 將作者信息封裝進 DTO
 	                UserNameIconDTO userNameIconDTO = new UserNameIconDTO(post.getAuthor());

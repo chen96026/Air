@@ -6,7 +6,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
@@ -23,12 +22,8 @@ public class Images {
 	@JoinColumn(name = "pid", nullable = false)
 	private Posts posts;
 	
-	@Lob
 	@Column(name = "image")
-	private byte[] image;
-	
-	@Column(name = "mimeType")
-	private String mimeType;
+	private String image;
 	
 
 	public Long getId() {
@@ -47,20 +42,12 @@ public class Images {
 		this.posts = posts;
 	}
 
-	public byte[] getImage() {
+	public String getImage() {
 		return image;
 	}
 
-	public void setImage(byte[] image) {
+	public void setImage(String image) {
 		this.image = image;
-	}
-
-	public String getMimeType() {
-		return mimeType;
-	}
-
-	public void setMimeType(String mimeType) {
-		this.mimeType = mimeType;
 	}
 	
 	
