@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主機： localhost:3306
--- 產生時間： 2024-10-28 02:17:46
+-- 產生時間： 2024-10-28 02:30:03
 -- 伺服器版本： 5.7.24
 -- PHP 版本： 8.3.1
 
@@ -43,6 +43,51 @@ INSERT INTO `bookmark` (`id`, `memberId`, `pid`) VALUES
 (5, 18, 1),
 (6, 18, 8),
 (11, 18, 24);
+
+-- --------------------------------------------------------
+
+--
+-- 資料表結構 `images`
+--
+
+CREATE TABLE `images` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `pid` int(10) UNSIGNED NOT NULL COMMENT '文章id(外鍵連接posts.id)',
+  `image` varchar(1000) NOT NULL COMMENT '附圖URL'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- 傾印資料表的資料 `images`
+--
+
+INSERT INTO `images` (`id`, `pid`, `image`) VALUES
+(68, 1, 'https://res.cloudinary.com/dzjv2m1on/image/upload/v1729738473/z7u2idfxwzp2zy1uflff.png'),
+(69, 2, 'https://res.cloudinary.com/dzjv2m1on/image/upload/v1729738513/sxhhwjihwy4ckjkofcm4.png'),
+(70, 2, 'https://res.cloudinary.com/dzjv2m1on/image/upload/v1729738514/nwmlbvd4do2jpvl7tnfk.png'),
+(71, 3, 'https://res.cloudinary.com/dzjv2m1on/image/upload/v1729738540/xk1zj8wgu4jhcvqhiyv3.png'),
+(72, 4, 'https://res.cloudinary.com/dzjv2m1on/image/upload/v1729738557/pdeomb0uyp6odybrelyn.png'),
+(73, 5, 'https://res.cloudinary.com/dzjv2m1on/image/upload/v1729738585/oe2woblbpl6ji69chmf1.png'),
+(74, 6, 'https://res.cloudinary.com/dzjv2m1on/image/upload/v1729738618/cedwp0deqlh16oseqtwu.png'),
+(75, 7, 'https://res.cloudinary.com/dzjv2m1on/image/upload/v1729738635/tupin33qrdz4osd1prou.png'),
+(76, 8, 'https://res.cloudinary.com/dzjv2m1on/image/upload/v1729738657/ii7cp2xmofdaxmhimv7e.png'),
+(77, 9, 'https://res.cloudinary.com/dzjv2m1on/image/upload/v1729738679/iquhncd0ceoqvgqohsbb.png'),
+(78, 15, 'https://res.cloudinary.com/dzjv2m1on/image/upload/v1729738700/ukkjj4hkdiomc7kfq021.png'),
+(79, 16, 'https://res.cloudinary.com/dzjv2m1on/image/upload/v1729738720/cvgzeo2vighgw4pk4hbs.png'),
+(80, 17, 'https://res.cloudinary.com/dzjv2m1on/image/upload/v1729738744/jmqwuxszyflg8x4hnzni.png'),
+(81, 20, 'https://res.cloudinary.com/dzjv2m1on/image/upload/v1729738838/nwcgxfwdmpqyznpkajyr.png'),
+(82, 20, 'https://res.cloudinary.com/dzjv2m1on/image/upload/v1729738858/hpw7jx0qutct3zl6orrc.png'),
+(83, 20, 'https://res.cloudinary.com/dzjv2m1on/image/upload/v1729738879/fahduskwfkwkihdsbkd0.png'),
+(84, 20, 'https://res.cloudinary.com/dzjv2m1on/image/upload/v1729738904/dcuw8izzocwa0jntogki.png'),
+(85, 20, 'https://res.cloudinary.com/dzjv2m1on/image/upload/v1729738920/bvkzfkgk7gbp9v9entkn.png'),
+(130, 24, 'https://res.cloudinary.com/dzjv2m1on/image/upload/v1729943208/qrf7ozzfmejrlqavawd7.jpg'),
+(131, 24, 'https://res.cloudinary.com/dzjv2m1on/image/upload/v1729943198/ztjojo3vhgdp6tuiz3s7.jpg'),
+(132, 24, 'https://res.cloudinary.com/dzjv2m1on/image/upload/v1729943204/kj9pqvfomy8q5mjqseaj.jpg'),
+(133, 24, 'https://res.cloudinary.com/dzjv2m1on/image/upload/v1729943199/id7nxoh6j06lo5yl2g9e.jpg'),
+(134, 24, 'https://res.cloudinary.com/dzjv2m1on/image/upload/v1729943202/t8fa7eduldse8deuxlcd.jpg'),
+(138, 24, 'https://res.cloudinary.com/dzjv2m1on/image/upload/v1729943396/byxw9xitrg613kktvanv.jpg'),
+(139, 24, 'https://res.cloudinary.com/dzjv2m1on/image/upload/v1729943404/wmo8lnvp9cgarp7dnqei.jpg'),
+(140, 24, 'https://res.cloudinary.com/dzjv2m1on/image/upload/v1729943400/kemryqsa47rcrpkg6seb.jpg'),
+(141, 24, 'https://res.cloudinary.com/dzjv2m1on/image/upload/v1729943399/xqeotahgpdflvuvw3jp5.jpg');
 
 -- --------------------------------------------------------
 
@@ -198,6 +243,13 @@ ALTER TABLE `bookmark`
   ADD KEY `bookmarkMemberId` (`memberId`);
 
 --
+-- 資料表索引 `images`
+--
+ALTER TABLE `images`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `pid` (`pid`) USING BTREE;
+
+--
 -- 資料表索引 `likes`
 --
 ALTER TABLE `likes`
@@ -237,6 +289,12 @@ ALTER TABLE `bookmark`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
+-- 使用資料表自動遞增(AUTO_INCREMENT) `images`
+--
+ALTER TABLE `images`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=142;
+
+--
 -- 使用資料表自動遞增(AUTO_INCREMENT) `likes`
 --
 ALTER TABLE `likes`
@@ -270,6 +328,12 @@ ALTER TABLE `reports`
 ALTER TABLE `bookmark`
   ADD CONSTRAINT `bookmarkMemberId` FOREIGN KEY (`memberId`) REFERENCES `member` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `bookmarkPid` FOREIGN KEY (`pid`) REFERENCES `posts` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- 資料表的限制式 `images`
+--
+ALTER TABLE `images`
+  ADD CONSTRAINT `pid` FOREIGN KEY (`pid`) REFERENCES `posts` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- 資料表的限制式 `likes`
