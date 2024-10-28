@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        #myChart1,#myChart2 {
+            max-width: 700px;
+            height: 400px;
+        }
+    </style>
+</head>
+
+<body>
+    <select id="yaxis1">
+        <option>收入</option>
+        <option>數量</option>
+    </select>
+    <select id="xaxis1">
+        <option>時間</option>
+        <option>機場</option>
+        <option>國家</option>
+        <option>航空公司</option>
+    </select>
+    <div id="myChart1"></div>
+    <select id="yaxis2">
+        <option>收入</option>
+        <option>數量</option>
+    </select>
+    <select id="xaxis2">
+        <option>時間</option>
+        <option>機場</option>
+        <option>國家</option>
+        <option>航空公司</option>
+    </select>
+    <div id="myChart2"></div>
+
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
+    <script>
+        // current 表示加載最新版本；corechart 指定了要加載的圖表包
+        google.charts.load('current', { packages: ['corechart'] });
+        // 設置回調函數，即我們要繪製的函數
+        google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+            var y = document.getElementById('yaxis1').value;
+            var x = document.getElementById('xaxis1').value;
+
+            var mysqlDatas = [
+                { id: 1, saleDate: '2024-01-11', airport: 'TPE', country: 'Taiwan', airline: 'JX', price: 1111 },
+                { id: 2, saleDate: '2024-02-22', airport: 'ICN', country: 'Korea', airline: 'BR', price: 2222 },
+                { id: 3, saleDate: '2024-03-03', airport: 'KIX', country: 'Japan', airline: 'CI', price: 3333 },
+                { id: 4, saleDate: '2024-04-04', airport: 'NRT', country: 'Japan', airline: 'NH', price: 4444 },
+                { id: 5, saleDate: '2024-05-05', airport: 'BNE', country: 'Australia', airline: 'QF', price: 5555 }
+            ];
+
+            var dataObj = {};
+            var dataArray = [[x, y]];
+
+            mysqlDatas.forEach((mysqlData) => {
+                var xValue;
+                switch (x) {
+                    case '時間':
+                        xValue = mysqlData.saleDate;
+                        break;
+                    case '機場':
+                        xValue = mysqlData.airport;
+                        break;
+                    case '國家':
+                        xValue = mysqlData.country;
+                        break;
+                    case '航空公司':
+                        xValue = mysqlData.airline;
+                        break;
+                }
+
+                // 若沒有則初始化
+                if (!dataObj[xValue]) {
+                    dataObj[xValue] = { price: 0, count: 0 };
+                }
+
+                dataObj[xValue].price += mysqlData.price;
+                dataObj[xValue].count += 1;
+            });
+
+            for (var key in dataObj) {
+                var yValue = y === '收入' ? dataObj[key].price : dataObj[key].count;
+                dataArray.push([key, yValue]);
+            }
+
+            var data = google.visualization.arrayToDataTable(dataArray);
+
+            var options = {
+                title: y + ' by ' + x,
+                hAxis: {
+                    title: x,
+                    titleTextStyle: {
+                        fontSize: 16, // 設置X軸標題的字體大小
+                        color: '#333' // 設置字體顏色
+                    },
+                    ticks: [
+                        { v: new Date(2024, 0), f: 'Jan' },
+                        { v: new Date(2024, 1), f: 'Feb' },
+                        { v: new Date(2024, 2), f: 'Mar' },
+                        { v: new Date(2024, 3), f: 'Apr' },
+                        { v: new Date(2024, 4), f: 'May' },
+                        { v: new Date(2024, 5), f: 'Jun' },
+                        { v: new Date(2024, 6), f: 'Jul' },
+                        { v: new Date(2024, 7), f: 'Aug' },
+                        { v: new Date(2024, 8), f: 'Sep' },
+                        { v: new Date(2024, 9), f: 'Oct' },
+                        { v: new Date(2024, 10), f: 'Nov' },
+                        { v: new Date(2024, 11), f: 'Dec' }
+                    ] // 手動設置每個月的刻度
+                },
+                vAxis: {
+                    title: y,
+                    titleTextStyle: {
+                        fontSize: 16, // 設置Y軸標題的字體大小
+                        color: '#333' // 設置字體顏色
+                    },
+                    format: '#', // 設置為整數格式，去除小數點
+
+                },
+                legend: 'none'
+            };
+
+            var chart1 = new google.visualization.ColumnChart(document.getElementById('myChart1'));
+            chart1.draw(data, options);
+        }
+
+        // 監聽下拉框變化，重新繪製圖表
+        document.getElementById('yaxis1').addEventListener('change', drawChart);
+        document.getElementById('xaxis1').addEventListener('change', drawChart);
+    </script>
+    <script>
+        // current 表示加載最新版本；corechart 指定了要加載的圖表包
+        google.charts.load('current', { packages: ['corechart'] });
+        // 設置回調函數，即我們要繪製的函數
+        google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+            var y = document.getElementById('yaxis2').value;
+            var x = document.getElementById('xaxis2').value;
+
+            var mysqlDatas = [
+                { id: 1, saleDate: '2024-01-11', airport: 'TPE', country: 'Taiwan', airline: 'JX', price: 1111 },
+                { id: 2, saleDate: '2024-02-22', airport: 'ICN', country: 'Korea', airline: 'BR', price: 2222 },
+                { id: 3, saleDate: '2024-03-03', airport: 'KIX', country: 'Japan', airline: 'CI', price: 3333 },
+                { id: 4, saleDate: '2024-04-04', airport: 'NRT', country: 'Japan', airline: 'NH', price: 4444 },
+                { id: 5, saleDate: '2024-05-05', airport: 'BNE', country: 'Australia', airline: 'QF', price: 5555 }
+            ];
+
+            var dataObj = {};
+            var dataArray = [[x, y]];
+
+            mysqlDatas.forEach((mysqlData) => {
+                var xValue;
+                switch (x) {
+                    case '時間':
+                        xValue = mysqlData.saleDate;
+                        break;
+                    case '機場':
+                        xValue = mysqlData.airport;
+                        break;
+                    case '國家':
+                        xValue = mysqlData.country;
+                        break;
+                    case '航空公司':
+                        xValue = mysqlData.airline;
+                        break;
+                }
+
+                // 若沒有則初始化
+                if (!dataObj[xValue]) {
+                    dataObj[xValue] = { price: 0, count: 0 };
+                }
+
+                dataObj[xValue].price += mysqlData.price;
+                dataObj[xValue].count += 1;
+            });
+
+            for (var key in dataObj) {
+                var yValue = y === '收入' ? dataObj[key].price : dataObj[key].count;
+                dataArray.push([key, yValue]);
+            }
+
+            var data = google.visualization.arrayToDataTable(dataArray);
+
+            var options = {
+                title: y + ' by ' + x,
+                hAxis: {
+                    title: x,
+                    titleTextStyle: {
+                        fontSize: 16, // 設置X軸標題的字體大小
+                        color: '#333' // 設置字體顏色
+                    },
+                    ticks: [
+                        { v: new Date(2024, 0), f: 'Jan' },
+                        { v: new Date(2024, 1), f: 'Feb' },
+                        { v: new Date(2024, 2), f: 'Mar' },
+                        { v: new Date(2024, 3), f: 'Apr' },
+                        { v: new Date(2024, 4), f: 'May' },
+                        { v: new Date(2024, 5), f: 'Jun' },
+                        { v: new Date(2024, 6), f: 'Jul' },
+                        { v: new Date(2024, 7), f: 'Aug' },
+                        { v: new Date(2024, 8), f: 'Sep' },
+                        { v: new Date(2024, 9), f: 'Oct' },
+                        { v: new Date(2024, 10), f: 'Nov' },
+                        { v: new Date(2024, 11), f: 'Dec' }
+                    ] // 手動設置每個月的刻度
+                },
+                vAxis: {
+                    title: y,
+                    titleTextStyle: {
+                        fontSize: 16, // 設置Y軸標題的字體大小
+                        color: '#333' // 設置字體顏色
+                    },
+                    format: '#', // 設置為整數格式，去除小數點
+
+                },
+                legend: {
+                    position: 'right',
+                    alignment: 'center',
+                    textStyle: {
+                        color: '#000000', // 字體顏色
+                        fontSize: 12,     // 字體大小
+                        fontName: 'Arial' // 字體名稱
+                    }
+                }, // 圖例在底部居中顯示
+                is3D: true
+            };
+
+            var chart1 = new google.visualization.PieChart(document.getElementById('myChart2'));
+            chart1.draw(data, options);
+        }
+
+        // 監聽下拉框變化，重新繪製圖表
+        document.getElementById('yaxis2').addEventListener('change', drawChart);
+        document.getElementById('xaxis2').addEventListener('change', drawChart);
+    </script>
+</body>
+
+</html>
